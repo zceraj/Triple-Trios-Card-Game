@@ -1,0 +1,54 @@
+for numbers of card snad grid
+if grid has 35 cells then there should be (35+1)/2 = 18 cards in each players hands
+
+----------------------------------------------------------------------------------------------------
+Communcations:
+Z:
+M:
+----------------------------------------------------------------------------------------------------
+                              ---------------
+                              --To Do List:--
+                              ---------------
+KEY:
+"-" means to-do
+"+" means completed
+"*" means in progress
+
+                                SOURCE CODE
+Model:
+- Define classes/interfaces for the grid and cards.
+- Implement methods for placing cards, executing the battle phase, and checking win conditions.
+- Write a class invariant for your main model class and ensure your implementation enforces it.
+
+
+View: (Z: more than happy to do the entire view since its so small)
+* Implement a textual view of the game state, showing card ownership and grid layout.
+
+Controller:
+- Implement classes to read grid configuration files (defining grid size, card cells, and holes).
+- Implement classes to read card configuration files (defining card names and attack values).
+
+Create at least 3 board configuration files:
+- A board with no holes for easy testing.
+- A board where all card cells are reachable (using compass directions).
+- A board where at least two groups of card cells are disconnected.
+Create 2 card configuration files:
+- One with fewer cards than required for some of your boards.
+- One with enough cards to play on any of your boards.
+
+                                  TESTING
+Model:
+- test the main model
+    - Ensure the model can handle grids of different sizes with varying hole and card cell configurations.
+- Write unit tests for your model’s core methods (grid initialization, card placement, battle phase).
+
+View: (Z: I am happy to test the view if Im writing it)
+- create a test for the view
+
+Controller:
+- test the controller
+
+                                    OTHER
+- Design a player interface for future human or AI players (explain in the design document).
+- Write a README file that explains your model, its design, and how to use it.
+- Create a separate design document for the player interface.
