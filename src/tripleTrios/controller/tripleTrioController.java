@@ -1,4 +1,4 @@
-package tripleTrios.view;
+package tripleTrios.controller;
 
 import tripleTrios.model.GameModelImpl;
 

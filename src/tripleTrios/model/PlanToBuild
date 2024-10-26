@@ -20,6 +20,19 @@ Model:
 - Implement methods for placing cards, executing the battle phase, and checking win conditions.
 - Write a class invariant for your main model class and ensure your implementation enforces it.
 
+- cell (M)
+- card (M)
+- battle rules (M)
+- grid (Z)
++ player
++ player color
+
+- GAME MODEL IMPL (M)
+- CONTROLLER (Z)
+* VIEW (Z)
+
+
+
 
 View: (Z: more than happy to do the entire view since its so small)
 * Implement a textual view of the game state, showing card ownership and grid layout.
