@@ -6,14 +6,14 @@ import java.awt.event.ActionListener;
 
 import tripleTrios.model.PlayerColor;
 
-public class tripleTrioView extends JFrame {
+public class TripleTrioView extends JFrame {
   private JLabel playerTurnLabel;
   private JButton playTurnButton;
   private JComboBox<PlayerColor> colorPicker;
   private JLabel selectedColorLabel;
 
   // Constructor
-  public tripleTrioView() {
+  public TripleTrioView() {
     setTitle("Turn-Based Game");
     setSize(400, 300);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,7 +40,7 @@ public class tripleTrioView extends JFrame {
     @Override
     public void actionPerformed(ActionEvent e) {
       playerTurnLabel.setText("Turn played!");
-      JOptionPane.showMessageDialog(tripleTrioView.this, "Player has played their turn!", "Turn Complete", JOptionPane.INFORMATION_MESSAGE);
+      JOptionPane.showMessageDialog(TripleTrioView.this, "Player has played their turn!", "Turn Complete", JOptionPane.INFORMATION_MESSAGE);
     }
   }
 

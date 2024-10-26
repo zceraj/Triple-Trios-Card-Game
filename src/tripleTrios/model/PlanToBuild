@@ -31,9 +31,6 @@ Model:
 - CONTROLLER (Z)
 * VIEW (Z)
 
-
-
-
 View: (Z: more than happy to do the entire view since its so small)
 * Implement a textual view of the game state, showing card ownership and grid layout.
 

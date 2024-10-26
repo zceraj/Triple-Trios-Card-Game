@@ -10,6 +10,7 @@ public class Grid {
   private Cell[][] grid;
 
   // constructor
+
   // grid = new Cell[row][cols]
 
   // place card
