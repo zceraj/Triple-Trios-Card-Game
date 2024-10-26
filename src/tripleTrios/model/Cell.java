@@ -6,9 +6,20 @@ package tripleTrios.model;
 public class Cell {
   private boolean isHole;
   private Card card;
+  private Cell type;
+  private Cell cardCell;
+  //should have if it is a hole
+  //should have if it is a cardCell
+  //should have if it is empty or not
 
-  boolean isCardCell() {
-    return false;
+  // constructor
+  public Cell(Cell type) {
+    this.type = type;
+  }
+
+
+  public boolean isCardCell() {
+    return type == cardCell;
   }
 
   boolean isHole() {
