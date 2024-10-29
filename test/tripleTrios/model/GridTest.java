@@ -65,7 +65,8 @@ class GridTest {
   @Test
   void testGetCardAtCardCell() {
     Cell cell = defaultGrid.getCell(0, 0);
-    Card testCard = new Card(
+    Player player1 = new Player("Player1", PlayerColor.valueOf("Blue"));
+    Card testCard = new Card("TestCard", 5, 3, 7, 1, player1, 2, 3);
     cell.setCard(testCard);
     assertEquals(testCard, defaultGrid.getCardAt(0, 0),
             "Expected card at (0,0) to match the test card");
