@@ -3,9 +3,14 @@ if grid has 35 cells then there should be (35+1)/2 = 18 cards in each players ha
 
 ----------------------------------------------------------------------------------------------------
 Communcations:
-Z: by the end of 10/29 im planning to finish the file reader system and controller
-by the middle of 10/30 finish the view
+Z:
+
 M:
+- I will finish the model classes
+    --adjecnt map in grid, - done
+    --updating battle rules, - done
+    --write tests for model
+    -- README file - working on it
 ----------------------------------------------------------------------------------------------------
                               ---------------
                               --To Do List:--

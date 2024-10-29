@@ -8,8 +8,14 @@ import java.util.List;
  */
 public class BattleRules {
 
+  private final GameModelImpl gameModel;
+
+  public BattleRules(GameModelImpl gameModel) {
+    this.gameModel = gameModel;
+  }
+
   /**
-   * Starts the battle after a card is placed on the grid.
+   * Starts the battle phase after a card is placed on the grid.
    * @param grid The grid where the card is placed.
    * @param row The row where the card is placed.
    * @param col The column where the card is placed.
@@ -19,44 +25,79 @@ public class BattleRules {
     Card placedCard = grid.getCell(row, col).getCard();
     List<Card> adjacentCards = getAdjacentCards(grid, row, col);
 
+    // For each adjacent card, check if it belongs to the opposing player and execute battle logic if so
     for (Card adjacentCard : adjacentCards) {
-      if (adjacentCard != null && adjacentCard.getOwner() != currPlayer) {
+      Player adjacentOwner = gameModel.getCellsPlayer(adjacentCard.getRow(), adjacentCard.getCol());
+      if (adjacentOwner != null && adjacentOwner != currPlayer) {
         Direction direction = decideDirection(row, col, adjacentCard);
-        attackBattle(placedCard, adjacentCard, direction);
+        executeBattle(placedCard, adjacentCard, direction);
       }
     }
+
+    // Execute any combo battles resulting from newly flipped cards
     comboBattle(grid, row, col, currPlayer);
   }
 
-  // Handles one comparison and flips card color if applicable
-  private void attackBattle(Card placedCard, Card adjacentCard, Direction direction) {
+  /**
+   * Executes the comparison between two cards and flips ownership if the placed card wins.
+   * @param placedCard The card placed by the current player.
+   * @param adjacentCard The opposing player's adjacent card.
+   * @param direction The direction in which the placed card faces the adjacent card.
+   */
+  private void executeBattle(Card placedCard, Card adjacentCard, Direction direction) {
     Direction oppositeDirection = direction.getOpposite();
 
+    // Compare attack values; flip ownership if placedCard's attack is stronger
     if (placedCard.getAttackValue(direction) > adjacentCard.getAttackValue(oppositeDirection)) {
-      adjacentCard.setOwner(placedCard.getOwner());
+      gameModel.updateOwner(
+              adjacentCard.getRow(),
+              adjacentCard.getCol(),
+              gameModel.getCellsPlayer(placedCard.getRow(), placedCard.getCol())
+      );
     }
   }
 
-  // Handles the combo battle
+  /**
+   * Executes combo battles where newly flipped cards can trigger additional flips in chain reactions.
+   * @param grid The game grid.
+   * @param row The row where the original card was placed.
+   * @param col The column where the original card was placed.
+   * @param currPlayer The player who placed the card.
+   */
   private void comboBattle(Grid grid, int row, int col, Player currPlayer) {
     List<Card> flippedCards = findFlippedCards(grid, currPlayer);
-    for (Card card : flippedCards) {
-      List<Card> adjacentCards = getAdjacentCards(grid, card.getRow(), card.getCol());
+
+    // For each newly flipped card, try to flip additional adjacent cards in a chain reaction
+    for (Card flippedCard : flippedCards) {
+      List<Card> adjacentCards = getAdjacentCards(grid, flippedCard.getRow(), flippedCard.getCol());
+
       for (Card adjacentCard : adjacentCards) {
-        if (adjacentCard != null && adjacentCard.getOwner() != currPlayer) {
-          Direction direction = decideDirection(card.getRow(), card.getCol(), adjacentCard);
-          attackBattle(card, adjacentCard, direction);
+        Player adjacentOwner = gameModel.getCellsPlayer(adjacentCard.getRow(), adjacentCard.getCol());
+        if (adjacentOwner != null && adjacentOwner != currPlayer) {
+          Direction direction = decideDirection(flippedCard.getRow(), flippedCard.getCol(), adjacentCard);
+          executeBattle(flippedCard, adjacentCard, direction);
         }
       }
     }
   }
 
-  // Gets the adjacent cards to the placed card
+  /**
+   * Retrieves all valid adjacent cards for a given cell on the grid.
+   * @param grid The game grid.
+   * @param row The row of the current cell.
+   * @param col The column of the current cell.
+   * @return A list of adjacent cards.
+   */
   private List<Card> getAdjacentCards(Grid grid, int row, int col) {
     List<Card> adjacentCards = new ArrayList<>();
-    for (int[] offset : new int[][]{{-1, 0}, {1, 0}, {0, 1}, {0, -1}}) {
+
+    // Offsets for North, South, East, and West neighbors
+    int[][] offsets = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
+
+    for (int[] offset : offsets) {
       int newRow = row + offset[0];
       int newCol = col + offset[1];
+
       if (grid.isValidCell(newRow, newCol)) {
         Cell cell = grid.getCell(newRow, newCol);
         if (cell.isCardCell() && !cell.isEmpty()) {
@@ -67,31 +108,50 @@ public class BattleRules {
     return adjacentCards;
   }
 
-  // Decides the direction of the attack
+  /**
+   * Determines the direction from the original cell to an adjacent cell.
+   * @param row The row of the original cell.
+   * @param col The column of the original cell.
+   * @param adjacentCard The adjacent card being examined.
+   * @return The direction from the original cell to the adjacent cell.
+   */
   private Direction decideDirection(int row, int col, Card adjacentCard) {
     int adjRow = adjacentCard.getRow();
     int adjCol = adjacentCard.getCol();
 
+    // Determine the direction based on relative row and column positions
     if (row == adjRow) {
-      return col < adjCol ? Direction.EAST : Direction.WEST;
+      if (col < adjCol) {
+        return Direction.EAST; // Adjacent card is to the right
+      } else {
+        return Direction.WEST; // Adjacent card is to the left
+      }
     } else {
-      return row < adjRow ? Direction.SOUTH : Direction.NORTH;
+      if (row < adjRow) {
+        return Direction.SOUTH; // Adjacent card is below
+      } else {
+        return Direction.NORTH; // Adjacent card is above
+      }
     }
   }
 
-  // Finds cards that have been flipped to the current player's ownership
+  /**
+   * Finds all cards on the grid that are currently owned by the current player.
+   * @param grid The game grid.
+   * @param currPlayer The current player.
+   * @return A list of cards owned by the current player.
+   */
   private List<Card> findFlippedCards(Grid grid, Player currPlayer) {
     List<Card> flippedCards = new ArrayList<>();
 
     for (int row = 0; row < grid.getRows(); row++) {
       for (int col = 0; col < grid.getCols(); col++) {
         Card card = grid.getCell(row, col).getCard();
-        if (card != null && card.getOwner() == currPlayer) {
+        if (card != null && gameModel.getCellsPlayer(row, col) == currPlayer) {
           flippedCards.add(card);
         }
       }
     }
-
     return flippedCards;
   }
 }
