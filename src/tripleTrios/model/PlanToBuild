@@ -55,7 +55,8 @@ Create 2 card configuration files:
                                   TESTING
 Model:
 - test the main model
-    - Ensure the model can handle grids of different sizes with varying hole and card cell configurations.
+    - Ensure the model can handle grids of different sizes with varying hole
+    and card cell configurations.
 - Write unit tests for your model’s core methods (grid initialization, card placement, battle phase).
 
 View: (Z: I am happy to test the view if Im writing it)

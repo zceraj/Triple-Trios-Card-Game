@@ -1,4 +1,5 @@
 package tripleTrios.model;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -7,7 +8,11 @@ public class Player {
   private PlayerColor color; // Red or Blue
   private List<Card> hand;
 
-  // constructor
+  Player(String name, PlayerColor color) {
+    this.hand = new ArrayList<>();
+    this.name = name;
+    this.color = color;
+  }
 
   public String getName() {
     return name;

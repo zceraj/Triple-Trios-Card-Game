@@ -1,0 +1,17 @@
+Things we haven't quite answered:
+
+-- since you worked a lot on the player impl how did we make this such that we can use machines?
+In a future assignment, we might ask you to implement a simple AI player for this game.
+This will enable several possible scenarios, including solitaire play (person vs computer)
+and fully-automated play (which may be useful for testing). You do not have to implement a computer
+player right now, but you should design your model so that different player implementations could
+exist for human or machines to play your game. You should attempt to design a player interface that
+allows this to happen.
+
+In a design document (in a separate text file), explain how you envision instantiating players
+and your model, so that you could play a few moves of the game. This might be one part of your
+README (see below), but probably should be a separate file.
+
+We will give additional guidance in future assignments over how we suggest you implement players;
+the goal in this assignment is for you to think through the design possibilities and explain what
+you think might be an appropriate design.
