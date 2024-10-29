@@ -5,7 +5,6 @@ import java.util.EnumMap;
 public class Card {
   private final String cardName;
   private final EnumMap<Direction, Integer> attackValues;
-  private Player owner;
   private final int row;
   private final int col;
 
@@ -17,13 +16,11 @@ public class Card {
    * @param south The attack value of the card in the south direction
    * @param east The attack value of the card in the east direction
    * @param west The attack value of the card in the west direction
-   * @param owner  The owner of the card
    * @param row The row of the card
    * @param col The column of the card
    */
-  public Card(String cardName, int north, int south, int east, int west, Player owner, int row, int col) {
+  public Card(String cardName, int north, int south, int east, int west, int row, int col) {
     this.cardName = cardName;
-    this.owner = owner;
     this.row = row;
     this.col = col;
 
@@ -33,6 +30,7 @@ public class Card {
     attackValues.put(Direction.EAST, east);
     attackValues.put(Direction.WEST, west);
   }
+
 
   /**
    * Gets the attack value of the card in the given direction.
@@ -44,21 +42,6 @@ public class Card {
     return attackValues.get(direction);
   }
 
-  /**
-   * Gets the owner of the card.
-   * @return The owner of the card
-   */
-  public Player getOwner() {
-    return owner;
-  }
-
-  /**
-   * Sets the owner of the card.
-   * @param owner The new owner of the card
-   */
-  public void setOwner(Player owner) {
-    this.owner = owner;
-  }
 
   /**
    * Gets the row of the card.

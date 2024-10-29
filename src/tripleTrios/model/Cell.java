@@ -5,7 +5,7 @@ package tripleTrios.model;
  * be placed) or holes (where no cards can be placed).
  */
 public class Cell {
-  private final boolean isHole;
+  private final boolean isCardCell;
   private Card card;
   private final int row;
   private final int col;
@@ -14,12 +14,12 @@ public class Cell {
    * Creates a cell at the given row and column, specifying if it's a hole or not.
    * @param row Row position of the cell.
    * @param col Column position of the cell.
-   * @param isHole Whether this cell is a hole (cannot hold a card).
+   * @param isCardCell Whether this cell is a card cell.
    */
-  public Cell(int row, int col, boolean isHole) {
+  public Cell(int row, int col, boolean isCardCell) {
     this.row = row;
     this.col = col;
-    this.isHole = isHole;
+    this.isCardCell = isCardCell;
     this.card = null; // Initialize as empty
   }
 
@@ -29,7 +29,7 @@ public class Cell {
    * @return True if the cell is a card cell, false if it's a hole.
    */
   public boolean isCardCell() {
-    return !isHole;
+    return isCardCell;
   }
 
 
@@ -47,7 +47,7 @@ public class Cell {
    * @param card The card to place in this cell.
    */
   public void setCard(Card card) {
-    if (isHole) {
+    if (!isCardCell) {
       throw new IllegalArgumentException("Cannot place a card in a hole.");
     }
     if (!isEmpty()) {
@@ -65,27 +65,6 @@ public class Cell {
     return card;
   }
 
-  /**
-   * Removes the card from this cell, setting it to empty.
-   */
-  public void removeCard() {
-    this.card = null;
-  }
 
 
-  /**
-   * Gets the row of the cell.
-   * @return The row of the cell.
-   */
-  public int getRow() {
-    return row;
-  }
-
-  /**
-   * Gets the column of the cell.
-   * @return The column of the cell.
-   */
-  public int getCol() {
-    return col;
-  }
 }
