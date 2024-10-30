@@ -1,11 +1,9 @@
-package tripleTrios.controller;
+package tripleTrios.model;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
-import tripleTrios.model.Card;
 
 
 public class CardFileReader {
@@ -39,6 +37,6 @@ public class CardFileReader {
   }
 
   public Map<String, Card> getCardDatabase() {
-    return cardDatabase;
+    return cards;
   }
 }
