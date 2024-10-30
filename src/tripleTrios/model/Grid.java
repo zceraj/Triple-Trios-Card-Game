@@ -2,6 +2,7 @@ package tripleTrios.model;
 
 import java.util.EnumMap;
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.Map;
 
 public class Grid {
@@ -15,6 +16,9 @@ public class Grid {
    * @param cellTypes 2D array of booleans indicating if a cell is a CardCell (true) or a Hole (false).
    */
   public Grid(boolean[][] cellTypes) {
+    if (cellTypes.length % 2 == 1 || cellTypes[0].length  % 2 == 1) {
+      throw new InputMismatchException("the grid cannot have an even number of cells");
+    }
     this.rows = cellTypes.length;
     this.cols = cellTypes[0].length;
     this.grid = new Cell[rows][cols];
