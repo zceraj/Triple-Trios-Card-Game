@@ -1,6 +1,8 @@
 package tripleTrios.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -10,8 +12,8 @@ import java.util.Map;
 public class GameModelImpl implements GameModel{
 
   private final Grid grid;
-  private final IPlayer player1;
-  private final IPlayer player2;
+  private IPlayer player1;
+  private IPlayer player2;
   private IPlayer currPlayer;
   private boolean gameOver;
 
@@ -41,19 +43,45 @@ public class GameModelImpl implements GameModel{
   }
 
 
+  /**
+   * Starts the game with the given options. The deck given is used
+   * to deal out the cards to each player . Modifying the deck given to this method
+   * will not modify the game state in any way.
+   *
+   * @param deck The deck of cards to use
+   * @param player1 The first player
+   * @param player2 The second player
+   * @throws IllegalStateException    if the game has started or the game is over
+   * @throws IllegalArgumentException if the gird is not odd
+   * @throws IllegalArgumentException if deck's size is not large enough to setup the game
+   */
   @Override
-  public void startGame() {
-    if (isGridOdd(grid)) {
+  public void startGame(List<Card> deck, IPlayer player1, IPlayer player2) {
+    if (!isGridOdd(grid)) {
       throw new IllegalArgumentException("Grid must have an odd number of card cells.");
     }
-
-    int expectedHandSize = (getTotalCardCells(grid) + 1) / 2;
-    if (player1.getHand().size() != expectedHandSize || player2.getHand().size() != expectedHandSize) {
-      throw new IllegalArgumentException("Players must have the correct number of cards in their hand.");
+    if (!isGameOver()) {
+      throw new IllegalStateException("Game has already started.");
     }
 
-    this.gameOver = false;
+    int totalCardCells = getTotalCardCells(grid);
+    int expectedHandSize = (totalCardCells + 1) / 2;
+
+    if (deck.size() < totalCardCells) {
+      throw new IllegalArgumentException("Deck must have enough cards to fill the grid.");
+    }
+
+    List<Card> player1Hand = new ArrayList<>(deck.subList(0, expectedHandSize));
+    List<Card> player2Hand = new ArrayList<>(deck.subList(expectedHandSize, 2 * expectedHandSize));
+
+    player1.setHand(player1Hand);
+    player2.setHand(player2Hand);
+
+    this.player1 = player1;
+    this.player2 = player2;
     this.currPlayer = player1;
+
+    this.gameOver = false;
 
   }
 
@@ -193,7 +221,7 @@ public class GameModelImpl implements GameModel{
 
   private boolean isGridOdd(Grid grid) {
     int cardCellCount = getCount(grid);
-    return cardCellCount % 2 == 0;
+    return cardCellCount % 2 != 0;
   }
 
   private static int getCount(Grid grid) {

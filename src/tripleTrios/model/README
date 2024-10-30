@@ -119,7 +119,7 @@ Game logic in:
     -- Cell
     -- Card
     -- Direction
-    
+
 Player logic in:
     -- IPlayer
     -- HumanPlayer

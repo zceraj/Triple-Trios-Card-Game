@@ -9,4 +9,5 @@ public interface IPlayer {
   void addCardToHand(Card card);
   void removeCardFromHand(Card card);
 
+  void setHand(List<Card> playerHand);
 }

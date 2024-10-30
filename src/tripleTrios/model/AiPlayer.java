@@ -30,4 +30,9 @@ public class AiPlayer implements IPlayer{
   public void removeCardFromHand(Card card) {
     //removes played cards from AI player hand
   }
+
+  @Override
+  public void setHand(List<Card> playerHand) {
+    //sets the hand of the AI player
+  }
 }
