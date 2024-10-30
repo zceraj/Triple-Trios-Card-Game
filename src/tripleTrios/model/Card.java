@@ -2,7 +2,7 @@ package tripleTrios.model;
 
 import java.util.EnumMap;
 
-public class Card {
+public class Card implements CardInterface {
   private final String cardName;
   private final EnumMap<Direction, Integer> attackValues;
   private int row = -1;

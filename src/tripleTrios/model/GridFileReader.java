@@ -3,7 +3,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class GridFileReader {
+public class GridFileReader implements GridReader {
   private boolean[][] grid;
 
   public GridFileReader(String filePath) throws IOException {
@@ -16,7 +16,7 @@ public class GridFileReader {
    * @return 2D boolean array representing the grid, where true is CardCell and false is Hole.
    * @throws IOException If there is an error reading the file.
    */
-  protected void readGridFile(String filename) throws IOException {
+   void readGridFile(String filename) throws IOException {
     try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
       // Read the grid dimensions
       String[] dimensions = reader.readLine().split(" ");
