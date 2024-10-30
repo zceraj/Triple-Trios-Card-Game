@@ -14,7 +14,7 @@ public class CardTest {
   public void setUp() {
     this.player1 = new HumanPlayer("Player1", PlayerColor.valueOf("Blue"));
     this.player2 = new HumanPlayer("Player2", PlayerColor.valueOf("Red"));
-    this.card = new Card("TestCard", 5, 3, 7, 1, 2, 3);
+    this.card = new Card("TestCard", 5, 3, 7, 1);
   }
 
   @Test

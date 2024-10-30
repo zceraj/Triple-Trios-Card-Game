@@ -53,7 +53,7 @@ public class GameModelImpl implements GameModel{
    * @param player2 The second player
    * @throws IllegalStateException    if the game has started or the game is over
    * @throws IllegalArgumentException if the gird is not odd
-   * @throws IllegalArgumentException if deck's size is not large enough to setup the game
+   * @throws IllegalArgumentException if deck's size is not large enough to set up the game
    */
   @Override
   public void startGame(List<Card> deck, IPlayer player1, IPlayer player2) {

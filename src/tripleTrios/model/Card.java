@@ -17,14 +17,24 @@ public class Card implements CardInterface {
    * @param east The attack value of the card in the east direction
    * @param west The attack value of the card in the west direction
    */
-  public Card(String cardName, int north, int south, int east, int west) {
+  public Card(String cardName, String north, String south, String east, String west) {
     this.cardName = cardName;
 
     this.attackValues = new EnumMap<>(Direction.class);
-    attackValues.put(Direction.NORTH, north);
-    attackValues.put(Direction.SOUTH, south);
-    attackValues.put(Direction.EAST, east);
-    attackValues.put(Direction.WEST, west);
+    attackValues.put(Direction.NORTH, validateAttackValue(north));
+    attackValues.put(Direction.SOUTH, validateAttackValue(south));
+    attackValues.put(Direction.EAST, validateAttackValue(east));
+    attackValues.put(Direction.WEST, validateAttackValue(west));
+  }
+
+  private int validateAttackValue(String value) {
+    if ("A".equals(value)) {
+      return 10;
+    } else if (value.matches("[0-9]")) {
+      return Integer.parseInt(value);
+    } else {
+      throw new IllegalArgumentException("Invalid attack value");
+    }
   }
 
 
