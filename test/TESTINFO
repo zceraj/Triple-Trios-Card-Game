@@ -3,3 +3,5 @@ Model tests:
 CardTest
 PlayerColorTest -- all tests passing!!
 PlayerTest
+
+Grid tests - make sure we test to string

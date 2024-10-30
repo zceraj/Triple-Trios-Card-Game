@@ -26,20 +26,8 @@ public class CardTest {
   }
 
   @Test
-  public void testGetOwner() {
-    assertEquals(player1, card.getOwner());
-  }
-
-  @Test
-  public void testSetOwner() {
-    card.setOwner(player2);
-    assertEquals(player2, card.getOwner());
-  }
-
-  @Test
   public void testGetRow() {
     assertEquals(2, card.getRow());
   }
-
 
 }

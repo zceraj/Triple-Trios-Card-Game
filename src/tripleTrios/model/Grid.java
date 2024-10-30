@@ -19,8 +19,6 @@ public class Grid {
     this.cols = cellTypes[0].length;
     this.grid = new Cell[rows][cols];
     this.adjacentCellMap = new HashMap<>();
-
-    // Initialize cells in grid
     initializeCells(cellTypes);
     trackCellsNextTo();
   }
@@ -123,17 +121,26 @@ public class Grid {
 
   /**
    * Transforms the grid's state into a string that the viewer can use.
+   * We decided that it was best to show the entire name of the card at the spot rather than
+   * just a character to avoid confusion and also did not include the player in the rendering of the
+   * grid. We decided that this would be shown in the GUI more clearly and that for testing and
+   * simple playing purposes this was enough.
    * @return String rendering of the grid.
    */
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    for (int row = 0; row < rows; row++) {
-      for (int col = 0; col < cols; col++) {
-        Cell cell = grid[row][col];
-        // Append "C" for CardCell, "X" for Hole
-        sb.append(cell.isCardCell() ? "C" : "X");
+    for (int i = 0; i < grid.length; i++) {
+      for (int j = 0; j < grid[i].length; j++) {
+        Cell cell = grid[i][j];
+        if (cell.isEmpty()) {
+          sb.append("[X] ");
+        } else if (!cell.isEmpty()) {
+          sb.append("[").append(cell.getCard().getCardName()).append("] ");
+        } else {
+          sb.append("[ ] ");
+        }
       }
-      sb.append("\n"); // Move to the next line after each row
+      sb.append("\n");
     }
     return sb.toString();
   }
