@@ -2,36 +2,33 @@ package tripleTrios.model;
 
 public interface CardInterface {
   /**
-   * Adds a row to the card.
-   * @param row The row to add
+   * Sets the row for the card after placement.
+   * @param row The row to set
    */
-  public void addRow(int row);
+  void addRow(int row);
 
   /**
-   * Adds a column to the card.
-   * @param col The column to add
+   * Sets the column for the card after placement.
+   * @param col The column to set
    */
-  public void addCol(int col);
+  void addCol(int col);
 
   /**
-   * Gets the attack value of the card in the given direction.
+   * Gets the attack value of the card in the given direction as a string.
    * @param direction The direction to get the attack value
-   * @return The attack value of the card in the given direction
+   * @return The attack value in the given direction as a string ("1"-"9" or "A").
    */
-  public int getAttackValue(Direction direction);
+  String getAttackValue(Direction direction);
 
   /**
    * Gets the row of the card.
    * @return The row of the card
    */
-  public int getRow();
+  int getRow();
 
   /**
    * Gets the column of the card.
    * @return The column of the card
    */
-  public int getCol();
-
-}
-
+  int getCol();
 }

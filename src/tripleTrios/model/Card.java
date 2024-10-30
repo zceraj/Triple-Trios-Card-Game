@@ -1,84 +1,80 @@
 package tripleTrios.model;
-
 import java.util.EnumMap;
 
 public class Card implements CardInterface {
   private final String cardName;
-  private final EnumMap<Direction, Integer> attackValues;
+  private final EnumMap<Direction, String> attackValues; // Stores attack values as strings
   private int row = -1;
   private int col = -1;
 
-
   /**
-   * Creates a new card with the given name, attack values, owner, and position.
+   * Creates a new card with the given name and attack values.
    * @param cardName The name of the card
-   * @param north The attack value of the card in the north direction
-   * @param south The attack value of the card in the south direction
-   * @param east The attack value of the card in the east direction
-   * @param west The attack value of the card in the west direction
+   * @param north The attack value in the north direction (1-10)
+   * @param south The attack value in the south direction (1-10)
+   * @param east The attack value in the east direction (1-10)
+   * @param west The attack value in the west direction (1-10)
    */
-  public Card(String cardName, String north, String south, String east, String west) {
+  public Card(String cardName, int north, int south, int east, int west) {
     this.cardName = cardName;
-
     this.attackValues = new EnumMap<>(Direction.class);
-    attackValues.put(Direction.NORTH, validateAttackValue(north));
-    attackValues.put(Direction.SOUTH, validateAttackValue(south));
-    attackValues.put(Direction.EAST, validateAttackValue(east));
-    attackValues.put(Direction.WEST, validateAttackValue(west));
-  }
 
-  private int validateAttackValue(String value) {
-    if ("A".equals(value)) {
-      return 10;
-    } else if (value.matches("[0-9]")) {
-      return Integer.parseInt(value);
-    } else {
-      throw new IllegalArgumentException("Invalid attack value");
-    }
+    attackValues.put(Direction.NORTH, tenToStringValue(north));
+    attackValues.put(Direction.SOUTH, tenToStringValue(south));
+    attackValues.put(Direction.EAST, tenToStringValue(east));
+    attackValues.put(Direction.WEST, tenToStringValue(west));
   }
 
 
-  /**
-   * Adds a row to the card.
-   * @param row The row to add
-   */
+  @Override
   public void addRow(int row) {
-    this.row = row;
+
   }
 
-  /**
-   * Adds a column to the card.
-   * @param col The column to add
-   */
+  @Override
   public void addCol(int col) {
-    this.col = col;
+
   }
 
   /**
-   * Gets the attack value of the card in the given direction.
+   * Gets the attack value of the card in the specified direction as a string.
    * @param direction The direction to get the attack value
-   * @return The attack value of the card in the given direction
+   * @return The attack value in the specified direction ("1"-"9" or "A")
    */
-  public int getAttackValue(Direction direction) {
+  public String getAttackValue(Direction direction) {
     return attackValues.get(direction);
   }
 
+  // Methods to set row and column after placement
+  public void setRow(int row) {
+    this.row = row;
+  }
 
+  public void setCol(int col) {
+    this.col = col;
+  }
 
-  /**
-   * Gets the row of the card.
-   * @return The row of the card
-   */
   public int getRow() {
     return row;
   }
 
-  /**
-   * Gets the column of the card.
-   * @return The column of the card
-   */
   public int getCol() {
     return col;
   }
 
+  //Converts an integer attack value to its string representation.
+  private String tenToStringValue(int value) {
+    if (value == 10) {
+      return "A";
+    } else {
+      return Integer.toString(value);
+    }
+  }
+
+  @Override
+  public String toString() {
+    return String.format("%s: N=%s S=%s E=%s W=%s", cardName,
+            attackValues.get(Direction.NORTH), attackValues.get(Direction.SOUTH),
+            attackValues.get(Direction.EAST), attackValues.get(Direction.WEST));
+  }
 }

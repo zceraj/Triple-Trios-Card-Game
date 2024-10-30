@@ -47,8 +47,10 @@ public class BattleRules {
   private void executeBattle(Card placedCard, Card adjacentCard, Direction direction) {
     Direction oppositeDirection = direction.getOpposite();
 
-    // Compare attack values; flip ownership if placedCard's attack is stronger
-    if (placedCard.getAttackValue(direction) > adjacentCard.getAttackValue(oppositeDirection)) {
+    int placedAttack = parseAttackValue(placedCard.getAttackValue(direction));
+    int adjacentAttack = parseAttackValue(adjacentCard.getAttackValue(oppositeDirection));
+
+    if (placedAttack> adjacentAttack) {
       gameModel.updateOwner(
               adjacentCard.getRow(),
               adjacentCard.getCol(),
@@ -153,5 +155,13 @@ public class BattleRules {
       }
     }
     return flippedCards;
+  }
+
+  private int parseAttackValue(String attackValue) {
+    if (attackValue.equals("A")) {
+      return 10;
+    } else {
+      return Integer.parseInt(attackValue);
+    }
   }
 }
