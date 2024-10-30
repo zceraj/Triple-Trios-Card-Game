@@ -8,9 +8,25 @@ import java.io.IOException;
 import java.nio.file.InvalidPathException;
 import java.util.InputMismatchException;
 
+/**
+ * The GridFileReader class is responsible for reading a grid configuration file
+ * and converting it into a 2D boolean array representing the grid.
+ * Each cell in the grid is represented by a boolean value, where true
+ * indicates a card cell ('C') and false indicates a hole ('X').
+ */
 public class GridFileReader implements GridReader {
   private boolean[][] grid;
 
+  /**
+   * Constructs a GridFileReader and calls the method that reads the grid configuration
+   * from the specified file path, setting it to the grid above.
+   *
+   * @param filePath the path to the grid configuration file.
+   * @throws FileNotFoundException if the file cannot be found.
+   * @throws InvalidPathException if the path format is invalid.
+   * @throws InputMismatchException if the grid dimensions or cell values are invalid.
+   * @throws IOException if an error occurs while reading the file.
+   */
   public GridFileReader(String filePath) throws FileNotFoundException, InvalidPathException, InputMismatchException, IOException {
     readGridFile(filePath);
   }
@@ -75,6 +91,11 @@ public class GridFileReader implements GridReader {
     }
   }
 
+  /**
+   * Retrieves the grid as a 2D boolean array.
+   *
+   * @return a 2D array of boolean values representing the grid.
+   */
   public boolean[][] getGrid() {
     return grid;
   }

@@ -42,4 +42,11 @@ public interface IPlayer {
    * @param card to be removed from the player's hand.
    */
   void removeCardFromHand(Card card);
+
+  /**
+   * Sets the hand of the player with a specified list of cards.
+   *
+   * @param playerHand a List of Cards to be set as the player's hand.
+   */
+  void setHand(List<Card> playerHand);
 }
