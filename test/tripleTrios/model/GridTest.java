@@ -38,10 +38,10 @@ class GridTest {
 
   @Test
   public void testCustomGridInitialization() {
-    assertTrue(customGrid.getCell(0, 0).isCardCell(), "Cell (0,0) should be a CardCell");
-    assertFalse(customGrid.getCell(0, 1).isCardCell(), "Cell (0,1) should be a Hole");
-    assertFalse(customGrid.getCell(1, 0).isCardCell(), "Cell (1,0) should be a Hole");
-    assertTrue(customGrid.getCell(1, 1).isCardCell(), "Cell (1,1) should be a CardCell");
+    assertTrue(smallGrid.getCell(0, 0).isCardCell(), "Cell (0,0) should be a CardCell");
+    assertFalse(smallGrid.getCell(0, 1).isCardCell(), "Cell (0,1) should be a Hole");
+    assertFalse(smallGrid.getCell(1, 0).isCardCell(), "Cell (1,0) should be a Hole");
+    assertTrue(smallGrid.getCell(1, 1).isCardCell(), "Cell (1,1) should be a CardCell");
   }
 
   @Test
@@ -102,6 +102,5 @@ class GridTest {
 
     // Test if the actual output matches the expected output
     assertEquals(expectedOutput, smallGrid.toString());
-  }
   }
 }

@@ -39,9 +39,9 @@ class CardFileReaderTest {
     assertEquals(2, cards.size());
     assertEquals("Card1", cards.get(0).getCardName());
     assertEquals(1, cards.get(0).getAttackValue(Direction.NORTH));
-    assertEquals(1, cards.get(0).getAttackValue(Direction.SOUTH));
-    assertEquals(1, cards.get(0).getAttackValue(Direction.EAST));
-    assertEquals(1, cards.get(0).getAttackValue(Direction.WEST));
+    assertEquals(2, cards.get(0).getAttackValue(Direction.SOUTH));
+    assertEquals(3, cards.get(0).getAttackValue(Direction.EAST));
+    assertEquals(4, cards.get(0).getAttackValue(Direction.WEST));
 
     assertEquals("Card2", cards.get(1).getCardName());
     assertEquals(5, cards.get(1).getAttackValue(Direction.NORTH));
