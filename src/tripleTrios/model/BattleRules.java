@@ -50,14 +50,12 @@ public class BattleRules {
     int placedAttack = parseAttackValue(placedCard.getAttackValue(direction));
     int adjacentAttack = parseAttackValue(adjacentCard.getAttackValue(oppositeDirection));
 
-    if (placedAttack> adjacentAttack) {
-      gameModel.updateOwner(
-              adjacentCard.getRow(),
-              adjacentCard.getCol(),
-              gameModel.getCellsPlayer(placedCard.getRow(), placedCard.getCol())
-      );
+    if (placedAttack > adjacentAttack) {
+      IPlayer placedCardOwner = gameModel.getCellsPlayer(placedCard.getRow(), placedCard.getCol());
+      gameModel.updateOwner(adjacentCard.getRow(), adjacentCard.getCol(), placedCardOwner);
     }
   }
+
 
   /**
    * Executes combo battles where newly flipped cards can trigger additional flips in chain reactions.
@@ -69,7 +67,6 @@ public class BattleRules {
   private void comboBattle(Grid grid, int row, int col, IPlayer currPlayer) {
     List<Card> flippedCards = findFlippedCards(grid, currPlayer);
 
-    // For each newly flipped card, try to flip additional adjacent cards in a chain reaction
     for (Card flippedCard : flippedCards) {
       List<Card> adjacentCards = getAdjacentCards(grid, flippedCard.getRow(), flippedCard.getCol());
 
@@ -121,19 +118,10 @@ public class BattleRules {
     int adjRow = adjacentCard.getRow();
     int adjCol = adjacentCard.getCol();
 
-    // Determine the direction based on relative row and column positions
     if (row == adjRow) {
-      if (col < adjCol) {
-        return Direction.EAST; // Adjacent card is to the right
-      } else {
-        return Direction.WEST; // Adjacent card is to the left
-      }
+      return (col < adjCol) ? Direction.EAST : Direction.WEST;
     } else {
-      if (row < adjRow) {
-        return Direction.SOUTH; // Adjacent card is below
-      } else {
-        return Direction.NORTH; // Adjacent card is above
-      }
+      return (row < adjRow) ? Direction.SOUTH : Direction.NORTH;
     }
   }
 

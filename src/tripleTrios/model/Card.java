@@ -4,7 +4,7 @@ import java.util.EnumMap;
 
 public class Card implements CardInterface {
   private final String cardName;
-  private final EnumMap<Direction, String> attackValues;  // Changed to String
+  private final EnumMap<Direction, String> attackValues;
   private int row = -1;
   private int col = -1;
 
@@ -16,21 +16,28 @@ public class Card implements CardInterface {
    * @param east The attack value of the card in the east direction
    * @param west The attack value of the card in the west direction
    */
-  public Card(String cardName, String north, String south, String east, String west) {
+  public Card(String cardName, int north, int south, int east, int west) {
     this.cardName = cardName;
 
     this.attackValues = new EnumMap<>(Direction.class);
-    attackValues.put(Direction.NORTH, validateAttackValue(north));
-    attackValues.put(Direction.SOUTH, validateAttackValue(south));
-    attackValues.put(Direction.EAST, validateAttackValue(east));
-    attackValues.put(Direction.WEST, validateAttackValue(west));
+    attackValues.put(Direction.NORTH, convertAttackValue(north));
+    attackValues.put(Direction.SOUTH, convertAttackValue(south));
+    attackValues.put(Direction.EAST, convertAttackValue(east));
+    attackValues.put(Direction.WEST, convertAttackValue(west));
   }
 
-  private String validateAttackValue(String value) {
-    if ("A".equals(value) || value.matches("[1-9]")) { // Ensures value is "1"-"9" or "A"
-      return value;
+  /**
+   * Converts an integer attack value to a string, where 10 is represented by "A".
+   * @param value The integer attack value to convert
+   * @return The string representation of the attack value ("1"-"9" or "A")
+   */
+  private String convertAttackValue(int value) {
+    if (value == 10) {
+      return "A";
+    } else if (value >= 1 && value <= 9) {
+      return Integer.toString(value);
     } else {
-      throw new IllegalArgumentException("Invalid attack value");
+      throw new IllegalArgumentException("Invalid attack value, must be between 1-9 or A.");
     }
   }
 
