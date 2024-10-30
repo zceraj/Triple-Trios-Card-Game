@@ -1,6 +1,7 @@
 package tripleTrios.controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import tripleTrios.model.Card;
@@ -11,8 +12,8 @@ import tripleTrios.model.GridFileReader;
 import tripleTrios.view.GameView;
 
 public class tripleTrioController {
-  private GameView view;
-  private GameModel model;
+  private final GameView view;
+  private final GameModel model;
 
   /**
    * the constructor for the controller.
@@ -40,9 +41,9 @@ public class tripleTrioController {
 
       // Parse card database
       CardFileReader cardParser = new CardFileReader("path/to/cardDatabase.txt");
-      Map<String, Card> cards = cardParser.getCardDatabase();
+      List<Card> cards = cardParser.getCardDatabase();
       System.out.println("\nCards:");
-      for (Card card : cards.values()) {
+      for (Card card : cards) {
         System.out.println(card);
       }
     } catch (IOException e) {

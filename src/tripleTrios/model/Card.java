@@ -53,6 +53,14 @@ public class Card implements CardInterface {
     return attackValues.get(direction);
   }
 
+  /**
+   * returns the name of the card.
+   * @return the name of the card.
+   */
+  public String getCardName() {
+    return cardName;
+  }
+
 
 
   /**

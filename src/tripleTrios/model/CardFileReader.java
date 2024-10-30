@@ -6,13 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-<<<<<<< Updated upstream
-public class CardFileReader {
-  private final Map<String, Card> cards;
-=======
 public class CardFileReader implements CardReader {
-  private List<Card> cards;
->>>>>>> Stashed changes
+  private final List<Card> cards;
 
   public CardFileReader(String filePath) throws IOException {
     cards = new ArrayList<>();

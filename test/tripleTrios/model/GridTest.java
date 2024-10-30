@@ -3,36 +3,41 @@ package tripleTrios.model;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.Before;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class GridTest {
-  private Grid defaultGrid;
-  private Grid customGrid;
+  private Grid easyGrid;
+  private Grid smallGrid;
 
   @Before
-  void setUp() {
-    defaultGrid = new Grid(3, 3);
+  public void setUp() {
+    boolean[][] grid = {
+            {true, false, true},
+            {false, true, true},
+            {false, false, false}
+    };
 
-    boolean[][] cellTypes = {
+    easyGrid = new Grid(grid);
+
+    boolean[][] grid2 = {
             {true, false},
             {false, true}
     };
-    customGrid = new Grid(cellTypes);
+    smallGrid = new Grid(grid2);
   }
 
   @Test
-  void testDefaultGridInitialization() {
-    for (int row = 0; row < defaultGrid.getRows(); row++) {
-      for (int col = 0; col < defaultGrid.getCols(); col++) {
-        assertTrue(defaultGrid.getCell(row, col).isCardCell(),
+  public void testDefaultGridInitialization() {
+    for (int row = 0; row < easyGrid.getRows(); row++) {
+      for (int col = 0; col < easyGrid.getCols(); col++) {
+        assertTrue(easyGrid.getCell(row, col).isCardCell(),
                 "Cell at (" + row + ", " + col + ") should be a CardCell");
       }
     }
   }
 
   @Test
-  void testCustomGridInitialization() {
+  public void testCustomGridInitialization() {
     assertTrue(customGrid.getCell(0, 0).isCardCell(), "Cell (0,0) should be a CardCell");
     assertFalse(customGrid.getCell(0, 1).isCardCell(), "Cell (0,1) should be a Hole");
     assertFalse(customGrid.getCell(1, 0).isCardCell(), "Cell (1,0) should be a Hole");
@@ -40,47 +45,63 @@ class GridTest {
   }
 
   @Test
-  void testGetCellWithinBounds() {
-    assertNotNull(defaultGrid.getCell(1, 1));
+  public void testGetCellWithinBounds() {
+    assertNotNull(easyGrid.getCell(1, 1));
   }
 
   @Test
-  void testGetCellOutOfBounds() {
-    assertThrows(IndexOutOfBoundsException.class, () -> defaultGrid.getCell(-1, 0));
-    assertThrows(IndexOutOfBoundsException.class, () -> defaultGrid.getCell(0, -1));
-    assertThrows(IndexOutOfBoundsException.class, () -> defaultGrid.getCell(3, 0));
-    assertThrows(IndexOutOfBoundsException.class, () -> defaultGrid.getCell(0, 3));
+  public void testGetCellOutOfBounds() {
+    assertThrows(IndexOutOfBoundsException.class, () -> easyGrid.getCell(-1, 0));
+    assertThrows(IndexOutOfBoundsException.class, () -> easyGrid.getCell(0, -1));
+    assertThrows(IndexOutOfBoundsException.class, () -> easyGrid.getCell(3, 0));
+    assertThrows(IndexOutOfBoundsException.class, () -> easyGrid.getCell(0, 3));
   }
 
   @Test
-  void testIsValidCell() {
-    assertTrue(defaultGrid.isValidCell(0, 0));
-    assertTrue(defaultGrid.isValidCell(2, 2));
-    assertFalse(defaultGrid.isValidCell(-1, 0));
-    assertFalse(defaultGrid.isValidCell(3, 3));
+  public void testIsValidCell() {
+    assertTrue(easyGrid.isValidCell(0, 0));
+    assertTrue(easyGrid.isValidCell(2, 2));
+    assertFalse(easyGrid.isValidCell(-1, 0));
+    assertFalse(easyGrid.isValidCell(3, 3));
   }
 
   @Test
-  void testGetCardAtCardCell() {
-    Cell cell = defaultGrid.getCell(0, 0);
+  public void testGetCardAtCardCell() {
+    Cell cell = easyGrid.getCell(0, 0);
     HumanPlayer player1 = new HumanPlayer("Player1", PlayerColor.valueOf("Blue"));
-    Card testCard = new Card("TestCard", 5, 3, 7, 1, player1, 2, 3);
+    Card testCard = new Card("TestCard", 5, 3, 7, 1);
     cell.setCard(testCard);
-    assertEquals(testCard, defaultGrid.getCardAt(0, 0),
+    assertEquals(testCard, easyGrid.getCardAt(0, 0),
             "Expected card at (0,0) to match the test card");
   }
 
   @Test
-  void testGetCardAtHoleOrEmptyCell() {
-    assertNull(customGrid.getCardAt(0, 1), "Expected null at (0,1) as it is a Hole");
-    assertNull(defaultGrid.getCardAt(1, 1), "Expected null at (1,1) as it has no card");
+  public void testGetCardAtHoleOrEmptyCell() {
+    assertNull(smallGrid.getCardAt(0, 1), "Expected null at (0,1) as it is a Hole");
+    assertNull(easyGrid.getCardAt(1, 1), "Expected null at (1,1) as it has no card");
   }
 
   @Test
-  void testGridDimensions() {
-    assertEquals(3, defaultGrid.getRows(), "Default grid should have 3 rows");
-    assertEquals(3, defaultGrid.getCols(), "Default grid should have 3 columns");
-    assertEquals(2, customGrid.getRows(), "Custom grid should have 2 rows");
-    assertEquals(2, customGrid.getCols(), "Custom grid should have 2 columns");
+  public void testGridDimensions() {
+    assertEquals(3, easyGrid.getRows(), "Default grid should have 3 rows");
+    assertEquals(3, easyGrid.getCols(), "Default grid should have 3 columns");
+    assertEquals(2, smallGrid.getRows(), "Custom grid should have 2 rows");
+    assertEquals(2, smallGrid.getCols(), "Custom grid should have 2 columns");
+  }
+
+  @Test
+  public void testToString() {
+    // Place cards in specific cells for testing
+    smallGrid.getCell(0, 0).setCard(new Card("CardA", 4, 5, 6, 7));
+    smallGrid.getCell(1, 1).setCard(new Card("CardB", 8, 9, 10, 11));
+
+    // Define the expected string representation of the grid
+    String expectedOutput =
+            "[CardA] [X] \n" +
+                    "[ ] [CardB] \n";
+
+    // Test if the actual output matches the expected output
+    assertEquals(expectedOutput, smallGrid.toString());
+  }
   }
 }
