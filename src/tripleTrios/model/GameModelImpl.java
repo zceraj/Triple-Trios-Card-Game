@@ -262,7 +262,7 @@ public class GameModelImpl implements GameModel {
     return cardCellCount % 2 != 0;
   }
 
-  private static int getCount(Grid grid) {
+  private int getCount(Grid grid) {
     int count = 0;
     for (int row = 0; row < grid.getRows(); row++) {
       for (int col = 0; col < grid.getCols(); col++) {
