@@ -1,7 +1,7 @@
 package tripleTrios.model;
 
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +16,8 @@ public class PlayerTest {
   @BeforeEach
   void setUp() {
     player = new HumanPlayer("Player1", PlayerColor.RED);
-    Card card1 = new Card("Card 1", 1, 2, 3, 4);
-    Card card2 = new Card("Card 2", 2, 4, 6, 8);
+    card1 = new Card("Card 1", 1, 2, 3, 4);  // Assign to class-level variables
+    card2 = new Card("Card 2", 2, 4, 6, 8);  // Assign to class-level variables
   }
 
   @Test
@@ -27,9 +27,8 @@ public class PlayerTest {
 
   @Test
   public void testGetColor() {
-
-    assertEquals("RED", player.getColor());
-    assertNotEquals("BLUE", player.getColor());
+    assertEquals("Red", player.getColor());
+    assertNotEquals("Blue", player.getColor());
   }
 
   @Test
@@ -44,16 +43,6 @@ public class PlayerTest {
     player.removeCardFromHand(card1);
     assertFalse(player.getHand().contains(card1));
   }
-
-//  @Test
-//  public void testGetHand() {
-//    player.addCardToHand(card1);
-//    player.addCardToHand(card2);
-//    List<> hand = player.getHand();
-//    assertEquals(2, hand.size());
-//    assertEquals(true, hand.contains(card1));
-//    assertEquals(true, hand.contains(card2));
-//  }
 
   @Test
   public void testSetHand() {
@@ -81,7 +70,6 @@ public class PlayerTest {
     player.setHand(hand);
     assertEquals(hand, player.getHand());
   }
-
 
   @Test
   public void testToString() {
