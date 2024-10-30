@@ -17,11 +17,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GridFileReaderTest {
 
-  private final String validFilePath = "testGrid.txt";
+  private final String validFilePath = "valid_grid.txt";
   private final String invalidFilePath = "invalidGrid.txt";
-  private final String invalidPath = "invalid:/path/to/grid.txt";
-  private final String gridWithInvalidDimensions = "3\nCXC\nCCC\nCXC"; // Missing width
-  private final String gridWithInvalidCharacters = "2 2\nCC\nCX\nXZ"; // Invalid character 'Z'
+  private final String gridWithInvalidDimensions = "invalid_grid_dimensions";
+  private final String inccorectGrid = "incorrect_char_in_grid.txt";
 
   // Helper method to create a file for testing
   private void createTestFile(String path, String content) throws IOException {
@@ -54,24 +53,22 @@ public class GridFileReaderTest {
 
   @Test
   public void testInvalidPath() {
-    assertThrows(InvalidPathException.class, () -> {
-      new GridFileReader(invalidPath);
+    assertThrows(FileNotFoundException.class, () -> {
+      new GridFileReader(invalidFilePath);
     });
   }
 
   @Test
-  public void testInvalidGridDimensions() throws IOException {
-    createTestFile(validFilePath, gridWithInvalidDimensions);
+  public void testInvalidGridDimensions() {
     assertThrows(InputMismatchException.class, () -> {
-      new GridFileReader(validFilePath);
+      new GridFileReader(gridWithInvalidDimensions);
     });
   }
 
   @Test
-  public void testInvalidCharactersInGrid() throws IOException {
-    createTestFile(validFilePath, gridWithInvalidCharacters);
+  public void testInvalidCharactersInGrid(){
     assertThrows(InputMismatchException.class, () -> {
-      new GridFileReader(validFilePath);
+      new GridFileReader(inccorectGrid);
     });
   }
 

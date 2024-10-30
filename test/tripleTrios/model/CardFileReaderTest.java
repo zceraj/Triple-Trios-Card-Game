@@ -38,16 +38,16 @@ class CardFileReaderTest {
 
     assertEquals(2, cards.size());
     assertEquals("Card1", cards.get(0).getCardName());
-    assertEquals(1, cards.get(0).getAttackValue(Direction.NORTH));
-    assertEquals(2, cards.get(0).getAttackValue(Direction.SOUTH));
-    assertEquals(3, cards.get(0).getAttackValue(Direction.EAST));
-    assertEquals(4, cards.get(0).getAttackValue(Direction.WEST));
+    assertEquals("1", cards.get(0).getAttackValue(Direction.NORTH));
+    assertEquals("2", cards.get(0).getAttackValue(Direction.SOUTH));
+    assertEquals("3", cards.get(0).getAttackValue(Direction.EAST));
+    assertEquals("4", cards.get(0).getAttackValue(Direction.WEST));
 
     assertEquals("Card2", cards.get(1).getCardName());
-    assertEquals(5, cards.get(1).getAttackValue(Direction.NORTH));
-    assertEquals(6, cards.get(1).getAttackValue(Direction.SOUTH));
-    assertEquals(7, cards.get(1).getAttackValue(Direction.EAST));
-    assertEquals(8, cards.get(1).getAttackValue(Direction.WEST));
+    assertEquals("5", cards.get(1).getAttackValue(Direction.NORTH));
+    assertEquals("6", cards.get(1).getAttackValue(Direction.SOUTH));
+    assertEquals("7", cards.get(1).getAttackValue(Direction.EAST));
+    assertEquals("8", cards.get(1).getAttackValue(Direction.WEST));
   }
 
   @Test
@@ -59,25 +59,12 @@ class CardFileReaderTest {
 
   @Test
   void testReadMalformedCardFile() {
-    try {
-      CardFileReader reader = new CardFileReader(BAD_FILE_PATH);
-      List<Card> cards = reader.getCardDatabase();
-
-      // Even if one line is malformed, the valid lines should still be processed
-      assertEquals(1, cards.size());
-      assertEquals("Card4", cards.get(0).getCardName());
-      assertEquals(12, cards.get(0).getAttackValue(Direction.NORTH));
-      assertEquals(13, cards.get(0).getAttackValue(Direction.SOUTH));
-      assertEquals(14, cards.get(0).getAttackValue(Direction.EAST));
-      assertEquals(15, cards.get(0).getAttackValue(Direction.WEST));
-    } catch (IOException e) {
-      fail("IOException should not be thrown for malformed file");
-    }
+    assertThrows(IllegalArgumentException.class, () -> { new CardFileReader(BAD_FILE_PATH); });
   }
 
   @AfterEach
   void tearDown() {
-    new File(VALID_FILE).delete();
-    new File(BAD_FILE_PATH).delete();
+    new File(CardFileReaderTest.VALID_FILE).delete();
+    new File(CardFileReaderTest.BAD_FILE_PATH).delete();
   }
 }

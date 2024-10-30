@@ -87,6 +87,10 @@ public class Card implements CardInterface {
     return col;
   }
 
+  /**
+   * Gets the column of the card.
+   * @return The name of the card.
+   */
   public String getCardName() {
     return cardName;
   }

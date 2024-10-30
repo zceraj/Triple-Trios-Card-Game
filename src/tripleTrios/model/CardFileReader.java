@@ -50,7 +50,7 @@ public class CardFileReader implements CardReader {
           cards.add(card);
         }
       }
-    } catch (IOException | NumberFormatException e) {
+    } catch (IllegalArgumentException e) {
       System.err.println("Error reading card database file: " + e.getMessage());
       throw e;
     }
