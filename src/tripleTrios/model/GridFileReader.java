@@ -42,12 +42,8 @@ public class GridFileReader implements GridReader {
   private void readGridFile(String filename) throws FileNotFoundException, InvalidPathException, InputMismatchException, IOException {
     File file = new File(filename);
 
-    if (!file.exists()) {
+    if (!file.isFile()) {
       throw new FileNotFoundException("File not found: " + filename);
-    }
-
-    if (!file.isFile() || !file.canRead()) {
-      throw new InvalidPathException(filename, "The specified path is invalid or the file is not readable.");
     }
 
     try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -63,6 +59,9 @@ public class GridFileReader implements GridReader {
         cols = Integer.parseInt(dimensions[1]);
       } catch (NumberFormatException e) {
         throw new InputMismatchException("Grid dimensions must be integers.");
+      }
+      if (rows % 2 == 0 || cols % 2 == 0) {
+        throw new InputMismatchException("the grid cannot have an even number of cells");
       }
 
       // Initialize the boolean array for grid configuration

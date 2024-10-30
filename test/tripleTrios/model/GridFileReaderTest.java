@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.InvalidPathException;
 import java.util.InputMismatchException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,65 +16,44 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GridFileReaderTest {
 
-  private final String validFilePath = "valid_grid.txt";
-  private final String invalidFilePath = "invalidGrid.txt";
-  private final String gridWithInvalidDimensions = "invalid_grid_dimensions";
-  private final String inccorectGrid = "incorrect_char_in_grid.txt";
-
-  // Helper method to create a file for testing
-  private void createTestFile(String path, String content) throws IOException {
-    try (FileWriter writer = new FileWriter(path)) {
-      writer.write(content);
-    }
-  }
-
   @Test
   public void testReadValidGridFile() throws IOException {
-    createTestFile(validFilePath, "3 3\nCXC\nCCC\nCXC");
-
-    GridFileReader reader = new GridFileReader(validFilePath);
+    GridFileReader reader = new GridFileReader(
+            "."+ File.separator +"TESTINGFILES"+ File.separator +"valid_grid.text");
     boolean[][] grid = reader.getGrid();
 
     assertNotNull(grid);
     assertEquals(3, grid.length);
     assertEquals(3, grid[0].length);
-    assertTrue(grid[0][0]); // C -> true
-    assertFalse(grid[0][1]); // X -> false
-    assertTrue(grid[1][1]); // C -> true
+    assertTrue(grid[0][0]);
+    assertFalse(grid[0][1]);
   }
 
   @Test
   public void testFileNotFound() {
     assertThrows(FileNotFoundException.class, () -> {
-      new GridFileReader(invalidFilePath);
+      new GridFileReader("invalidGrid.txt");
     });
   }
 
   @Test
   public void testInvalidPath() {
     assertThrows(FileNotFoundException.class, () -> {
-      new GridFileReader(invalidFilePath);
+      new GridFileReader("invalidGrid.txt");
     });
   }
 
   @Test
   public void testInvalidGridDimensions() {
     assertThrows(InputMismatchException.class, () -> {
-      new GridFileReader(gridWithInvalidDimensions);
+      new GridFileReader("."+ File.separator +"TESTINGFILES"+ File.separator +"incorrect_grid_dimensions");
     });
   }
 
   @Test
   public void testInvalidCharactersInGrid(){
     assertThrows(InputMismatchException.class, () -> {
-      new GridFileReader(inccorectGrid);
+      new GridFileReader("."+ File.separator +"TESTINGFILES"+ File.separator +"incorrect_char_in_grid");
     });
-  }
-
-  // Clean up test files after tests
-  @org.junit.jupiter.api.AfterEach
-  public void cleanUp() {
-    new File(validFilePath).delete();
-    new File(invalidFilePath).delete();
   }
 }
