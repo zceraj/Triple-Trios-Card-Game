@@ -1,11 +1,9 @@
 package tripleTrios.model;
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
@@ -14,22 +12,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class CardFileReaderTest {
   private static final String VALID_FILE = "test_cards.txt";
   private static final String INVALID_FILE_PATH = "invalid_file.txt";
-  private static final String BAD_FILE_PATH = "malformed_cards.txt";
+  private static final String BAD_FILE_PATH = "bad_card.txt";
 
-  @BeforeEach
-  void setUp() throws IOException {
-    // Create a valid file for testing
-    try (FileWriter writer = new FileWriter(VALID_FILE)) {
-      writer.write("Card1 1 2 3 4\n");
-      writer.write("Card2 5 6 7 8\n");
-    }
-
-    // Create a malformed file for testing
-    try (FileWriter writer = new FileWriter(BAD_FILE_PATH)) {
-      writer.write("Card3 9 10 11\n"); // Missing one parameter
-      writer.write("Card4 12 13 14 15\n");
-    }
-  }
 
   @Test
   void testReadValidCardFile() throws IOException {

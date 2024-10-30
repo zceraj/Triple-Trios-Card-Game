@@ -29,7 +29,7 @@ public class GameModelImplTest {
     assertFalse(game.isGameOver());
   }
 
-  @Test
-  public void testGetCount
+//  @Test
+//  public void testGetCount
 
 }
