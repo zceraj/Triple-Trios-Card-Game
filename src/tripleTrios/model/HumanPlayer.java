@@ -80,6 +80,8 @@ public class HumanPlayer implements IPlayer {
     this.hand.addAll(playerHand);
   }
 
+
+
   /**
    * Gets the list of cards currently in the player's hand.
    *
@@ -97,8 +99,14 @@ public class HumanPlayer implements IPlayer {
    * @throws IndexOutOfBoundsException if the index is out of range
    */
   public Card playCard(int index) {
+
     return hand.remove(index);
   }
+
+  public void placeTheCard(Card card, int row, int col) {
+    //place the card at the specified row and column
+  }
+
 
   /**
    * Returns a string representation of the HumanPlayer, including the player's
