@@ -30,6 +30,15 @@ public class HumanPlayer implements IPlayer {
     hand.remove(card);
   }
 
+  @Override
+  public void setHand(List<Card> playerHand) {
+    if (playerHand == null) {
+      throw new IllegalArgumentException("Hand cannot be null.");
+    }
+    this.hand.clear();
+    this.hand.addAll(playerHand);
+  }
+
   public List<Card> getHand() {
     return hand;
   }

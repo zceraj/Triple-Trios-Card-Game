@@ -13,8 +13,8 @@ public class PlayerTest {
   @BeforeEach
   void setUp() {
     player = new HumanPlayer("Player1", PlayerColor.RED);
-//    card1 = new Card("Card 1", 1);
-//    card2 = new Card("Card 2", 2);
+    Card card1 = new Card("Card 1", 1, 2, 3, 4);
+    Card card2 = new Card("Card 2", 2, 4, 6, 8);
   }
 
   @Test
