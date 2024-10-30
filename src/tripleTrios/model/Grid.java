@@ -25,6 +25,7 @@ public class Grid {
     trackCellsNextTo();
   }
 
+
   /**
    * Initializes cells as CardCells or Holes based on the cellTypes configuration array.
    * @param cellTypes 2D boolean array where true means CardCell and false means Hole.

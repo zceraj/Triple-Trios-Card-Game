@@ -7,7 +7,7 @@ import java.util.Map;
 
 
 public class CardFileReader {
-  private Map<String, Card> cards;
+  private final Map<String, Card> cards;
 
   public CardFileReader(String filePath) throws IOException {
     cards = new HashMap<>();

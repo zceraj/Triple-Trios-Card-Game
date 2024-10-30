@@ -1,0 +1,92 @@
+OVERVIEW:
+
+GameModel:
+- Interface that defines the methods needed to run the game such as:
+  - starGame
+  - placeCard
+  - battles
+
+GameModelImpl:
+- Implements the GameModel interface and the logic of the game itself such as:
+  - if the setup is valid
+  - actual logic of starting the game and placing a card
+  - initiates the battle when appropriate
+  - maintains the game state
+  - brings together logic of the player, grd, card, and rules
+
+Grid:
+- Manages the grid/board of the game for both holes and card cells
+    - validates if a cell can be placed
+    - gets the cells next to each other to keep up with the battle logic
+
+Cell:
+- Represents a cell within a grid
+  - checks if its is a hole or a card cell
+  - a cell can hold a card or be empty
+
+Card:
+- Represents a card int he game
+  - has the attack values of each direction of the card
+  - had the card name
+
+BattleRules:
+- Represents the logic behind battles in the game
+  - determines winner for each battle
+  -
+
+Direction:
+- Enum representing directions of a card
+  - NORTH, SOUTH, EAST, WEST
+  - maps the opposite direction for cards used in battle logic
+
+IPlayer:
+- Interfaces defining a basic player
+ - color
+ - name
+ - hand
+ - adding and removing cards from hand
+
+HumanPlayer:
+- Implements IPlayer
+  - represents a human player
+  - has a hand of cards
+  - can add and remove cards from hand
+
+AIPlayer:
+- Implements IPlayer
+  - represents an AI player
+
+-----------------------------------------------------------------------------------------------------------------------
+QUICK START:
+
+// 5x5 grid true for card cell, false for hole
+boolean[][] cellTypes = {
+    {true, false, true, false, true},
+    {false, true, false, true, false},
+    {true, false, true, false, true},
+    {false, true, false, true, false},
+    {true, false, true, false, true}
+};
+Grid grid = new Grid(cellTypes);
+IPlayer player1 = new HumanPlayer("Player 1", Color.RED);
+IPlayer player2 = new HumanPlayer("Player 2", Color.BLUE);
+player1.addCard(new Card("King", 1, 2, 3, 4));
+player2.addCard(new Card("Joker", 1, 2, 3, 4));
+
+GameModelImpl gameModel = new GameModelImpl(grid, player1, player2);
+gameModel.startGame();
+
+gameModel.placeCard(player1.getHand.get(0), 0, 0);
+-----------------------------------------------------------------------------------------------------------------------
+
+KEY COMPONENTS:
+
+KEY SUBCOMPONENTS:
+
+SOURCE ORGANIZATION:
+
+
+
+
+
+

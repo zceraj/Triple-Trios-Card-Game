@@ -7,14 +7,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CardTest {
   private Card card;
-  private Player player1;
-  private Player player2;
+  private HumanPlayer player1;
+  private HumanPlayer player2;
 
   @BeforeEach
   public void setUp() {
-    this.player1 = new Player("Player1", PlayerColor.valueOf("Blue"));
-    this.player2 = new Player("Player2", PlayerColor.valueOf("Red"));
-    this.card = new Card("TestCard", 5, 3, 7, 1, player1, 2, 3);
+    this.player1 = new HumanPlayer("Player1", PlayerColor.valueOf("Blue"));
+    this.player2 = new HumanPlayer("Player2", PlayerColor.valueOf("Red"));
+    this.card = new Card("TestCard", 5, 3, 7, 1, 2, 3);
   }
 
   @Test

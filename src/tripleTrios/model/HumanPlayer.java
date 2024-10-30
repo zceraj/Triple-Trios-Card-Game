@@ -3,12 +3,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Player {
-  private String name;
-  private PlayerColor color; // Red or Blue
-  private List<Card> hand;
+public class HumanPlayer implements IPlayer {
+  private final String name;
+  private final PlayerColor color;
+  private final List<Card> hand;
 
-  Player(String name, PlayerColor color) {
+  HumanPlayer(String name, PlayerColor color) {
     this.hand = new ArrayList<>();
     this.name = name;
     this.color = color;

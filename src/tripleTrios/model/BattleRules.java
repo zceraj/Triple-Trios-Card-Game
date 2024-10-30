@@ -21,13 +21,13 @@ public class BattleRules {
    * @param col The column where the card is placed.
    * @param currPlayer The player who placed the card.
    */
-  public void startBattle(Grid grid, int row, int col, Player currPlayer) {
+  public void startBattle(Grid grid, int row, int col, IPlayer currPlayer) {
     Card placedCard = grid.getCell(row, col).getCard();
     List<Card> adjacentCards = getAdjacentCards(grid, row, col);
 
     // For each adjacent card, check if it belongs to the opposing player and execute battle logic if so
     for (Card adjacentCard : adjacentCards) {
-      Player adjacentOwner = gameModel.getCellsPlayer(adjacentCard.getRow(), adjacentCard.getCol());
+      IPlayer adjacentOwner = gameModel.getCellsPlayer(adjacentCard.getRow(), adjacentCard.getCol());
       if (adjacentOwner != null && adjacentOwner != currPlayer) {
         Direction direction = decideDirection(row, col, adjacentCard);
         executeBattle(placedCard, adjacentCard, direction);
@@ -64,7 +64,7 @@ public class BattleRules {
    * @param col The column where the original card was placed.
    * @param currPlayer The player who placed the card.
    */
-  private void comboBattle(Grid grid, int row, int col, Player currPlayer) {
+  private void comboBattle(Grid grid, int row, int col, IPlayer currPlayer) {
     List<Card> flippedCards = findFlippedCards(grid, currPlayer);
 
     // For each newly flipped card, try to flip additional adjacent cards in a chain reaction
@@ -72,7 +72,7 @@ public class BattleRules {
       List<Card> adjacentCards = getAdjacentCards(grid, flippedCard.getRow(), flippedCard.getCol());
 
       for (Card adjacentCard : adjacentCards) {
-        Player adjacentOwner = gameModel.getCellsPlayer(adjacentCard.getRow(), adjacentCard.getCol());
+        IPlayer adjacentOwner = gameModel.getCellsPlayer(adjacentCard.getRow(), adjacentCard.getCol());
         if (adjacentOwner != null && adjacentOwner != currPlayer) {
           Direction direction = decideDirection(flippedCard.getRow(), flippedCard.getCol(), adjacentCard);
           executeBattle(flippedCard, adjacentCard, direction);
@@ -141,7 +141,7 @@ public class BattleRules {
    * @param currPlayer The current player.
    * @return A list of cards owned by the current player.
    */
-  private List<Card> findFlippedCards(Grid grid, Player currPlayer) {
+  private List<Card> findFlippedCards(Grid grid, IPlayer currPlayer) {
     List<Card> flippedCards = new ArrayList<>();
 
     for (int row = 0; row < grid.getRows(); row++) {

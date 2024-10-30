@@ -1,18 +1,16 @@
 package tripleTrios.model;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import tripleTrios.model.Grid;
-import tripleTrios.model.Cell;
-import tripleTrios.model.Card;
 
 class GridTest {
   private Grid defaultGrid;
   private Grid customGrid;
 
-  @BeforeEach
+  @Before
   void setUp() {
     defaultGrid = new Grid(3, 3);
 
@@ -65,7 +63,7 @@ class GridTest {
   @Test
   void testGetCardAtCardCell() {
     Cell cell = defaultGrid.getCell(0, 0);
-    Player player1 = new Player("Player1", PlayerColor.valueOf("Blue"));
+    HumanPlayer player1 = new HumanPlayer("Player1", PlayerColor.valueOf("Blue"));
     Card testCard = new Card("TestCard", 5, 3, 7, 1, player1, 2, 3);
     cell.setCard(testCard);
     assertEquals(testCard, defaultGrid.getCardAt(0, 0),

@@ -10,12 +10,12 @@ import java.util.Map;
 public class GameModelImpl implements GameModel{
 
   private final Grid grid;
-  private final Player player1;
-  private final Player player2;
-  private Player currPlayer;
+  private final IPlayer player1;
+  private final IPlayer player2;
+  private IPlayer currPlayer;
   private boolean gameOver;
 
-  private final Map<Cell, Player> cellsPlayer;
+  private final Map<Cell, IPlayer> cellsPlayer;
 
   /**
    * Constructor that creates a game model with the given grid and players.
@@ -23,7 +23,7 @@ public class GameModelImpl implements GameModel{
    * @param player1 The first player
    * @param player2 The second player
    */
-  public GameModelImpl(Grid grid, Player player1, Player player2) {
+  public GameModelImpl(Grid grid, IPlayer player1, IPlayer player2) {
     this.grid = grid;
     this.player1 = player1;
     this.player2 = player2;
@@ -31,13 +31,30 @@ public class GameModelImpl implements GameModel{
     this.gameOver = false;
     this.cellsPlayer = new HashMap<>();
 
-    if (!isGridOdd(grid)) {
+    if (isGridOdd(grid)) {
       throw new IllegalArgumentException("Grid must have an odd number of card cells.");
     }
     int expectedHandSize = (getTotalCardCells(grid) + 1) / 2;
     if (player1.getHand().size() != expectedHandSize || player2.getHand().size() != expectedHandSize) {
       throw new IllegalArgumentException("Players must have the correct number of cards in their hand.");
     }
+  }
+
+
+  @Override
+  public void startGame() {
+    if (isGridOdd(grid)) {
+      throw new IllegalArgumentException("Grid must have an odd number of card cells.");
+    }
+
+    int expectedHandSize = (getTotalCardCells(grid) + 1) / 2;
+    if (player1.getHand().size() != expectedHandSize || player2.getHand().size() != expectedHandSize) {
+      throw new IllegalArgumentException("Players must have the correct number of cards in their hand.");
+    }
+
+    this.gameOver = false;
+    this.currPlayer = player1;
+
   }
 
 
@@ -50,15 +67,15 @@ public class GameModelImpl implements GameModel{
   @Override
   public void placeCard(Card card, int row, int col) {
     if (!grid.isValidCell(row, col)) {
-      throw new IllegalArgumentException("Invalid cell");
+      throw new IllegalArgumentException("Invalid cell coordinates.");
     }
+
     Cell cell = grid.getCell(row, col);
     if (!cell.isCardCell() || !cell.isEmpty()) {
-      throw new IllegalArgumentException("Invalid cell");
+      throw new IllegalArgumentException("Cannot place card in this cell.");
     }
-    if (!currPlayer.getHand().contains(card)) {
-      throw new IllegalArgumentException("Player does not have this card");
-    }
+    card.addRow(row);
+    card.addCol(col);
 
     cell.setCard(card);
     cellsPlayer.put(cell, currPlayer);
@@ -71,6 +88,7 @@ public class GameModelImpl implements GameModel{
       nextTurn();
     }
   }
+
 
   /**
    * Checks if the game is over.
@@ -94,7 +112,7 @@ public class GameModelImpl implements GameModel{
   }
 
   @Override
-  public Player getWinner() {
+  public IPlayer getWinner() {
 
     if (!gameOver) {
       return null;
@@ -118,7 +136,7 @@ public class GameModelImpl implements GameModel{
    * @param col The column of the cell
    * @return The player that owns the card in the cell
    */
-  public Player getCellsPlayer(int row, int col) {
+  public IPlayer getCellsPlayer(int row, int col) {
     Cell cell = grid.getCell(row, col);
     return cellsPlayer.get(cell);
   }
@@ -129,11 +147,11 @@ public class GameModelImpl implements GameModel{
   }
 
   @Override
-  public Player getCurPlayer() {
+  public IPlayer getCurPlayer() {
     return currPlayer;
   }
 
-  public void updateOwner(int row, int col, Player newOwner) {
+  public void updateOwner(int row, int col, IPlayer newOwner) {
     Cell cell = grid.getCell(row, col);
     cellsPlayer.put(cell, newOwner);
   }
@@ -155,7 +173,7 @@ public class GameModelImpl implements GameModel{
     nextTurn();
   }
 
-  private int countCards(Player player) {
+  private int countCards(IPlayer player) {
     int count = 0;
     for (int row = 0; row < grid.getRows(); row++) {
       for (int col = 0; col < grid.getCols(); col++) {
@@ -175,7 +193,7 @@ public class GameModelImpl implements GameModel{
 
   private boolean isGridOdd(Grid grid) {
     int cardCellCount = getCount(grid);
-    return cardCellCount % 2 != 0;
+    return cardCellCount % 2 == 0;
   }
 
   private static int getCount(Grid grid) {

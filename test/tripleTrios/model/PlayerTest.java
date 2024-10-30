@@ -2,18 +2,17 @@ package tripleTrios.model;
 
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
-import java.awt.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PlayerTest {
-  private Player player;
+  private HumanPlayer player;
   private Card card1;
   private Card card2;
 
   @BeforeEach
   void setUp() {
-    player = new Player("Player1", PlayerColor.RED);
+    player = new HumanPlayer("Player1", PlayerColor.RED);
 //    card1 = new Card("Card 1", 1);
 //    card2 = new Card("Card 2", 2);
   }
