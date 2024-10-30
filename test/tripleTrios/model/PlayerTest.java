@@ -3,6 +3,9 @@ package tripleTrios.model;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PlayerTest {
@@ -24,7 +27,9 @@ public class PlayerTest {
 
   @Test
   public void testGetColor() {
+
     assertEquals("RED", player.getColor());
+    assertNotEquals("BLUE", player.getColor());
   }
 
   @Test
@@ -51,6 +56,15 @@ public class PlayerTest {
 //  }
 
   @Test
+  public void testSetHand() {
+    List<Card> newHand = new ArrayList<>();
+    newHand.add(card1);
+    newHand.add(card2);
+    player.setHand(newHand);
+    assertEquals(newHand, player.getHand());
+  }
+
+  @Test
   public void testPlayCard() {
     player.addCardToHand(card1);
     player.addCardToHand(card2);
@@ -58,6 +72,16 @@ public class PlayerTest {
     assertEquals(card1, playedCard);
     assertFalse(player.getHand().contains(card1));
   }
+
+  @Test
+  public void testGetHand() {
+    List<Card> hand = new ArrayList<>();
+    hand.add(card1);
+    hand.add(card2);
+    player.setHand(hand);
+    assertEquals(hand, player.getHand());
+  }
+
 
   @Test
   public void testToString() {
