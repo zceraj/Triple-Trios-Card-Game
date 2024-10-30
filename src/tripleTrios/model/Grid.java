@@ -19,8 +19,6 @@ public class Grid {
     this.cols = cellTypes[0].length;
     this.grid = new Cell[rows][cols];
     this.adjacentCellMap = new HashMap<>();
-
-    // Initialize cells in grid
     initializeCells(cellTypes);
     trackCellsNextTo();
   }
