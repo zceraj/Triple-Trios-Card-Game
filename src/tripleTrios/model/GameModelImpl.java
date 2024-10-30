@@ -40,7 +40,7 @@ public class GameModelImpl implements GameModel {
     this.gameOver = false;
     this.cellsPlayer = new HashMap<>();
 
-    if (isGridOdd(grid)) {
+    if (!isGridOdd(grid)) {
       throw new IllegalArgumentException("Grid must have an odd number of card cells.");
     }
     int expectedHandSize = (getTotalCardCells(grid) + 1) / 2;
@@ -253,15 +253,18 @@ public class GameModelImpl implements GameModel {
     return count;
   }
 
-  private int getTotalCardCells(Grid grid) {
+  //gets the total number of card cells in the grid
+  int getTotalCardCells(Grid grid) {
     return getCount(grid);
   }
 
+  // checks if the gird has an odd number of cells
   private boolean isGridOdd(Grid grid) {
     int cardCellCount = getCount(grid);
     return cardCellCount % 2 != 0;
   }
 
+  //gets the number of card cells in the grid
   private int getCount(Grid grid) {
     int count = 0;
     for (int row = 0; row < grid.getRows(); row++) {

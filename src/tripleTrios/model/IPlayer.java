@@ -49,4 +49,6 @@ public interface IPlayer {
    * @param playerHand a List of Cards to be set as the player's hand.
    */
   void setHand(List<Card> playerHand);
+  
+  void placeTheCard(Card card, int row, int col);
 }
