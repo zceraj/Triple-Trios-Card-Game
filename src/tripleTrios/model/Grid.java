@@ -119,4 +119,22 @@ public class Grid {
   public int getCols() {
     return cols;
   }
+
+
+  /**
+   * Transforms the grid's state into a string that the viewer can use.
+   * @return String rendering of the grid.
+   */
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    for (int row = 0; row < rows; row++) {
+      for (int col = 0; col < cols; col++) {
+        Cell cell = grid[row][col];
+        // Append "C" for CardCell, "X" for Hole
+        sb.append(cell.isCardCell() ? "C" : "X");
+      }
+      sb.append("\n"); // Move to the next line after each row
+    }
+    return sb.toString();
+  }
 }

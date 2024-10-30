@@ -2,15 +2,20 @@ package tripleTrios.model;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 
+<<<<<<< Updated upstream
 public class CardFileReader {
   private final Map<String, Card> cards;
+=======
+public class CardFileReader implements CardReader {
+  private List<Card> cards;
+>>>>>>> Stashed changes
 
   public CardFileReader(String filePath) throws IOException {
-    cards = new HashMap<>();
+    cards = new ArrayList<>();
     parseCardFile(filePath);
   }
 
@@ -27,7 +32,7 @@ public class CardFileReader {
           int west = Integer.parseInt(parts[4]);
 
           Card card = new Card(cardName, north, south, east, west);
-          cards.put(cardName, card);
+          cards.add(card);
         }
       }
     } catch (IOException | NumberFormatException e) {
@@ -36,7 +41,7 @@ public class CardFileReader {
     }
   }
 
-  public Map<String, Card> getCardDatabase() {
+  public List<Card> getCardDatabase() {
     return cards;
   }
 }
