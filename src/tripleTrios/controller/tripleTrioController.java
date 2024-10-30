@@ -7,6 +7,7 @@ import tripleTrios.model.Card;
 import tripleTrios.model.CardFileReader;
 import tripleTrios.model.GameModel;
 import tripleTrios.model.GameModelImpl;
+import tripleTrios.model.GridFileReader;
 import tripleTrios.view.GameView;
 
 public class tripleTrioController {
@@ -30,10 +31,10 @@ public class tripleTrioController {
   public void startGame() {
     try {
       // Parse grid configuration
-      GridConfigParser gridParser = new GridConfigParser("path/to/gridConfig.txt");
-      char[][] grid = gridParser.getGrid();
+      GridFileReader gridReader = new GridFileReader("path/to/gridConfig.txt");
+      boolean[][] grid = gridReader.getGrid();
       System.out.println("Grid:");
-      for (char[] row : grid) {
+      for (boolean[] row : grid) {
         System.out.println(row);
       }
 
@@ -47,41 +48,13 @@ public class tripleTrioController {
     } catch (IOException e) {
       System.out.println();
     }
-    model.initializeGame();
-    view.updateGrid(model.getGrid()); // Update the view with the initial grid
-    view.setCurrentPlayer(model.getCurrentPlayer());
+    model.startGame();
   }
 
   public void playTurn(int row, int col, int cardIndex) {
   }
 
   public void displayGameState() {
-  }
-
-
-
-
-    // Method to handle cell clicks
-    public void handleCellClick(int row, int col) {
-      if (model.isMoveLegal(row, col)) {
-        model.placeCard(row, col); // Update model state
-        view.updateGrid(model.getGrid()); // Refresh the view
-        view.appendLog("Player " + model.getCurrentPlayer() + " placed a card at (" + row + ", " + col + ")");
-
-        // Check for battle and update view accordingly
-        model.battlePhase(row, col);
-        view.updateGrid(model.getGrid()); // Refresh the view after battle
-        switchPlayer(); // Switch to the other player
-      } else {
-        view.appendLog("Illegal move by player " + model.getCurrentPlayer());
-      }
-    }
-
-    // Method to switch players
-    private void switchPlayer() {
-      model.switchPlayer();
-      view.setCurrentPlayer(model.getCurrentPlayer());
-    }
   }
 
 }

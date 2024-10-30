@@ -4,33 +4,41 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class GridFileReader {
-  private Grid grid;
+  private boolean[][] grid;
 
   public GridFileReader(String filePath) throws IOException {
-    parseGridFile(filePath);
+    readGridFile(filePath);
   }
 
-  private void parseGridFile(String filePath) throws IOException {
-    try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+  /**
+   * Reads a grid configuration file and converts it to a boolean 2D array.
+   * @param filename Path to the grid configuration file.
+   * @return 2D boolean array representing the grid, where true is CardCell and false is Hole.
+   * @throws IOException If there is an error reading the file.
+   */
+  protected void readGridFile(String filename) throws IOException {
+    try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+      // Read the grid dimensions
       String[] dimensions = reader.readLine().split(" ");
       int rows = Integer.parseInt(dimensions[0]);
       int cols = Integer.parseInt(dimensions[1]);
 
-      grid = new boolean[][];
+      // Initialize the boolean array for grid configuration
+      boolean[][] grid = new boolean[rows][cols];
 
-      for (int i = 0; i < rows; i++) {
+      // Read each row in the grid
+      for (int row = 0; row < rows; row++) {
         String line = reader.readLine();
-        for (int j = 0; j < cols; j++) {
-          grid[i][j] = line.charAt(j);
+        for (int col = 0; col < cols; col++) {
+          grid[row][col] = line.charAt(col) == 'C'; // 'C' = true (CardCell), 'X' = false (Hole)
         }
       }
-    } catch (IOException | NumberFormatException | NullPointerException e) {
-      System.err.println("Error reading grid configuration file: " + e.getMessage());
-      throw e; // Optionally rethrow or handle as needed
+
+      this.grid= grid;
     }
   }
 
-  public Grid getGrid() {
+  public boolean[][] getGrid() {
     return grid;
   }
 }
