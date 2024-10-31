@@ -22,8 +22,8 @@ public class PlayerTest {
   @BeforeEach
   void setUp() {
     player = new HumanPlayer("Player1", PlayerColor.RED);
-    card1 = new Card("Card 1", 1, 2, 3, 4);  // Assign to class-level variables
-    card2 = new Card("Card 2", 2, 4, 6, 8);  // Assign to class-level variables
+    card1 = new Card("Card 1", 1, 2, 3, 4);
+    card2 = new Card("Card 2", 2, 4, 6, 8);
   }
 
   @Test
@@ -80,7 +80,7 @@ public class PlayerTest {
   @Test
   public void testToString() {
     player.addCardToHand(card1);
-    String expectedString = "Player1 (RED) - Hand: [" + card1 + "]";
+    String expectedString = "Player1 (Red) - Hand: [" + card1 + "]";
     assertEquals(expectedString, player.toString());
   }
 }
