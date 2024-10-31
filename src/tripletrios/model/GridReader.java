@@ -1,5 +1,9 @@
 package tripletrios.model;
 
+
+/**
+ * Represents a grid reader in the game.
+ */
 public interface GridReader {
 
   /**

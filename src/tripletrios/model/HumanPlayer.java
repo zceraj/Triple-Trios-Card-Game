@@ -103,6 +103,12 @@ public class HumanPlayer implements IPlayer {
     return hand.remove(index);
   }
 
+  /**
+   * Places a card on the game board at the specified row and column.
+   * @param card the card to place
+   * @param row the row to place the card
+   * @param col  the column to place the card
+   */
   public void placeTheCard(Card card, int row, int col) {
     if (card == null) {
       throw new IllegalArgumentException("Card cannot be null.");

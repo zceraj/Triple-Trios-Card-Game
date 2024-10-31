@@ -53,15 +53,27 @@ public class Grid {
         Cell cell = grid[row][col];
         Map<Direction, Cell> neighbors = new EnumMap<>(Direction.class);
 
-        if (isValidCell(row - 1, col)) neighbors.put(Direction.NORTH, grid[row - 1][col]);
-        if (isValidCell(row + 1, col)) neighbors.put(Direction.SOUTH, grid[row + 1][col]);
-        if (isValidCell(row, col - 1)) neighbors.put(Direction.WEST, grid[row][col - 1]);
-        if (isValidCell(row, col + 1)) neighbors.put(Direction.EAST, grid[row][col + 1]);
+        if (isValidCell(row - 1, col)) {
+          neighbors.put(Direction.NORTH, grid[row - 1][col]);
+        }
+
+        if (isValidCell(row + 1, col)) {
+          neighbors.put(Direction.SOUTH, grid[row + 1][col]);
+        }
+
+        if (isValidCell(row, col - 1)) {
+          neighbors.put(Direction.WEST, grid[row][col - 1]);
+        }
+
+        if (isValidCell(row, col + 1)) {
+          neighbors.put(Direction.EAST, grid[row][col + 1]);
+        }
 
         adjacentCellMap.put(cell, neighbors);
       }
     }
   }
+
 
   /**
    * Retrieves a specific cell at the given row and column.

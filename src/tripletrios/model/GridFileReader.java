@@ -27,7 +27,8 @@ public class GridFileReader implements GridReader {
    * @throws InputMismatchException if the grid dimensions or cell values are invalid.
    * @throws IOException if an error occurs while reading the file.
    */
-  public GridFileReader(String filePath) throws FileNotFoundException, InvalidPathException, InputMismatchException, IOException {
+  public GridFileReader(String filePath) throws FileNotFoundException, InvalidPathException,
+          InputMismatchException, IOException {
     readGridFile(filePath);
   }
 
@@ -39,7 +40,8 @@ public class GridFileReader implements GridReader {
    * @throws InputMismatchException if the grid dimensions or cell values are invalid.
    * @throws IOException if an error occurs while reading the file.
    */
-  private void readGridFile(String filename) throws FileNotFoundException, InvalidPathException, InputMismatchException, IOException {
+  private void readGridFile(String filename) throws FileNotFoundException,
+          InvalidPathException, InputMismatchException, IOException {
     File file = new File(filename);
 
     if (!file.isFile()) {
@@ -53,7 +55,8 @@ public class GridFileReader implements GridReader {
         throw new InputMismatchException("Invalid grid dimensions in file header.");
       }
 
-      int rows, cols;
+      int rows;
+      int cols;
       try {
         rows = Integer.parseInt(dimensions[0]);
         cols = Integer.parseInt(dimensions[1]);
@@ -81,7 +84,8 @@ public class GridFileReader implements GridReader {
           } else if (cell == 'X') {
             grid[row][col] = false; // 'X' = false (Hole)
           } else {
-            throw new InputMismatchException("Invalid cell character at row " + row + ", column " + col + ": " + cell);
+            throw new InputMismatchException("Invalid cell character at row "
+                    + row + ", column " + col + ": " + cell);
           }
         }
       }

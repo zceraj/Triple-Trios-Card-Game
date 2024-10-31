@@ -23,7 +23,6 @@ public class GameModelImpl implements GameModel {
   private IPlayer currPlayer;
   private boolean gameOver;
   private final Map<Cell, IPlayer> cellsPlayer;
-  private List<Card> cards;
 
   //CLASS INVARIANT: the game grid must have an odd number of card cells
   /**
@@ -71,7 +70,8 @@ public class GameModelImpl implements GameModel {
    *                                  is insufficient to set up the game
    */
   @Override
-  public void startGame(String gridFilePath, String cardFilePath, IPlayer player1, IPlayer player2) {
+  public void startGame(String gridFilePath, String cardFilePath,
+                        IPlayer player1, IPlayer player2) {
     if (!isGameOver()) {
       throw new IllegalStateException("Game has already started.");
     }
@@ -103,7 +103,7 @@ public class GameModelImpl implements GameModel {
       throw new IllegalArgumentException("Deck must have enough cards to fill the grid.");
     }
 
-    this.cards = loadedCards.subList(0, totalCardCells);
+    List<Card> cards = loadedCards.subList(0, totalCardCells);
 
     List<Card> player1Hand = new ArrayList<>(cards.subList(0, expectedHandSize));
     List<Card> player2Hand = new ArrayList<>(cards.subList(expectedHandSize, 2 * expectedHandSize));
