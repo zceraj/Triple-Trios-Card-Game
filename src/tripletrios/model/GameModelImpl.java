@@ -22,7 +22,7 @@ public class GameModelImpl implements GameModel {
   private IPlayer player2;
   private IPlayer currPlayer;
   private boolean gameOver;
-  private boolean gameStarted;
+  private boolean gameStarted = false;
   private final Map<Cell, IPlayer> cellsPlayer;
 
   //CLASS INVARIANT: the game grid must have an odd number of card cells
@@ -46,7 +46,7 @@ public class GameModelImpl implements GameModel {
     this.gameOver = false;
     this.cellsPlayer = new HashMap<>();
 
-    if (!isGridOdd(grid)) {
+    if (isGridOdd(grid)) {
       throw new IllegalArgumentException("Grid must have an odd number of card cells.");
     }
     int expectedHandSize = (getTotalCardCells(grid) + 1) / 2;
@@ -79,7 +79,7 @@ public class GameModelImpl implements GameModel {
     if (this.gameOver) {
       throw new IllegalStateException("Game is over.");
     }
-    if (!isGridOdd(grid)) {
+    if (isGridOdd(grid)) {
       throw new IllegalArgumentException("Grid must have an odd number of card cells.");
     }
 

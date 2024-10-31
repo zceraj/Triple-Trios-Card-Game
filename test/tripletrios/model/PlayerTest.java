@@ -83,4 +83,8 @@ public class PlayerTest {
     String expectedString = "Player1 (Red) - Hand: [" + card1 + "]";
     assertEquals(expectedString, player.toString());
   }
+
+  //test to confirm a player can not flip their own card
+
+  //test
 }

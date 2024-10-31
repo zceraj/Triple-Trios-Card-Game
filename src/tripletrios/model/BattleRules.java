@@ -1,7 +1,10 @@
 package tripletrios.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 
 /**
  * Represents the rules logic for the battling phase between cards.
@@ -64,9 +67,13 @@ public class BattleRules {
    * @param currPlayer The player who placed the card.
    */
   private void comboBattle(Grid grid, int row, int col, IPlayer currPlayer) {
+    Set<Card> processedCards = new HashSet<>();
     List<Card> flippedCards = findFlippedCards(grid, currPlayer);
 
     for (Card flippedCard : flippedCards) {
+      if (processedCards.contains(flippedCard)) continue;  // Skip already processed cards
+      processedCards.add(flippedCard);
+
       List<Card> adjacentCards = getAdjacentCards(grid, flippedCard.getRow(), flippedCard.getCol());
 
       for (Card adjacentCard : adjacentCards) {
@@ -90,8 +97,6 @@ public class BattleRules {
    */
   private List<Card> getAdjacentCards(Grid grid, int row, int col) {
     List<Card> adjacentCards = new ArrayList<>();
-
-    // Offsets for North, South, East, and West neighbors
     int[][] offsets = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
 
     for (int[] offset : offsets) {
@@ -146,11 +151,15 @@ public class BattleRules {
     return flippedCards;
   }
 
+  // Parses the attack value of a card, converting "A" to 10.
   private int parseAttackValue(String attackValue) {
-    if (attackValue.equals("A")) {
+    if ("A".equals(attackValue)) {
       return 10;
-    } else {
+    }
+    try {
       return Integer.parseInt(attackValue);
+    } catch (NumberFormatException e) {
+      throw new IllegalArgumentException("Invalid attack value: " + attackValue);
     }
   }
 }

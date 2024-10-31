@@ -8,7 +8,7 @@ import java.util.EnumMap;
  */
 public class Card implements CardInterface {
   private final String cardName;
-  private final EnumMap<Direction, String> attackValues;
+  private final EnumMap<Direction, Integer> attackValues;
   private int row = -1;
   private int col = -1;
 
@@ -24,10 +24,14 @@ public class Card implements CardInterface {
     this.cardName = cardName;
 
     this.attackValues = new EnumMap<>(Direction.class);
-    attackValues.put(Direction.NORTH, stringToIntAttack(north));
-    attackValues.put(Direction.SOUTH, stringToIntAttack(south));
-    attackValues.put(Direction.EAST, stringToIntAttack(east));
-    attackValues.put(Direction.WEST, stringToIntAttack(west));
+    attackValues.put(Direction.NORTH, north);
+    attackValues.put(Direction.SOUTH, south);
+    attackValues.put(Direction.EAST, east);
+    attackValues.put(Direction.WEST, west);
+
+    if (north < 1 || north > 10 || south < 1 || south > 10 || east < 1 || east > 10 || west < 1 || west > 10) {
+      throw new IllegalArgumentException("Invalid attack value, must be between 1-10.");
+    }
   }
 
   /**
@@ -35,14 +39,8 @@ public class Card implements CardInterface {
    * @param value The integer attack value to convert
    * @return The string representation of the attack value ("1"-"9" or "A")
    */
-  private String stringToIntAttack(int value) {
-    if (value == 10) {
-      return "A";
-    } else if (value >= 1 && value <= 9) {
-      return Integer.toString(value);
-    } else {
-      throw new IllegalArgumentException("Invalid attack value, must be between 1-9 or A.");
-    }
+  private String formatAttack(int value) {
+    return value == 10 ? "A" : Integer.toString(value);
   }
 
   /**
@@ -70,7 +68,8 @@ public class Card implements CardInterface {
    */
   @Override
   public String getAttackValue(Direction direction) {
-    return attackValues.get(direction);
+
+    return formatAttack(attackValues.get(direction));
   }
 
   /**

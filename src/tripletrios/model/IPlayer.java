@@ -25,7 +25,7 @@ public interface IPlayer {
   /**
    * Retrieves the list of cards currently held by the player.
    *
-   * @return a of {@code Card} objects representing the player's hand.
+   * @return a list of {@code Card} objects representing the player's hand.
    */
   List<Card> getHand();
 

@@ -1,8 +1,6 @@
 package tripletrios.model;
 
-
-
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -16,22 +14,23 @@ public class GridTest {
   private Grid easyGrid;
   private Grid smallGrid;
 
-  @Before
+  @BeforeEach
   public void setUp() {
     boolean[][] grid = {
             {true, false, true},
             {false, true, true},
-            {false, false, false}
+            {true, false, false}
     };
-
     easyGrid = new Grid(grid);
 
     boolean[][] grid2 = {
-            {true, false},
-            {false, true}
+            {true, false, false},
+            {false, true, true},
+            {true, true, false}
     };
     smallGrid = new Grid(grid2);
   }
+
 
   @Test
   public void testDefaultGridInitialization() {
@@ -92,8 +91,8 @@ public class GridTest {
   public void testGridDimensions() {
     assertEquals(3, easyGrid.getRows(), "Default grid should have 3 rows");
     assertEquals(3, easyGrid.getCols(), "Default grid should have 3 columns");
-    assertEquals(2, smallGrid.getRows(), "Custom grid should have 2 rows");
-    assertEquals(2, smallGrid.getCols(), "Custom grid should have 2 columns");
+    assertEquals(3, smallGrid.getRows(), "Custom grid should have 3 rows");
+    assertEquals(3, smallGrid.getCols(), "Custom grid should have 3 columns");
   }
 
   @Test
@@ -104,8 +103,9 @@ public class GridTest {
 
     // Define the expected string representation of the grid
     String expectedOutput =
-            "[CardA] [X] \n"
-                    + "[ ] [CardB] \n";
+            "[CardA] [X] [X] \n" +
+                    "[ ] [CardB] [ ] \n" +
+                    "[ ] [ ] [X] \n";
 
     // Test if the actual output matches the expected output
     assertEquals(expectedOutput, smallGrid.toString());

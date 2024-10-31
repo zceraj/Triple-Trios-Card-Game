@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
- * tests the game model impl test.
+ * Tests the GameModelImpl class.
  */
 public class GameModelImplTest {
   private GameModelImpl game;
@@ -26,46 +26,29 @@ public class GameModelImplTest {
    * sets up the game model to test.
    */
   @BeforeEach
-  void setUp() {
+  void setUp() throws Exception {
     player1 = new HumanPlayer("Player1", PlayerColor.BLUE);
     player2 = new HumanPlayer("Player2", PlayerColor.RED);
 
-    Card card1 = new Card("Card 1", 1, 2, 3, 4);
-    Card card2 = new Card("Card 2", 2, 4, 6, 8);
-    Card card3 = new Card("Card 3", 3, 6, 9, 9);
-    Card card4 = new Card("Card 4", 4, 8, 4, 1);
-    Card card5 = new Card("Card 5", 5, 3, 2, 1);
-    Card card6 = new Card("Card 6", 6, 7, 3, 2);
-    Card card7 = new Card("Card 7", 7, 8, 4, 3);
-
     List<Card> deck = new ArrayList<>();
-    deck.add(card1);
-    deck.add(card2);
-    deck.add(card3);
-    deck.add(card4);
-    deck.add(card5);
-    deck.add(card6);
-    deck.add(card7);
+    deck.add(new Card("Card 1", 1, 2, 3, 4));
+    deck.add(new Card("Card 2", 2, 4, 6, 8));
+    deck.add(new Card("Card 3", 3, 6, 9, 9));
+    deck.add(new Card("Card 4", 4, 8, 4, 1));
+    deck.add(new Card("Card 5", 5, 3, 2, 1));
 
-    boolean[][] cells = {
-            {true, true, true},
-            {false, true, false},
-            {true, false, false}
-    };
-    Grid grid = new Grid(cells);
-
-    int totalCardCells = 5;
-    int expectedHandSize = (totalCardCells + 1) / 2;
-
+    int expectedHandSize = (deck.size() + 1) / 2;
     player1.setHand(deck.subList(0, expectedHandSize));
-    player2.setHand(deck.subList(expectedHandSize, expectedHandSize * 2));
+    player2.setHand(deck.subList(expectedHandSize, deck.size()));
+
+    // Read grid from file and create Grid object
+    String gridFilePath = "." + File.separator + "TESTINGFILES" + File.separator + "valid_grid.txt";
+    GridFileReader gridReader = new GridFileReader(gridFilePath);
+    Grid grid = new Grid(gridReader.getGrid());
+
     game = new GameModelImpl(grid, player1, player2);
-    game.startGame(
-            "." + File.separator + "TESTINGFILES" + File.separator + "valid_grid.text",
-            "." + File.separator + "TESTINGFILES" + File.separator + "full_card_set.txt",
-            player1,
-            player2);
   }
+
 
   @Test
   public void testGetCount() {
@@ -270,5 +253,55 @@ public class GameModelImplTest {
     assertEquals(expectedPlayer2Hand, player2.getHand());
   }
 
+  @Test
+  public void testFlipOwnCard() {
+    Card card = player1.getHand().get(0);
+    game.placeCard(card, 0, 0);
+
+    game.battles(0, 0);
+
+    assertEquals(player1, game.getCellsPlayer(0, 0));
+  }
+
+
+  @Test
+  public void testFlipOpponentCard() {
+    Card playersCard = player1.getHand().get(0);
+    Card opponentsCard = player2.getHand().get(0);
+
+    game.placeCard(playersCard, 0, 0);
+    game.placeCard(opponentsCard, 0, 2);
+
+    game.battles(0, 0);
+
+    assertEquals(player1, game.getCellsPlayer(0, 2));
+  }
+
+  @Test
+  public void testPlayerCantPlayWhenNotTheirTurn() {
+    Card card = player2.getHand().get(0);
+    assertThrows(IllegalStateException.class, () -> game.placeCard(card, 0, 0));
+  }
+
+  @Test
+  public void testPlayerCantPlayToOutOfBoundsLocation() {
+    Card card = player1.getHand().get(0);
+    assertThrows(IllegalArgumentException.class, () -> game.placeCard(card, 4, 5));
+  }
+
+  @Test
+  public void testTilesAreFlippedCorrectly() {
+    Card player1Card1 = player1.getHand().get(0);
+    Card player2Card1 = player2.getHand().get(0);
+    Card player2Card2 = player2.getHand().get(1);
+
+    game.placeCard(player1Card1, 0, 0);
+    game.placeCard(player2Card1, 0, 1);
+    game.placeCard(player2Card2, 1, 0);
+    game.battles(0, 0);
+
+    assertEquals(player1, game.getCellsPlayer(0, 1));
+    assertEquals(player1, game.getCellsPlayer(1, 0));
+  }
 
 }
