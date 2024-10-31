@@ -7,8 +7,6 @@ package tripletrios.model;
 public class Cell {
   private final boolean isCardCell;
   private Card card;
-  private final int row;
-  private final int col;
 
   /**
    * Creates a cell at the given row and column, specifying if it's a hole or not.
@@ -17,8 +15,6 @@ public class Cell {
    * @param isCardCell Whether this cell is a card cell.
    */
   public Cell(int row, int col, boolean isCardCell) {
-    this.row = row;
-    this.col = col;
     this.isCardCell = isCardCell;
     this.card = null; // Initialize as empty
   }
