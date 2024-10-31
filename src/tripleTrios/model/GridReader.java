@@ -1,7 +1,8 @@
 package tripleTrios.model;
 
-import java.io.IOException;
-
+/**
+ * Represents a grid reader in the game.
+ */
 public interface GridReader {
 
   /**
