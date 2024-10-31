@@ -50,8 +50,9 @@ public class GameModelImpl implements GameModel {
       throw new IllegalArgumentException("Grid must have an odd number of card cells.");
     }
     int expectedHandSize = (getTotalCardCells(grid) + 1) / 2;
-    if (player1.getHand().size() != expectedHandSize || player2.getHand().size() != expectedHandSize) {
-      throw new IllegalArgumentException("Players must have the correct number of cards in their hand.");
+    if (player1.getHand().size() != expectedHandSize || player2.getHand().size()
+            != expectedHandSize) {
+      throw new IllegalArgumentException("Players must have the correct number of cards in hand.");
     }
   }
 

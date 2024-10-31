@@ -5,6 +5,10 @@ import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Map;
 
+/**
+ * Represents the grid of the game.
+ * The grid is a 2D array of cells, where each cell can be a CardCell or a Hole.
+ */
 public class Grid {
   private final int rows;
   private final int cols;
@@ -13,7 +17,7 @@ public class Grid {
 
   /**
    * Creates a new grid with specified cell types (CardCells or Holes).
-   * @param cellTypes 2D array of booleans indicating if a cell is a CardCell (true) or a Hole (false).
+   * @param cellTypes 2D array of booleans indicating if a cell is a CardCell or a Hole.
    */
   public Grid(boolean[][] cellTypes) {
     if (cellTypes.length % 2 == 1 || cellTypes[0].length  % 2 == 1) {
