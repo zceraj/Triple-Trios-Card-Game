@@ -71,7 +71,9 @@ public class BattleRules {
     List<Card> flippedCards = findFlippedCards(grid, currPlayer);
 
     for (Card flippedCard : flippedCards) {
-      if (processedCards.contains(flippedCard)) continue;  // Skip already processed cards
+      if (processedCards.contains(flippedCard)) {
+        continue;
+      }
       processedCards.add(flippedCard);
 
       List<Card> adjacentCards = getAdjacentCards(grid, flippedCard.getRow(), flippedCard.getCol());

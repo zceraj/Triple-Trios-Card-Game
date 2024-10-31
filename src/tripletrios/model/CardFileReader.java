@@ -1,6 +1,8 @@
 package tripletrios.model;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,7 +24,7 @@ public class CardFileReader implements CardReader {
    */
   public CardFileReader(String filePath) throws IOException {
     cards = new ArrayList<>();
-    parseCardFile(filePath);
+    readCardFile(filePath);
   }
 
   /**
@@ -33,7 +35,11 @@ public class CardFileReader implements CardReader {
    * @param filePath the path to the card database file.
    * @throws IOException if an error occurs while reading the file.
    */
-  private void parseCardFile(String filePath) throws IOException {
+  private void readCardFile(String filePath) throws IOException {
+    File file = new File(filePath);
+    if (!file.exists()) {
+      throw new FileNotFoundException("this file doesn't exist, please try again" +filePath);
+    }
     try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
       String line;
       while ((line = reader.readLine()) != null) {
@@ -47,6 +53,9 @@ public class CardFileReader implements CardReader {
 
           Card card = new Card(cardName, north, south, east, west);
           cards.add(card);
+        }
+        else if (parts.length < 5) {
+          throw new IllegalArgumentException("invalid card format");
         }
       }
     } catch (IllegalArgumentException e) {

@@ -29,7 +29,14 @@ public class Card implements CardInterface {
     attackValues.put(Direction.EAST, east);
     attackValues.put(Direction.WEST, west);
 
-    if (north < 1 || north > 10 || south < 1 || south > 10 || east < 1 || east > 10 || west < 1 || west > 10) {
+    if (north < 1
+            || north > 10
+            || south < 1
+            || south > 10
+            || east < 1
+            || east > 10
+            || west < 1
+            || west > 10) {
       throw new IllegalArgumentException("Invalid attack value, must be between 1-10.");
     }
   }
@@ -98,4 +105,16 @@ public class Card implements CardInterface {
     return cardName;
   }
 
+  /**
+   * formats the card as the name of the card and all of its attack values.
+   * @return the card as a string.
+   */
+  public String toString() {
+    StringBuilder attackValuesString = new StringBuilder();
+    for (Integer value : attackValues.values()) {
+      attackValuesString.append(value.toString());
+      attackValuesString.append(" ");
+    }
+    return cardName + " " + attackValuesString;
+  }
 }

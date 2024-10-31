@@ -26,20 +26,26 @@ public class GameModelImpl implements GameModel {
   private final Map<Cell, IPlayer> cellsPlayer;
 
   //CLASS INVARIANT: the game grid must have an odd number of card cells
+
   /**
    * Constructs a GameModelImpl instance with the specified grid and players.
    *
-   * @param grid    The game grid
-   * @param player1 The first player
-   * @param player2 The second player
-   * @throws IllegalArgumentException if the grid does not have an odd number
-   *                                  of card cells or if players do not have
-   *                                  the expected number of cards in hand.
-   *
+   * @param gridfileName the name of the file the holds the grid.
+   * @param player1 the first player.
+   * @param player2 the second player.
+   * @throws RuntimeException if the grid file cannot be read
    */
-
-  public GameModelImpl(Grid grid, IPlayer player1, IPlayer player2) {
-    this.grid = grid;
+  public GameModelImpl(
+          String gridfileName,
+          IPlayer player1,
+          IPlayer player2) throws RuntimeException {
+    GridFileReader gridReader;
+    try {
+      gridReader = new GridFileReader(gridfileName);
+    } catch (IOException e) {
+      throw new RuntimeException("can't read grid file.");
+    }
+    this.grid = new Grid(gridReader.getGrid());
     this.player1 = player1;
     this.player2 = player2;
     this.currPlayer = player1;
@@ -49,12 +55,8 @@ public class GameModelImpl implements GameModel {
     if (isGridOdd(grid)) {
       throw new IllegalArgumentException("Grid must have an odd number of card cells.");
     }
-    int expectedHandSize = (getTotalCardCells(grid) + 1) / 2;
-    if (player1.getHand().size() != expectedHandSize || player2.getHand().size()
-            != expectedHandSize) {
-      throw new IllegalArgumentException("Players must have the correct number of cards in hand.");
-    }
   }
+
 
 
   /**
@@ -63,7 +65,6 @@ public class GameModelImpl implements GameModel {
    * will not modify the game state.
    *
    * @param player1 The first player
-   * @param gridFilePath is the filepath to the grid
    * @param cardFilePath is the filepath to the cards
    * @param player2 The second player
    * @throws IllegalStateException    if the game has already started or is over
@@ -71,7 +72,7 @@ public class GameModelImpl implements GameModel {
    *                                  is insufficient to set up the game
    */
   @Override
-  public void startGame(String gridFilePath, String cardFilePath,
+  public void startGame(String cardFilePath,
                         IPlayer player1, IPlayer player2) {
     if (this.gameStarted) {
       throw new IllegalStateException("Game has already started.");
@@ -79,22 +80,8 @@ public class GameModelImpl implements GameModel {
     if (this.gameOver) {
       throw new IllegalStateException("Game is over.");
     }
-    if (isGridOdd(grid)) {
-      throw new IllegalArgumentException("Grid must have an odd number of card cells.");
-    }
-
-    GridFileReader gridReader = null;
-    try {
-      gridReader = new GridFileReader(gridFilePath);
-    } catch (IOException e) {
-      throw new RuntimeException("can't read grid file.");
-    }
-    this.grid = new Grid(gridReader.getGrid());
 
     int totalCardCells = getTotalCardCells(grid);
-    if (totalCardCells % 2 == 0) {
-      throw new IllegalArgumentException("Grid must have an odd number of card cells.");
-    }
 
     int expectedHandSize = (totalCardCells + 1) / 2;
 
@@ -122,6 +109,7 @@ public class GameModelImpl implements GameModel {
     this.player2 = player2;
     this.currPlayer = player1;
     this.gameOver = false;
+    this.gameStarted = true;
   }
 
   /**
@@ -134,7 +122,7 @@ public class GameModelImpl implements GameModel {
    *                                  if the cell is not empty
    */
   @Override
-  public void placeCard(Card card, int row, int col) {
+  public void placeCard(Card card, int col, int row) {
     if (!gameStarted) {
       throw new IllegalStateException("Game has not  started.");
     }
@@ -145,7 +133,7 @@ public class GameModelImpl implements GameModel {
       throw new IllegalArgumentException("Invalid cell coordinates.");
     }
 
-    Cell cell = grid.getCell(row, col);
+    Cell cell = grid.getCell(col, row);
     if (!cell.isCardCell() || !cell.isEmpty()) {
       throw new IllegalArgumentException("Cannot place card in this cell.");
     }

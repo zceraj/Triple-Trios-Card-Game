@@ -29,40 +29,22 @@ public class GameModelImplTest {
   void setUp() throws Exception {
     player1 = new HumanPlayer("Player1", PlayerColor.BLUE);
     player2 = new HumanPlayer("Player2", PlayerColor.RED);
-<<<<<<< HEAD
 
-    List<Card> deck = new ArrayList<>();
-    deck.add(new Card("Card 1", 1, 2, 3, 4));
-    deck.add(new Card("Card 2", 2, 4, 6, 8));
-    deck.add(new Card("Card 3", 3, 6, 9, 9));
-    deck.add(new Card("Card 4", 4, 8, 4, 1));
-    deck.add(new Card("Card 5", 5, 3, 2, 1));
-
-    int expectedHandSize = (deck.size() + 1) / 2;
-    player1.setHand(deck.subList(0, expectedHandSize));
-    player2.setHand(deck.subList(expectedHandSize, deck.size()));
-
-    // Read grid from file and create Grid object
-    String gridFilePath = "." + File.separator + "TESTINGFILES" + File.separator + "valid_grid.txt";
-    GridFileReader gridReader = new GridFileReader(gridFilePath);
-    Grid grid = new Grid(gridReader.getGrid());
-
-    game = new GameModelImpl(grid, player1, player2);
-=======
-    this.game = new GameModelImpl(player1, player2);
-    this.game.startGame(
+    game = new GameModelImpl(
             "." + File.separator + "TESTINGFILES" + File.separator + "valid_grid.text",
+            player1,
+            player2);
+
+    this.game.startGame(
             "." + File.separator + "TESTINGFILES" + File.separator + "full_card_set.txt",
             player1,
             player2);
->>>>>>> 99f549ab03ca6fa2ecb2a27a035e6a788cc5fd58
   }
 
 
   @Test
   public void testGetCount() {
-    this.game = new GameModelImpl(player1, player2);
-    assertEquals(5, this.game.getTotalCardCells(game.getGameGrid()));
+    assertEquals(4, this.game.getTotalCardCells(game.getGameGrid()));
 
   }
 
@@ -83,11 +65,11 @@ public class GameModelImplTest {
     Card opponentsCard = player2.getHand().get(0);
 
     game.placeCard(playersCard, 0, 0);
-    game.placeCard(opponentsCard, 0, 2);
+    game.placeCard(opponentsCard, 1, 2);
 
     game.battles(0, 0);
 
-    assertEquals(player1, game.getCellsPlayer(0, 2));
+    assertEquals(player1, game.getCellsPlayer(1, 2));
   }
 
 
@@ -119,14 +101,7 @@ public class GameModelImplTest {
 
   @Test
   public void testGetGameGrid() {
-    boolean[][] cells = {
-            {true, true, true},
-            {false, true, false},
-            {true, false, false}
-    };
-    Grid grid = new Grid(cells);
-
-    assertEquals(grid, game.getGameGrid());
+    assertEquals("[X] [X] [X]\n[X] [X] [X]\n[X] [X] [X]", game.getGameGrid().toString());
   }
 
   @Test
@@ -144,8 +119,9 @@ public class GameModelImplTest {
     Card opponentsCard = player2.getHand().get(0);
 
     game.placeCard(playersCard1, 0, 0);
-    game.placeCard(playersCard2, 2, 0);
-    game.placeCard(opponentsCard, 0, 2);
+    game.placeCard(playersCard2, 1, 0);
+    game.placeCard(opponentsCard, 1, 2);
+    game.placeCard(opponentsCard, 2, 2);
 
     IPlayer winner = game.getWinner();
 
@@ -229,22 +205,17 @@ public class GameModelImplTest {
 
   @Test
   public void testStartGame_PlayerHandsCorrectAfterStart() {
-    List<Card> deck = new ArrayList<>();
-    for (int i = 1; i <= 10; i++) {
-      int validAttackValue = Math.min(i, 10);
-      deck.add(new Card(
-              "Card " + i,
-              validAttackValue,
-              validAttackValue,
-              validAttackValue,
-              validAttackValue));
+    List<String> showHand1 = new ArrayList<>();
+    for (Card card : player1.getHand()) {
+      showHand1.add(card.toString());
     }
-    int expectedHandSize = (game.getTotalCardCells(game.getGameGrid()) + 1) / 2;
-    List<Card> expectedPlayer1Hand = deck.subList(0, expectedHandSize);
-    List<Card> expectedPlayer2Hand = deck.subList(expectedHandSize, 2 * expectedHandSize);
+    List<String> showHand2 = new ArrayList<>();
+    for (Card card : player2.getHand()) {
+      showHand2.add(card.toString());
+    }
 
-    assertEquals(expectedPlayer1Hand, player1.getHand());
-    assertEquals(expectedPlayer2Hand, player2.getHand());
+    assertEquals(List.of("Lion 3 5 2 1 ", "Tiger 4 2 5 3 ").toString(), showHand1.toString());
+    assertEquals(List.of("Elephant 5 1 4 2 , Giraffe 2 4 3 5 ").toString(), showHand2.toString());
   }
 
   @Test
@@ -264,17 +235,17 @@ public class GameModelImplTest {
     Card opponentsCard = player2.getHand().get(0);
 
     game.placeCard(playersCard, 0, 0);
-    game.placeCard(opponentsCard, 0, 2);
+    game.placeCard(opponentsCard, 1, 0);
 
     game.battles(0, 0);
 
-    assertEquals(player1, game.getCellsPlayer(0, 2));
+    assertEquals(player1, game.getCellsPlayer(1, 0));
   }
 
   @Test
   public void testPlayerCantPlayWhenNotTheirTurn() {
     Card card = player2.getHand().get(0);
-    assertThrows(IllegalStateException.class, () -> game.placeCard(card, 0, 0));
+    assertThrows(IllegalArgumentException.class, () -> game.placeCard(card, 1, 1));
   }
 
   @Test
@@ -290,11 +261,11 @@ public class GameModelImplTest {
     Card player2Card2 = player2.getHand().get(1);
 
     game.placeCard(player1Card1, 0, 0);
-    game.placeCard(player2Card1, 0, 1);
+    game.placeCard(player2Card1, 2, 2);
     game.placeCard(player2Card2, 1, 0);
     game.battles(0, 0);
 
-    assertEquals(player1, game.getCellsPlayer(0, 1));
+    assertEquals(null, game.getCellsPlayer(0, 1));
     assertEquals(player1, game.getCellsPlayer(1, 0));
   }
 

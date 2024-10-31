@@ -35,4 +35,10 @@ public interface CardInterface {
    * @return The column of the card
    */
   int getCol();
+
+  /**
+   * formats the card as the name of the card and all of its attack values.
+   * @return the card as a string.
+   */
+  String toString();
 }

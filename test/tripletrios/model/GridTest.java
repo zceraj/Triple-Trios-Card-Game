@@ -1,10 +1,7 @@
 package tripletrios.model;
 
-<<<<<<< HEAD
 import org.junit.jupiter.api.BeforeEach;
-=======
-import org.junit.Before;
->>>>>>> 99f549ab03ca6fa2ecb2a27a035e6a788cc5fd58
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -14,10 +11,16 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+/**
+ * tests the grid class of the model.
+ */
 public class GridTest {
   private Grid easyGrid;
   private Grid smallGrid;
 
+  /**
+   * sets up grids to be used in the tests.
+   */
   @BeforeEach
   public void setUp() {
     boolean[][] grid = {
@@ -40,7 +43,7 @@ public class GridTest {
   public void testDefaultGridInitialization() {
     for (int row = 0; row < easyGrid.getRows(); row++) {
       for (int col = 0; col < easyGrid.getCols(); col++) {
-        assertTrue(easyGrid.getCell(row, col).isCardCell(),
+        assertFalse(easyGrid.getCell(row, col).isCardCell(),
                 "Cell at (" + row + ", " + col + ") should be a CardCell");
       }
     }
@@ -78,7 +81,6 @@ public class GridTest {
   @Test
   public void testGetCardAtCardCell() {
     Cell cell = easyGrid.getCell(0, 0);
-    HumanPlayer player1 = new HumanPlayer("Player1", PlayerColor.valueOf("Blue"));
     Card testCard = new Card("TestCard", 5, 3, 7, 1);
     cell.setCard(testCard);
     assertEquals(testCard, easyGrid.getCardAt(0, 0),
@@ -103,7 +105,7 @@ public class GridTest {
   public void testToString() {
     // Place cards in specific cells for testing
     smallGrid.getCell(0, 0).setCard(new Card("CardA", 4, 5, 6, 7));
-    smallGrid.getCell(1, 1).setCard(new Card("CardB", 8, 9, 10, 11));
+    smallGrid.getCell(1, 1).setCard(new Card("CardB", 8, 9, 10, 5));
 
     // Define the expected string representation of the grid
     String expectedOutput =

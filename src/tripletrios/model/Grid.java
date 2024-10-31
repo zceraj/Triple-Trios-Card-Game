@@ -17,10 +17,11 @@ public class Grid {
 
   /**
    * Creates a new grid with specified cell types (CardCells or Holes).
+   *
    * @param cellTypes 2D array of booleans indicating if a cell is a CardCell or a Hole.
    */
   public Grid(boolean[][] cellTypes) {
-    if (cellTypes.length % 2 == 0 || cellTypes[0].length  % 2 == 0) {
+    if (cellTypes.length % 2 == 0 || cellTypes[0].length % 2 == 0) {
       throw new InputMismatchException("the grid cannot have an even number of cells");
     }
     this.rows = cellTypes.length;
@@ -34,6 +35,7 @@ public class Grid {
 
   /**
    * Initializes cells as CardCells or Holes based on the cellTypes configuration array.
+   *
    * @param cellTypes 2D boolean array where true means CardCell and false means Hole.
    */
   private void initializeCells(boolean[][] cellTypes) {
@@ -77,6 +79,7 @@ public class Grid {
 
   /**
    * Retrieves a specific cell at the given row and column.
+   *
    * @param row Row of the cell.
    * @param col Column of the cell.
    * @return The cell at (row, col).
@@ -92,6 +95,7 @@ public class Grid {
 
   /**
    * Retrieves the adjacent cells for a specific cell at (row, col).
+   *
    * @param row The row of the cell.
    * @param col The column of the cell.
    * @return Map of adjacent cells, keyed by direction.
@@ -103,6 +107,7 @@ public class Grid {
 
   /**
    * Checks if the cell at the given row and column is within the grid bounds.
+   *
    * @param row The row of the cell.
    * @param col The column of the cell.
    * @return True if the cell is within the grid bounds, false otherwise.
@@ -113,6 +118,7 @@ public class Grid {
 
   /**
    * Retrieves the card at a specific position if the cell is valid.
+   *
    * @param row The row of the cell.
    * @param col The column of the cell.
    * @return The card in the cell at (row, col), or null if empty or a Hole.
@@ -124,6 +130,7 @@ public class Grid {
 
   /**
    * Returns the number of rows in the grid.
+   *
    * @return The number of rows in the grid.
    */
   public int getRows() {
@@ -132,6 +139,7 @@ public class Grid {
 
   /**
    * Returns the number of columns in the grid.
+   *
    * @return The number of columns in the grid.
    */
   public int getCols() {
@@ -145,23 +153,30 @@ public class Grid {
    * just a character to avoid confusion and also did not include the player in the rendering of the
    * grid. We decided that this would be shown in the GUI more clearly and that for testing and
    * simple playing purposes this was enough.
+   *
    * @return String rendering of the grid.
    */
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    for (int i = 0; i < grid.length; i++) {
-      for (int j = 0; j < grid[i].length; j++) {
-        Cell cell = grid[i][j];
+    for (int columns = 0; columns < grid.length; columns++) {
+      for (int rows = 0; rows < grid[columns].length; rows++) {
+        Cell cell = grid[columns][rows];
         if (cell.isEmpty()) {
-          sb.append("[X] ");
+          sb.append("[X]");
         } else if (!cell.isEmpty()) {
-          sb.append("[").append(cell.getCard().getCardName()).append("] ");
+          sb.append("[").append(cell.getCard().getCardName()).append("]");
         } else {
-          sb.append("[ ] ");
+          sb.append("[ ]");
+        }
+        if (rows < grid[columns].length - 1) {
+          sb.append(" ");
         }
       }
-      sb.append("\n");
+      if (columns < grid.length - 1) {
+        sb.append("\n");
+      }
     }
     return sb.toString();
   }
+
 }

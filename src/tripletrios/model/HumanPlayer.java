@@ -23,7 +23,7 @@ public class HumanPlayer implements IPlayer {
    * @param name  the name of the player
    * @param color the color representing the player's identity
    */
-  HumanPlayer(String name, PlayerColor color) {
+  public HumanPlayer(String name, PlayerColor color) {
     this.hand = new ArrayList<>();
     this.name = name;
     this.color = color;
