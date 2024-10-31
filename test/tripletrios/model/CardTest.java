@@ -3,17 +3,19 @@ package tripletrios.model;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * tests the card class of the model.
+ */
 public class CardTest {
   private Card card;
-  private HumanPlayer player1;
-  private HumanPlayer player2;
 
+  /**
+   * sets up the card class.
+   */
   @BeforeEach
   public void setUp() {
-    this.player1 = new HumanPlayer("Player1", PlayerColor.valueOf("Blue"));
-    this.player2 = new HumanPlayer("Player2", PlayerColor.valueOf("Red"));
     this.card = new Card("TestCard", 5, 3, 7, 1);
   }
 

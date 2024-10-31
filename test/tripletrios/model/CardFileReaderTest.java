@@ -6,12 +6,21 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class CardFileReaderTest {
-  private static final String VALID_FILE = "."+ File.separator +"TESTINGFILES"+ File.separator +"test_cards.txt";
+  private static final String VALID_FILE = "."
+          + File.separator
+          + "TESTINGFILES"
+          + File.separator
+          + "test_cards.txt";
   private static final String INVALID_FILE_PATH = "invalid_file.txt";
-  private static final String BAD_FILE_PATH = "."+ File.separator +"TESTINGFILES"+ File.separator +"bad_card.txt";
+  private static final String BAD_FILE_PATH = "."
+          + File.separator
+          + "TESTINGFILES"
+          + File.separator
+          + "bad_card.txt";
 
 
   @Test
@@ -42,6 +51,8 @@ class CardFileReaderTest {
 
   @Test
   void testReadMalformedCardFile() {
-    assertThrows(IllegalArgumentException.class, () -> { new CardFileReader(BAD_FILE_PATH); });
+    assertThrows(IllegalArgumentException.class, () -> {
+      new CardFileReader(BAD_FILE_PATH);
+    });
   }
 }

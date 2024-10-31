@@ -18,7 +18,7 @@ public class GridFileReaderTest {
   @Test
   public void testReadValidGridFile() throws IOException {
     GridFileReader reader = new GridFileReader(
-            "."+ File.separator +"TESTINGFILES"+ File.separator +"valid_grid.text");
+            "." + File.separator + "TESTINGFILES" + File.separator + "valid_grid.text");
     boolean[][] grid = reader.getGrid();
 
     assertNotNull(grid);
@@ -45,14 +45,19 @@ public class GridFileReaderTest {
   @Test
   public void testInvalidGridDimensions() {
     assertThrows(InputMismatchException.class, () -> {
-      new GridFileReader("."+ File.separator +"TESTINGFILES"+ File.separator +"incorrect_grid_dimensions");
+      new GridFileReader(
+              "." + File.separator
+                      + "TESTINGFILES" + File.separator
+                      + "incorrect_grid_dimensions");
     });
   }
 
   @Test
   public void testInvalidCharactersInGrid(){
     assertThrows(InputMismatchException.class, () -> {
-      new GridFileReader("."+ File.separator +"TESTINGFILES"+ File.separator +"incorrect_char_in_grid");
+      new GridFileReader("."
+              + File.separator + "TESTINGFILES"
+              + File.separator + "incorrect_char_in_grid");
     });
   }
 }

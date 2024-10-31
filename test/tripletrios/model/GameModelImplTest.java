@@ -14,13 +14,17 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+/**
+ * tests the game model impl test
+ */
 public class GameModelImplTest {
   private GameModelImpl game;
   private IPlayer player1;
   private IPlayer player2;
 
-
-
+  /**
+   * sets up the game model to test. 
+   */
   @BeforeEach
   void setUp() {
     player1 = new HumanPlayer("Player1", PlayerColor.BLUE);

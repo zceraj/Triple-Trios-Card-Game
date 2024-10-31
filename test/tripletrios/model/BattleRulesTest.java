@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * test for the battle rules class in the main.
+ */
 public class BattleRulesTest {
 
   private BattleRules battleRules;
@@ -13,6 +16,9 @@ public class BattleRulesTest {
   private IPlayer player1;
   private IPlayer player2;
 
+  /**
+   * sets up everything needed to test.
+   */
   @BeforeEach
   public void setUp() {
     // Initialize players
