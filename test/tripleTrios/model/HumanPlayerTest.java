@@ -6,13 +6,24 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+
+/**
+ * Test class for the HumanPlayer class.
+ */
 public class HumanPlayerTest {
   private HumanPlayer player;
   private Card card1;
   private Card card2;
 
+  /**
+   * Set up the test environment.
+   */
   @BeforeEach
   public void setUp() {
     player = new HumanPlayer("Player1", PlayerColor.RED);

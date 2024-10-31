@@ -1,8 +1,11 @@
 package tripleTrios.model;
 
 import java.util.EnumMap;
-import java.util.Objects;
 
+/**
+ * Represents a card in the game.
+ * Implements the CardInterface.
+ */
 public class Card implements CardInterface {
   private final String cardName;
   private final EnumMap<Direction, String> attackValues;

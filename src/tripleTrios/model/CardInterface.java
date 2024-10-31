@@ -1,5 +1,9 @@
 package tripleTrios.model;
 
+/**
+ * Represents a card in the game.
+ * This class can be expanded to include more functionality for the card.
+ */
 public interface CardInterface {
   /**
    * Sets the row for the card after placement.

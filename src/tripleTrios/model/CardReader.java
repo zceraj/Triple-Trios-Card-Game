@@ -1,9 +1,12 @@
 package tripleTrios.model;
 
 import java.util.List;
-import java.util.Map;
 
-public interface CardReader <C extends CardInterface>{
+/**
+ * Represents a player in the game.
+ * @param <C>
+ */
+public interface CardReader <C extends CardInterface> {
 
   /**
    * returns a set of cards that can be used in the game.

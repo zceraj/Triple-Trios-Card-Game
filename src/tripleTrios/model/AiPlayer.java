@@ -7,7 +7,7 @@ import java.util.List;
  * Implements the IPlayer interface.
  * This class can be expanded to include AI logic for playing the game.
  */
-public class AiPlayer implements IPlayer{
+public class AiPlayer implements IPlayer {
 
   /**
    * Gets the name of the player.
@@ -43,6 +43,7 @@ public class AiPlayer implements IPlayer{
   @Override
   public void addCardToHand(Card card) {
 
+    // adds a card to the hand
   }
 
   /**
@@ -52,6 +53,7 @@ public class AiPlayer implements IPlayer{
   @Override
   public void removeCardFromHand(Card card) {
 
+    //removes acard from the hand
   }
 
   /**
@@ -61,6 +63,7 @@ public class AiPlayer implements IPlayer{
   @Override
   public void setHand(List<Card> playerHand) {
 
+    // sets the hand of the player
   }
 
   /**
@@ -72,5 +75,6 @@ public class AiPlayer implements IPlayer{
   @Override
   public void placeTheCard(Card card, int row, int col) {
 
+    // places the card at the specified row and column
   }
 }
