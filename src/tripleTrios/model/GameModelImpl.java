@@ -8,6 +8,7 @@ import java.util.Map;
 /**
  * Represents the model for the Triple Trios card game, encapsulating the
  * game logic and managing the state of the game.
+ * CLASS INVARIANT: the game grid must have an odd number of card cells
  *
  * <p>This class handles the initialization of players and the game grid,
  * facilitates the placement of cards, manages player turns, and checks
@@ -22,6 +23,7 @@ public class GameModelImpl implements GameModel {
   private boolean gameOver;
   private final Map<Cell, IPlayer> cellsPlayer;
 
+  //CLASS INVARIANT: the game grid must have an odd number of card cells
   /**
    * Constructs a GameModelImpl instance with the specified grid and players.
    *
@@ -31,7 +33,9 @@ public class GameModelImpl implements GameModel {
    * @throws IllegalArgumentException if the grid does not have an odd number
    *                                  of card cells or if players do not have
    *                                  the expected number of cards in hand.
+   *
    */
+
   public GameModelImpl(Grid grid, IPlayer player1, IPlayer player2) {
     this.grid = grid;
     this.player1 = player1;
