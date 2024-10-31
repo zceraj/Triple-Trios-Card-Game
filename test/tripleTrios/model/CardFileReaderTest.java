@@ -10,9 +10,9 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CardFileReaderTest {
-  private static final String VALID_FILE = "test_cards.txt";
+  private static final String VALID_FILE = "."+ File.separator +"TESTINGFILES"+ File.separator +"test_cards.txt";
   private static final String INVALID_FILE_PATH = "invalid_file.txt";
-  private static final String BAD_FILE_PATH = "bad_card.txt";
+  private static final String BAD_FILE_PATH = "."+ File.separator +"TESTINGFILES"+ File.separator +"bad_card.txt";
 
 
   @Test
@@ -44,11 +44,5 @@ class CardFileReaderTest {
   @Test
   void testReadMalformedCardFile() {
     assertThrows(IllegalArgumentException.class, () -> { new CardFileReader(BAD_FILE_PATH); });
-  }
-
-  @AfterEach
-  void tearDown() {
-    new File(CardFileReaderTest.VALID_FILE).delete();
-    new File(CardFileReaderTest.BAD_FILE_PATH).delete();
   }
 }
