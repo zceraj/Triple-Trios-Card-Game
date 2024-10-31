@@ -38,7 +38,7 @@ public class CardFileReader implements CardReader {
   private void readCardFile(String filePath) throws IOException {
     File file = new File(filePath);
     if (!file.exists()) {
-      throw new FileNotFoundException("this file doesn't exist, please try again" +filePath);
+      throw new FileNotFoundException("this file doesn't exist, please try again" + filePath);
     }
     try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
       String line;

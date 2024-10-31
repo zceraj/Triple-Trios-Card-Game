@@ -14,15 +14,14 @@ import java.io.StringWriter;
 import java.io.IOException;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * tests for the TripleTrioTextView class.
  */
 public class TripleTrioTextViewTest {
-
-  private IPlayer player1;
-  private IPlayer player2;
   private GameModel game;
   private StringWriter appendable;
   private TripleTrioTextView view;
@@ -32,8 +31,8 @@ public class TripleTrioTextViewTest {
    */
   @BeforeEach
   public void setUp() throws Exception {
-    player1 = new HumanPlayer("Player1", PlayerColor.BLUE);
-    player2 = new HumanPlayer("Player2", PlayerColor.RED);
+    HumanPlayer player1 = new HumanPlayer("Player1", PlayerColor.BLUE);
+    HumanPlayer player2 = new HumanPlayer("Player2", PlayerColor.RED);
 
     game = new GameModelImpl(
             "." + File.separator + "TESTINGFILES" + File.separator + "valid_grid.text",
