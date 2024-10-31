@@ -29,6 +29,7 @@ public class GameModelImplTest {
   void setUp() throws Exception {
     player1 = new HumanPlayer("Player1", PlayerColor.BLUE);
     player2 = new HumanPlayer("Player2", PlayerColor.RED);
+<<<<<<< HEAD
 
     List<Card> deck = new ArrayList<>();
     deck.add(new Card("Card 1", 1, 2, 3, 4));
@@ -47,12 +48,21 @@ public class GameModelImplTest {
     Grid grid = new Grid(gridReader.getGrid());
 
     game = new GameModelImpl(grid, player1, player2);
+=======
+    this.game = new GameModelImpl(player1, player2);
+    this.game.startGame(
+            "." + File.separator + "TESTINGFILES" + File.separator + "valid_grid.text",
+            "." + File.separator + "TESTINGFILES" + File.separator + "full_card_set.txt",
+            player1,
+            player2);
+>>>>>>> 99f549ab03ca6fa2ecb2a27a035e6a788cc5fd58
   }
 
 
   @Test
   public void testGetCount() {
-    assertEquals(5, game.getTotalCardCells(game.getGameGrid()));
+    this.game = new GameModelImpl(player1, player2);
+    assertEquals(5, this.game.getTotalCardCells(game.getGameGrid()));
 
   }
 
@@ -193,22 +203,6 @@ public class GameModelImplTest {
   @Test
   void testCurrentPlayerIsPlayer1AtStart() {
     assertEquals(player1, game.getCurPlayer(), "Player 1 should start the game.");
-  }
-
-  @Test
-  public void testInvalidGrid_ThrowsException() {
-    boolean[][] invalidCells = {
-            {true, true, true},
-            {false, true, false},
-            {false, true, true}
-    };
-    Grid invalidGrid = new Grid(invalidCells);
-
-    Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-      new GameModelImpl(invalidGrid, player1, player2);
-    });
-
-    assertEquals("Grid must have an odd number of card cells.", exception.getMessage());
   }
 
   @Test

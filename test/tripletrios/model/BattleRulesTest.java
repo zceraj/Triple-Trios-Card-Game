@@ -45,7 +45,7 @@ public class BattleRulesTest {
     }
 
     // Initialize game model and battle rules
-    game = new GameModelImpl(grid, player1, player2);
+    game = new GameModelImpl(player1, player2);
     battleRules = new BattleRules(game);
   }
 

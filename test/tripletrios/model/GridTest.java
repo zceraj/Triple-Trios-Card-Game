@@ -1,6 +1,10 @@
 package tripletrios.model;
 
+<<<<<<< HEAD
 import org.junit.jupiter.api.BeforeEach;
+=======
+import org.junit.Before;
+>>>>>>> 99f549ab03ca6fa2ecb2a27a035e6a788cc5fd58
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
