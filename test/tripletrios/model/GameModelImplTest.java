@@ -29,39 +29,8 @@ public class GameModelImplTest {
   void setUp() {
     player1 = new HumanPlayer("Player1", PlayerColor.BLUE);
     player2 = new HumanPlayer("Player2", PlayerColor.RED);
-
-    Card card1 = new Card("Card 1", 1, 2, 3, 4);
-    Card card2 = new Card("Card 2", 2, 4, 6, 8);
-    Card card3 = new Card("Card 3", 3, 6, 9, 9);
-    Card card4 = new Card("Card 4", 4, 8, 4, 1);
-    Card card5 = new Card("Card 5", 5, 3, 2, 1);
-    Card card6 = new Card("Card 6", 6, 7, 3, 2);
-    Card card7 = new Card("Card 7", 7, 8, 4, 3);
-
-    List<Card> deck = new ArrayList<>();
-    deck.add(card1);
-    deck.add(card2);
-    deck.add(card3);
-    deck.add(card4);
-    deck.add(card5);
-    deck.add(card6);
-    deck.add(card7);
-
-    boolean[][] cells = {
-            {true, true, true},
-            {false, true, false},
-            {true, false, false}
-    };
-    Grid grid = new Grid(cells);
-
-    int totalCardCells = 5;
-    int expectedHandSize = (totalCardCells + 1) / 2;
-
-    player1.setHand(deck.subList(0, expectedHandSize));
-    player2.setHand(deck.subList(expectedHandSize, expectedHandSize * 2));
-    game = new GameModelImpl(player1, player2);
-
-    game.startGame(
+    this.game = new GameModelImpl(player1, player2);
+    this.game.startGame(
             "." + File.separator + "TESTINGFILES" + File.separator + "valid_grid.text",
             "." + File.separator + "TESTINGFILES" + File.separator + "full_card_set.txt",
             player1,
@@ -70,7 +39,8 @@ public class GameModelImplTest {
 
   @Test
   public void testGetCount() {
-    assertEquals(5, game.getTotalCardCells(game.getGameGrid()));
+    this.game = new GameModelImpl(player1, player2);
+    assertEquals(5, this.game.getTotalCardCells(game.getGameGrid()));
 
   }
 
