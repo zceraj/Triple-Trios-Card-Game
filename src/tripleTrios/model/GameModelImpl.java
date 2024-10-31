@@ -1,5 +1,6 @@
 package tripleTrios.model;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,12 +16,13 @@ import java.util.Map;
  */
 public class GameModelImpl implements GameModel {
 
-  private final Grid grid;
+  private Grid grid;
   private IPlayer player1;
   private IPlayer player2;
   private IPlayer currPlayer;
   private boolean gameOver;
   private final Map<Cell, IPlayer> cellsPlayer;
+  private List<Card> cards;
 
   /**
    * Constructs a GameModelImpl instance with the specified grid and players.
@@ -49,36 +51,57 @@ public class GameModelImpl implements GameModel {
     }
   }
 
+
   /**
    * Starts the game with the given options. The provided deck is used to
    * deal out cards to each player. Modifying the deck given to this method
    * will not modify the game state.
    *
-   * @param deck    The deck of cards to use
    * @param player1 The first player
+   * @param gridFilePath is the filepath to the grid
+   * @param cardFilePath is the filepath to the cards
    * @param player2 The second player
    * @throws IllegalStateException    if the game has already started or is over
    * @throws IllegalArgumentException if the grid is not odd or the deck's size
    *                                  is insufficient to set up the game
    */
   @Override
-  public void startGame(List<Card> deck, IPlayer player1, IPlayer player2) {
-    if (!isGridOdd(grid)) {
-      throw new IllegalArgumentException("Grid must have an odd number of card cells.");
-    }
+  public void startGame(String gridFilePath, String cardFilePath, IPlayer player1, IPlayer player2) {
     if (!isGameOver()) {
       throw new IllegalStateException("Game has already started.");
     }
 
+    GridFileReader gridReader = null;
+    try {
+      gridReader = new GridFileReader(gridFilePath);
+    } catch (IOException e) {
+      throw new RuntimeException("can't read grid file.");
+    }
+    this.grid = new Grid(gridReader.getGrid());
+
     int totalCardCells = getTotalCardCells(grid);
+    if (totalCardCells % 2 == 0) {
+      throw new IllegalArgumentException("Grid must have an odd number of card cells.");
+    }
+
     int expectedHandSize = (totalCardCells + 1) / 2;
 
-    if (deck.size() < totalCardCells) {
+    CardFileReader cardReader = null;
+    try {
+      cardReader = new CardFileReader(cardFilePath);
+    } catch (IOException e) {
+      throw new IllegalArgumentException("can't read card file");
+    }
+    List<Card> loadedCards = cardReader.getCardDatabase();
+
+    if (loadedCards.size() < totalCardCells) {
       throw new IllegalArgumentException("Deck must have enough cards to fill the grid.");
     }
 
-    List<Card> player1Hand = new ArrayList<>(deck.subList(0, expectedHandSize));
-    List<Card> player2Hand = new ArrayList<>(deck.subList(expectedHandSize, 2 * expectedHandSize));
+    this.cards = loadedCards.subList(0, totalCardCells);
+
+    List<Card> player1Hand = new ArrayList<>(cards.subList(0, expectedHandSize));
+    List<Card> player2Hand = new ArrayList<>(cards.subList(expectedHandSize, 2 * expectedHandSize));
 
     player1.setHand(player1Hand);
     player2.setHand(player2Hand);
@@ -86,7 +109,6 @@ public class GameModelImpl implements GameModel {
     this.player1 = player1;
     this.player2 = player2;
     this.currPlayer = player1;
-
     this.gameOver = false;
   }
 
