@@ -1,7 +1,5 @@
 package tripletrios.model;
 
-
-
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 

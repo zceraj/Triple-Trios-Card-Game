@@ -22,13 +22,13 @@ public class GameModelImpl implements GameModel {
   private IPlayer player2;
   private IPlayer currPlayer;
   private boolean gameOver;
+  private boolean gameStarted;
   private final Map<Cell, IPlayer> cellsPlayer;
 
   //CLASS INVARIANT: the game grid must have an odd number of card cells
   /**
    * Constructs a GameModelImpl instance with the specified grid and players.
    *
-   * @param grid    The game grid
    * @param player1 The first player
    * @param player2 The second player
    * @throws IllegalArgumentException if the grid does not have an odd number
@@ -37,22 +37,13 @@ public class GameModelImpl implements GameModel {
    *
    */
 
-  public GameModelImpl(Grid grid, IPlayer player1, IPlayer player2) {
-    this.grid = grid;
+  public GameModelImpl(IPlayer player1, IPlayer player2) {
     this.player1 = player1;
     this.player2 = player2;
     this.currPlayer = player1;
     this.gameOver = false;
+    this.gameStarted = false;
     this.cellsPlayer = new HashMap<>();
-
-    if (!isGridOdd(grid)) {
-      throw new IllegalArgumentException("Grid must have an odd number of card cells.");
-    }
-    int expectedHandSize = (getTotalCardCells(grid) + 1) / 2;
-    if (player1.getHand().size() != expectedHandSize || player2.getHand().size()
-            != expectedHandSize) {
-      throw new IllegalArgumentException("Players must have the correct number of cards in hand.");
-    }
   }
 
 
@@ -72,8 +63,11 @@ public class GameModelImpl implements GameModel {
   @Override
   public void startGame(String gridFilePath, String cardFilePath,
                         IPlayer player1, IPlayer player2) {
-    if (!isGameOver()) {
-      throw new IllegalStateException("Game has already started.");
+    if (isGameOver()) {
+      throw new IllegalStateException("Game has finished ");
+    }
+    if (gameStarted) {
+      throw new IllegalStateException("game has already started");
     }
 
     GridFileReader gridReader = null;
@@ -115,6 +109,7 @@ public class GameModelImpl implements GameModel {
     this.player2 = player2;
     this.currPlayer = player1;
     this.gameOver = false;
+    this.gameStarted = true;
   }
 
   /**

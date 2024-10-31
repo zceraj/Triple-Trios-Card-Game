@@ -20,7 +20,7 @@ public class Grid {
    * @param cellTypes 2D array of booleans indicating if a cell is a CardCell or a Hole.
    */
   public Grid(boolean[][] cellTypes) {
-    if (cellTypes.length % 2 == 1 || cellTypes[0].length  % 2 == 1) {
+    if (cellTypes.length % 2 == 0 || cellTypes[0].length  % 2 == 0) {
       throw new InputMismatchException("the grid cannot have an even number of cells");
     }
     this.rows = cellTypes.length;

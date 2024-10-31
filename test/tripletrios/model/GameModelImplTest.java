@@ -59,7 +59,8 @@ public class GameModelImplTest {
 
     player1.setHand(deck.subList(0, expectedHandSize));
     player2.setHand(deck.subList(expectedHandSize, expectedHandSize * 2));
-    game = new GameModelImpl(grid, player1, player2);
+    game = new GameModelImpl(player1, player2);
+
     game.startGame(
             "." + File.separator + "TESTINGFILES" + File.separator + "valid_grid.text",
             "." + File.separator + "TESTINGFILES" + File.separator + "full_card_set.txt",
@@ -210,22 +211,6 @@ public class GameModelImplTest {
   @Test
   void testCurrentPlayerIsPlayer1AtStart() {
     assertEquals(player1, game.getCurPlayer(), "Player 1 should start the game.");
-  }
-
-  @Test
-  public void testInvalidGrid_ThrowsException() {
-    boolean[][] invalidCells = {
-            {true, true, true},
-            {false, true, false},
-            {false, true, true}
-    };
-    Grid invalidGrid = new Grid(invalidCells);
-
-    Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-      new GameModelImpl(invalidGrid, player1, player2);
-    });
-
-    assertEquals("Grid must have an odd number of card cells.", exception.getMessage());
   }
 
   @Test
