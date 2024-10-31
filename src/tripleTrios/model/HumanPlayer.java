@@ -104,7 +104,11 @@ public class HumanPlayer implements IPlayer {
   }
 
   public void placeTheCard(Card card, int row, int col) {
-    //place the card at the specified row and column
+    if (card == null) {
+      throw new IllegalArgumentException("Card cannot be null.");
+    }
+    card.addRow(row);
+    card.addCol(col);
   }
 
 

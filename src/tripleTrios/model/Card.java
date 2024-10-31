@@ -1,6 +1,7 @@
 package tripleTrios.model;
 
 import java.util.EnumMap;
+import java.util.Objects;
 
 public class Card implements CardInterface {
   private final String cardName;
@@ -20,10 +21,10 @@ public class Card implements CardInterface {
     this.cardName = cardName;
 
     this.attackValues = new EnumMap<>(Direction.class);
-    attackValues.put(Direction.NORTH, convertAttackValue(north));
-    attackValues.put(Direction.SOUTH, convertAttackValue(south));
-    attackValues.put(Direction.EAST, convertAttackValue(east));
-    attackValues.put(Direction.WEST, convertAttackValue(west));
+    attackValues.put(Direction.NORTH, stringToIntAttack(north));
+    attackValues.put(Direction.SOUTH, stringToIntAttack(south));
+    attackValues.put(Direction.EAST, stringToIntAttack(east));
+    attackValues.put(Direction.WEST, stringToIntAttack(west));
   }
 
   /**
@@ -31,7 +32,7 @@ public class Card implements CardInterface {
    * @param value The integer attack value to convert
    * @return The string representation of the attack value ("1"-"9" or "A")
    */
-  private String convertAttackValue(int value) {
+  private String stringToIntAttack(int value) {
     if (value == 10) {
       return "A";
     } else if (value >= 1 && value <= 9) {
@@ -94,4 +95,5 @@ public class Card implements CardInterface {
   public String getCardName() {
     return cardName;
   }
+
 }

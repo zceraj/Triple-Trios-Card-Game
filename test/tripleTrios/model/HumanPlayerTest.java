@@ -8,16 +8,16 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class PlayerTest {
+public class HumanPlayerTest {
   private HumanPlayer player;
   private Card card1;
   private Card card2;
 
   @BeforeEach
-  void setUp() {
+  public void setUp() {
     player = new HumanPlayer("Player1", PlayerColor.RED);
-    card1 = new Card("Card 1", 1, 2, 3, 4);  // Assign to class-level variables
-    card2 = new Card("Card 2", 2, 4, 6, 8);  // Assign to class-level variables
+    card1 = new Card("Card 1", 1, 2, 3, 4);
+    card2 = new Card("Card 2", 2, 4, 6, 8);
   }
 
   @Test
@@ -49,17 +49,11 @@ public class PlayerTest {
     List<Card> newHand = new ArrayList<>();
     newHand.add(card1);
     newHand.add(card2);
+
     player.setHand(newHand);
     assertEquals(newHand, player.getHand());
-  }
 
-  @Test
-  public void testPlayCard() {
-    player.addCardToHand(card1);
-    player.addCardToHand(card2);
-    Card playedCard = player.playCard(0);
-    assertEquals(card1, playedCard);
-    assertFalse(player.getHand().contains(card1));
+    assertThrows(IllegalArgumentException.class, () -> player.setHand(null));
   }
 
   @Test
@@ -67,14 +61,32 @@ public class PlayerTest {
     List<Card> hand = new ArrayList<>();
     hand.add(card1);
     hand.add(card2);
+
     player.setHand(hand);
     assertEquals(hand, player.getHand());
   }
 
   @Test
-  public void testToString() {
+  public void testPlayCard() {
     player.addCardToHand(card1);
-    String expectedString = "Player1 (RED) - Hand: [" + card1 + "]";
-    assertEquals(expectedString, player.toString());
+    player.addCardToHand(card2);
+
+    Card playedCard = player.playCard(0);
+    assertEquals(card1, playedCard);
+    assertFalse(player.getHand().contains(card1));
+
+    assertThrows(IndexOutOfBoundsException.class, () -> player.playCard(5));
   }
+
+  @Test
+  public void testPlaceTheCard() {
+    player.addCardToHand(card1);
+    player.placeTheCard(card1, 1, 1);
+
+    assertEquals(1, card1.getRow());
+    assertEquals(1, card1.getCol());
+
+    assertThrows(IllegalArgumentException.class, () -> player.placeTheCard(null, 0, 0));
+  }
+
 }

@@ -254,7 +254,7 @@ public class GameModelImpl implements GameModel {
   }
 
   //gets the total number of card cells in the grid
-  int getTotalCardCells(Grid grid) {
+  public int getTotalCardCells(Grid grid) {
     return getCount(grid);
   }
 

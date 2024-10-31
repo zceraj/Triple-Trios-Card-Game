@@ -12,6 +12,9 @@ In a design document (in a separate text file), explain how you envision instant
 and your model, so that you could play a few moves of the game. This might be one part of your
 README (see below), but probably should be a separate file.
 
+
+
+
 We will give additional guidance in future assignments over how we suggest you implement players;
 the goal in this assignment is for you to think through the design possibilities and explain what
 you think might be an appropriate design.
