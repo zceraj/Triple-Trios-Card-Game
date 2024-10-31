@@ -13,6 +13,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * tests the grid file reader in the model.
+ */
 public class GridFileReaderTest {
 
   @Test
@@ -53,7 +56,7 @@ public class GridFileReaderTest {
   }
 
   @Test
-  public void testInvalidCharactersInGrid(){
+  public void testInvalidCharactersInGrid() {
     assertThrows(InputMismatchException.class, () -> {
       new GridFileReader("."
               + File.separator + "TESTINGFILES"
