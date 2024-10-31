@@ -161,7 +161,7 @@ public class Grid {
     for (int columns = 0; columns < grid.length; columns++) {
       for (int rows = 0; rows < grid[columns].length; rows++) {
         Cell cell = grid[columns][rows];
-        if (cell.isEmpty()) {
+        if (cell.isCardCell() && cell.isEmpty()) {
           sb.append("[X]");
         } else if (!cell.isEmpty()) {
           sb.append("[").append(cell.getCard().getCardName()).append("]");

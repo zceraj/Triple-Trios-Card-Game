@@ -101,7 +101,9 @@ public class GameModelImplTest {
 
   @Test
   public void testGetGameGrid() {
-    assertEquals("[X] [X] [X]\n[X] [X] [X]\n[X] [X] [X]", game.getGameGrid().toString());
+    assertEquals("[X] [ ] [ ]\n" +
+            "[X] [ ] [X]\n" +
+            "[ ] [ ] [X]", game.getGameGrid().toString());
   }
 
   @Test

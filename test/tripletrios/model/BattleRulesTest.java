@@ -3,6 +3,8 @@ package tripletrios.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -12,9 +14,9 @@ public class BattleRulesTest {
 
   private BattleRules battleRules;
   private GameModelImpl game;
-  private Grid grid;
   private IPlayer player1;
   private IPlayer player2;
+  private Grid grid;
 
   /**
    * sets up everything needed to test.
@@ -25,27 +27,19 @@ public class BattleRulesTest {
     player1 = new HumanPlayer("Player1", PlayerColor.RED);
     player2 = new HumanPlayer("Player2", PlayerColor.BLUE);
 
-    // Set up a 3x3 grid with all cells available for cards
-    boolean[][] cells = {
-            {true, true, true},
-            {true, false, true},
-            {true, true, true}
-    };
-    grid = new Grid(cells);
+    game = new GameModelImpl(
+            "." + File.separator + "TESTINGFILES" + File.separator + "battle_rules_grid",
+            player1,
+            player2);
 
-    // Determine the required hand size based on grid size or game rules
-    int requiredHandSize = (game.getTotalCardCells(grid) + 1) / 2;
-
-    // Populate each player's hand with the required number of cards
-    for (int i = 1; i <= requiredHandSize; i++) {
-      Card card1 = new Card("Red Card " + i, 5, 2, 3, 4);
-      Card card2 = new Card("Blue Card " + i, 2, 6, 5, 1);
-      player1.addCardToHand(card1);
-      player2.addCardToHand(card2);
-    }
+    this.game.startGame(
+            "." + File.separator + "TESTINGFILES" + File.separator + "full_card_set.txt",
+            player1,
+            player2);
 
     // Initialize game model and battle rules
     battleRules = new BattleRules(game);
+    this.grid = game.getGameGrid();
   }
 
   @Test
@@ -57,13 +51,13 @@ public class BattleRulesTest {
     game.placeCard(card1, 1, 1);
     game.updateOwner(1, 1, player1);
 
-    game.placeCard(card2, 1, 0);
-    game.updateOwner(1, 0, player2);
+    game.placeCard(card2, 0, 1);
+    game.updateOwner(0, 1, player2);
 
     // Initiate battle and verify the outcome
     battleRules.startBattle(grid, 1, 1, player1);
 
     // Check that player1 has won the cell (1,0)
-    assertEquals(player1, game.getCellsPlayer(1, 0), "Player 1 should have won the battle.");
+    assertEquals(player2, game.getCellsPlayer(0, 1), "Player 2 should have won the battle.");
   }
 }
