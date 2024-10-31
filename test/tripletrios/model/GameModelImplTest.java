@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
- * tests the game model impl test
+ * tests the game model impl test.
  */
 public class GameModelImplTest {
   private GameModelImpl game;
@@ -23,7 +23,7 @@ public class GameModelImplTest {
   private IPlayer player2;
 
   /**
-   * sets up the game model to test. 
+   * sets up the game model to test.
    */
   @BeforeEach
   void setUp() {
@@ -61,8 +61,8 @@ public class GameModelImplTest {
     player2.setHand(deck.subList(expectedHandSize, expectedHandSize * 2));
     game = new GameModelImpl(grid, player1, player2);
     game.startGame(
-            "."+ File.separator +"TESTINGFILES"+ File.separator +"valid_grid.text",
-            "."+ File.separator +"TESTINGFILES"+ File.separator +"full_card_set.txt",
+            "." + File.separator + "TESTINGFILES" + File.separator + "valid_grid.text",
+            "." + File.separator + "TESTINGFILES" + File.separator + "full_card_set.txt",
             player1,
             player2);
   }
@@ -167,7 +167,8 @@ public class GameModelImplTest {
 
     for (int row = 0; row < game.getGameGrid().getRows(); row++) {
       for (int col = 0; col < game.getGameGrid().getCols(); col++) {
-        if (game.getGameGrid().getCell(row, col).isCardCell() && game.getGameGrid().getCell(row, col).isEmpty()) {
+        if (game.getGameGrid().getCell(row, col).isCardCell()
+                && game.getGameGrid().getCell(row, col).isEmpty()) {
           Card card = player1.getHand().get(0);
           game.placeCard(card, row, col);
         }
@@ -195,8 +196,10 @@ public class GameModelImplTest {
   @Test
   void testStartGameDistributesCards() {
     int expectedHandSize = (game.getTotalCardCells(game.getGameGrid()) + 1) / 2;
-    assertEquals(expectedHandSize, player1.getHand().size(), "Player 1 should have correct hand size.");
-    assertEquals(expectedHandSize, player2.getHand().size(), "Player 2 should have correct hand size.");
+    assertEquals(expectedHandSize, player1.getHand().size(),
+            "Player 1 should have correct hand size.");
+    assertEquals(expectedHandSize, player2.getHand().size(),
+            "Player 2 should have correct hand size.");
   }
 
   @Test
@@ -231,7 +234,12 @@ public class GameModelImplTest {
 
     for (int i = 1; i <= 10; i++) {
       int validAttackValue = Math.min(i, 10);
-      deck.add(new Card("Card " + i, validAttackValue, validAttackValue, validAttackValue, validAttackValue));
+      deck.add(new Card(
+              "Card " + i,
+              validAttackValue,
+              validAttackValue,
+              validAttackValue,
+              validAttackValue));
     }
 
     int expectedHandSize = (game.getTotalCardCells(game.getGameGrid()) + 1) / 2;
@@ -247,7 +255,12 @@ public class GameModelImplTest {
     List<Card> deck = new ArrayList<>();
     for (int i = 1; i <= 10; i++) {
       int validAttackValue = Math.min(i, 10);
-      deck.add(new Card("Card " + i, validAttackValue, validAttackValue, validAttackValue, validAttackValue));
+      deck.add(new Card(
+              "Card " + i,
+              validAttackValue,
+              validAttackValue,
+              validAttackValue,
+              validAttackValue));
     }
     int expectedHandSize = (game.getTotalCardCells(game.getGameGrid()) + 1) / 2;
     List<Card> expectedPlayer1Hand = deck.subList(0, expectedHandSize);

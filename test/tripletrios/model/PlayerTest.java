@@ -11,7 +11,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-
+/**
+ * tests the player class from model.
+ */
 public class PlayerTest {
   private HumanPlayer player;
   private Card card1;
