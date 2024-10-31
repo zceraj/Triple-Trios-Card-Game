@@ -22,6 +22,7 @@ public class GameModelImpl implements GameModel {
   private IPlayer player2;
   private IPlayer currPlayer;
   private boolean gameOver;
+  private boolean gameStarted;
   private final Map<Cell, IPlayer> cellsPlayer;
 
   //CLASS INVARIANT: the game grid must have an odd number of card cells
@@ -72,8 +73,14 @@ public class GameModelImpl implements GameModel {
   @Override
   public void startGame(String gridFilePath, String cardFilePath,
                         IPlayer player1, IPlayer player2) {
-    if (!isGameOver()) {
+    if (this.gameStarted) {
       throw new IllegalStateException("Game has already started.");
+    }
+    if (this.gameOver) {
+      throw new IllegalStateException("Game is over.");
+    }
+    if (!isGridOdd(grid)) {
+      throw new IllegalArgumentException("Grid must have an odd number of card cells.");
     }
 
     GridFileReader gridReader = null;
@@ -128,6 +135,12 @@ public class GameModelImpl implements GameModel {
    */
   @Override
   public void placeCard(Card card, int row, int col) {
+    if (!gameStarted) {
+      throw new IllegalStateException("Game has not  started.");
+    }
+    if (isGameOver()) {
+      throw new IllegalStateException("Game is over.");
+    }
     if (!grid.isValidCell(row, col)) {
       throw new IllegalArgumentException("Invalid cell coordinates.");
     }
