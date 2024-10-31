@@ -117,12 +117,22 @@ public class GameModelImplTest {
 
   @Test
   public void testGetGameGrid() {
+    boolean[][] cells = {
+            {true, true, true},
+            {false, true, false},
+            {true, false, false}
+    };
+    Grid grid = new Grid(cells);
 
+    assertEquals(grid, game.getGameGrid());
   }
 
   @Test
   public void testGetCellsPlayer() {
+    Card playersCard = player1.getHand().get(0);
+    game.placeCard(playersCard, 0, 0);
 
+    assertEquals(player1, game.getCellsPlayer(0, 0));
   }
 
   @Test

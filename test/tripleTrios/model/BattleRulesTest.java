@@ -24,7 +24,7 @@ public class BattleRulesTest {
     // Set up a 3x3 grid with all cells available for cards
     boolean[][] cells = {
             {true, true, true},
-            {true, true, true},
+            {true, false, true},
             {true, true, true}
     };
     grid = new Grid(cells);

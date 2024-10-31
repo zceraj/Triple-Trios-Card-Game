@@ -65,9 +65,9 @@ public class AiPlayer implements IPlayer{
 
   /**
    * Places the card at the specified row and column.
-   * @param card
-   * @param row
-   * @param col
+   * @param card to be placed
+   * @param row to place the card
+   * @param col to place the card
    */
   @Override
   public void placeTheCard(Card card, int row, int col) {
