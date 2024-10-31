@@ -25,21 +25,20 @@ public class BattleRules {
     Card placedCard = grid.getCell(row, col).getCard();
     List<Card> adjacentCards = getAdjacentCards(grid, row, col);
 
-    // For each adjacent card, check if it belongs to the opposing player and execute battle logic if so
     for (Card adjacentCard : adjacentCards) {
-      IPlayer adjacentOwner = gameModel.getCellsPlayer(adjacentCard.getRow(), adjacentCard.getCol());
+      IPlayer adjacentOwner = gameModel.getCellsPlayer(adjacentCard.getRow(),
+              adjacentCard.getCol());
       if (adjacentOwner != null && adjacentOwner != currPlayer) {
         Direction direction = decideDirection(row, col, adjacentCard);
         executeBattle(placedCard, adjacentCard, direction);
       }
     }
 
-    // Execute any combo battles resulting from newly flipped cards
     comboBattle(grid, row, col, currPlayer);
   }
 
   /**
-   * Executes the comparison between two cards and flips ownership if the placed card wins.
+   * Executes the comparison between two cards and flips owners based on the result.
    * @param placedCard The card placed by the current player.
    * @param adjacentCard The opposing player's adjacent card.
    * @param direction The direction in which the placed card faces the adjacent card.
@@ -58,7 +57,7 @@ public class BattleRules {
 
 
   /**
-   * Executes combo battles where newly flipped cards can trigger additional flips in chain reactions.
+   * Executes combo battles where newly flipped cards can flip cards in chain reactions.
    * @param grid The game grid.
    * @param row The row where the original card was placed.
    * @param col The column where the original card was placed.
@@ -71,9 +70,11 @@ public class BattleRules {
       List<Card> adjacentCards = getAdjacentCards(grid, flippedCard.getRow(), flippedCard.getCol());
 
       for (Card adjacentCard : adjacentCards) {
-        IPlayer adjacentOwner = gameModel.getCellsPlayer(adjacentCard.getRow(), adjacentCard.getCol());
+        IPlayer adjacentOwner = gameModel.getCellsPlayer(
+                adjacentCard.getRow(), adjacentCard.getCol());
         if (adjacentOwner != null && adjacentOwner != currPlayer) {
-          Direction direction = decideDirection(flippedCard.getRow(), flippedCard.getCol(), adjacentCard);
+          Direction direction = decideDirection(
+                  flippedCard.getRow(), flippedCard.getCol(), adjacentCard);
           executeBattle(flippedCard, adjacentCard, direction);
         }
       }

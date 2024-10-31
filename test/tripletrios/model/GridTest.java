@@ -1,9 +1,16 @@
 package tripletrios.model;
 
-import static org.junit.jupiter.api.Assertions.*;
+
 
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class GridTest {
   private Grid easyGrid;
@@ -97,8 +104,8 @@ class GridTest {
 
     // Define the expected string representation of the grid
     String expectedOutput =
-            "[CardA] [X] \n" +
-                    "[ ] [CardB] \n";
+            "[CardA] [X] \n"
+                    + "[ ] [CardB] \n";
 
     // Test if the actual output matches the expected output
     assertEquals(expectedOutput, smallGrid.toString());
