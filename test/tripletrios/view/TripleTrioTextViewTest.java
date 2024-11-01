@@ -6,7 +6,6 @@ import tripletrios.model.Card;
 import tripletrios.model.GameModel;
 import tripletrios.model.GameModelImpl;
 import tripletrios.model.HumanPlayer;
-import tripletrios.model.IPlayer;
 import tripletrios.model.PlayerColor;
 
 import java.io.File;

@@ -156,6 +156,11 @@ public class GameModelImplTest {
     assertEquals(card, game.getGameGrid().getCardAt(0, 0));
   }
 
+  @Test
+  public void testPlayerCantPlayWhenNotTheirTurn() {
+    Card card = player2.getHand().get(0);
+    assertThrows(IllegalArgumentException.class, () -> game.placeCard(card, 1, 1));
+  }
 
   @Test
   void testStartGameInitializesGridCorrectly() {
@@ -171,6 +176,12 @@ public class GameModelImplTest {
             "Player 1 should have correct hand size.");
     assertEquals(expectedHandSize, player2.getHand().size(),
             "Player 2 should have correct hand size.");
+  }
+
+  @Test
+  public void testPlayerCantPlayToOutOfBoundsLocation() {
+    Card card = player1.getHand().get(0);
+    assertThrows(IllegalArgumentException.class, () -> game.placeCard(card, 4, 5));
   }
 
   @Test
@@ -244,17 +255,6 @@ public class GameModelImplTest {
     assertEquals(player1, game.getCellsPlayer(1, 0));
   }
 
-  @Test
-  public void testPlayerCantPlayWhenNotTheirTurn() {
-    Card card = player2.getHand().get(0);
-    assertThrows(IllegalArgumentException.class, () -> game.placeCard(card, 1, 1));
-  }
-
-  @Test
-  public void testPlayerCantPlayToOutOfBoundsLocation() {
-    Card card = player1.getHand().get(0);
-    assertThrows(IllegalArgumentException.class, () -> game.placeCard(card, 4, 5));
-  }
 
   @Test
   public void testTilesAreFlippedCorrectly() {
