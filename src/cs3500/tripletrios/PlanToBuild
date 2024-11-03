@@ -1,0 +1,86 @@
+for numbers of card snad grid
+if grid has 35 cells then there should be (35+1)/2 = 18 cards in each players hands
+
+----------------------------------------------------------------------------------------------------
+Communcations:
+Z:
+
+M:
+- I will finish the model classes
+    --adjecnt map in grid, - done
+    --updating battle rules, - done
+    --write tests for model
+    -- README file - working on it
+----------------------------------------------------------------------------------------------------
+                              ---------------
+                              --To Do List:--
+                              ---------------
+KEY:
+"-" means to-do
+"+" means completed
+"*" means in progress
+
+                                SOURCE CODE
+Model:
+- make the model read only
+    - extend the interface to a read only three trios model intergace
+        - The ability to create a game using the configuration files for the grid and the cards
+        - The ability to create a copy of the grid
+            - obserations:
+              How big is the grid?
+              What are the contents of a cell at a given coordinate?
+              What are the contents of a player’s hand?
+              Which player owns the card in a cell at a given coordinate?
+              Is it legal for the current player to play at a given coordinate?
+              Given a card and a coordinate, how many cards can a player flip by playing at a given coordinate?
+              What is a player’s score in the game?
+              Is the game over?
+        - The current player plays a card from their hand at a given cell
+
+View:
+    - create a GUI view using java swing
+    - interfaces for all the components of the view
+        - frame
+        - panel
+        - gui rendering??
+
+How we want the view to look
+- a game board in the center (rows x cols big) -- light purple
+- a column on each side of the grid defining the player's hand
+- yellow or dark purple squares indicating the possible moves for the players
+- onece a card is placed the yellow square turns into the card.
+
+- a user should be able to click on a card in the hand,
+and it should highlight that card somehow. In the image below,
+the highlight is indicated as a thick grey border. You may choose another way of
+highlighting if you wish so long as it is obvious it is selected.
+- Additionally, your view should (temporarily) print a message (using System.out) containing the
+index of the card that was clicked on as well as which player owns that hand.
+
+  a user should be able to click on a cell in the grid and the view should (temporarily) print a
+  message (using System.out) containing the coordinates of the cell that was clicked on, in whatever
+  coordinate system you used in your model. Note: this is not the same thing as the physical mouse
+  coordinates of the mouse event!
+
+- a user can select
+- a user can deselect a card by clicking the same card or another card
+
+- clicking outside of the grid shouldn't do anything
+
+
+Controller:
+- make a plan for the controller
+
+Main:
+- fix the code with our actual model class names
+
+                                  TESTING
+- have the screenshots for the appropriate parts of the view:
+    - At the start of the game
+    - With a card selected from the Red Player’s hand
+    - With a card selected from the Blue Player’s hand
+    - At a non-trivial intermediate point of the game, meaning cards have been played and the hands of both players have decreased
+
+
+
+                                    OTHER

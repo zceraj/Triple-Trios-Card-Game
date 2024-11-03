@@ -5,6 +5,14 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
+import cs3500.tripletrios.model.BattleRules;
+import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.GameModelImpl;
+import cs3500.tripletrios.model.Grid;
+import cs3500.tripletrios.model.HumanPlayer;
+import cs3500.tripletrios.model.IPlayer;
+import cs3500.tripletrios.model.PlayerColor;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**

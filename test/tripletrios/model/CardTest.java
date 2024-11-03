@@ -3,6 +3,9 @@ package tripletrios.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.Direction;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

@@ -1,4 +1,4 @@
-package tripletrios.view;
+package cs3500.tripletrios.view;
 
 import java.io.IOException;
 

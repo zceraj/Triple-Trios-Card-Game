@@ -1,10 +1,10 @@
-package tripletrios.view;
+package cs3500.tripletrios.view;
 
 import java.io.IOException;
 import java.util.Objects;
 
-import tripletrios.model.Card;
-import tripletrios.model.GameModel;
+import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.GameModel;
 
 /**
  * creates a textual view of the state of the model.

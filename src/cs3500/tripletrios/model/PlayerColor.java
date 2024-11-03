@@ -1,4 +1,4 @@
-package tripletrios.model;
+package cs3500.tripletrios.model;
 
 /**
  * Represents the colors that can be assigned to a player in the Triple Trios game.

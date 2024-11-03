@@ -2,11 +2,12 @@ package tripletrios.view;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import tripletrios.model.Card;
-import tripletrios.model.GameModel;
-import tripletrios.model.GameModelImpl;
-import tripletrios.model.HumanPlayer;
-import tripletrios.model.PlayerColor;
+import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.GameModel;
+import cs3500.tripletrios.model.GameModelImpl;
+import cs3500.tripletrios.model.HumanPlayer;
+import cs3500.tripletrios.model.PlayerColor;
+import cs3500.tripletrios.view.TripleTrioTextView;
 
 import java.io.File;
 import java.io.StringWriter;

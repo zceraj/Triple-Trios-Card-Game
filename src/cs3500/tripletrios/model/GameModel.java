@@ -1,4 +1,4 @@
-package tripletrios.model;
+package cs3500.tripletrios.model;
 
 /**
  * Represents the interface fo the model for the Triple Trios card game.

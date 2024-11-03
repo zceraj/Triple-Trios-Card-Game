@@ -6,6 +6,10 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.HumanPlayer;
+import cs3500.tripletrios.model.PlayerColor;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

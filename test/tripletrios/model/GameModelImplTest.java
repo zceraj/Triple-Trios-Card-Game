@@ -7,6 +7,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.GameModelImpl;
+import cs3500.tripletrios.model.HumanPlayer;
+import cs3500.tripletrios.model.IPlayer;
+import cs3500.tripletrios.model.PlayerColor;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertThrows;

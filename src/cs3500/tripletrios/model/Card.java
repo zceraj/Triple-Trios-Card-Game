@@ -1,4 +1,4 @@
-package tripletrios.model;
+package cs3500.tripletrios.model;
 
 import java.util.EnumMap;
 
