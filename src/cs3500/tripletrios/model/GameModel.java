@@ -62,11 +62,4 @@ public interface GameModel {
    */
   void battles(int row, int col);
 
-  /**
-   * Gets the total number of card cells in the grid.
-   * @param grid The grid to check
-   * @return The total number of card cells in the grid
-   */
-  int getTotalCardCells(Grid grid);
-
 }
