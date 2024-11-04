@@ -4,38 +4,38 @@ X - completed
 * - in progress if needed
 
 November 3 (Today)
-    O Set up shared workspace and repository
-    O Divide remaining tasks between each partner
-    O Review assignment requirements and create a game plan
+    X Set up shared workspace and repository
+    X Divide remaining tasks between each partner
+    X Review assignment requirements and create a game plan
 
 November 4
-    O Partner A: Implement read-only model interface
-    O Partner B: Implement mutable model interface
+    O Meroska: Implement read-only model interface
+    O Zara: Start work on the visual view with Java Swing basics and fix the main
     O Both: Review each other's code and make adjustments
 
 November 5
-    O Partner A: Start work on the visual view with Java Swing basics
+    O Partner A: Implement mouse interactions in the view
     O Partner B: Begin strategic computer player design, focusing on simple strategy
     O Both: Collaborate on testing early implementations
 
 November 6
-    O Partner A: Implement mouse interactions in the view
+    O Partner A: Complete remaining view interface elements
     O Partner B: Complete simple computer player strategy and test
     O Both: Integrate view and strategy components
 
 November 7
-    O Partner A: Complete remaining view interface elements
+    O Partner A: Test view responsiveness and interactions thoroughly
     O Partner B: Start implementing advanced computer player strategy
     O Both: Write initial tests for view and model integration
 
 November 8
-    O Partner A: Test view responsiveness and interactions thoroughly
+    O Partner A: Begin documentation and README updates
     O Partner B: Finalize advanced computer player strategy and test
     O Both: Implement model mocks for strategy testing
 
 November 9
-    O Partner A: Begin documentation and README updates
-    O Partner B: Capture screenshots for submission
+    O Zara: Capture screenshots for submission
+    O Partner B: Buffer
     O Both: Run full integration tests and debug if needed
 
 November 10 (Goal Completion Day)
