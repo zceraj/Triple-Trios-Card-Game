@@ -64,16 +64,13 @@ public class GameModelImpl implements GameModel {
    * deal out cards to each player. Modifying the deck given to this method
    * will not modify the game state.
    *
-   * @param player1 The first player
    * @param cardFilePath is the filepath to the cards
-   * @param player2 The second player
    * @throws IllegalStateException    if the game has already started or is over
    * @throws IllegalArgumentException if the grid is not odd or the deck's size
    *                                  is insufficient to set up the game
    */
   @Override
-  public void startGame(String cardFilePath,
-                        IPlayer player1, IPlayer player2) {
+  public void startGame(String cardFilePath) {
     if (this.gameStarted) {
       throw new IllegalStateException("Game has already started.");
     }
@@ -105,8 +102,6 @@ public class GameModelImpl implements GameModel {
     player1.setHand(player1Hand);
     player2.setHand(player2Hand);
 
-    this.player1 = player1;
-    this.player2 = player2;
     this.currPlayer = player1;
     this.gameOver = false;
     this.gameStarted = true;
