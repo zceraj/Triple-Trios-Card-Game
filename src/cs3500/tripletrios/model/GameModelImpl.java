@@ -78,7 +78,7 @@ public class GameModelImpl implements GameModel {
       throw new IllegalStateException("Game is over.");
     }
 
-    int totalCardCells = grid.getCount(game.getGameGrid());
+    int totalCardCells = grid.getCount();
 
     int expectedHandSize = (totalCardCells + 1) / 2;
 
@@ -278,7 +278,7 @@ public class GameModelImpl implements GameModel {
 
   // checks if the gird has an odd number of cells
   private boolean isGridOdd(Grid grid) {
-    int cardCellCount = grid.getCount(game.getGameGrid());
+    int cardCellCount = grid.getCount();
     return cardCellCount % 2 != 0;
   }
 }
