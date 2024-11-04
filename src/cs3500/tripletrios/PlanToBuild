@@ -6,11 +6,7 @@ Communcations:
 Z:
 
 M:
-- I will finish the model classes
-    --adjecnt map in grid, - done
-    --updating battle rules, - done
-    --write tests for model
-    -- README file - working on it
+
 ----------------------------------------------------------------------------------------------------
                               ---------------
                               --To Do List:--
@@ -32,12 +28,13 @@ Model:
               What are the contents of a player’s hand?
               Which player owns the card in a cell at a given coordinate?
               Is it legal for the current player to play at a given coordinate?
-              Given a card and a coordinate, how many cards can a player flip by playing at a given coordinate?
+              Given a card and a coordinate, how many cards can a player flip by playing at a
+              given coordinate?
               What is a player’s score in the game?
               Is the game over?
         - The current player plays a card from their hand at a given cell
 
-View:
+Basic View:
     - create a GUI view using java swing
     - interfaces for all the components of the view
         - frame
@@ -68,11 +65,43 @@ index of the card that was clicked on as well as which player owns that hand.
 - clicking outside of the grid shouldn't do anything
 
 
+Computer Player:
+- Flip as many cards on this turn as possible. This means choosing a position and card together.
+
+- Go for the corners: cards in corners only expose two of their attack values instead of all 4,
+making them harder to flip. Then consider which card is hardest to flip in that corner.
+
+- If there are multiple "best" moves that can be chosen in a single strategy,
+break ties by choosing the move with the uppermost-leftmost coordinate for the position and then
+choose the best card for that position with an index closest to 0 in the hand .
+- If there are no valid moves, your player should pass choose the upper-most,
+left-most open position and the card at index 0.
+
 Controller:
 - make a plan for the controller
 
 Main:
 - fix the code with our actual model class names
+
+Make a mock model:
+- Mock your model to record a transcript of which coordinates were inspected by your strategy, and
+then test whether that transcript contains all the necessary coordinates.
+- Mock your model to lie about the legality of certain locations or the value of such moves,
+to force your strategy to think that only only a pre-determined move is valid, and then test that
+it indeed returns that move.
+Submit a plain-text file named strategy-transcript.txt containing a transcript from your mocked
+model of your simplest strategy choosing a move for Black on the starting board configuration.
+
+
+
+EXTRA CREDIT:
+Implement the other two strategies mentioned in the prior subsection.
+Fix your strategy implementations such that they can be recombined in
+various ways (and not just hard-coded in a fixed combination like our
+HybridMergeSorter from class.
+Write tests that show your new strategies work solo and you can
+recombine strategies to make more complex ones.
+WRITE THIS IN THE README
 
                                   TESTING
 - have the screenshots for the appropriate parts of the view:
@@ -80,7 +109,7 @@ Main:
     - With a card selected from the Red Player’s hand
     - With a card selected from the Blue Player’s hand
     - At a non-trivial intermediate point of the game, meaning cards have been played and the hands of both players have decreased
-
+- test the strategies
 
 
                                     OTHER

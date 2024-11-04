@@ -1,0 +1,80 @@
+# Assignment 6: Third Time’s a Charm – Three Trios, Part 2 - To-Do List
+
+    KEY
+O - not complete
+X - completed
+* - in progress if needed
+
+### 1. Refactor Models into Read-Only and Mutable Interfaces
+   O **Identify key methods in `GameModelImpl`** that are used for game data retrieval vs. game state changes.
+   O **Define Read-Only Interface**
+       O List methods related to retrieving game state without modifying it (e.g., methods to view grid status, cards, player info).
+       O Implement a read-only interface that includes these non-modifying methods.
+   O **Define Mutable Interface**
+       O Identify methods that alter the game state (e.g., methods to place cards, change turns, update scores).
+       O Implement a mutable interface with these methods.
+   O **Implement Interfaces in Model**
+       O Update `GameModelImpl` to implement both interfaces.
+       O Ensure methods are appropriately grouped and restricted according to each interface.
+
+---
+
+### 2. Develop a Visual View of the Game Using Java Swing
+   O **Plan Visual Components**
+       O Design how the grid, players, and cards will be displayed in the GUI.
+       O Decide on layout, components (e.g., JPanels, JLabels, buttons), and color schemes.
+   O **Implement Swing View Class**
+       O Set up main game window using JFrame.
+       O Add panels or components for:
+           O Game grid (display cells and card placement).
+           O Player information (current score, cards in hand).
+           O Control buttons (e.g., "Restart Game," "Exit Game").
+       O Style the game layout for clarity and visual appeal.
+
+---
+
+### 3. Integrate Mouse Interaction for Card Placement
+   O **Handle Mouse Events**
+       O Add mouse listeners to grid cells to detect clicks.
+       O Implement logic for determining which cell was clicked.
+       O Trigger card placement logic based on cell selection.
+   O **Update Game State in View**
+       O Reflect changes in the model visually (e.g., showing a placed card on the grid).
+       O Ensure turn-based actions update correctly in the view.
+
+---
+
+### 4. Implement Strategic Computer Players
+   O **Define Strategy Interfaces**
+       O Create interfaces or abstract classes for computer player strategies.
+   O **Implement Specific Strategies**
+       O Develop basic strategy (random or simple heuristics).
+       O Implement advanced strategy (e.g., decision-making based on game state).
+   O **Integrate Strategies with Game Logic**
+       O Add functionality to select a strategy for the computer player.
+       O Test strategies to confirm they respond correctly to game events.
+
+---
+
+### 5. Testing
+   O **Unit Test Model and View Components**
+       O Write unit tests for read-only and mutable model interfaces.
+       O Use mock objects to simulate strategies and game states.
+   O **Test GUI Interactions**
+       O Test mouse interactions for card placement.
+       O Ensure visual updates match game state changes.
+   O **Test Computer Player Strategies**
+       O Verify each strategy performs as expected.
+       O Check interactions between player actions and computer responses.
+
+---
+
+### 6. Documentation & Submission
+   O **Update README**
+       O Provide instructions on game setup, controls, and rules.
+       O List known issues and areas for potential enhancement.
+   O **Prepare Submission Files**
+       O Include all code files, README, and screenshots.
+       O Generate JAR file for easy execution.
+   O **Submit** by Nov 12.
+   O **Complete Self-Evaluation** by Nov 14.
