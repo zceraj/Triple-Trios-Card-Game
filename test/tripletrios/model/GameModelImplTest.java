@@ -48,7 +48,7 @@ public class GameModelImplTest {
 
   @Test
   public void testGetCount() {
-    assertEquals(4, this.game.getTotalCardCells(game.getGameGrid()));
+    assertEquals(4, this.game.getGameGrid().getCount());
 
   }
 
@@ -175,7 +175,7 @@ public class GameModelImplTest {
 
   @Test
   void testStartGameDistributesCards() {
-    int expectedHandSize = (game.getTotalCardCells(game.getGameGrid()) + 1) / 2;
+    int expectedHandSize = (game.getGameGrid().getCount() + 1) / 2;
     assertEquals(expectedHandSize, player1.getHand().size(),
             "Player 1 should have correct hand size.");
     assertEquals(expectedHandSize, player2.getHand().size(),
@@ -212,7 +212,7 @@ public class GameModelImplTest {
               validAttackValue));
     }
 
-    int expectedHandSize = (game.getTotalCardCells(game.getGameGrid()) + 1) / 2;
+    int expectedHandSize = (game.getGameGrid().getCount() + 1) / 2;
     assertEquals(expectedHandSize, player1.getHand().size());
     assertEquals(expectedHandSize, player2.getHand().size());
     assertEquals(player1, game.getCurPlayer());
