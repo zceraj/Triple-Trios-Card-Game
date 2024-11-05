@@ -10,13 +10,12 @@ public interface GameModel extends ReadOnlyGameModel {
    * to deal out the cards to each player . Modifying the deck given to this method
    * will not modify the game state in any way.
    *
-   * @param cardFilePath is the filepath to the cards
    * @throws IllegalStateException    if the game has started or the game is over
    * @throws IllegalArgumentException if numPalettes < 2 or handSize <= 0
    * @throws IllegalArgumentException if deck's size is not large enough to set up the game
    * @throws IllegalArgumentException if deck has non-unique cards or null cards
    */
-  void startGame(String cardFilePath);
+  void startGame();
 
   /**
    * Places the given card at the specified row and column in the game grid.

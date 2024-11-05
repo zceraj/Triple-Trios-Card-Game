@@ -41,8 +41,7 @@ public class GameModelImplTest {
             player1,
             player2);
 
-    this.game.startGame(
-            "." + File.separator + "TESTINGFILES" + File.separator + "full_card_set.txt");
+    this.game.startGame();
   }
 
 

@@ -39,9 +39,7 @@ public class TripleTrioTextViewTest {
             player1,
             player2);
 
-    game.startGame(
-            "." + File.separator + "TESTINGFILES" + File.separator + "full_card_set.txt"
-    );
+    game.startGame();
 
     appendable = new StringWriter();
     view = new TripleTrioTextView(game, appendable);

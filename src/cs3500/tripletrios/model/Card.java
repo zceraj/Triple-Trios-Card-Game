@@ -80,6 +80,24 @@ public class Card implements CardInterface {
   }
 
   /**
+   * Gets the row of the card.
+   * @return The row of the card
+   */
+  @Override
+  public int getRow() {
+    return row;
+  }
+
+  /**
+   * Gets the column of the card.
+   * @return The column of the card
+   */
+  @Override
+  public int getCol() {
+    return col;
+  }
+
+  /**
    * Gets the column of the card.
    * @return The name of the card.
    */
