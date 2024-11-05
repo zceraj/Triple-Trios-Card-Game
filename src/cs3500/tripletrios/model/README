@@ -125,6 +125,14 @@ Player logic in:
     -- HumanPlayer
     -- AIPlayer
 
+--------------------------------------------------------------------------------------------------
+CHANGES FOR PART 2:
+
+Missing functionality we added
+ - players score in the game. We orignally just had a getWinner, but we figured
+     it would be useful to know who is currently winning thorugh out the game instead
+     of just getting the winner at the end
+
 
 
 

@@ -24,17 +24,6 @@ public interface CardInterface {
    */
   String getAttackValue(Direction direction);
 
-  /**
-   * Gets the row of the card.
-   * @return The row of the card
-   */
-  int getRow();
-
-  /**
-   * Gets the column of the card.
-   * @return The column of the card
-   */
-  int getCol();
 
   /**
    * formats the card as the name of the card and all of its attack values.

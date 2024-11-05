@@ -1,5 +1,6 @@
 package cs3500.tripletrios.model;
 
+
 /**
  * Represents each cell in the grid of the game. Cells can either be card cells (where cards can
  * be placed) or holes (where no cards can be placed).

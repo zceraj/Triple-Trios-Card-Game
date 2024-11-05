@@ -147,17 +147,18 @@ public class Grid {
   }
 
     //gets the number of card cells in the grid
-    public int getCount() {
-      int count = 0;
-      for (int row = 0; row < this.getRows(); row++) {
-        for (int col = 0; col < this.getCols(); col++) {
-          if (this.getCell(row, col).isCardCell()) {
-            count++;
-          }
+
+  public int getCount() {
+    int count = 0;
+    for (int row = 0; row < this.getRows(); row++) {
+      for (int col = 0; col < this.getCols(); col++) {
+        if (this.getCell(row, col).isCardCell()) {
+          count++;
         }
       }
-      return count;
     }
+      return count;
+  }
 
 
   /**

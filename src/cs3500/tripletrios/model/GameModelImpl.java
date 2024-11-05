@@ -25,6 +25,7 @@ public class GameModelImpl implements GameModel {
   private boolean gameStarted = false;
   private final Map<Cell, IPlayer> cellsPlayer;
 
+
   //CLASS INVARIANT: the game grid must have an odd number of card cells
 
   /**
@@ -78,7 +79,7 @@ public class GameModelImpl implements GameModel {
       throw new IllegalStateException("Game is over.");
     }
 
-    int totalCardCells = grid.getCount(game.getGameGrid());
+    int totalCardCells = grid.getCount();
 
     int expectedHandSize = (totalCardCells + 1) / 2;
 
@@ -262,6 +263,17 @@ public class GameModelImpl implements GameModel {
     nextTurn();
   }
 
+  /**
+   * Gets the score for a player in the game
+   * @param player The player to get the score of
+   * @return The score of the player
+   */
+  @Override
+  public int getScore(IPlayer player) {
+    return countCards(player);
+  }
+
+
   // Private helper method that counts the cards
   private int countCards(IPlayer player) {
     int count = 0;
@@ -278,7 +290,7 @@ public class GameModelImpl implements GameModel {
 
   // checks if the gird has an odd number of cells
   private boolean isGridOdd(Grid grid) {
-    int cardCellCount = grid.getCount(game.getGameGrid());
+    int cardCellCount = grid.getCount();
     return cardCellCount % 2 != 0;
   }
 }
