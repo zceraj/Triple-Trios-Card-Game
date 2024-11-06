@@ -65,12 +65,13 @@ public class GameModelImpl implements GameModel {
    * deal out cards to each player. Modifying the deck given to this method
    * will not modify the game state.
    *
+   * @param cardFilePath is the filepath to the cards
    * @throws IllegalStateException    if the game has already started or is over
    * @throws IllegalArgumentException if the grid is not odd or the deck's size
    *                                  is insufficient to set up the game
    */
   @Override
-  public void startGame() {
+  public void startGame(String cardFilePath) {
     if (this.gameStarted) {
       throw new IllegalStateException("Game has already started.");
     }
@@ -84,7 +85,7 @@ public class GameModelImpl implements GameModel {
 
     CardFileReader cardReader = null;
     try {
-      cardReader = new CardFileReader("cards.txt");
+      cardReader = new CardFileReader(cardFilePath);
     } catch (IOException e) {
       throw new IllegalArgumentException("can't read card file");
     }

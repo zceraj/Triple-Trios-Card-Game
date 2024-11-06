@@ -8,6 +8,7 @@ import java.util.Map;
 /**
  * Represents the grid of the game.
  * The grid is a 2D array of cells, where each cell can be a CardCell or a Hole.
+ * The grid is tracked as a coordinate system with (0, 0) as the top-left corner.
  */
 public class Grid {
   private final int rows;

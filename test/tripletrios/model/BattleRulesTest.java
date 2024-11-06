@@ -40,7 +40,8 @@ public class BattleRulesTest {
             player1,
             player2);
 
-    this.game.startGame();
+    this.game.startGame(
+            "." + File.separator + "TESTINGFILES" + File.separator + "full_card_set.txt");
 
     // Initialize game model and battle rules
     battleRules = new BattleRules(game);
