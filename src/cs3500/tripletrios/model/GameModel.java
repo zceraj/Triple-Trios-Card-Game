@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Represents the interface fo the model for the Triple Trios card game.
  */
-public interface GameModel {
+public interface GameModel extends ReadOnlyGameModel {
 
   /**
    * Starts the game with the given options. The deck given is used
@@ -29,30 +29,6 @@ public interface GameModel {
   void placeCard(Card card, int row, int col);
 
   /**
-   * Checks if the game is over.
-   * @return True if the game is over, false otherwise
-   */
-  boolean isGameOver();
-
-  /**
-   * Gets the winner of the game.
-   * @return The winner of the game
-   */
-  IPlayer getWinner();
-
-  /**
-   * Gets the game grid.
-   * @return The game grid
-   */
-  Grid getGameGrid();
-
-  /**
-   * Gets the current player.
-   * @return The current player
-   */
-  IPlayer getCurPlayer();
-
-  /**
    * Advances the game to the next turn.
    */
   void nextTurn();
@@ -63,5 +39,7 @@ public interface GameModel {
    * @param col The column of the battle
    */
   void battles(int row, int col);
+
+  void updateOwner(int row, int col, IPlayer player);
 
 }

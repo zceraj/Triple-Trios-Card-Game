@@ -161,7 +161,7 @@ public class GameModelImplTest {
   }
 
   @Test
-  public void testPlayerCantPlayWhenNotTheirTurn() {
+  public void testPlayerCantPlayWrongTurn() {
     Card card = player2.getHand().get(0);
     assertThrows(IllegalArgumentException.class, () -> game.placeCard(card, 1, 1));
   }
@@ -183,7 +183,7 @@ public class GameModelImplTest {
   }
 
   @Test
-  public void testPlayerCantPlayToOutOfBoundsLocation() {
+  public void testPlayerInvalidLocation() {
     Card card = player1.getHand().get(0);
     assertThrows(IllegalArgumentException.class, () -> game.placeCard(card, 4, 5));
   }
@@ -236,7 +236,7 @@ public class GameModelImplTest {
   }
 
   @Test
-  public void testFlipOwnCard() {
+  public void testFlipPersonalCard() {
     Card card = player1.getHand().get(0);
     game.placeCard(card, 0, 0);
 
@@ -261,7 +261,7 @@ public class GameModelImplTest {
 
 
   @Test
-  public void testTilesAreFlippedCorrectly() {
+  public void testFlippingTiles() {
     Card player1Card1 = player1.getHand().get(0);
     Card player2Card1 = player2.getHand().get(0);
     Card player2Card2 = player2.getHand().get(1);
@@ -273,6 +273,14 @@ public class GameModelImplTest {
 
     assertEquals(null, game.getCellsPlayer(0, 1));
     assertEquals(player1, game.getCellsPlayer(1, 0));
+  }
+
+  @Test
+  //test the get score method in between plays
+  public void testGetScore() {
+    Card playersCard = player1.getHand().get(0);
+    game.placeCard(playersCard, 0, 0);
+    assertEquals(1, game.getScore(player1));
   }
 
 }

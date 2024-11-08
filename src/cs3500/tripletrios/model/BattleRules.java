@@ -37,7 +37,7 @@ public class BattleRules {
       }
     }
 
-    comboBattle(grid, row, col, currPlayer);
+    comboBattle(grid, currPlayer);
   }
 
   /**
@@ -62,11 +62,9 @@ public class BattleRules {
   /**
    * Executes combo battles where newly flipped cards can flip cards in chain reactions.
    * @param grid The game grid.
-   * @param row The row where the original card was placed.
-   * @param col The column where the original card was placed.
    * @param currPlayer The player who placed the card.
    */
-  private void comboBattle(Grid grid, int row, int col, IPlayer currPlayer) {
+  private void comboBattle(Grid grid, IPlayer currPlayer) {
     Set<Card> processedCards = new HashSet<>();
     List<Card> flippedCards = findFlippedCards(grid, currPlayer);
 

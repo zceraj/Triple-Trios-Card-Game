@@ -8,6 +8,7 @@ import java.util.Map;
 /**
  * Represents the grid of the game.
  * The grid is a 2D array of cells, where each cell can be a CardCell or a Hole.
+ * The grid is tracked as a coordinate system with (0, 0) as the top-left corner.
  */
 public class Grid {
   private final int rows;
@@ -146,17 +147,18 @@ public class Grid {
   }
 
     //gets the number of card cells in the grid
-    public int getCount() {
-      int count = 0;
-      for (int row = 0; row < this.getRows(); row++) {
-        for (int col = 0; col < this.getCols(); col++) {
-          if (this.getCell(row, col).isCardCell()) {
-            count++;
-          }
+
+  public int getCount() {
+    int count = 0;
+    for (int row = 0; row < this.getRows(); row++) {
+      for (int col = 0; col < this.getCols(); col++) {
+        if (this.getCell(row, col).isCardCell()) {
+          count++;
         }
       }
-      return count;
     }
+      return count;
+  }
 
 
   /**

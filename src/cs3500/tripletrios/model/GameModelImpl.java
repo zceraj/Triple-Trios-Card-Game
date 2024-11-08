@@ -28,6 +28,7 @@ public class GameModelImpl implements GameModel {
   private boolean gameStarted = false;
   private final Map<Cell, IPlayer> cellsPlayer;
 
+
   //CLASS INVARIANT: the game grid must have an odd number of card cells
 
   /**
@@ -254,6 +255,17 @@ public class GameModelImpl implements GameModel {
 
     nextTurn();
   }
+
+  /**
+   * Gets the score for a player in the game
+   * @param player The player to get the score of
+   * @return The score of the player
+   */
+  @Override
+  public int getScore(IPlayer player) {
+    return countCards(player);
+  }
+
 
   // Private helper method that counts the cards
   private int countCards(IPlayer player) {
