@@ -20,5 +20,4 @@ public class AbstractStrategy {
     return 0;
   }
 
-  protected abstract Moves tieBreaker(<List<Moves> tiedMoves);
 }
