@@ -1,4 +1,4 @@
-package cs3500.threetrios;
+package cs3500.tripletrios.view;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -6,17 +6,18 @@ import javax.swing.*;
 import java.util.List;
 
 import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.ReadOnlyGameModel;
 
-public class ThreeTriosView extends JFrame {
-  private final ReadonlyThreeTriosModel model;
+public class TripleTrioGuiView extends JFrame {
+  private final ReadOnlyGameModel model;
   private final JPanel gridPanel;
   private final JPanel handPanel;
   private Card selectedCard;
   private int selectedCardIndex = -1;
 
-  public ThreeTriosView(ReadonlyThreeTriosModel model) {
+  public TripleTrioGuiView(ReadOnlyGameModel model) {
     this.model = model;
-    this.gridPanel = new JPanel(new GridLayout(model.getGridSize(), model.getGridSize()));
+    this.gridPanel = new JPanel(new GridLayout(model.getGameGrid().getRows(), model.getGameGrid().getCols()));
     this.handPanel = new JPanel(new FlowLayout());
     this.selectedCard = null;
 
@@ -41,9 +42,9 @@ public class ThreeTriosView extends JFrame {
 
   private void initializeGrid() {
     gridPanel.removeAll();
-    for (int i = 0; i < model.getGridSize(); i++) {
-      for (int j = 0; j < model.getGridSize(); j++) {
-        GridCell cell = new GridCell(i, j);
+    for (int rows = 0; rows < model.getGameGrid().getRows(); rows++) {
+      for (int cols = 0; cols < model.getGameGrid().getCols(); cols++) {
+        GridCell cell = new GridCell(rows, cols);
         gridPanel.add(cell);
       }
     }
@@ -51,7 +52,7 @@ public class ThreeTriosView extends JFrame {
 
   private void initializeHand() {
     handPanel.removeAll();
-    List<Card> playerHand = model.getPlayerHand(0);  // Example for Player 1
+    List<Card> playerHand = model.getCurPlayer().getHand();
     for (int i = 0; i < playerHand.size(); i++) {
       CardPanel cardPanel = new CardPanel(playerHand.get(i), i);
       handPanel.add(cardPanel);
@@ -59,7 +60,6 @@ public class ThreeTriosView extends JFrame {
   }
 
   private void handleMouseClick(MouseEvent e) {
-    // Handle clicks for selecting cards or selecting grid cells
     Component clickedComponent = e.getComponent();
     if (clickedComponent instanceof CardPanel) {
       CardPanel cardPanel = (CardPanel) clickedComponent;
@@ -74,7 +74,6 @@ public class ThreeTriosView extends JFrame {
   }
 
   private void highlightSelectedCard(CardPanel cardPanel) {
-    // Highlight the selected card with a border or visual effect
     cardPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY, 5));
   }
 
@@ -82,7 +81,6 @@ public class ThreeTriosView extends JFrame {
     super.setVisible(visible);
   }
 
-  // Internal class for grid cells
   private class GridCell extends JPanel {
     private final int row;
     private final int column;
@@ -104,7 +102,6 @@ public class ThreeTriosView extends JFrame {
     }
   }
 
-  // Internal class for player cards in hand
   private class CardPanel extends JPanel {
     private final Card card;
     private final int index;

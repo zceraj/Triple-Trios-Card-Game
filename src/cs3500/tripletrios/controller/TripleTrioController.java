@@ -1,16 +1,18 @@
-import javax.swing.*;
+package cs3500.tripletrios.controller;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import cs3500.tripletrios.model.GameModelImpl;
+import cs3500.tripletrios.view.TripleTrioGuiView;
 
 public class TripleTrioController {
   private final GameModelImpl model; // The mutable game model
   private final TripleTrioGuiView view;   // The view interface to display the game
 
-  public TripleTrioController(GameModelImpl model, TripleTriosView view) {
+  public TripleTrioController(GameModelImpl model, TripleTrioGuiView view) {
     this.model = model;
     this.view = view;
 
