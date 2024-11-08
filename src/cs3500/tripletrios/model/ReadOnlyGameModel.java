@@ -19,13 +19,13 @@ public interface ReadOnlyGameModel {
 
   /**
    * Gets the game grid.
-   * @return The game grid
+   * @return a copy of the game grid
    */
   Grid getGameGrid();
 
   /**
    * Gets the current player.
-   * @return The current player
+   * @return a copy of the current player
    */
   IPlayer getCurPlayer();
 
@@ -34,7 +34,7 @@ public interface ReadOnlyGameModel {
    *
    * @param row The row of the cell
    * @param col The column of the cell
-   * @return The player that owns the card in the cell
+   * @return The copy of the player that owns the card in the cell
    */
   IPlayer getCellsPlayer(int row, int col);
 
@@ -49,6 +49,5 @@ public interface ReadOnlyGameModel {
   //contents of players hand
   //is it legal fro the curent player to play at given coordinate - this is checked in placeCard
   //given card and coordinate, how many cards can player flip
-
 
 }
