@@ -137,7 +137,7 @@ Missing functionality we added:
      of just getting the winner at the end
 
  - removed the int col, int row in the comboBattle method in BattleRules class, it wasn't used and felt unnecessary
- 
+
 
 
 

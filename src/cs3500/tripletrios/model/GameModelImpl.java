@@ -18,7 +18,7 @@ import cs3500.tripletrios.controller.GridFileReader;
  * facilitates the placement of cards, manages player turns, and checks
  * for game over conditions. It implements the GameModel interface.
  */
-public class GameModelImpl implements GameModel {
+public class GameModelImpl implements GameModel, ReadOnlyGameModel {
 
   private Grid grid;
   private IPlayer player1;
