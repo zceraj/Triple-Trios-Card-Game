@@ -1,61 +1,74 @@
-//package tripleTrios.controller;
-//
-//import java.io.IOException;
-//import java.util.List;
-//import java.util.Map;
-//
-//import tripleTrios.model.Card;
-//import tripleTrios.model.CardFileReader;
-//import tripleTrios.model.GameModel;
-//import tripleTrios.model.GameModelImpl;
-//import tripleTrios.model.GridFileReader;
-//import tripleTrios.view.GameView;
-//
-//public class tripleTrioController {
-//  private final GameView view;
-//  private final GameModel model;
-//
-//  /**
-//   * the constructor for the controller.
-//   * @param view sets the view that the controller will be using.
-//   * @param model sets the model that the controller will be using.
-//   */
-//  public tripleTrioController(GameView view, GameModel model) {
-//    this.view = view;
-//    this.model = model;
-//  }
-//
-//  /**
-//   * method to start the game that calls the helper
-//   * fuctions which use view and model to execute the commands.
-//   */
-//  public void startGame() {
-//    try {
-//      // Parse grid configuration
-//      GridFileReader gridReader = new GridFileReader("path/to/gridConfig.txt");
-//      boolean[][] grid = gridReader.getGrid();
-//      System.out.println("Grid:");
-//      for (boolean[] row : grid) {
-//        System.out.println(row);
-//      }
-//
-//      // Parse card database
-//      CardFileReader cardParser = new CardFileReader("path/to/cardDatabase.txt");
-//      List<Card> cards = cardParser.getCardDatabase();
-//      System.out.println("\nCards:");
-//      for (Card card : cards) {
-//        System.out.println(card);
-//      }
-//    } catch (IOException e) {
-//      System.out.println();
-//    }
-//    model.startGame();
-//  }
-//
-//  public void playTurn(int row, int col, int cardIndex) {
-//  }
-//
-//  public void displayGameState() {
-//  }
-//
-//}
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import cs3500.tripletrios.model.GameModelImpl;
+
+public class TripleTrioController {
+  private final GameModelImpl model; // The mutable game model
+  private final TripleTrioGuiView view;   // The view interface to display the game
+
+  public TripleTrioController(GameModelImpl model, TripleTriosView view) {
+    this.model = model;
+    this.view = view;
+
+    // Set up event listeners for buttons in the view
+    view.addRestartButtonListener(new RestartButtonListener());
+    view.addGridClickListener(new GridClickListener());
+
+    startNewGame();
+  }
+
+  // Starts a new game by resetting the model and updating the view
+  private void startNewGame() {
+    model.startGame();
+    view.resetGrid(model.getGridRows(), model.getGridCols());
+    updateView();
+  }
+
+  // Updates the view with the latest game state
+  private void updateView() {
+    view.updateGrid(model.getGridState());
+    view.updatePlayerInfo(model.getCurrentPlayerInfo());
+    view.updateScore(model.getPlayerScores());
+    if (model.checkGameOver()) {
+      view.displayGameOver(model.getWinner());
+    }
+  }
+
+  // Listener for the "Restart" button in the view
+  private class RestartButtonListener implements ActionListener {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      startNewGame();
+    }
+  }
+
+  // Listener for clicks on the game grid
+  private class GridClickListener extends MouseAdapter {
+    @Override
+    public void mouseClicked(MouseEvent e) {
+      // Calculate which grid cell was clicked
+      int row = view.getRowFromClick(e.getY());
+      int col = view.getColFromClick(e.getX());
+
+      if (model.isValidMove(row, col)) {
+        // Place the current player's card at the clicked position
+        model.placeCard(row, col);
+        updateView();
+
+        if (model.checkGameOver()) {
+          view.displayGameOver(model.getWinner());
+        } else {
+          model.switchToNextPlayer();
+          updateView();
+        }
+      } else {
+        view.showInvalidMoveMessage();
+      }
+    }
+  }
+}
+

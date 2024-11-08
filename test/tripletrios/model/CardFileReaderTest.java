@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.List;
 
 import cs3500.tripletrios.model.Card;
-import cs3500.tripletrios.model.CardFileReader;
+import cs3500.tripletrios.controller.CardFileReader;
 import cs3500.tripletrios.model.Direction;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

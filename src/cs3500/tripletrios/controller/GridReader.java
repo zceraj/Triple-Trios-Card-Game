@@ -1,4 +1,4 @@
-package cs3500.tripletrios.model;
+package cs3500.tripletrios.controller;
 
 
 /**

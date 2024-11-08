@@ -1,6 +1,8 @@
-package cs3500.tripletrios.model;
+package cs3500.tripletrios.controller;
 
 import java.util.List;
+
+import cs3500.tripletrios.model.CardInterface;
 
 /**
  * Represents a player in the game.

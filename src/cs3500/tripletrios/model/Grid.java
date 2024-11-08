@@ -32,7 +32,6 @@ public class Grid {
     trackCellsNextTo();
   }
 
-
   /**
    * Initializes cells as CardCells or Holes based on the cellTypes configuration array.
    *
@@ -191,5 +190,4 @@ public class Grid {
     }
     return sb.toString();
   }
-
 }

@@ -1,4 +1,4 @@
-package cs3500.tripletrios.model;
+package cs3500.tripletrios.controller;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import cs3500.tripletrios.model.Card;
 
 /**
  * A class responsible for reading card data from a specified file.
