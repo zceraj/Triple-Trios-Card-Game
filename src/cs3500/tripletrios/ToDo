@@ -10,12 +10,11 @@ X - completed
    X **Define Read-Only Interface**
        X List methods related to retrieving game state without modifying it (e.g., methods to view grid status, cards, player info).
        X Implement a read-only interface that includes these non-modifying methods.
-   O **Define Mutable Interface**
-       X Identify methods that alter the game state (e.g., methods to place cards, change turns, update scores).
-       O Add an update score method to the mutable interface. --- did we want a getScore or a variable that stores an updated score?
+   X Identify methods that alter the game state (e.g., methods to place cards, change turns, update scores).
+       X Add an update score method to the mutable interface. --- did we want a getScore or a variable that stores an updated score?
        X Implement a mutable interface with these methods.
    O **Implement Interfaces in Model**
-       O Update `GameModelImpl` to implement both interfaces.
+       X Update `GameModelImpl` to implement both interfaces.
        O Ensure methods are appropriately grouped and restricted according to each interface.
 
 ---
@@ -80,3 +79,10 @@ X - completed
        O Generate JAR file for easy execution.
    O **Submit** by Nov 12.
    O **Complete Self-Evaluation** by Nov 14.
+
+
+
+   --- INCLASS NOTES ABOUT HW 6
+
+   - DONT PUT SPACES BETWEEN CARDS/CELLS IN THE GRID- points will be lost its ok if there is a hand panel with the cards in hand
+   and the grid/baord, but no spaces between cards/cells
