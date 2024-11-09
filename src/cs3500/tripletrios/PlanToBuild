@@ -3,7 +3,7 @@ if grid has 35 cells then there should be (35+1)/2 = 18 cards in each players ha
 
 ----------------------------------------------------------------------------------------------------
 Communcations:
-Z:
+Z: add getPlayer to the mdoel interface.
 
 M:
 

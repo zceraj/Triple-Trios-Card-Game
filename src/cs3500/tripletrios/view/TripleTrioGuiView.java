@@ -3,22 +3,28 @@ package cs3500.tripletrios.view;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.ReadOnlyGameModel;
 
 public class TripleTrioGuiView extends JFrame {
   private final ReadOnlyGameModel model;
   private final JPanel gridPanel;
-  private final JPanel handPanel;
+  private final JPanel leftColumnPanel;
+  private final JPanel rightColumnPanel;
   private Card selectedCard;
   private int selectedCardIndex = -1;
+
 
   public TripleTrioGuiView(ReadOnlyGameModel model) {
     this.model = model;
     this.gridPanel = new JPanel(new GridLayout(model.getGameGrid().getRows(), model.getGameGrid().getCols()));
-    this.handPanel = new JPanel(new FlowLayout());
+    this.leftColumnPanel = new JPanel(new GridLayout(model.getGameGrid().getRows(), 1));
+    this.rightColumnPanel = new JPanel(new GridLayout(model.getGameGrid().getRows(), 1));
     this.selectedCard = null;
 
     setTitle("Three Trios Game");
@@ -27,10 +33,11 @@ public class TripleTrioGuiView extends JFrame {
     setSize(800, 600);
 
     add(gridPanel, BorderLayout.CENTER);
-    add(handPanel, BorderLayout.SOUTH);
+    add(leftColumnPanel, BorderLayout.WEST);
+    add(rightColumnPanel, BorderLayout.EAST);
 
-    initializeHand();
     initializeGrid();
+    initializeHands();
 
     addMouseListener(new MouseAdapter() {
       @Override
@@ -42,20 +49,57 @@ public class TripleTrioGuiView extends JFrame {
 
   private void initializeGrid() {
     gridPanel.removeAll();
-    for (int rows = 0; rows < model.getGameGrid().getRows(); rows++) {
-      for (int cols = 0; cols < model.getGameGrid().getCols(); cols++) {
-        GridCell cell = new GridCell(rows, cols);
-        gridPanel.add(cell);
+    List<List<Cell>> cells = new ArrayList<>();
+
+    for (int row = 0; row < model.getGameGrid().getRows(); row++) {
+      List<Cell> rowCells = new ArrayList<>();
+      for (int col = 0; col < model.getGameGrid().getCols(); col++) {
+        rowCells.add(model.getGameGrid().getCell(row, col));
+      }
+      cells.add(rowCells);
+    }
+
+    for (int row = 0; row < cells.size(); row++) {
+      for (int col = 0; col < cells.get(row).size(); col++) {
+        Cell cell = cells.get(row).get(col);
+        GridPanel gridCellPanel = new GridPanel(cell, col);
+        gridPanel.add(gridCellPanel);
       }
     }
+
+    gridPanel.revalidate();
+    gridPanel.repaint();
   }
 
-  private void initializeHand() {
-    handPanel.removeAll();
-    List<Card> playerHand = model.getCurPlayer().getHand();
-    for (int i = 0; i < playerHand.size(); i++) {
-      CardPanel cardPanel = new CardPanel(playerHand.get(i), i);
-      handPanel.add(cardPanel);
+
+  private void initializeHands() {
+    leftColumnPanel.removeAll();
+    rightColumnPanel.removeAll();
+    List<Card> leftColumnCards = model.getCurPlayer().getHand();
+    List<Card> rightColumnCards = model.getOtherPlayer().getHand();
+    Color leftColumnCardsColor;
+    Color rightColumnCardsColor;
+
+    Color red = new Color(200, 50, 100);
+    Color blue = new Color(50, 100, 200);
+
+    if (model.getCurPlayer().getColor() == "BLUE") {
+      leftColumnCardsColor = blue;
+      rightColumnCardsColor = red;
+    }
+    else {
+      leftColumnCardsColor = red;
+      rightColumnCardsColor = blue;
+    }
+
+    for (int i = 0; i < leftColumnCards.size(); i++) {
+      CardPanel cardPanel = new CardPanel(leftColumnCards.get(i), leftColumnCardsColor, i);
+      leftColumnPanel.add(cardPanel);
+    }
+
+    for (int i = 0; i < rightColumnCards.size(); i++) {
+      CardPanel cardPanel = new CardPanel(rightColumnCards.get(i), rightColumnCardsColor, i);
+      rightColumnPanel.add(cardPanel);
     }
   }
 

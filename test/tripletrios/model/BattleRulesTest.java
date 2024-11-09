@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 
 import cs3500.tripletrios.model.BattleRules;
 import cs3500.tripletrios.model.Card;
@@ -24,7 +26,13 @@ public class BattleRulesTest {
   private GameModelImpl game;
   private IPlayer player1;
   private IPlayer player2;
-  private Grid grid;
+  private boolean[][] grid = {
+          {false, true, true},
+          {false, true, false},
+          {true, true, false}
+  };
+  private List<Card> cards;
+  private Grid gridAsGrid = new Grid(grid);
 
   /**
    * sets up everything needed to test.
@@ -34,18 +42,25 @@ public class BattleRulesTest {
     // Initialize players
     player1 = new HumanPlayer("Player1", PlayerColor.RED);
     player2 = new HumanPlayer("Player2", PlayerColor.BLUE);
+    cards = List.of(
+            new Card("Tiger", 4, 2, 5, 3),
+            new Card("Elephant", 5, 1, 4, 2),
+            new Card("Giraffe", 2, 4, 3, 5),
+            new Card("Zebra", 1, 3, 5, 4),
+            new Card("Panda", 4, 4, 4, 4),
+            new Card("Wolf", 3, 2, 1, 5)
+    );
 
     game = new GameModelImpl(
-            "." + File.separator + "TESTINGFILES" + File.separator + "battle_rules_grid",
+            grid,
             player1,
             player2);
 
-    this.game.startGame(
-            "." + File.separator + "TESTINGFILES" + File.separator + "full_card_set.txt");
+    this.game.startGame(cards);
 
     // Initialize game model and battle rules
     battleRules = new BattleRules(game);
-    this.grid = game.getGameGrid();
+    this.gridAsGrid = game.getGameGrid();
   }
 
   @Test
@@ -61,7 +76,7 @@ public class BattleRulesTest {
     game.updateOwner(0, 1, player2);
 
     // Initiate battle and verify the outcome
-    battleRules.startBattle(grid, 1, 1, player1);
+    battleRules.startBattle(gridAsGrid, 1, 1, player1);
 
     // Check that player1 has won the cell (1,0)
     assertEquals(player2, game.getCellsPlayer(0, 1), "Player 2 should have won the battle.");

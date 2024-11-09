@@ -44,7 +44,7 @@ public class GameModelImpl implements GameModel {
           IPlayer player1,
           IPlayer player2) throws RuntimeException {
     Grid trialGrid = new Grid(grid);
-    if (isGridOdd(this.grid)) {
+    if (isGridOdd(trialGrid)) {
       throw new IllegalArgumentException("Grid must have an odd number of card cells.");
     }
     else {
@@ -285,5 +285,12 @@ public class GameModelImpl implements GameModel {
   private boolean isGridOdd(Grid grid) {
     int cardCellCount = grid.getCount();
     return cardCellCount % 2 != 0;
+  }
+
+  public IPlayer getOtherPlayer(){
+    if (currPlayer == player2) {
+      return player1;
+    }
+    return player2;
   }
 }
