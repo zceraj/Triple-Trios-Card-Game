@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.*;
 
 import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.Cell;
 
 public class GridPanel extends JPanel{
@@ -38,7 +39,7 @@ public class GridPanel extends JPanel{
     });
   }
 
-  public Card getCard() {
+  public CardInterface getCard() {
     return cell.getCard();
   }
 
@@ -62,7 +63,7 @@ public class GridPanel extends JPanel{
 
       // If the cell contains a card, display the card name in the center
       if (cell.isCardCell() && cell.getCard() != null) {
-        Card card = cell.getCard();
+        CardInterface card = cell.getCard();
         g.setColor(Color.BLACK); // Set text color
         g.setFont(new Font("Arial", Font.PLAIN, 12)); // Set font for card name
         String cardName = card.getCardName();

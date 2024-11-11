@@ -3,6 +3,7 @@ package tripletrios.view;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.GameModel;
 import cs3500.tripletrios.model.GameModelImpl;
 import cs3500.tripletrios.model.Grid;
@@ -40,7 +41,7 @@ public class TripleTrioTextViewTest {
             {true, false, true}
     };
 
-    List<Card> cards = List.of(
+    List<CardInterface> cards = List.of(
             new Card("Tiger", 4, 2, 5, 3),
             new Card("Elephant", 5, 1, 4, 2),
             new Card("Giraffe", 2, 4, 3, 5),
@@ -71,10 +72,10 @@ public class TripleTrioTextViewTest {
 
     // Prepare the expected output based on the game state
     String expectedGrid = game.getGameGrid().toString();
-    List<Card> hand = game.getCurPlayer().getHand();
+    List<CardInterface> hand = game.getCurPlayer().getHand();
     StringBuilder expectedCards = new StringBuilder();
 
-    for (Card card : hand) {
+    for (CardInterface card : hand) {
       expectedCards.append(card.toString()).append("\n");
     }
 

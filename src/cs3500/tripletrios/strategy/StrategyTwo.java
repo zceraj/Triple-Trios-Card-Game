@@ -1,0 +1,82 @@
+package cs3500.tripletrios.strategy;
+
+import cs3500.tripletrios.model.CardInterface;
+import cs3500.tripletrios.model.Direction;
+import cs3500.tripletrios.model.Grid;
+import cs3500.tripletrios.model.IPlayer;
+import cs3500.tripletrios.model.ReadOnlyGameModel;
+
+public class StrategyTwo extends AbstractStrategy implements StrategyInterface {
+  private final ReadOnlyGameModel model;
+
+  /**
+   * Constructor for the second strategy.
+   *
+   * @param model a read-only game model  representing the game state
+   */
+  public StrategyTwo(ReadOnlyGameModel model) {
+    this.model = model;
+  }
+
+  /**
+   * Gets tje best move available based off the game state
+   * @param computerPlayer the computer generated player
+   * @return a Move object that represents the best move
+   */
+  @Override
+  public Moves getBestMove(IPlayer computerPlayer) {
+    Moves bestMove = null;
+    int maxDefenseValue = -1;
+    Grid grid = model.getGameGrid();
+
+    int[][] cornerPositions = {
+            {0, 0},                               // Top-left corner
+            {0, grid.getCols() - 1},              // Top-right corner
+            {grid.getRows() - 1, 0},              // Bottom-left corner
+            {grid.getRows() - 1, grid.getCols() - 1} // Bottom-right corner
+    };
+
+    for (int[] corner : cornerPositions) {
+      int row = corner[0];
+      int col = corner[1];
+
+      // Check if the corner cell is valid and empty
+      if (grid.isValidCell(row, col) && grid.getCell(row, col).isEmpty()) {
+        for (CardInterface card : computerPlayer.getHand()) {
+          int defenseValue = calculateDefenseValue(card, row, col);
+          if (defenseValue > maxDefenseValue) {
+            maxDefenseValue = defenseValue;
+            bestMove = new Moves(card, row, col);
+          } else if (defenseValue == maxDefenseValue && bestMove != null) {
+            bestMove = breakTie(card, row, col, bestMove, computerPlayer);
+          }
+        }
+      }
+    }
+    return bestMove;
+  }
+
+  // Calculate the defense value of placing a card in a corner.
+  private int calculateDefenseValue(CardInterface card, int row, int col) {
+    int defenseValue = 0;
+    Grid gridCopy = new Grid(model.getGameGrid());
+
+    // Determine exposed directions for each corner position
+    if (row == 0 && col == 0) {
+      defenseValue = intAttackValue(card.getAttackValue(Direction.SOUTH))
+              + intAttackValue(card.getAttackValue(Direction.EAST));
+    } else if (row == 0 && col == gridCopy.getCols() - 1) {
+      defenseValue = intAttackValue(card.getAttackValue(Direction.SOUTH))
+              + intAttackValue(card.getAttackValue(Direction.WEST));
+    } else if (row == gridCopy.getRows() - 1 && col == 0) {
+      defenseValue = intAttackValue(card.getAttackValue(Direction.NORTH))
+              + intAttackValue(card.getAttackValue(Direction.EAST));
+    } else if (row == gridCopy.getRows() - 1 && col == gridCopy.getCols() - 1) {
+      defenseValue = intAttackValue(card.getAttackValue(Direction.NORTH))
+              + intAttackValue(card.getAttackValue(Direction.WEST));
+    }
+
+    return defenseValue;
+  }
+
+}

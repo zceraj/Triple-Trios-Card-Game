@@ -7,7 +7,9 @@ package cs3500.tripletrios.model;
  */
 public class Cell {
   private final boolean isCardCell;
-  private Card card;
+  private CardInterface card;
+  private final int row;
+  private final int col;
 
   /**
    * Creates a cell at the given row and column, specifying if it's a hole or not.
@@ -17,7 +19,24 @@ public class Cell {
    */
   public Cell(int row, int col, boolean isCardCell) {
     this.isCardCell = isCardCell;
-    this.card = null; // Initialize as empty
+    this.card = null;
+    this.row = row;
+    this.col = col;
+  }
+
+  /**
+   * Copy constructor for a new cell.
+   * @param original The cell to copy.
+   */
+  public Cell(Cell original) {
+    this.row = original.row;
+    this.col = original.col;
+    this.isCardCell = original.isCardCell;
+    if (original.card != null) {
+      this.card = new Card((Card) original.card); // Deep copy of the card
+    } else {
+      this.card = null;
+    }
   }
 
 
@@ -43,7 +62,7 @@ public class Cell {
    * Places a card in this cell if it's a card cell and currently empty.
    * @param card The card to place in this cell.
    */
-  public void setCard(Card card) {
+  public void setCard(CardInterface card) {
     if (!isCardCell) {
       throw new IllegalArgumentException("Cannot place a card in a hole.");
     }
@@ -58,8 +77,24 @@ public class Cell {
    * Gets the card in this cell.
    * @return The card in this cell, or null if the cell is empty.
    */
-  public Card getCard() {
+  public CardInterface getCard() {
     return card;
+  }
+
+  /**
+   * Gets the row of a Cell
+   * @return row in which the cell is in
+   */
+  public int getRow() {
+    return row;
+  }
+
+  /**
+   * Gets the column of a Cell
+   * @return column in which the cell is in
+   */
+  public int getCol() {
+    return col;
   }
 
 

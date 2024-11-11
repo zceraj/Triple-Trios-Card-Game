@@ -47,9 +47,4 @@ public interface ReadOnlyGameModel {
 
   IPlayer getOtherPlayer();
 
-  //how big the game grid is
-  //contents of players hand
-  //is it legal fro the curent player to play at given coordinate - this is checked in placeCard
-  //given card and coordinate, how many cards can player flip
-
 }

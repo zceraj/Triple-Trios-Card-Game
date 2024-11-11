@@ -41,6 +41,8 @@ public class Card implements CardInterface {
     }
   }
 
+
+
   /**
    * Converts an integer attack value to a string, where 10 is represented by "A".
    * @param value The integer attack value to convert

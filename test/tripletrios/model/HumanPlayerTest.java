@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.HumanPlayer;
 import cs3500.tripletrios.model.PlayerColor;
 
@@ -61,7 +62,7 @@ public class HumanPlayerTest {
 
   @Test
   public void testSetHand() {
-    List<Card> newHand = new ArrayList<>();
+    List<CardInterface> newHand = new ArrayList<>();
     newHand.add(card1);
     newHand.add(card2);
 
@@ -73,7 +74,7 @@ public class HumanPlayerTest {
 
   @Test
   public void testGetHand() {
-    List<Card> hand = new ArrayList<>();
+    List<CardInterface> hand = new ArrayList<>();
     hand.add(card1);
     hand.add(card2);
 
@@ -86,7 +87,7 @@ public class HumanPlayerTest {
     player.addCardToHand(card1);
     player.addCardToHand(card2);
 
-    Card playedCard = player.playCard(0);
+    CardInterface playedCard = player.playCard(0);
     assertEquals(card1, playedCard);
     assertFalse(player.getHand().contains(card1));
 

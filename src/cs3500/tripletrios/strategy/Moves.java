@@ -1,21 +1,22 @@
 package cs3500.tripletrios.strategy;
 
 import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.CardInterface;
 
 public class Moves {
-  private final Card card;
+  private final CardInterface card;
   private final int row;
   private final int col;
-  private final int totalFlips;
 
-  public Moves(Card card, int row, int col, int totalFlips) {
+  public Moves(CardInterface card, int row, int col) {
     this.card = card;
     this.row = row;
     this.col = col;
-    this.totalFlips = totalFlips;
+
   }
 
-  public Card getCard() {
+
+  public CardInterface getCard() {
     return card;
   }
 
@@ -27,9 +28,6 @@ public class Moves {
     return col;
   }
 
-  public int getTotalFlips() {
-    return totalFlips;
-  }
 
 
 }

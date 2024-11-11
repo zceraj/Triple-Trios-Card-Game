@@ -34,6 +34,24 @@ public class Grid {
   }
 
   /**
+   * Copy constructor for a new grid.
+   *
+   * @param original The grid to copy.
+   */
+  public Grid(Grid original) {
+    this.rows = original.rows;
+    this.cols = original.cols;
+    this.grid = new Cell[rows][cols];
+    this.adjacentCellMap = new HashMap<>();
+    for (int row = 0; row < rows; row++) {
+      for (int col = 0; col < cols; col++) {
+        this.grid[row][col] = new Cell(original.grid[row][col]);
+      }
+    }
+    trackCellsNextTo();
+  }
+
+  /**
    * Initializes cells as CardCells or Holes based on the cellTypes configuration array.
    *
    * @param cellTypes 2D boolean array where true means CardCell and false means Hole.
@@ -87,22 +105,45 @@ public class Grid {
    */
   public Cell getCell(int row, int col) {
     if (isValidCell(row, col)) {
-      return grid[row][col];
+      Cell originalCell = grid[row][col];
+      return new Cell(row, col, originalCell.isCardCell());
     } else {
       throw new IndexOutOfBoundsException("Invalid cell coordinates.");
     }
   }
 
   /**
-   * Retrieves the adjacent cells for a specific cell at (row, col).
+   * Gets the adjacent cell from the given position in the specified direction.
    *
-   * @param row The row of the cell.
-   * @param col The column of the cell.
-   * @return Map of adjacent cells, keyed by direction.
+   * @param row The current row position
+   * @param col The current column position
+   * @param direction The direction to move
+   * @return The adjacent cell if it exists, or null if out of bounds
    */
-  public Map<Direction, Cell> getAdjacentCells(int row, int col) {
-    Cell cell = getCell(row, col);
-    return adjacentCellMap.getOrDefault(cell, new EnumMap<>(Direction.class));
+  public Cell getAdjacentCells(int row, int col, Direction direction) {
+    int newRow = row;
+    int newCol = col;
+
+    switch (direction) {
+      case NORTH:
+        newRow -= 1;
+        break;
+      case SOUTH:
+        newRow += 1;
+        break;
+      case EAST:
+        newCol += 1;
+        break;
+      case WEST:
+        newCol -= 1;
+        break;
+    }
+
+    if (isValidCell(newRow, newCol)) {
+      return getCell(newRow, newCol);
+    } else {
+      return null;
+    }
   }
 
   /**
@@ -123,7 +164,7 @@ public class Grid {
    * @param col The column of the cell.
    * @return The card in the cell at (row, col), or null if empty or a Hole.
    */
-  public Card getCardAt(int row, int col) {
+  public CardInterface getCardAt(int row, int col) {
     Cell cell = getCell(row, col);
     return cell.isCardCell() && !cell.isEmpty() ? cell.getCard() : null;
   }
@@ -146,8 +187,11 @@ public class Grid {
     return cols;
   }
 
-    //gets the number of card cells in the grid
 
+  /**
+   * Gets the number of cells in the grid.
+   * @return The number of cells in the grid.
+   */
   public int getCount() {
     int count = 0;
     for (int row = 0; row < this.getRows(); row++) {
@@ -159,6 +203,16 @@ public class Grid {
     }
       return count;
   }
+
+  public void updateCell(int row, int col, Cell newCell) {
+    if (isValidCell(row, col)) {
+      grid[row][col] = new Cell(newCell);
+    } else {
+      throw new IndexOutOfBoundsException("Invalid cell coordinates.");
+    }
+  }
+
+
 
 
   /**
