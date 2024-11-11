@@ -45,7 +45,7 @@ public class Card implements CardInterface {
    * Creates a new card with the given name and attack values.
    * @param original The card to copy
    */
-  public Card(CardInterface original) {
+  public Card(Card original) {
     this.cardName = original.getCardName();
     this.attackValues = new EnumMap<>(Direction.class);
     for (Direction dir : Direction.values()) {
