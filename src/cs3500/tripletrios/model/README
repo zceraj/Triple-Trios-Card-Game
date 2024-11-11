@@ -130,13 +130,16 @@ CHANGES FOR PART 2:
 
 - Clearly stated in the grid class the coordinate system, we originally forgot to write this in the model
    adding it has made the game clearer to understand.
+- removed the int col, int row in the comboBattle method in BattleRules class, it wasn't used and felt unnecessary
+- changed the input for methods related to cards to not take in the class of a Card, but instead take in/output the
+   Card interface as instructed by the feedback of HW5 implementation
 
 Missing functionality we added:
  - players score in the game. We originally just had a getWinner, but we figured
      it would be useful to know who is currently winning through out the game instead
      of just getting the winner at the end
 
- - removed the int col, int row in the comboBattle method in BattleRules class, it wasn't used and felt unnecessary
+
 
 
 

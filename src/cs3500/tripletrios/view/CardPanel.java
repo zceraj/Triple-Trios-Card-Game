@@ -11,13 +11,14 @@ import javax.swing.*;
 
 
 import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.Direction;
 
 /**
  * a card that appears on the side of the board before its played.
  */
 class CardPanel extends JPanel {
-  private final Card card;
+  private final CardInterface card;
   private final int index;
   private boolean isSelected = false;
 
@@ -28,7 +29,7 @@ class CardPanel extends JPanel {
    * @param color the color of the card --> to know which players side is which.
    * @param index for future calling of the card.
    */
-  public CardPanel(Card card, Color color, int index) {
+  public CardPanel(CardInterface card, Color color, int index) {
     this.card = card;
     this.index = index;
 
@@ -92,7 +93,7 @@ class CardPanel extends JPanel {
    * to be able to use the values.
    * @return the card in the box.
    */
-  public Card getCard() {
+  public CardInterface getCard() {
     return card;
   }
 

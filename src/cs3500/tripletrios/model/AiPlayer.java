@@ -32,7 +32,7 @@ public class AiPlayer implements IPlayer {
    * @return a list of Card objects representing the player's hand
    */
   @Override
-  public List<Card> getHand() {
+  public List<CardInterface> getHand() {
     return List.of();
   }
 
@@ -41,7 +41,7 @@ public class AiPlayer implements IPlayer {
    * @param card to be added to the player's hand.
    */
   @Override
-  public void addCardToHand(Card card) {
+  public void addCardToHand(CardInterface card) {
 
     // adds a card to the hand
   }
@@ -51,9 +51,9 @@ public class AiPlayer implements IPlayer {
    * @param card to be removed from the player's hand.
    */
   @Override
-  public void removeCardFromHand(Card card) {
+  public void removeCardFromHand(CardInterface card) {
 
-    //removes acard from the hand
+    //removes a card from the hand
   }
 
   /**
@@ -61,7 +61,7 @@ public class AiPlayer implements IPlayer {
    * @param playerHand a List of Cards to be set as the player's hand.
    */
   @Override
-  public void setHand(List<Card> playerHand) {
+  public void setHand(List<CardInterface> playerHand) {
 
     // sets the hand of the player
   }
@@ -73,7 +73,7 @@ public class AiPlayer implements IPlayer {
    * @param col to place the card
    */
   @Override
-  public void placeTheCard(Card card, int row, int col) {
+  public void placeTheCard(CardInterface card, int row, int col) {
 
     // places the card at the specified row and column
   }

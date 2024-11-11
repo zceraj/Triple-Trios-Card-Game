@@ -11,9 +11,13 @@ import java.util.Set;
  */
 public class BattleRules {
 
-  private final GameModelImpl gameModel;
+  private final GameModel gameModel;
 
-  public BattleRules(GameModelImpl gameModel) {
+  /**
+   * Constructs a new BattleRules object with the given game model.
+   * @param gameModel The game model to use for the battle phase.
+   */
+  public BattleRules(GameModel gameModel) {
     this.gameModel = gameModel;
   }
 
@@ -25,10 +29,10 @@ public class BattleRules {
    * @param currPlayer The player who placed the card.
    */
   public void startBattle(Grid grid, int row, int col, IPlayer currPlayer) {
-    Card placedCard = grid.getCell(row, col).getCard();
-    List<Card> adjacentCards = getAdjacentCards(grid, row, col);
+    CardInterface placedCard = grid.getCell(row, col).getCard();
+    List<CardInterface> adjacentCards = getAdjacentCards(grid, row, col);
 
-    for (Card adjacentCard : adjacentCards) {
+    for (CardInterface adjacentCard : adjacentCards) {
       IPlayer adjacentOwner = gameModel.getCellsPlayer(adjacentCard.getRow(),
               adjacentCard.getCol());
       if (adjacentOwner != null && adjacentOwner != currPlayer) {
@@ -46,7 +50,7 @@ public class BattleRules {
    * @param adjacentCard The opposing player's adjacent card.
    * @param direction The direction in which the placed card faces the adjacent card.
    */
-  private void executeBattle(Card placedCard, Card adjacentCard, Direction direction) {
+  private void executeBattle(CardInterface placedCard, CardInterface adjacentCard, Direction direction) {
     Direction oppositeDirection = direction.getOpposite();
 
     int placedAttack = parseAttackValue(placedCard.getAttackValue(direction));
@@ -65,18 +69,18 @@ public class BattleRules {
    * @param currPlayer The player who placed the card.
    */
   private void comboBattle(Grid grid, IPlayer currPlayer) {
-    Set<Card> processedCards = new HashSet<>();
-    List<Card> flippedCards = findFlippedCards(grid, currPlayer);
+    Set<CardInterface> processedCards = new HashSet<>();
+    List<CardInterface> flippedCards = findFlippedCards(grid, currPlayer);
 
-    for (Card flippedCard : flippedCards) {
+    for (CardInterface flippedCard : flippedCards) {
       if (processedCards.contains(flippedCard)) {
         continue;
       }
       processedCards.add(flippedCard);
 
-      List<Card> adjacentCards = getAdjacentCards(grid, flippedCard.getRow(), flippedCard.getCol());
+      List<CardInterface> adjacentCards = getAdjacentCards(grid, flippedCard.getRow(), flippedCard.getCol());
 
-      for (Card adjacentCard : adjacentCards) {
+      for (CardInterface adjacentCard : adjacentCards) {
         IPlayer adjacentOwner = gameModel.getCellsPlayer(
                 adjacentCard.getRow(), adjacentCard.getCol());
         if (adjacentOwner != null && adjacentOwner != currPlayer) {
@@ -95,8 +99,8 @@ public class BattleRules {
    * @param col The column of the current cell.
    * @return A list of adjacent cards.
    */
-  private List<Card> getAdjacentCards(Grid grid, int row, int col) {
-    List<Card> adjacentCards = new ArrayList<>();
+  private List<CardInterface> getAdjacentCards(Grid grid, int row, int col) {
+    List<CardInterface> adjacentCards = new ArrayList<>();
     int[][] offsets = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
 
     for (int[] offset : offsets) {
@@ -120,7 +124,7 @@ public class BattleRules {
    * @param adjacentCard The adjacent card being examined.
    * @return The direction from the original cell to the adjacent cell.
    */
-  private Direction decideDirection(int row, int col, Card adjacentCard) {
+  private Direction decideDirection(int row, int col, CardInterface adjacentCard) {
     int adjRow = adjacentCard.getRow();
     int adjCol = adjacentCard.getCol();
 
@@ -137,12 +141,12 @@ public class BattleRules {
    * @param currPlayer The current player.
    * @return A list of cards owned by the current player.
    */
-  private List<Card> findFlippedCards(Grid grid, IPlayer currPlayer) {
-    List<Card> flippedCards = new ArrayList<>();
+  private List<CardInterface> findFlippedCards(Grid grid, IPlayer currPlayer) {
+    List<CardInterface> flippedCards = new ArrayList<>();
 
     for (int row = 0; row < grid.getRows(); row++) {
       for (int col = 0; col < grid.getCols(); col++) {
-        Card card = grid.getCell(row, col).getCard();
+        CardInterface card = grid.getCell(row, col).getCard();
         if (card != null && gameModel.getCellsPlayer(row, col) == currPlayer) {
           flippedCards.add(card);
         }

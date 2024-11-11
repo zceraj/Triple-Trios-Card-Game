@@ -3,6 +3,7 @@ package cs3500.tripletrios;
 import java.util.List;
 
 import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.GameModelImpl;
 import cs3500.tripletrios.model.HumanPlayer;
 import cs3500.tripletrios.model.IPlayer;
@@ -22,7 +23,7 @@ public final class ThreeTrios {
             {true, false, false, false, false, true, true}, //row 5
 
     };
-    List<Card> cards = List.of(
+    List<CardInterface> cards = List.of(
             new Card("Lion", 3, 5, 2, 1),
             new Card("Tiger", 4, 2, 5, 3),
             new Card("Elephant", 5, 1, 4, 2),

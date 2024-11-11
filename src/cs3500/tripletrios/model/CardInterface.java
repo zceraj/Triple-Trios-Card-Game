@@ -36,6 +36,14 @@ public interface CardInterface {
    */
   int getCol();
 
+
+  /**
+   * Gets the name of the card.
+   * @return The name of the card
+   */
+  String getCardName();
+
+
   /**
    * formats the card as the name of the card and all of its attack values.
    * @return the card as a string.

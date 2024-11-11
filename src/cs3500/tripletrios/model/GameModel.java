@@ -18,7 +18,7 @@ public interface GameModel extends ReadOnlyGameModel {
    * @throws IllegalArgumentException if deck's size is not large enough to set up the game
    * @throws IllegalArgumentException if deck has non-unique cards or null cards
    */
-  void startGame(List<Card> cardIn);
+  void startGame(List<CardInterface> cardIn);
 
   /**
    * Places the given card at the specified row and column in the game grid.
@@ -26,7 +26,7 @@ public interface GameModel extends ReadOnlyGameModel {
    * @param row The row to place the card
    * @param col The column to place the card
    */
-  void placeCard(Card card, int row, int col);
+  void placeCard(CardInterface card, int row, int col);
 
   /**
    * Advances the game to the next turn.

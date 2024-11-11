@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.GameModelImpl;
 import cs3500.tripletrios.model.Grid;
 import cs3500.tripletrios.model.HumanPlayer;
@@ -28,7 +29,7 @@ public class GameModelImplTest {
   private GameModelImpl game;
   private IPlayer player1;
   private IPlayer player2;
-  private List<Card> cards;
+  private List<CardInterface> cards;
   private Grid grid;
 
   /**
@@ -79,8 +80,8 @@ public class GameModelImplTest {
 
   @Test
   public void testBattles() {
-    Card playersCard = player1.getHand().get(0);
-    Card opponentsCard = player2.getHand().get(0);
+    CardInterface playersCard = player1.getHand().get(0);
+    CardInterface opponentsCard = player2.getHand().get(0);
 
     game.placeCard(playersCard, 0, 0);
     game.placeCard(opponentsCard, 1, 2);
@@ -102,7 +103,7 @@ public class GameModelImplTest {
 
   @Test
   public void testUpdateOwner() {
-    Card playersCard = player1.getHand().get(0);
+    CardInterface playersCard = player1.getHand().get(0);
     game.placeCard(playersCard, 0, 0);
 
     game.updateOwner(0, 0, player2);
@@ -126,7 +127,7 @@ public class GameModelImplTest {
 
   @Test
   public void testGetCellsPlayer() {
-    Card playersCard = player1.getHand().get(0);
+    CardInterface playersCard = player1.getHand().get(0);
     game.placeCard(playersCard, 0, 0);
 
     assertEquals(player1, game.getCellsPlayer(0, 0));
@@ -134,9 +135,9 @@ public class GameModelImplTest {
 
   @Test
   public void testGetWinner() {
-    Card playersCard1 = player1.getHand().get(0);
-    Card playersCard2 = player1.getHand().get(1);
-    Card opponentsCard = player2.getHand().get(0);
+    CardInterface playersCard1 = player1.getHand().get(0);
+    CardInterface playersCard2 = player1.getHand().get(1);
+    CardInterface opponentsCard = player2.getHand().get(0);
 
     game.placeCard(playersCard1, 0, 0);
     game.placeCard(playersCard2, 1, 0);
@@ -158,7 +159,7 @@ public class GameModelImplTest {
       for (int col = 0; col < game.getGameGrid().getCols(); col++) {
         if (game.getGameGrid().getCell(row, col).isCardCell()
                 && game.getGameGrid().getCell(row, col).isEmpty()) {
-          Card card = player1.getHand().get(0);
+          CardInterface card = player1.getHand().get(0);
           game.placeCard(card, row, col);
         }
       }
@@ -169,14 +170,14 @@ public class GameModelImplTest {
 
   @Test
   public void testPlaceCard() {
-    Card card = player1.getHand().get(0);
+    CardInterface card = player1.getHand().get(0);
     game.placeCard(card, 0, 0);
     assertEquals(card, game.getGameGrid().getCardAt(0, 0));
   }
 
   @Test
   public void testPlayerCantPlayWrongTurn() {
-    Card card = player2.getHand().get(0);
+    CardInterface card = player2.getHand().get(0);
     assertThrows(IllegalArgumentException.class, () -> game.placeCard(card, 1, 1));
   }
 
@@ -198,7 +199,7 @@ public class GameModelImplTest {
 
   @Test
   public void testPlayerInvalidLocation() {
-    Card card = player1.getHand().get(0);
+    CardInterface card = player1.getHand().get(0);
     assertThrows(IllegalArgumentException.class, () -> game.placeCard(card, 4, 5));
   }
 
@@ -237,11 +238,11 @@ public class GameModelImplTest {
   @Test
   public void testStartGame_PlayerHandsCorrectAfterStart() {
     List<String> showHand1 = new ArrayList<>();
-    for (Card card : player1.getHand()) {
+    for (CardInterface card : player1.getHand()) {
       showHand1.add(card.toString());
     }
     List<String> showHand2 = new ArrayList<>();
-    for (Card card : player2.getHand()) {
+    for (CardInterface card : player2.getHand()) {
       showHand2.add(card.toString());
     }
 
@@ -251,7 +252,7 @@ public class GameModelImplTest {
 
   @Test
   public void testFlipPersonalCard() {
-    Card card = player1.getHand().get(0);
+    CardInterface card = player1.getHand().get(0);
     game.placeCard(card, 0, 0);
 
     game.battles(0, 0);
@@ -262,8 +263,8 @@ public class GameModelImplTest {
 
   @Test
   public void testFlipOpponentCard() {
-    Card playersCard = player1.getHand().get(0);
-    Card opponentsCard = player2.getHand().get(0);
+    CardInterface playersCard = player1.getHand().get(0);
+    CardInterface opponentsCard = player2.getHand().get(0);
 
     game.placeCard(playersCard, 0, 0);
     game.placeCard(opponentsCard, 1, 0);
@@ -276,9 +277,9 @@ public class GameModelImplTest {
 
   @Test
   public void testFlippingTiles() {
-    Card player1Card1 = player1.getHand().get(0);
-    Card player2Card1 = player2.getHand().get(0);
-    Card player2Card2 = player2.getHand().get(1);
+    CardInterface player1Card1 = player1.getHand().get(0);
+    CardInterface player2Card1 = player2.getHand().get(0);
+    CardInterface player2Card2 = player2.getHand().get(1);
 
     game.placeCard(player1Card1, 0, 0);
     game.placeCard(player2Card1, 2, 2);
@@ -292,7 +293,7 @@ public class GameModelImplTest {
   @Test
   //test the get score method in between plays
   public void testGetScore() {
-    Card playersCard = player1.getHand().get(0);
+    CardInterface playersCard = player1.getHand().get(0);
     game.placeCard(playersCard, 0, 0);
     assertEquals(1, game.getScore(player1));
   }

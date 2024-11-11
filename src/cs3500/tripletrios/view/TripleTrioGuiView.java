@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.ReadOnlyGameModel;
 
@@ -16,7 +17,7 @@ public class TripleTrioGuiView extends JFrame{
   private final JPanel gridPanel;
   private final JPanel leftColumnPanel;
   private final JPanel rightColumnPanel;
-  private Card selectedCard;
+  private CardInterface selectedCard;
   private int selectedCardIndex = -1;
 
 
@@ -75,8 +76,8 @@ public class TripleTrioGuiView extends JFrame{
   private void initializeHands() {
     leftColumnPanel.removeAll();
     rightColumnPanel.removeAll();
-    List<Card> leftColumnCards = model.getCurPlayer().getHand();
-    List<Card> rightColumnCards = model.getOtherPlayer().getHand();
+    List<CardInterface> leftColumnCards = model.getCurPlayer().getHand();
+    List<CardInterface> rightColumnCards = model.getOtherPlayer().getHand();
     Color leftColumnCardsColor;
     Color rightColumnCardsColor;
 

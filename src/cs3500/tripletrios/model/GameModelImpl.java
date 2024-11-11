@@ -1,28 +1,24 @@
 package cs3500.tripletrios.model;
 
-import java.io.IOException;
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import cs3500.tripletrios.controller.GridFileReader;
 
 /**
  * Represents the model for the Triple Trios card game, encapsulating the
  * game logic and managing the state of the game.
  * CLASS INVARIANT: the game grid must have an odd number of card cells
- *
  * This class handles the initialization of players and the game grid,
  * facilitates the placement of cards, manages player turns, and checks
  * for game over conditions. It implements the GameModel interface.
  */
 public class GameModelImpl implements GameModel, ReadOnlyGameModel {
 
-  private Grid grid;
-  private IPlayer player1;
-  private IPlayer player2;
+  private final Grid grid;
+  private final IPlayer player1;
+  private final IPlayer player2;
   private IPlayer currPlayer;
   private boolean gameOver;
   private boolean gameStarted = false;
@@ -70,7 +66,7 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
    *                                  is insufficient to set up the game
    */
   @Override
-  public void startGame(List<Card> cardsIn) {
+  public void startGame(List<CardInterface> cardsIn) {
     if (this.gameStarted) {
       throw new IllegalStateException("Game has already started.");
     }
@@ -82,17 +78,15 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
 
     int expectedHandSize = (totalCardCells + 1) / 2;
 
-    List<Card> loadedCards = cardsIn;
-
-    if (loadedCards.size() < totalCardCells) {
+    if (cardsIn.size() < totalCardCells) {
       throw new IllegalArgumentException("Deck must have enough cards to fill the grid.");
     }
 
     // Limit the cards list to the minimum necessary size
-    List<Card> cards = new ArrayList<>(cardsIn.subList(0, 2 * expectedHandSize));
+    List<CardInterface> cards = new ArrayList<>(cardsIn.subList(0, 2 * expectedHandSize));
 
-    List<Card> player1Hand = new ArrayList<>(cards.subList(0, expectedHandSize));
-    List<Card> player2Hand = new ArrayList<>(cards.subList(expectedHandSize, 2 * expectedHandSize));
+    List<CardInterface> player1Hand = new ArrayList<>(cards.subList(0, expectedHandSize));
+    List<CardInterface> player2Hand = new ArrayList<>(cards.subList(expectedHandSize, 2 * expectedHandSize));
 
     player1.setHand(player1Hand);
     player2.setHand(player2Hand);
@@ -112,7 +106,7 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
    *                                  if the cell is not empty
    */
   @Override
-  public void placeCard(Card card, int col, int row) {
+  public void placeCard(CardInterface card, int col, int row) {
     if (!gameStarted) {
       throw new IllegalStateException("Game has not  started.");
     }
@@ -123,15 +117,18 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
       throw new IllegalArgumentException("Invalid cell coordinates.");
     }
 
-    Cell cell = grid.getCell(col, row);
-    if (!cell.isCardCell() || !cell.isEmpty()) {
+    Cell originalCell = grid.getCell(col, row);
+    if (!originalCell.isCardCell() || !originalCell.isEmpty()) {
       throw new IllegalArgumentException("Cannot place card in this cell.");
     }
     card.addRow(row);
     card.addCol(col);
 
-    cell.setCard(card);
-    cellsPlayer.put(cell, currPlayer);
+    Cell updatedCell = new Cell(originalCell);
+    updatedCell.setCard(card);
+
+    grid.updateCell(row, col, updatedCell);
+    cellsPlayer.put(updatedCell, currPlayer);
 
     battles(row, col);
 
@@ -211,7 +208,7 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
         cellTypes[row][col] = grid.getCell(row, col).isCardCell(); 
       }
     }
-    return new Grid(cellTypes);
+    return new Grid(this.grid);
   }
 
   /**
@@ -232,8 +229,9 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
    * @param newOwner The new player owning the cell
    */
   public void updateOwner(int row, int col, IPlayer newOwner) {
-    Cell cell = grid.getCell(row, col);
-    cellsPlayer.put(cell, newOwner);
+    Cell orignalCell = grid.getCell(row, col);
+    Cell updatedCell = new Cell(orignalCell);
+    cellsPlayer.put(updatedCell, newOwner);
   }
 
   /**
@@ -279,7 +277,7 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
     int count = 0;
     for (int row = 0; row < grid.getRows(); row++) {
       for (int col = 0; col < grid.getCols(); col++) {
-        Card card = grid.getCell(row, col).getCard();
+        CardInterface card = grid.getCell(row, col).getCard();
         if (card != null && getCellsPlayer(row, col) == player) {
           count++;
         }

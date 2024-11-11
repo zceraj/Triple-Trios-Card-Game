@@ -15,7 +15,7 @@ import java.util.List;
 public class HumanPlayer implements IPlayer {
   private final String name;
   private final PlayerColor color;
-  private final List<Card> hand;
+  private final List<CardInterface> hand;
 
   /**
    * Constructs a new HumanPlayer with the specified name and color.
@@ -52,7 +52,7 @@ public class HumanPlayer implements IPlayer {
    *
    * @param card the card to be added to the hand
    */
-  public void addCardToHand(Card card) {
+  public void addCardToHand(CardInterface card) {
     hand.add(card);
   }
 
@@ -61,7 +61,7 @@ public class HumanPlayer implements IPlayer {
    *
    * @param card the card to be removed from the hand
    */
-  public void removeCardFromHand(Card card) {
+  public void removeCardFromHand(CardInterface card) {
     hand.remove(card);
   }
 
@@ -72,7 +72,7 @@ public class HumanPlayer implements IPlayer {
    * @throws IllegalArgumentException if playerHand is null
    */
   @Override
-  public void setHand(List<Card> playerHand) {
+  public void setHand(List<CardInterface> playerHand) {
     if (playerHand == null) {
       throw new IllegalArgumentException("Hand cannot be null.");
     }
@@ -87,7 +87,7 @@ public class HumanPlayer implements IPlayer {
    *
    * @return the list of cards in the player's hand
    */
-  public List<Card> getHand() {
+  public List<CardInterface> getHand() {
     return hand;
   }
 
@@ -98,7 +98,7 @@ public class HumanPlayer implements IPlayer {
    * @return the card that was played
    * @throws IndexOutOfBoundsException if the index is out of range
    */
-  public Card playCard(int index) {
+  public CardInterface playCard(int index) {
 
     return hand.remove(index);
   }
@@ -109,7 +109,7 @@ public class HumanPlayer implements IPlayer {
    * @param row the row to place the card
    * @param col  the column to place the card
    */
-  public void placeTheCard(Card card, int row, int col) {
+  public void placeTheCard(CardInterface card, int row, int col) {
     if (card == null) {
       throw new IllegalArgumentException("Card cannot be null.");
     }

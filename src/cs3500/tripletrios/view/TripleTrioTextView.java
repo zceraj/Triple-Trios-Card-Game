@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.GameModel;
 
 /**
@@ -37,7 +38,7 @@ public class TripleTrioTextView implements GameView {
 
     // Cards (C): Show loaded card details
     stringToRender.append("\nCards:\n");
-    for (Card card : model.getCurPlayer().getHand()) {
+    for (CardInterface card : model.getCurPlayer().getHand()) {
       stringToRender.append(card.toString()).append("\n");
     }
   }

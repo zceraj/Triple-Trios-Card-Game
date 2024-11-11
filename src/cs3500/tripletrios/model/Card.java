@@ -42,6 +42,23 @@ public class Card implements CardInterface {
   }
 
   /**
+   * Creates a new card with the given name and attack values.
+   * @param original The card to copy
+   */
+  public Card(CardInterface original) {
+    this.cardName = original.getCardName();
+    this.attackValues = new EnumMap<>(Direction.class);
+    for (Direction dir : Direction.values()) {
+      this.attackValues.put(dir, original.getAttackValue(dir));
+    }
+    this.row = original.getRow();
+    this.col = original.getCol();
+  }
+
+
+
+
+  /**
    * Converts an integer attack value to a string, where 10 is represented by "A".
    * @param value The integer attack value to convert
    * @return The string representation of the attack value ("1"-"9" or "A")

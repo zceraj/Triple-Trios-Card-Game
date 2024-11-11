@@ -34,6 +34,24 @@ public class Grid {
   }
 
   /**
+   * Copy constructor for a new grid.
+   *
+   * @param original The grid to copy.
+   */
+  public Grid(Grid original) {
+    this.rows = original.rows;
+    this.cols = original.cols;
+    this.grid = new Cell[rows][cols];
+    this.adjacentCellMap = new HashMap<>();
+    for (int row = 0; row < rows; row++) {
+      for (int col = 0; col < cols; col++) {
+        this.grid[row][col] = new Cell(original.grid[row][col]);
+      }
+    }
+    trackCellsNextTo();
+  }
+
+  /**
    * Initializes cells as CardCells or Holes based on the cellTypes configuration array.
    *
    * @param cellTypes 2D boolean array where true means CardCell and false means Hole.
@@ -124,7 +142,7 @@ public class Grid {
    * @param col The column of the cell.
    * @return The card in the cell at (row, col), or null if empty or a Hole.
    */
-  public Card getCardAt(int row, int col) {
+  public CardInterface getCardAt(int row, int col) {
     Cell cell = getCell(row, col);
     return cell.isCardCell() && !cell.isEmpty() ? cell.getCard() : null;
   }
@@ -147,8 +165,11 @@ public class Grid {
     return cols;
   }
 
-    //gets the number of card cells in the grid
 
+  /**
+   * Gets the number of cells in the grid.
+   * @return The number of cells in the grid.
+   */
   public int getCount() {
     int count = 0;
     for (int row = 0; row < this.getRows(); row++) {
@@ -160,6 +181,16 @@ public class Grid {
     }
       return count;
   }
+
+  public void updateCell(int row, int col, Cell newCell) {
+    if (isValidCell(row, col)) {
+      grid[row][col] = new Cell(newCell);
+    } else {
+      throw new IndexOutOfBoundsException("Invalid cell coordinates.");
+    }
+  }
+
+
 
 
   /**

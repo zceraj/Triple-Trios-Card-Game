@@ -3,12 +3,11 @@ package tripletrios.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-import java.util.Arrays;
 import java.util.List;
 
 import cs3500.tripletrios.model.BattleRules;
 import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.GameModelImpl;
 import cs3500.tripletrios.model.Grid;
 import cs3500.tripletrios.model.HumanPlayer;
@@ -31,7 +30,7 @@ public class BattleRulesTest {
           {false, true, false},
           {true, true, false}
   };
-  private List<Card> cards;
+  private List<CardInterface> cards;
   private Grid gridAsGrid = new Grid(grid);
 
   /**
@@ -66,8 +65,8 @@ public class BattleRulesTest {
   @Test
   public void testBattleExecution_SingleBattle() {
     // Place initial cards on grid for battle
-    Card card1 = player1.getHand().get(0);
-    Card card2 = player2.getHand().get(0);
+    CardInterface card1 = player1.getHand().get(0);
+    CardInterface card2 = player2.getHand().get(0);
 
     game.placeCard(card1, 1, 1);
     game.updateOwner(1, 1, player1);
