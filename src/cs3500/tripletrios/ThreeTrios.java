@@ -62,8 +62,6 @@ public final class ThreeTrios {
             new Card("Parrot", 1, 5, 4, 2)
     );
 
-
-
     GameModelImpl model = new GameModelImpl(grid, player1, player2);
     model.startGame(cards);
     TripleTrioGuiView view = new TripleTrioGuiView(model);
