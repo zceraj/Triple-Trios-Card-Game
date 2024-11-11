@@ -4,8 +4,24 @@ if grid has 35 cells then there should be (35+1)/2 = 18 cards in each players ha
 ----------------------------------------------------------------------------------------------------
 Communcations:
 Z:
+- make it such that you can pass in an odd number of cards and it wont crash!!
+- how do i make it so that the curr player cant play the other players cards?
+- throw exception if both of the players are the same color --> 2 blue players.
+- implement the interfaces in the gui components
+- Additionally, your view should (temporarily) print a message (using System.out) containing the
+index of the card that was clicked on as well as which player owns that hand.
+  - a user should be able to click on a cell in the grid and the view should (temporarily) print a
+  message (using System.out) containing the coordinates of the cell that was clicked on, in whatever
+  coordinate system you used in your model. Note: this is not the same thing as the physical mouse
+  coordinates of the mouse event!
+
+  O Player information (current score, cards in hand).
+             O Control buttons (e.g., "Restart Game," "Exit Game").
 
 M:
+
+To Discuss:
+- make a plan for the controller
 
 ----------------------------------------------------------------------------------------------------
                               ---------------
@@ -18,8 +34,8 @@ KEY:
 
                                 SOURCE CODE
 Model:
-- make the model read only
-    - extend the interface to a read only three trios model intergace
++ make the model read only
+    + extend the interface to a read only three trios model intergace
         - The ability to create a game using the configuration files for the grid and the cards
         - The ability to create a copy of the grid
             - obserations:
@@ -35,19 +51,19 @@ Model:
         - The current player plays a card from their hand at a given cell
 
 Basic View:
-    - create a GUI view using java swing
-    - interfaces for all the components of the view
-        - frame
-        - panel
-        - gui rendering??
+    + create a GUI view using java swing
+    _ interfaces for all the components of the view
+        + frame
+        + panel
+        + gui rendering??
 
 How we want the view to look
-- a game board in the center (rows x cols big) -- light purple
-- a column on each side of the grid defining the player's hand
-- yellow or dark purple squares indicating the possible moves for the players
-- onece a card is placed the yellow square turns into the card.
++ a game board in the center (rows x cols big) -- light purple
++ a column on each side of the grid defining the player's hand
++ yellow or dark purple squares indicating the possible moves for the players
+- once a card is placed the yellow square turns into the card.
 
-- a user should be able to click on a card in the hand,
++ a user should be able to click on a card in the hand,
 and it should highlight that card somehow. In the image below,
 the highlight is indicated as a thick grey border. You may choose another way of
 highlighting if you wish so long as it is obvious it is selected.
@@ -59,10 +75,10 @@ index of the card that was clicked on as well as which player owns that hand.
   coordinate system you used in your model. Note: this is not the same thing as the physical mouse
   coordinates of the mouse event!
 
-- a user can select
-- a user can deselect a card by clicking the same card or another card
++ a user can select
++ a user can deselect a card by clicking the same card or another card
 
-- clicking outside of the grid shouldn't do anything
++ clicking outside of the grid shouldn't do anything
 
 
 Computer Player:
@@ -81,7 +97,7 @@ Controller:
 - make a plan for the controller
 
 Main:
-- fix the code with our actual model class names
++ fix the code with our actual model class names
 
 Make a mock model:
 - Mock your model to record a transcript of which coordinates were inspected by your strategy, and

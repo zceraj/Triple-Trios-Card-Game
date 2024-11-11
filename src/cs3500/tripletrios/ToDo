@@ -13,29 +13,29 @@ X - completed
    X Identify methods that alter the game state (e.g., methods to place cards, change turns, update scores).
        X Add an update score method to the mutable interface. --- did we want a getScore or a variable that stores an updated score?
        X Implement a mutable interface with these methods.
-   O **Implement Interfaces in Model**
+   X **Implement Interfaces in Model**
        X Update `GameModelImpl` to implement both interfaces.
        O Ensure methods are appropriately grouped and restricted according to each interface.
 
 ---
 
 ### 2. Develop a Visual View of the Game Using Java Swing
-   O **Plan Visual Components**
-       O Design how the grid, players, and cards will be displayed in the GUI.
-       O Decide on layout, components (e.g., JPanels, JLabels, buttons), and color schemes.
-   O **Implement Swing View Class**
-       O Set up main game window using JFrame.
-       O Add panels or components for:
-           O Game grid (display cells and card placement).
+   X **Plan Visual Components**
+       X Design how the grid, players, and cards will be displayed in the GUI.
+       X Decide on layout, components (e.g., JPanels, JLabels, buttons), and color schemes.
+   X **Implement Swing View Class**
+       X Set up main game window using JFrame.
+       X Add panels or components for:
+           X Game grid (display cells and card placement).
            O Player information (current score, cards in hand).
            O Control buttons (e.g., "Restart Game," "Exit Game").
-       O Style the game layout for clarity and visual appeal.
+       X Style the game layout for clarity and visual appeal.
 
 ---
 
 ### 3. Integrate Mouse Interaction for Card Placement
    O **Handle Mouse Events**
-       O Add mouse listeners to grid cells to detect clicks.
+       X Add mouse listeners to grid cells to detect clicks.
        O Implement logic for determining which cell was clicked.
        O Trigger card placement logic based on cell selection.
    O **Update Game State in View**
@@ -82,7 +82,8 @@ X - completed
 
 
 
-   --- INCLASS NOTES ABOUT HW 6
+--- INCLASS NOTES ABOUT HW 6
 
-   - DONT PUT SPACES BETWEEN CARDS/CELLS IN THE GRID- points will be lost its ok if there is a hand panel with the cards in hand
+   - DONT PUT SPACES BETWEEN CARDS/CELLS IN THE GRID- points will be lost its ok
+   if there is a hand panel with the cards in hand
    and the grid/baord, but no spaces between cards/cells

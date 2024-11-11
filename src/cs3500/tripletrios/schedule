@@ -3,41 +3,17 @@ O - not complete
 X - completed
 * - in progress if needed
 
-November 3 (Today)
-    X Set up shared workspace and repository
-    X Divide remaining tasks between each partner
-    X Review assignment requirements and create a game plan
+November 10
+    O Zara:
+        - Complete remaining view interface elements and
+        - Test view responsiveness and interactions thoroughly
+        - Begin documentation and README updates
+    O Meroska:
+        - Finalize advanced computer player strategy and test
+        -  Write initial tests for view and model integration
+        - Implement model mocks for strategy testing
 
-November 4
-    O Meroska: Implement read-only model interface
-    X Zara: Start work on the visual view with Java Swing basics and fix the main
-    O Both: Review each other's code and make adjustments
-
-November 5
-    X Zara: Implement mouse interactions in the view
-    O Meroska: Begin strategic computer player design, focusing on simple strategy
-    O Both: Collaborate on testing early implementations
-
-November 6
-    O Zara: Complete remaining view interface elements
-    O Meroska: Complete simple computer player strategy and test
-    O Both: Integrate view and strategy components
-
-November 7
-    O Zara: Test view responsiveness and interactions thoroughly
-    O Meroska: Start implementing advanced computer player strategy
-    O Both: Write initial tests for view and model integration
-
-November 8
-    O Zara: Begin documentation and README updates
-    O Meroska: Finalize advanced computer player strategy and test
-    O Both: Implement model mocks for strategy testing
-
-November 9
-    O Zara: Capture screenshots for submission
-    O Both: Run full integration tests and debug if needed
-
-November 10 (Goal Completion Day)
+November 12 (Goal Completion Day)
     O Review and polish code, README, and documentation
     O Create JAR file and finalize submission materials
     O Complete any final tests and do a last code review together

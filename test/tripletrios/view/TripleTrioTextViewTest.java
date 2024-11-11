@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.GameModel;
 import cs3500.tripletrios.model.GameModelImpl;
+import cs3500.tripletrios.model.Grid;
 import cs3500.tripletrios.model.HumanPlayer;
 import cs3500.tripletrios.model.PlayerColor;
 import cs3500.tripletrios.view.TripleTrioTextView;
@@ -33,15 +34,27 @@ public class TripleTrioTextViewTest {
   public void setUp() throws Exception {
     HumanPlayer player1 = new HumanPlayer("Player1", PlayerColor.BLUE);
     HumanPlayer player2 = new HumanPlayer("Player2", PlayerColor.RED);
+    boolean[][] grid = {
+            {true, true, false},
+            {false, true, true},
+            {true, false, true}
+    };
+
+    List<Card> cards = List.of(
+            new Card("Tiger", 4, 2, 5, 3),
+            new Card("Elephant", 5, 1, 4, 2),
+            new Card("Giraffe", 2, 4, 3, 5),
+            new Card("Zebra", 1, 3, 5, 4),
+            new Card("Panda", 4, 4, 4, 4),
+            new Card("Wolf", 3, 2, 1, 5)
+    );
 
     game = new GameModelImpl(
-            "." + File.separator + "TESTINGFILES" + File.separator + "valid_grid.text",
+            grid,
             player1,
             player2);
 
-    game.startGame(
-            "." + File.separator + "TESTINGFILES" + File.separator + "full_card_set.txt"
-    );
+    game.startGame(cards);
 
     appendable = new StringWriter();
     view = new TripleTrioTextView(game, appendable);

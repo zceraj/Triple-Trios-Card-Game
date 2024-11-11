@@ -9,6 +9,7 @@ import java.util.List;
 
 import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.GameModelImpl;
+import cs3500.tripletrios.model.Grid;
 import cs3500.tripletrios.model.HumanPlayer;
 import cs3500.tripletrios.model.IPlayer;
 import cs3500.tripletrios.model.PlayerColor;
@@ -27,6 +28,8 @@ public class GameModelImplTest {
   private GameModelImpl game;
   private IPlayer player1;
   private IPlayer player2;
+  private List<Card> cards;
+  private Grid grid;
 
   /**
    * sets up the game model to test.
@@ -35,14 +38,25 @@ public class GameModelImplTest {
   void setUp() throws Exception {
     player1 = new HumanPlayer("Player1", PlayerColor.BLUE);
     player2 = new HumanPlayer("Player2", PlayerColor.RED);
+    cards = List.of(
+            new Card("Tiger", 4, 2, 5, 3),
+            new Card("Elephant", 5, 1, 4, 2),
+            new Card("Giraffe", 2, 4, 3, 5),
+            new Card("Zebra", 1, 3, 5, 4),
+            new Card("Panda", 4, 4, 4, 4),
+            new Card("Wolf", 3, 2, 1, 5)
+    );
+    boolean[][] gridToSet = {{true, false, false},
+            {true, false, true},
+            {false, false, true}};
+    this.grid = new Grid(gridToSet);
 
     game = new GameModelImpl(
-            "." + File.separator + "TESTINGFILES" + File.separator + "valid_grid.text",
+            gridToSet,
             player1,
             player2);
 
-    this.game.startGame(
-            "." + File.separator + "TESTINGFILES" + File.separator + "full_card_set.txt");
+    this.game.startGame(cards);
   }
 
 

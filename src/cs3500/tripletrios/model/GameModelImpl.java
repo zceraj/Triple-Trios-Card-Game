@@ -44,7 +44,7 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
           IPlayer player1,
           IPlayer player2) throws RuntimeException {
     Grid trialGrid = new Grid(grid);
-    if (isGridOdd(this.grid)) {
+    if (!isGridOdd(trialGrid)) {
       throw new IllegalArgumentException("Grid must have an odd number of card cells.");
     }
     else {
@@ -88,7 +88,8 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
       throw new IllegalArgumentException("Deck must have enough cards to fill the grid.");
     }
 
-    List<Card> cards = loadedCards.subList(0, totalCardCells);
+    // Limit the cards list to the minimum necessary size
+    List<Card> cards = new ArrayList<>(cardsIn.subList(0, 2 * expectedHandSize));
 
     List<Card> player1Hand = new ArrayList<>(cards.subList(0, expectedHandSize));
     List<Card> player2Hand = new ArrayList<>(cards.subList(expectedHandSize, 2 * expectedHandSize));
@@ -291,5 +292,12 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
   private boolean isGridOdd(Grid grid) {
     int cardCellCount = grid.getCount();
     return cardCellCount % 2 != 0;
+  }
+
+  public IPlayer getOtherPlayer(){
+    if (currPlayer == player2) {
+      return player1;
+    }
+    return player2;
   }
 }
