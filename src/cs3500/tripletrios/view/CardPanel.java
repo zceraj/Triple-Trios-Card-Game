@@ -41,15 +41,27 @@ class CardPanel extends JPanel {
 
     // labels with attack values or the card name as the text shown
     JLabel nameLabel = new JLabel(card.getCardName(), SwingConstants.CENTER);
-    JLabel northLabel = new JLabel(String.valueOf(card.getAttackValue(Direction.NORTH)), SwingConstants.CENTER);
-    JLabel eastLabel = new JLabel(String.valueOf(card.getAttackValue(Direction.EAST)), SwingConstants.CENTER);
-    JLabel southLabel = new JLabel(String.valueOf(card.getAttackValue(Direction.SOUTH)), SwingConstants.CENTER);
-    JLabel westLabel = new JLabel(String.valueOf(card.getAttackValue(Direction.WEST)), SwingConstants.CENTER);
+    JLabel northLabel = new JLabel(
+            String.valueOf(card.getAttackValue(Direction.NORTH)), SwingConstants.CENTER);
+    JLabel eastLabel = new JLabel(
+            String.valueOf(card.getAttackValue(Direction.EAST)), SwingConstants.CENTER);
+    JLabel southLabel = new JLabel(
+            String.valueOf(card.getAttackValue(Direction.SOUTH)), SwingConstants.CENTER);
+    JLabel westLabel = new JLabel(
+            String.valueOf(card.getAttackValue(Direction.WEST)), SwingConstants.CENTER);
 
 
     try {
-      Font customFontForLabel = Font.createFont(Font.TRUETYPE_FONT, new File("sillyStuff/SourGummy-VariableFont_wdth,wght.ttf")).deriveFont(14f);
-      Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File("sillyStuff/SourGummy-VariableFont_wdth,wght.ttf")).deriveFont(23f);
+      Font customFontForLabel = Font.createFont(
+              Font.TRUETYPE_FONT,
+              new File(
+                      "formatting/SourGummy-VariableFont_wdth,wght.ttf"))
+              .deriveFont(14f);
+      Font customFont = Font.createFont(
+              Font.TRUETYPE_FONT,
+              new File(
+                      "formatting/SourGummy-VariableFont_wdth,wght.ttf"))
+              .deriveFont(23f);
       nameLabel.setFont(customFontForLabel);
       northLabel.setFont(customFont);
       eastLabel.setFont(customFont);
@@ -114,17 +126,16 @@ class CardPanel extends JPanel {
     } else {
       // Select the card
       this.isSelected = true;
-      setBorder(BorderFactory.createLineBorder(Color.GRAY, 5)); // Highlight with gray border
+      setBorder(BorderFactory.createLineBorder(Color.GRAY, 5)); // Highlight
       System.out.println("Selected card: " + card.getCardName() + " (Index: " + index + ")");
     }
   }
 
-  // Optional: Custom paint method to enhance visual representation (e.g., highlight or show card name)
   @Override
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
     if (isSelected) {
-      g.setColor(Color.GRAY); // Change this if you want a different visual effect for selection
+      g.setColor(Color.GRAY); // Change??
       g.fillRect(0, 0, getWidth(), getHeight());
     }
   }

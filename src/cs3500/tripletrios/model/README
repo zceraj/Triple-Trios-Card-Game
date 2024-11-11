@@ -1,3 +1,12 @@
+----------------------------------------------------------------------------------------------------
+-------------------------------------ASSIGNMENT 6 READ ME ------------------------------------------
+----------------------------------------------------------------------------------------------------
+
+add stuff here
+
+----------------------------------------------------------------------------------------------------
+-------------------------------------ASSIGNMENT 5 READ ME ------------------------------------------
+----------------------------------------------------------------------------------------------------
 OVERVIEW:
 
 This is a two player game of Three Trios that is played ona grid consisting of cells.
@@ -137,12 +146,3 @@ Missing functionality we added:
      of just getting the winner at the end
 
  - removed the int col, int row in the comboBattle method in BattleRules class, it wasn't used and felt unnecessary
-
-
-
-
-
-
-
-
-

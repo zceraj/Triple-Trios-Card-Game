@@ -3,11 +3,11 @@ package cs3500.tripletrios;
 import java.util.List;
 
 import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.GameModel;
 import cs3500.tripletrios.model.GameModelImpl;
 import cs3500.tripletrios.model.HumanPlayer;
 import cs3500.tripletrios.model.IPlayer;
 import cs3500.tripletrios.model.PlayerColor;
-import cs3500.tripletrios.model.ReadOnlyGameModel;
 import cs3500.tripletrios.view.TripleTrioGuiView;
 
 public final class ThreeTrios {
@@ -61,9 +61,7 @@ public final class ThreeTrios {
             new Card("Parrot", 1, 5, 4, 2)
     );
 
-
-
-    GameModelImpl model = new GameModelImpl(grid, player1, player2);
+    GameModel model = new GameModelImpl(grid, player1, player2);
     model.startGame(cards);
     TripleTrioGuiView view = new TripleTrioGuiView(model);
     view.setVisible(true);
