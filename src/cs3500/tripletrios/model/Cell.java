@@ -17,7 +17,7 @@ public class Cell {
    */
   public Cell(int row, int col, boolean isCardCell) {
     this.isCardCell = isCardCell;
-    this.card = null; // Initialize as empty
+    this.card = null;
   }
 
 
@@ -59,7 +59,8 @@ public class Cell {
    * @return The card in this cell, or null if the cell is empty.
    */
   public Card getCard() {
-    return card;
+    return new Card(card.getCardName(), card.getAttackValue(Direction.NORTH), card.getAttackValue(Direction.SOUTH),
+            card.getAttackValue(Direction.EAST), card.getAttackValue(Direction.WEST));
   }
 
 

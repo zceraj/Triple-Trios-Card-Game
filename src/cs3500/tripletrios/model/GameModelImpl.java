@@ -204,7 +204,13 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
    */
   @Override
   public Grid getGameGrid() {
-    return grid;
+    boolean[][] cellTypes = new boolean[grid.getRows()][grid.getCols()];
+    for (int row = 0; row < grid.getRows(); row++) {
+      for (int col = 0; col < grid.getCols(); col++) {
+        cellTypes[row][col] = grid.getCell(row, col).isCardCell(); 
+      }
+    }
+    return new Grid(cellTypes);
   }
 
   /**

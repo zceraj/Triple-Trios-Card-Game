@@ -87,7 +87,8 @@ public class Grid {
    */
   public Cell getCell(int row, int col) {
     if (isValidCell(row, col)) {
-      return grid[row][col];
+      Cell originalCell = grid[row][col];
+      return new Cell(row, col, originalCell.isCardCell());
     } else {
       throw new IndexOutOfBoundsException("Invalid cell coordinates.");
     }
