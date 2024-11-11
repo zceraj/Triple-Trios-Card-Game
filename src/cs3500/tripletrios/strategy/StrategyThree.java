@@ -1,6 +1,14 @@
 package cs3500.tripletrios.strategy;
 
-public class StrategyThree {
+import cs3500.tripletrios.model.IPlayer;
+
+public class StrategyThree extends AbstractStrategy implements StrategyInterface {
+ 
+
+  @Override
+  public Moves getBestMove(IPlayer computerPlayer) {
+    return null;
+  }
 
    /*Strat 3
 //  * choose cards less likley t be flipped in general

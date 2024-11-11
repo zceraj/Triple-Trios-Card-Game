@@ -113,15 +113,37 @@ public class Grid {
   }
 
   /**
-   * Retrieves the adjacent cells for a specific cell at (row, col).
+   * Gets the adjacent cell from the given position in the specified direction.
    *
-   * @param row The row of the cell.
-   * @param col The column of the cell.
-   * @return Map of adjacent cells, keyed by direction.
+   * @param row The current row position
+   * @param col The current column position
+   * @param direction The direction to move
+   * @return The adjacent cell if it exists, or null if out of bounds
    */
-  public Map<Direction, Cell> getAdjacentCells(int row, int col) {
-    Cell cell = getCell(row, col);
-    return adjacentCellMap.getOrDefault(cell, new EnumMap<>(Direction.class));
+  public Cell getAdjacentCells(int row, int col, Direction direction) {
+    int newRow = row;
+    int newCol = col;
+
+    switch (direction) {
+      case NORTH:
+        newRow -= 1;
+        break;
+      case SOUTH:
+        newRow += 1;
+        break;
+      case EAST:
+        newCol += 1;
+        break;
+      case WEST:
+        newCol -= 1;
+        break;
+    }
+
+    if (isValidCell(newRow, newCol)) {
+      return getCell(newRow, newCol);
+    } else {
+      return null;
+    }
   }
 
   /**

@@ -81,6 +81,22 @@ public class Cell {
     return card;
   }
 
+  /**
+   * Gets the row of a Cell
+   * @return row in which the cell is in
+   */
+  public int getRow() {
+    return row;
+  }
+
+  /**
+   * Gets the column of a Cell
+   * @return column in which the cell is in
+   */
+  public int getCol() {
+    return col;
+  }
+
 
 
 }

@@ -2,23 +2,40 @@ package cs3500.tripletrios.strategy;
 
 import java.util.List;
 
-import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.GameModel;
 import cs3500.tripletrios.model.IPlayer;
 
 public class AbstractStrategy {
 
-  protected GameModel model;
-  protected IPlayer curPlayer;
-
-  public AbstractStrategy(GameModel model, IPlayer curPlayer) {
-    this.model = model;
-    this.curPlayer = curPlayer;
+  // Parses the attack value and converts "A" to 10.
+  protected int intAttackValue(String attackValue) {
+    if ("A".equals(attackValue)) {
+      return 10;
+    } else {
+      return Integer.parseInt(attackValue);
+    }
   }
 
-  protected int evaluateFlips(Card card, int row, int col) {
-    return 0;
+  protected Moves breakTie(CardInterface card, int row, int col, Moves bestMove, IPlayer player) {
+    // Check for uppermost-leftmost coordinate
+    if (row < bestMove.getRow() || (row == bestMove.getRow() && col < bestMove.getCol())) {
+      return new Moves(card, row, col);
+    }
+    // If coordinates are the same, choose the card with the lowest index in the hand
+    if (row == bestMove.getRow() && col == bestMove.getCol()) {
+      int cardIndex = player.getHand().indexOf(card);
+      int bestMoveCardIndex = player.getHand().indexOf(bestMove.getCard());
+      if (cardIndex < bestMoveCardIndex) {
+        return new Moves(card, row, col);
+      }
+    }
+    return bestMove;
   }
+
+
+
+  // Abstract method for calculating defense value, to be implemented by each strategy
 
 
 //  /*Break ties

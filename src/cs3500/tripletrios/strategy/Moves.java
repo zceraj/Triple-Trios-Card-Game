@@ -7,13 +7,12 @@ public class Moves {
   private final CardInterface card;
   private final int row;
   private final int col;
-  private final int totalFlips;
 
-  public Moves(Card card, int row, int col, int totalFlips) {
+  public Moves(CardInterface card, int row, int col) {
     this.card = card;
     this.row = row;
     this.col = col;
-    this.totalFlips = totalFlips;
+
   }
 
 
@@ -29,9 +28,6 @@ public class Moves {
     return col;
   }
 
-  public int getTotalFlips() {
-    return totalFlips;
-  }
 
 
 }
