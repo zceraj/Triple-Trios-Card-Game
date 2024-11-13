@@ -1,6 +1,5 @@
 package cs3500.tripletrios.strategy;
 
-import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.CardInterface;
 
 public class Moves {

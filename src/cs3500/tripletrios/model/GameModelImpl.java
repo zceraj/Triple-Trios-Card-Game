@@ -16,6 +16,7 @@ import java.util.Map;
  */
 public class GameModelImpl implements GameModel, ReadOnlyGameModel {
 
+
   private final Grid grid;
   private final IPlayer player1;
   private final IPlayer player2;
@@ -53,7 +54,28 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
     this.cellsPlayer = new HashMap<>();
   }
 
+  /**
+   * Constructor for an instance of a model with its current grid and players
+   * to be used for strategies.
+   */
+  public GameModelImpl(Grid grid, IPlayer currPlayer, IPlayer otherPlayer) {
+    this.grid = new Grid(grid);
+    this.currPlayer = currPlayer;
+    this.player1 = currPlayer;
+    this.player2 = otherPlayer;
+    this.gameOver = false;
+    this.cellsPlayer = new HashMap<>();
 
+    //add the cellsPlayer map based on the current grid state.
+    for (int row = 0; row < grid.getRows(); row++) {
+      for (int col = 0; col < grid.getCols(); col++) {
+        Cell cell = grid.getCell(row, col);
+        if (!cell.isEmpty()) {
+          cellsPlayer.put(cell, getCellsPlayer(row, col));
+        }
+      }
+    }
+  }
 
   /**
    * Starts the game with the given options. The provided deck is used to

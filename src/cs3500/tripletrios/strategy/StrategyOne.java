@@ -34,6 +34,7 @@ public class StrategyOne extends AbstractStrategy implements StrategyInterface {
     Moves bestMove = null;
     Grid grid = model.getGameGrid();
 
+    // Iterate through all cells on the grid
     for (int row = 0; row < grid.getRows(); row++) {
       for (int col = 0; col < grid.getCols(); col++) {
         if (grid.getCell(row, col).isEmpty()) { // Check if the cell is empty for placement
@@ -49,10 +50,10 @@ public class StrategyOne extends AbstractStrategy implements StrategyInterface {
         }
       }
     }
-    return bestMove;
+
+    // Fallback mechanism: if no best move was found, choose the upper-left most open cell and the first card
+    return finalMove(computerPlayer, bestMove, grid);
   }
-
-
 
 
   //counts the possible flips that would happen if a card was played

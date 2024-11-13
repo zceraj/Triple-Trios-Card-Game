@@ -12,8 +12,18 @@ Missing functionality we added:
  - players score in the game. We originally just had a getWinner, but we figured
      it would be useful to know who is currently winning through out the game instead
      of just getting the winner at the end
- - removed the int col, int row in the comboBattle method in BattleRules class, it wasn't used and felt unnecessary
 
+Strategies:
+- StrategyInterface with main method among the strategy classes (getBestMove)
+- AbstractStrategy class extended to strategy classes with the common methods
+    - breakTie
+    - intAttackValue
+    - finalMove
+- Individual classes fro each strategy and its logic
+    - StrategyOne --> holds logic for the first strategy
+    - StrategyTwo --> holds logic for the second strategy
+    - StrategyThree --> holds logic for the third strategy
+    - StrategyFour --> holds logic for the fourth strategy
 ----------------------------------------------------------------------------------------------------
 -------------------------------------ASSIGNMENT 5 READ ME ------------------------------------------
 ----------------------------------------------------------------------------------------------------

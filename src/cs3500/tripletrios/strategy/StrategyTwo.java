@@ -53,8 +53,10 @@ public class StrategyTwo extends AbstractStrategy implements StrategyInterface {
         }
       }
     }
-    return bestMove;
+
+    return finalMove(computerPlayer, bestMove, grid);
   }
+
 
   // Calculate the defense value of placing a card in a corner.
   private int calculateDefenseValue(CardInterface card, int row, int col) {

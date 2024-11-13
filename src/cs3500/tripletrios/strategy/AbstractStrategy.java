@@ -1,14 +1,15 @@
 package cs3500.tripletrios.strategy;
 
-import java.util.List;
 
 import cs3500.tripletrios.model.CardInterface;
-import cs3500.tripletrios.model.GameModel;
+import cs3500.tripletrios.model.Grid;
 import cs3500.tripletrios.model.IPlayer;
 
-public class AbstractStrategy {
+/**
+ * An abstract class of the common methods between the strategies
+ */
+public class AbstractStrategy  {
 
-  // Parses the attack value and converts "A" to 10.
   protected int intAttackValue(String attackValue) {
     if ("A".equals(attackValue)) {
       return 10;
@@ -33,22 +34,17 @@ public class AbstractStrategy {
     return bestMove;
   }
 
+  protected static Moves finalMove(IPlayer computerPlayer, Moves bestMove, Grid grid) {
+    if (bestMove == null) {
+      for (int row = 0; row < grid.getRows(); row++) {
+        for (int col = 0; col < grid.getCols(); col++) {
+          if (grid.getCell(row, col).isEmpty()) {
+            return new Moves(computerPlayer.getHand().get(0), row, col);
+          }
+        }
+      }
+    }
 
-
-  // Abstract method for calculating defense value, to be implemented by each strategy
-
-
-//  /*Break ties
-//  *if there are multiple best moves that can be chosen in a single stratgy
-//  * break ties by choosing the move with uppermost-leftmost coordinate
-//  * for the position then choose the best card for tha position
-//  * with an index closest to the 0 in the hand
-//  *
-//  * if no valid moves: choose the upper-mpst left most open position
-//  * and the card at index 0
-//  *
-//  * hint: keep un mid that a stargey needs to know whcih player is tryig to pick a move for
-//  *
-//   */
-
+    return bestMove;
+  }
 }
