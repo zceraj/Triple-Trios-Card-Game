@@ -43,6 +43,13 @@ public interface CardInterface {
    */
   String getCardName();
 
+  /**
+   * Gets the attack value of the card in the given direction as an integer.
+   * @param direction The direction to get the attack value
+   * @return The attack value of the card in the given direction (1-10).
+   */
+  int getAttackValueAsInt(Direction direction);
+
 
   /**
    * formats the card as the name of the card and all of its attack values.
