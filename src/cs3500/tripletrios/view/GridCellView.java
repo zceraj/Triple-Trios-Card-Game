@@ -1,20 +1,13 @@
 package cs3500.tripletrios.view;
 
-import java.awt.*;
-
 import cs3500.tripletrios.model.CardInterface;
 
+/**
+ * Represents a view component for a single cell in the game grid of the "Triple Trio" game.
+ * This interface defines the methods needed to display and interact with an individual cell
+ * in the GUI, allowing for flexible rendering and event handling for each cell.
+ */
 public interface GridCellView {
-
-  /**
-   * Initializes the grid cell with the given card and visual style (e.g., color).
-   */
-  void initializeCell();
-
-  /**
-   * Highlights the grid cell when clicked (e.g., changing border color).
-   */
-  void highlightCell();
 
   /**
    * Returns the card that is placed in this grid cell.
@@ -38,10 +31,4 @@ public interface GridCellView {
    * @return The column index.
    */
   int getCol();
-
-  /**
-   * Custom rendering logic for the grid cell, such as displaying the card name.
-   * @param g The graphics context for painting.
-   */
-  void renderCell(Graphics g);
 }

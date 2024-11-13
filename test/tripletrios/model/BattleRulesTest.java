@@ -25,7 +25,7 @@ public class BattleRulesTest {
   private GameModelImpl game;
   private IPlayer player1;
   private IPlayer player2;
-  private boolean[][] grid = {
+  private final boolean[][] grid = {
           {false, true, true},
           {false, true, false},
           {true, true, false}

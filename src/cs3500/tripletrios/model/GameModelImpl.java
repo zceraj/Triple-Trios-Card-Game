@@ -311,7 +311,7 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
   // checks if the gird has an odd number of cells
   private boolean isGridOdd(Grid grid) {
     int cardCellCount = grid.getCount();
-    return cardCellCount % 2 != 0;
+    return cardCellCount % 2 == 1;
   }
 
   public IPlayer getOtherPlayer(){
@@ -319,5 +319,21 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
       return player1;
     }
     return player2;
+  }
+
+  public IPlayer getPlayerFromCard(CardInterface card) {
+    if (currPlayer == player2)
+      if (getCurPlayer().getHand().contains(card)) {
+        return player2;
+      } else {
+        return player1;
+    }
+    if (currPlayer == player1)
+      if (getCurPlayer().getHand().contains(card)) {
+        return player1;
+      } else {
+        return player2;
+      }
+    return null;
   }
 }

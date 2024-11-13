@@ -1,5 +1,6 @@
 package tripletrios.model;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,6 +22,7 @@ import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * Tests the GameModelImpl class.
@@ -47,9 +49,12 @@ public class GameModelImplTest {
             new Card("Panda", 4, 4, 4, 4),
             new Card("Wolf", 3, 2, 1, 5)
     );
-    boolean[][] gridToSet = {{true, false, false},
-            {true, false, true},
-            {false, false, true}};
+    //CCX
+    //XCC
+    //CXC
+    boolean[][] gridToSet = {{true, true, false},
+            {false, true, true},
+            {false, true, false}};
     this.grid = new Grid(gridToSet);
 
     game = new GameModelImpl(
@@ -74,8 +79,8 @@ public class GameModelImplTest {
     assertEquals(3, game.getGameGrid().getCols());
 
     //checks cell types true for card cells and false for holes
-    assertEquals(true, game.getGameGrid().getCell(0, 0).isCardCell());
-    assertEquals(false, game.getGameGrid().getCell(0, 1).isCardCell());
+    Assertions.assertTrue(game.getGameGrid().getCell(0, 0).isCardCell());
+    Assertions.assertFalse(game.getGameGrid().getCell(0, 1).isCardCell());
   }
 
   @Test
@@ -286,7 +291,7 @@ public class GameModelImplTest {
     game.placeCard(player2Card2, 1, 0);
     game.battles(0, 0);
 
-    assertEquals(null, game.getCellsPlayer(0, 1));
+    assertNull(game.getCellsPlayer(0, 1));
     assertEquals(player1, game.getCellsPlayer(1, 0));
   }
 
