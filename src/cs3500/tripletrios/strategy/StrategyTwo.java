@@ -19,6 +19,7 @@ public class StrategyTwo extends AbstractStrategy implements StrategyInterface {
    * @param model a read-only game model  representing the game state
    */
   public StrategyTwo(ReadOnlyGameModel model) {
+    super(model.getGameGrid());
     this.model = model;
   }
 

@@ -21,6 +21,7 @@ public class StrategyThree extends AbstractStrategy implements StrategyInterface
    * @param model the read-only game model used as the game state
    */
   public StrategyThree (ReadOnlyGameModel model) {
+    super(model.getGameGrid());
     this.model = model;
   }
 

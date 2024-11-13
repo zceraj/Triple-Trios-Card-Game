@@ -17,16 +17,17 @@ public class StrategyFour extends AbstractStrategy implements StrategyInterface 
   private final StrategyInterface oppStrategy;
 
   /**
-   * Constructor for Strategy four
+   * Constructor for Strategy four.
    *
    * @param model       the read-only game model used as a game state
    * @param oppStrategy the strategy the opponent might use
    */
   public StrategyFour(ReadOnlyGameModel model, StrategyInterface oppStrategy) {
+    // Pass the grid from the model to the abstract strategy constructor
+    super(model.getGameGrid());
     this.model = model;
     this.oppStrategy = oppStrategy;
   }
-
 
   @Override
   public Moves getBestMove(IPlayer computerPlayer) {
@@ -89,6 +90,4 @@ public class StrategyFour extends AbstractStrategy implements StrategyInterface 
     simulatedModel.getGameGrid().getCell(move.getRow(), move.getCol()).setCard(move.getCard());
     return simulatedModel.getScore(simulatedModel.getCurPlayer());
   }
-
-
 }
