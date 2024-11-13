@@ -45,22 +45,23 @@ public class StrategyTwo extends AbstractStrategy implements StrategyInterface {
       int row = corner[0];
       int col = corner[1];
 
-      // Check if the corner cell is valid and empty
       if (grid.isValidCell(row, col) && grid.getCell(row, col).isEmpty()) {
         for (CardInterface card : computerPlayer.getHand()) {
           int defenseValue = calculateDefenseValue(card, row, col);
+
           if (defenseValue > maxDefenseValue) {
             maxDefenseValue = defenseValue;
             bestMove = new Moves(card, row, col);
-          } else if (defenseValue == maxDefenseValue && bestMove != null) {
+          }
+          else if (defenseValue == maxDefenseValue && bestMove != null) {
             bestMove = breakTie(card, row, col, bestMove, computerPlayer);
           }
         }
       }
     }
-
     return finalMove(computerPlayer, bestMove, grid);
   }
+
 
 
   // Calculate the defense value of placing a card in a corner.
@@ -84,5 +85,8 @@ public class StrategyTwo extends AbstractStrategy implements StrategyInterface {
 
     return defenseValue;
   }
+
+
+
 
 }

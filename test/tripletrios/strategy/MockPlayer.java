@@ -80,4 +80,11 @@ public class MockPlayer implements IPlayer {
     return new ArrayList<>(hand);
   }
 
+  /**
+   * Clear the hand of the player.
+   */
+  public void clearHand() {
+    hand.clear();
+  }
+
 }

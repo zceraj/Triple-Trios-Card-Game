@@ -64,7 +64,7 @@ public class StrategyOne extends AbstractStrategy implements StrategyInterface {
   //counts the possible flips that would happen if a card was played
   private int countPotentialFlips(CardInterface card, int row, int col) {
     int flipCount = 0;
-    Grid gridCopy = new Grid(model.getGameGrid()); // Create a deep copy of the grid
+    Grid gridCopy = new Grid(model.getGameGrid());
 
     for (Direction direction : Direction.values()) {
       Cell adjacentCell = gridCopy.getAdjacentCells(row, col, direction);
