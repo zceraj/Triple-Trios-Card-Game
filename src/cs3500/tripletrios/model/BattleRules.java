@@ -50,7 +50,10 @@ public class BattleRules {
    * @param adjacentCard The opposing player's adjacent card.
    * @param direction The direction in which the placed card faces the adjacent card.
    */
-  private void executeBattle(CardInterface placedCard, CardInterface adjacentCard, Direction direction) {
+  private void executeBattle(
+          CardInterface placedCard,
+          CardInterface adjacentCard,
+          Direction direction) {
     Direction oppositeDirection = direction.getOpposite();
 
     int placedAttack = parseAttackValue(placedCard.getAttackValue(direction));
@@ -78,7 +81,10 @@ public class BattleRules {
       }
       processedCards.add(flippedCard);
 
-      List<CardInterface> adjacentCards = getAdjacentCards(grid, flippedCard.getRow(), flippedCard.getCol());
+      List<CardInterface> adjacentCards = getAdjacentCards(
+              grid,
+              flippedCard.getRow(),
+              flippedCard.getCol());
 
       for (CardInterface adjacentCard : adjacentCards) {
         IPlayer adjacentOwner = gameModel.getCellsPlayer(

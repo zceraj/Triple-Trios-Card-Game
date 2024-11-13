@@ -42,7 +42,8 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
    */
   public TripleTrioGuiView(ReadOnlyGameModel model) {
     this.model = model;
-    this.gridPanel = new JPanel(new GridLayout(model.getGameGrid().getRows(), model.getGameGrid().getCols()));
+    this.gridPanel = new JPanel(
+            new GridLayout(model.getGameGrid().getRows(), model.getGameGrid().getCols()));
     this.leftColumnPanel = new JPanel(new GridLayout(model.getGameGrid().getRows(), 1));
     this.rightColumnPanel = new JPanel(new GridLayout(model.getGameGrid().getRows(), 1));
     this.selectedCard = null;
@@ -105,7 +106,7 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
     Color red = new Color(200, 50, 100);
     Color blue = new Color(50, 100, 200);
 
-    if (model.getCurPlayer().getColor() == "BLUE") {
+    if (model.getCurPlayer().getColor().equals("BLUE")) {
       leftColumnCardsColor = blue;
       rightColumnCardsColor = red;
     } else {
@@ -164,7 +165,10 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
 
       IPlayer playerOwner = model.getPlayerFromCard(cardPanel.getCard());
 
-      System.out.println("Selected card: " + selectedCard.getCardName() + " (Index: " + selectedCardIndex + " owned by " + playerOwner.getName() + ")");
+      System.out.println("Selected card: "
+                      + selectedCard.getCardName()
+                      + " (Index: " + selectedCardIndex + " owned by "
+                      + playerOwner.getName() + ")");
     }
   }
 

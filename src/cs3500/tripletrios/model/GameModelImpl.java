@@ -88,7 +88,7 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
    *                                  is insufficient to set up the game
    */
   @Override
-  public void startGame(List<CardInterface> cardsIn) {
+  public void startGame(List<CardInterface> cards) {
     if (this.gameStarted) {
       throw new IllegalStateException("Game has already started.");
     }
@@ -100,15 +100,20 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
 
     int expectedHandSize = (totalCardCells + 1) / 2;
 
-    if (cardsIn.size() < totalCardCells) {
+    if (cards.size() < totalCardCells) {
       throw new IllegalArgumentException("Deck must have enough cards to fill the grid.");
     }
 
-    // Limit the cards list to the minimum necessary size
-    List<CardInterface> cards = new ArrayList<>(cardsIn.subList(0, 2 * expectedHandSize));
+    List<CardInterface> player1Hand = new ArrayList<>();
+    List<CardInterface> player2Hand = new ArrayList<>();
 
-    List<CardInterface> player1Hand = new ArrayList<>(cards.subList(0, expectedHandSize));
-    List<CardInterface> player2Hand = new ArrayList<>(cards.subList(expectedHandSize, 2 * expectedHandSize));
+    for (int i = 0; i < cards.size(); i++) {
+      if (i % 2 == 0) {
+        player1Hand.add(cards.get(i));
+      } else {
+        player2Hand.add(cards.get(i));
+      }
+    }
 
     player1.setHand(player1Hand);
     player2.setHand(player2Hand);
@@ -284,7 +289,7 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
   }
 
   /**
-   * Gets the score for a player in the game
+   * Gets the score for a player in the game.
    * @param player The player to get the score of
    * @return The score of the player
    */
@@ -314,26 +319,39 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
     return cardCellCount % 2 == 1;
   }
 
-  public IPlayer getOtherPlayer(){
+  /**
+   * Returns the player who is not the current player.
+   *
+   * @return the other player in the game, opposite to the current player
+   */
+  public IPlayer getOtherPlayer() {
     if (currPlayer == player2) {
       return player1;
     }
     return player2;
   }
 
+  /**
+   * Determines the owner of the specified room.
+   *
+   * @param card the card to locate
+   * @return the player who has the card or null if no player was found.
+   */
   public IPlayer getPlayerFromCard(CardInterface card) {
-    if (currPlayer == player2)
+    if (currPlayer == player2){
       if (getCurPlayer().getHand().contains(card)) {
         return player2;
       } else {
         return player1;
+      }
     }
-    if (currPlayer == player1)
+    if (currPlayer == player1) {
       if (getCurPlayer().getHand().contains(card)) {
         return player1;
       } else {
         return player2;
       }
+    }
     return null;
   }
 }

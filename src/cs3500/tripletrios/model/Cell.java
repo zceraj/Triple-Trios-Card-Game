@@ -78,7 +78,7 @@ public class Cell {
   }
 
   /**
-   * Gets the row of a Cell
+   * Gets the row of a Cell.
    * @return row in which the cell is in
    */
   public int getRow() {
@@ -86,7 +86,7 @@ public class Cell {
   }
 
   /**
-   * Gets the column of a Cell
+   * Gets the column of a Cell.
    * @return column in which the cell is in
    */
   public int getCol() {

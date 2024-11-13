@@ -28,7 +28,7 @@ class CardPanel extends JPanel implements CardPanelView {
   private final Dimension CHANGING_SIZE = new Dimension(100, 140);
 
   /**
-   * setting up my cards in the gui!!
+   * setting up my cards in the gui!.
    * @param card the card being portrayed --> obvi a need because how else will it access
    *             all of the card's values.
    * @param color the color of the card --> to know which players side is which.
@@ -62,12 +62,12 @@ class CardPanel extends JPanel implements CardPanelView {
               Font.TRUETYPE_FONT,
               new File(
                       "formatting/SourGummy-VariableFont_wdth,wght.ttf"))
-              .deriveFont(2000f/ CHANGING_SIZE.height);
+              .deriveFont(2000f / CHANGING_SIZE.height);
       Font customFont = Font.createFont(
               Font.TRUETYPE_FONT,
               new File(
                       "formatting/SourGummy-VariableFont_wdth,wght.ttf"))
-              .deriveFont(3000f/ CHANGING_SIZE.height);
+              .deriveFont(3000f / CHANGING_SIZE.height);
       nameLabel.setFont(customFontForLabel);
       northLabel.setFont(customFont);
       eastLabel.setFont(customFont);
@@ -84,13 +84,13 @@ class CardPanel extends JPanel implements CardPanelView {
     add(nameLabel, BorderLayout.CENTER);
 
     northLabel.setBorder(BorderFactory.createEmptyBorder(
-            200/ CHANGING_SIZE.height, 0, 0, 0));
+            200 / CHANGING_SIZE.height, 0, 0, 0));
     eastLabel.setBorder(BorderFactory.createEmptyBorder(
-            0, 200/ CHANGING_SIZE.width, 0, 200/ CHANGING_SIZE.width));
+            0, 200 / CHANGING_SIZE.width, 0, 200 / CHANGING_SIZE.width));
     southLabel.setBorder(BorderFactory.createEmptyBorder(
-            0, 0, 200/ CHANGING_SIZE.height, 0));
+            0, 0, 200 / CHANGING_SIZE.height, 0));
     westLabel.setBorder(BorderFactory.createEmptyBorder(
-            0, 200/ CHANGING_SIZE.width, 0, 200/ CHANGING_SIZE.width));
+            0, 200 / CHANGING_SIZE.width, 0, 200 / CHANGING_SIZE.width));
 
     setBorder(BorderFactory.createLineBorder(Color.BLACK));
   }
@@ -129,7 +129,9 @@ class CardPanel extends JPanel implements CardPanelView {
     if (parent != null) {
       int width = (int) (parent.getWidth() * 0.2);
       int height = (int) (parent.getHeight() * 0.3);
-      return new Dimension(Math.max(width, CHANGING_SIZE.width), Math.max(height, CHANGING_SIZE.height));
+      return new Dimension(
+              Math.max(width, CHANGING_SIZE.width),
+              Math.max(height, CHANGING_SIZE.height));
     }
     return CHANGING_SIZE;
   }
