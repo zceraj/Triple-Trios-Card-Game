@@ -78,7 +78,7 @@ public class StrategyFour extends AbstractStrategy implements StrategyInterface 
   /**
    * Evaluates the potential score of a move for the opponent.
    *
-   * @param move           The opponent's best move.
+   * @param move The opponent's best move.
    * @param simulatedModel The game model after the computer's move.
    * @return The score representing how advantageous the move is for the opponent.
    */

@@ -12,6 +12,8 @@ Missing functionality we added:
  - players score in the game. We originally just had a getWinner, but we figured
      it would be useful to know who is currently winning through out the game instead
      of just getting the winner at the end
+ - added a constructor in GameModelImpl to be used to simulate a play and get possible results
+    to use for strategy four
 
 Strategies:
 - StrategyInterface with main method among the strategy classes (getBestMove)

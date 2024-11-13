@@ -32,11 +32,7 @@ public class Cell {
     this.row = original.row;
     this.col = original.col;
     this.isCardCell = original.isCardCell;
-    if (original.card != null) {
-      this.card = new Card((Card) original.card); // Deep copy of the card
-    } else {
-      this.card = null;
-    }
+    this.card = original.card;
   }
 
 
@@ -95,6 +91,14 @@ public class Cell {
    */
   public int getCol() {
     return col;
+  }
+
+  private int intAttackValue(String value) {
+    if (value.equals("A")) {
+      return 10;
+    } else {
+      return Integer.parseInt(value);
+    }
   }
 
 
