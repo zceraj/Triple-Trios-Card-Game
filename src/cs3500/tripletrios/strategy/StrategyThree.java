@@ -53,8 +53,6 @@ public class StrategyThree extends AbstractStrategy implements StrategyInterface
         }
       }
     }
-
-    // Fallback: if no move found, select the first available open position
     return finalMove(computerPlayer, bestMove, grid);
   }
 

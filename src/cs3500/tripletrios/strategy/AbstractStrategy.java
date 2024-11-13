@@ -10,6 +10,7 @@ import cs3500.tripletrios.model.IPlayer;
  */
 public class AbstractStrategy  {
 
+  // Converts the attack value to an integer
   protected int intAttackValue(String attackValue) {
     if ("A".equals(attackValue)) {
       return 10;
@@ -18,6 +19,7 @@ public class AbstractStrategy  {
     }
   }
 
+  // Break ties by position and card index
   protected Moves breakTie(CardInterface card, int row, int col, Moves bestMove, IPlayer player) {
     // Check for uppermost-leftmost coordinate
     if (row < bestMove.getRow() || (row == bestMove.getRow() && col < bestMove.getCol())) {
@@ -34,6 +36,7 @@ public class AbstractStrategy  {
     return bestMove;
   }
 
+  // Fallback mechanism: if no best move was found, choose the upper-left most open cell and the first card
   protected static Moves finalMove(IPlayer computerPlayer, Moves bestMove, Grid grid) {
     if (bestMove == null) {
       for (int row = 0; row < grid.getRows(); row++) {

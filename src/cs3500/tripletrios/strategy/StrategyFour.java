@@ -7,6 +7,10 @@ import cs3500.tripletrios.model.Grid;
 import cs3500.tripletrios.model.IPlayer;
 import cs3500.tripletrios.model.ReadOnlyGameModel;
 
+/**
+ * Represents a class for the fourth strategy to place a card that will minimize the opponent's
+ * ability to flip cards.
+ */
 public class StrategyFour extends AbstractStrategy implements StrategyInterface {
 
   private final ReadOnlyGameModel model;

@@ -6,6 +6,10 @@ import cs3500.tripletrios.model.Grid;
 import cs3500.tripletrios.model.IPlayer;
 import cs3500.tripletrios.model.ReadOnlyGameModel;
 
+/**
+ * Represents a class for the second strategy that places a card in a corner that will maximize the
+ * defense value of the corner.
+ */
 public class StrategyTwo extends AbstractStrategy implements StrategyInterface {
   private final ReadOnlyGameModel model;
 
@@ -63,7 +67,6 @@ public class StrategyTwo extends AbstractStrategy implements StrategyInterface {
     int defenseValue = 0;
     Grid gridCopy = new Grid(model.getGameGrid());
 
-    // Determine exposed directions for each corner position
     if (row == 0 && col == 0) {
       defenseValue = intAttackValue(card.getAttackValue(Direction.SOUTH))
               + intAttackValue(card.getAttackValue(Direction.EAST));

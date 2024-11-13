@@ -8,6 +8,10 @@ import cs3500.tripletrios.model.Grid;
 import cs3500.tripletrios.model.IPlayer;
 import cs3500.tripletrios.model.ReadOnlyGameModel;
 
+/**
+ * Represents a class for the first strategy that places a card that will maximize the number of
+ * opponent's cards that can be flipped.
+ */
 public class StrategyOne extends AbstractStrategy implements StrategyInterface {
 
   private final ReadOnlyGameModel model;
