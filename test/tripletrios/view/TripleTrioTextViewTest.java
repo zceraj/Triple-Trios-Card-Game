@@ -79,7 +79,7 @@ public class TripleTrioTextViewTest {
       expectedCards.append(card.toString()).append("\n");
     }
 
-    String expectedOutput = "Grid:/n" + expectedGrid + "\nCards:\n" + expectedCards.toString();
+    String expectedOutput = "Grid:/n" + expectedGrid + "\nCards:\n" + expectedCards;
 
     // Assert that the output is as expected
     assertEquals(expectedOutput, appendable.toString());

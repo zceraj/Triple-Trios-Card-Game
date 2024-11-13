@@ -119,8 +119,9 @@ public class Grid {
    * @param col The current column position
    * @param direction The direction to move
    * @return The adjacent cell if it exists, or null if out of bounds
+   * @throws IndexOutOfBoundsException if the direction is invalid.
    */
-  public Cell getAdjacentCells(int row, int col, Direction direction) {
+  public Cell getAdjacentCells(int row, int col, Direction direction) throws IndexOutOfBoundsException {
     int newRow = row;
     int newCol = col;
 
@@ -137,6 +138,8 @@ public class Grid {
       case WEST:
         newCol -= 1;
         break;
+      default:
+        throw new IndexOutOfBoundsException("Invalid direction.");
     }
 
     if (isValidCell(newRow, newCol)) {
@@ -201,9 +204,17 @@ public class Grid {
         }
       }
     }
-      return count;
+    return count;
   }
 
+  /**
+   * Updates the cell at the specified row and column with the provided {@code newCell} value.
+   *
+   * @param row the row index of the cell to update
+   * @param col the column index of the cell to update
+   * @param newCell the new cell to place at the specified location
+   * @throws IndexOutOfBoundsException if the specified row or column is outside the grid bounds
+   */
   public void updateCell(int row, int col, Cell newCell) {
     if (isValidCell(row, col)) {
       grid[row][col] = new Cell(newCell);
@@ -211,9 +222,6 @@ public class Grid {
       throw new IndexOutOfBoundsException("Invalid cell coordinates.");
     }
   }
-
-
-
 
   /**
    * Transforms the grid's state into a string that the viewer can use.

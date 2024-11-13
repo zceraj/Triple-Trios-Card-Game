@@ -8,10 +8,20 @@ import cs3500.tripletrios.model.GameModelImpl;
 import cs3500.tripletrios.model.HumanPlayer;
 import cs3500.tripletrios.model.IPlayer;
 import cs3500.tripletrios.model.PlayerColor;
-import cs3500.tripletrios.model.ReadOnlyGameModel;
 import cs3500.tripletrios.view.TripleTrioGuiView;
 
+/**
+ * the entry point for running the Triple Trios game.
+ * It initializes the game model, players, grid configuration, and cards,
+ * then launches the GUI view.
+ */
 public final class ThreeTrios {
+  /**
+   * The main method that sets up the Triple Trios game. It creates two players,
+   * a grid layout, a list of cards, initializes the game model, and launches the GUI.
+   *
+   * @param args command-line arguments (not used) --> it won't let me run it without it??
+   */
   public static void main(String[] args) {
     IPlayer player1 = new HumanPlayer("player1", PlayerColor.BLUE);
     IPlayer player2 = new HumanPlayer("player2", PlayerColor.RED);

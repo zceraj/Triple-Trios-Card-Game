@@ -45,6 +45,7 @@ public interface ReadOnlyGameModel {
    */
   int getScore(IPlayer player);
 
-  IPlayer getOtherPlayer();
+  IPlayer getPlayerFromCard(CardInterface card);
 
+  IPlayer getOtherPlayer();
 }

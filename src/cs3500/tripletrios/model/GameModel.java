@@ -41,6 +41,4 @@ public interface GameModel extends ReadOnlyGameModel {
   void battles(int row, int col);
 
   void updateOwner(int row, int col, IPlayer player);
-
-  IPlayer getOtherPlayer();
 }

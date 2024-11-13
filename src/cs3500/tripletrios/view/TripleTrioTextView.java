@@ -3,7 +3,6 @@ package cs3500.tripletrios.view;
 import java.io.IOException;
 import java.util.Objects;
 
-import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.GameModel;
 
