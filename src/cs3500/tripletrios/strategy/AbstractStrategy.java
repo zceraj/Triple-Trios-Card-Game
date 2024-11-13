@@ -8,7 +8,24 @@ import cs3500.tripletrios.model.IPlayer;
 /**
  * An abstract class of the common methods between the strategies
  */
-public class AbstractStrategy  {
+public abstract class AbstractStrategy implements StrategyInterface {
+
+  protected final Grid grid;
+
+  /**
+   * Constructor for the abstract strategy
+   * @param grid the grid to analyze
+   */
+  public AbstractStrategy(Grid grid) {
+    this.grid = grid;
+  }
+
+  /**
+   * Gets the best move available based of the state of the grid.
+   * @param computerPlayer  the computer generated player
+   * @return a Move object
+   */
+  public abstract Moves getBestMove(IPlayer computerPlayer);
 
   // Converts the attack value to an integer
   protected int intAttackValue(String attackValue) {
@@ -21,11 +38,9 @@ public class AbstractStrategy  {
 
   // Break ties by position and card index
   protected Moves breakTie(CardInterface card, int row, int col, Moves bestMove, IPlayer player) {
-    // Check for uppermost-leftmost coordinate
     if (row < bestMove.getRow() || (row == bestMove.getRow() && col < bestMove.getCol())) {
       return new Moves(card, row, col);
     }
-    // If coordinates are the same, choose the card with the lowest index in the hand
     if (row == bestMove.getRow() && col == bestMove.getCol()) {
       int cardIndex = player.getHand().indexOf(card);
       int bestMoveCardIndex = player.getHand().indexOf(bestMove.getCard());
@@ -50,4 +65,5 @@ public class AbstractStrategy  {
 
     return bestMove;
   }
+
 }

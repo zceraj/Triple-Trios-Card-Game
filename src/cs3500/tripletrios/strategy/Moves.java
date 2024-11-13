@@ -27,6 +27,10 @@ public class Moves {
     return col;
   }
 
+  public int getScore() {
+    return card.getAttackValue();
+  }
+
 
 
 }
