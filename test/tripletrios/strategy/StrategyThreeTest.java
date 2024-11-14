@@ -17,6 +17,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Unit tests for the StrategyThree class in the Triple Trios game.
+ * These tests verify the functionality of the strategy, including the selection of optimal moves
+ * based on game logic and strategy implementation.
+ */
 public class StrategyThreeTest {
 
   private Grid testGrid;
@@ -58,7 +63,9 @@ public class StrategyThreeTest {
     assertEquals("Expected row to be 0.", expectedRow, row);
     assertEquals("Expected column to be 0.", expectedCol, col);
 
-    assertEquals("Expected Card1 to be selected as the best move.", mockPlayer.getHand().get(0), card);
+    assertEquals(
+            "Expected Card1 to be selected as the best move.",
+            mockPlayer.getHand().get(0), card);
 
   }
 
@@ -91,7 +98,8 @@ public class StrategyThreeTest {
     int expectedCol = 0;
 
     assertNotNull("Best move should not be null.", bestMove);
-    assertEquals("Tie should be resolved using the card with the lowest index.", expectedCard, bestMove.getCard());
+    assertEquals("Tie should be resolved using the card with the lowest index.",
+            expectedCard, bestMove.getCard());
     assertEquals("Expected row to be 0.", expectedRow, bestMove.getRow());
     assertEquals("Expected column to be 0.", expectedCol, bestMove.getCol());
   }
