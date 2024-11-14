@@ -35,14 +35,15 @@ public class StrategyOne extends AbstractStrategy implements StrategyInterface {
    */
   @Override
   public Moves getBestMove(IPlayer computerPlayer) {
+    Grid grid = model.getGameGrid();
+    IPlayer currentPlayer = model.getCurPlayer();
+
     int maxFlips = -1;
     Moves bestMove = null;
-    Grid grid = model.getGameGrid();
 
-    // Iterate through all cells on the grid
     for (int row = 0; row < grid.getRows(); row++) {
       for (int col = 0; col < grid.getCols(); col++) {
-        if (grid.getCell(row, col).isEmpty()) { // Check if the cell is empty for placement
+        if (grid.getCell(row, col).isEmpty()) {
           for (CardInterface card : computerPlayer.getHand()) {
             int potentialFlips = countPotentialFlips(card, row, col);
             if (potentialFlips > maxFlips) {
@@ -55,24 +56,23 @@ public class StrategyOne extends AbstractStrategy implements StrategyInterface {
         }
       }
     }
-
-    // Fallback mechanism: if no best move was found, choose the upper-left most open cell and the first card
     return finalMove(computerPlayer, bestMove, grid);
   }
+
 
 
   //counts the possible flips that would happen if a card was played
   private int countPotentialFlips(CardInterface card, int row, int col) {
     int flipCount = 0;
-    Grid gridCopy = new Grid(model.getGameGrid()); // Create a deep copy of the grid
+    Grid gridCopy = new Grid(model.getGameGrid());
 
     for (Direction direction : Direction.values()) {
       Cell adjacentCell = gridCopy.getAdjacentCells(row, col, direction);
       if (adjacentCell != null && !adjacentCell.isEmpty()) {
         CardInterface opponentCard = adjacentCell.getCard();
         if (opponentCard != null && !opponentCard.equals(card)) {
-          int cardAttackValue = intAttackValue(card.getAttackValue(direction));
-          int opponentDefenseValue = intAttackValue(opponentCard.getAttackValue(direction.getOpposite()));
+          int cardAttackValue = card.getAttackValueAsInt(direction);
+          int opponentDefenseValue = opponentCard.getAttackValueAsInt(direction.getOpposite());
 
           if (cardAttackValue > opponentDefenseValue) {
             flipCount++;
@@ -80,10 +80,8 @@ public class StrategyOne extends AbstractStrategy implements StrategyInterface {
         }
       }
     }
-
     return flipCount;
   }
-
 
 }
 

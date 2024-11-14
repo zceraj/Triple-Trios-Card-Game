@@ -4,50 +4,91 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.List;
 
 import cs3500.tripletrios.controller.GridFileReader;
+import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.Grid;
-import cs3500.tripletrios.model.IPlayer;
 import cs3500.tripletrios.strategy.Moves;
 import cs3500.tripletrios.strategy.StrategyOne;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class StrategyOneTest {
 
+  private MockPlayer mockPlayer;
   private MockModelStrategyOne mockModel;
   private StrategyOne strategyOne;
-  private MockPlayer aiPlayer;
-
 
   @Before
   public void setup() throws IOException {
     GridFileReader gridFileReader = new GridFileReader("TESTINGFILES/grid3x3.txt");
-    Grid grid = new Grid(gridFileReader.getGrid());
+    Grid testGrid = new Grid(gridFileReader.getGrid());
 
-    aiPlayer = new MockPlayer("AIPlayer");
-    mockModel = new MockModelStrategyOne(grid, aiPlayer, aiPlayer);
+    mockPlayer = new MockPlayer("Computer");
+    mockPlayer.addCardToHand(new Card("Card1", 9, 9, 8, 10));
+    mockPlayer.addCardToHand(new Card("Card2", 7, 3, 6, 4));
+    mockPlayer.addCardToHand(new Card("Card3", 1, 10, 3, 2));
+
+    MockPlayer mockOpponent = new MockPlayer("Opponent");
+    mockModel = new MockModelStrategyOne(testGrid, mockPlayer, mockOpponent);
 
     strategyOne = new StrategyOne(mockModel);
   }
 
   @Test
-  public void testGetBestMove_MaximizeFlips() {
-    Moves bestMove = strategyOne.getBestMove(aiPlayer);
+  public void testGetBestMoveMaxFlips() {
+    Moves bestMove = strategyOne.getBestMove(mockPlayer);
 
-    assertNotNull("Strategy should return a valid move", bestMove);
+    CardInterface expectedCard = mockPlayer.getHand().get(0);
+    int expectedRow = 0;
+    int expectedCol = 0;
 
-    int expectedFlips = calculateExpectedFlips(bestMove);
-    assertTrue("The best move should maximize potential flips",
-            expectedFlips > 0);
-
-    assertTrue("getGameGrid should have been called",
-            mockModel.getMethodCalls().contains("getGameGrid"));
-    assertTrue("getCellsPlayer should have been called",
-            mockModel.getMethodCalls().contains("getCellsPlayer"));
+    assertNotNull("Best move should not be null.", bestMove);
+    assertEquals("Expected card with the highest number of flips to be chosen.", expectedCard, bestMove.getCard());
+    assertEquals("Expected row to be 0.", expectedRow, bestMove.getRow());
+    assertEquals("Expected col to be 0.", expectedCol, bestMove.getCol());
   }
 
 
+  @Test
+  public void testGetBestMoveTieBreaking() {
+    mockPlayer.addCardToHand(new Card("Card4", 7, 7, 7, 7));
+
+    Moves bestMove = strategyOne.getBestMove(mockPlayer);
+
+    CardInterface expectedCard = mockPlayer.getHand().get(0);  // Card1 should be chosen if there is a tie
+    int expectedRow = 0;
+    int expectedCol = 0;
+
+    assertEquals("Tie should be resolved using the card with the lowest index.", expectedCard, bestMove.getCard());
+    assertEquals("Tie should be resolved using the uppermost row.", expectedRow, bestMove.getRow());
+    assertEquals("Tie should be resolved using the leftmost col.", expectedCol, bestMove.getCol());
+  }
+  @Test
+  public void testMethodCallsForGetBestMove() {
+    strategyOne.getBestMove(mockPlayer);
+
+    List<String> methodCalls = mockModel.getMethodCalls();
+
+    boolean foundGameGrid = false;
+    boolean foundCurPlayerAfterGameGrid = false;
+
+    for (String method : methodCalls) {
+      if (method.equals("getGameGrid")) {
+        foundGameGrid = true;
+      }
+      if (foundGameGrid && method.equals("getCurPlayer")) {
+        foundCurPlayerAfterGameGrid = true;
+        break;
+      }
+    }
+
+    assertTrue("Expected method getGameGrid to be called at least once.", foundGameGrid);
+    assertTrue("Expected method getCurPlayer to be called after at least one getGameGrid.", foundCurPlayerAfterGameGrid);
+  }
 
 }

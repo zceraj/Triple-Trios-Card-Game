@@ -31,12 +31,16 @@ public abstract class AbstractStrategy implements StrategyInterface {
   protected int intAttackValue(String attackValue) {
     if ("A".equals(attackValue)) {
       return 10;
-    } else {
+    }
+    try {
       return Integer.parseInt(attackValue);
+    } catch (NumberFormatException e) {
+      throw new IllegalArgumentException("Invalid attack value: " + attackValue);
     }
   }
 
-  // Break ties by position and card index
+
+  // Break ties by position of uppermost-leftmost and card index
   protected Moves breakTie(CardInterface card, int row, int col, Moves bestMove, IPlayer player) {
     if (row < bestMove.getRow() || (row == bestMove.getRow() && col < bestMove.getCol())) {
       return new Moves(card, row, col);
@@ -50,6 +54,8 @@ public abstract class AbstractStrategy implements StrategyInterface {
     }
     return bestMove;
   }
+
+
 
   // Fallback mechanism: if no best move was found, choose the upper-left most open cell and the first card
   protected static Moves finalMove(IPlayer computerPlayer, Moves bestMove, Grid grid) {

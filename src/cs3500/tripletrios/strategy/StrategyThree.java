@@ -42,12 +42,10 @@ public class StrategyThree extends AbstractStrategy implements StrategyInterface
           for (CardInterface card : computerPlayer.getHand()) {
             int flipRisk = evaluateFlipRisk(card, row, col);
 
-            // Update best move if a lower risk is found
             if (flipRisk < minFlipsRisk) {
               minFlipsRisk = flipRisk;
               bestMove = new Moves(card, row, col);
             } else if (flipRisk == minFlipsRisk && bestMove != null) {
-              // Break ties by position and card index
               bestMove = breakTie(card, row, col, bestMove, computerPlayer);
             }
           }
@@ -59,25 +57,29 @@ public class StrategyThree extends AbstractStrategy implements StrategyInterface
 
 
 
-  //Evaluates the risk of a card being flipped by opponents at the given position.
+  // Evaluates the risk of a card being flipped by opponents at the given position.
   private int evaluateFlipRisk(CardInterface card, int row, int col) {
     int riskScore = 0;
     Grid gridCopy = new Grid(model.getGameGrid());
 
     for (Direction direction : Direction.values()) {
       Cell adjacentCell = gridCopy.getAdjacentCells(row, col, direction);
+
       if (adjacentCell != null && !adjacentCell.isEmpty()) {
         CardInterface opponentCard = adjacentCell.getCard();
-        if (opponentCard != null && !opponentCard.equals(card) &&
-                intAttackValue(opponentCard.getAttackValue(direction.getOpposite())) >
-                        intAttackValue(card.getAttackValue(direction))) {
-          riskScore++;
+
+        if (opponentCard != null && !opponentCard.equals(card)) {
+          int opponentAttackValue = intAttackValue(opponentCard.getAttackValue(direction.getOpposite()));
+          int currentCardAttackValue = intAttackValue(card.getAttackValue(direction));
+
+          if (opponentAttackValue > currentCardAttackValue) {
+            riskScore++;
+          }
         }
       }
     }
 
     return riskScore;
   }
-
-
 }
+

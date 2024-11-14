@@ -1,14 +1,15 @@
 package tripletrios.strategy;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.Grid;
 import cs3500.tripletrios.model.IPlayer;
 import cs3500.tripletrios.model.ReadOnlyGameModel;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MockModelStrategyOne implements ReadOnlyGameModel {
 
@@ -69,11 +70,7 @@ public class MockModelStrategyOne implements ReadOnlyGameModel {
   @Override
   public IPlayer getOtherPlayer() {
     methodCalls.add("getOtherPlayer");
-    if (currentPlayer == mockPlayer1) {
-      return mockPlayer2;
-    } else {
-      return mockPlayer1;
-    }
+    return currentPlayer == mockPlayer1 ? mockPlayer2 : mockPlayer1;
   }
 
   @Override
@@ -86,6 +83,13 @@ public class MockModelStrategyOne implements ReadOnlyGameModel {
   public IPlayer getWinner() {
     methodCalls.add("getWinner");
     return winner;
+  }
+
+  @Override
+  public IPlayer getPlayerFromCard(CardInterface card) {
+    methodCalls.add("getPlayerFromCard");
+    // Assuming mockPlayer1 owns all cards in this mock setup
+    return mockPlayer1;  // or provide logic based on your needs
   }
 
   /**
