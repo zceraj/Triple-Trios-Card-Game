@@ -35,16 +35,16 @@ public class StrategyFour extends AbstractStrategy implements StrategyInterface 
     Moves bestMove = null;
     Grid grid = model.getGameGrid();
 
+    // Iterate through the grid to find available cells
     for (int row = 0; row < grid.getRows(); row++) {
       for (int col = 0; col < grid.getCols(); col++) {
-        if (grid.getCell(row, col).isEmpty()) {
+        if (grid.getCell(row, col).isEmpty() && grid.getCell(row, col).isCardCell()) {
           for (CardInterface card : computerPlayer.getHand()) {
             Grid simulatedGrid = new Grid(model.getGameGrid());
             Cell simulatedCell = simulatedGrid.getCell(row, col);
             simulatedCell.setCard(card);
             simulatedGrid.updateCell(row, col, simulatedCell);
 
-            // Simulate the opponent's best move after this move
             IPlayer opponent = model.getOtherPlayer();
             ReadOnlyGameModel simulatedModel = createNewModel(simulatedGrid, opponent);
             Moves opponentBestMove = oppStrategy.getBestMove(opponent);
@@ -61,14 +61,16 @@ public class StrategyFour extends AbstractStrategy implements StrategyInterface 
         }
       }
     }
-
     return bestMove;
   }
+
+
+
 
   /**
    * Creates a simulated model with a modified grid and specified current player.
    *
-   * @param grid          The grid after the computer's simulated move.
+   * @param grid The grid after the computer's simulated move.
    * @param currentPlayer The opponent who will be making the next move.
    * @return A read-only game model representing the simulated game state.
    */

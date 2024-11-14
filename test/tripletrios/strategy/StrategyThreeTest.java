@@ -77,7 +77,7 @@ public class StrategyThreeTest {
       }
     }
 
-    assertEquals("Expected method getGameGrid to be called at least once.", true, foundGameGrid);
+    assertTrue("Expected method getGameGrid to be called at least once.", foundGameGrid);
   }
 
   @Test

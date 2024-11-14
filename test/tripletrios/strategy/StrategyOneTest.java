@@ -15,10 +15,10 @@ import cs3500.tripletrios.strategy.StrategyOne;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class StrategyOneTest {
 
-  private Grid testGrid;
   private MockPlayer mockPlayer;
   private MockModelStrategyOne mockModel;
   private StrategyOne strategyOne;
@@ -26,7 +26,7 @@ public class StrategyOneTest {
   @Before
   public void setup() throws IOException {
     GridFileReader gridFileReader = new GridFileReader("TESTINGFILES/grid3x3.txt");
-    testGrid = new Grid(gridFileReader.getGrid());
+    Grid testGrid = new Grid(gridFileReader.getGrid());
 
     mockPlayer = new MockPlayer("Computer");
     mockPlayer.addCardToHand(new Card("Card1", 9, 9, 8, 10));
@@ -87,8 +87,8 @@ public class StrategyOneTest {
       }
     }
 
-    assertEquals("Expected method getGameGrid to be called at least once.", true, foundGameGrid);
-    assertEquals("Expected method getCurPlayer to be called after at least one getGameGrid.", true, foundCurPlayerAfterGameGrid);
+    assertTrue("Expected method getGameGrid to be called at least once.", foundGameGrid);
+    assertTrue("Expected method getCurPlayer to be called after at least one getGameGrid.", foundCurPlayerAfterGameGrid);
   }
 
 }
