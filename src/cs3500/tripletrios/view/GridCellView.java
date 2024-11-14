@@ -1,6 +1,7 @@
 package cs3500.tripletrios.view;
 
 import cs3500.tripletrios.model.CardInterface;
+import cs3500.tripletrios.model.ReadOnlyGameModel;
 
 /**
  * Represents a view component for a single cell in the game grid of the "Triple Trio" game.
@@ -31,4 +32,9 @@ public interface GridCellView {
    * @return The column index.
    */
   int getCol();
+
+  /**
+   * repaints the grid and changes the color of the cell.
+   */
+  void repaintGrid(ReadOnlyGameModel model);
 }

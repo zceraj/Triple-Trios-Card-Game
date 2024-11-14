@@ -99,7 +99,6 @@ public class HumanPlayer implements IPlayer {
    * @throws IndexOutOfBoundsException if the index is out of range
    */
   public CardInterface playCard(int index) {
-
     return hand.remove(index);
   }
 
@@ -115,6 +114,7 @@ public class HumanPlayer implements IPlayer {
     }
     card.addRow(row);
     card.addCol(col);
+    hand.remove(card);
   }
 
 

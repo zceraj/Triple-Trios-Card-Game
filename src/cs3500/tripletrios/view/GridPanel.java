@@ -1,17 +1,27 @@
 package cs3500.tripletrios.view;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.FontMetrics;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Font;
+
 import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 import javax.swing.BorderFactory;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 
 import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.Cell;
+import cs3500.tripletrios.model.Direction;
+import cs3500.tripletrios.model.ReadOnlyGameModel;
 
 /**
  * Represents a graphical component in a grid-based view for the Triple Trios game.
@@ -32,17 +42,12 @@ public class GridPanel extends JPanel implements GridCellView {
    * @param row  the row index of the cell in the grid
    * @param col  the column index of the cell in the grid
    */
-  public GridPanel(Cell cell, int row, int col) {
+  public GridPanel(Cell cell, int row, int col, ReadOnlyGameModel model) {
     this.cell = cell;
     this.row = row;
     this.col = col;
     setPreferredSize(new Dimension(80, 120));
-    if (cell.isCardCell()) {
-      setBackground(new Color(200, 150, 255));
-    }
-    else {
-      setBackground(Color.LIGHT_GRAY);
-    }
+    setColor(model);
     setBorder(BorderFactory.createLineBorder(new Color(100, 0, 150)));
 
     // Add mouse listener to handle clicks on the grid cell
@@ -112,6 +117,96 @@ public class GridPanel extends JPanel implements GridCellView {
   @Override
   public int getCol() {
     return col;
+  }
+
+  /**
+   * sets the colr of the cell depending on if it is a card cell and if theres a card inside.
+   */
+  private void setColor(ReadOnlyGameModel model) {
+    Cell cell = model.getGameGrid().getCell(row, col);
+    if (cell.isCardCell()) {
+      System.out.println("Cell at (" + row + "," + col + ") is a card cell.");
+      if (cell.getCard() != null) {
+        System.out.println("Cell contains card: " + cell.getCard().getCardName());
+      } else {
+        System.out.println("Cell is empty.");
+      }
+    }
+    if (cell.isCardCell()) {
+      if (cell.getCard() != null) {
+        Color cellColor;
+        if (model.getCurPlayer().getColor().equals("BLUE")) {
+          cellColor = new Color(50, 100, 200);
+        }
+        else {
+          cellColor = new Color(200, 50, 100);
+        }
+        setBackground(cellColor);
+        setLabel();
+      }
+      else {
+        setBackground(new Color(200, 150, 255));
+      }
+    }
+    else {
+      setBackground(Color.LIGHT_GRAY);
+    }
+  }
+
+  /**
+   * repaints the grid and changes the color of the cell.
+   */
+  public void repaintGrid(ReadOnlyGameModel model) {
+    setColor(model);
+    repaint();
+  }
+
+  /**
+   * sets the label of the card on the cell.
+   */
+  private void setLabel() {
+    JLabel nameLabel = new JLabel(cell.getCard().getCardName(), SwingConstants.CENTER);
+    JLabel northLabel = new JLabel(
+            String.valueOf(
+                    cell.getCard().getAttackValue(Direction.NORTH)), SwingConstants.CENTER);
+    JLabel eastLabel = new JLabel(
+            String.valueOf(
+                    cell.getCard().getAttackValue(Direction.EAST)), SwingConstants.CENTER);
+    JLabel southLabel = new JLabel(
+            String.valueOf(
+                    cell.getCard().getAttackValue(Direction.SOUTH)), SwingConstants.CENTER);
+    JLabel westLabel = new JLabel(
+            String.valueOf(
+                    cell.getCard().getAttackValue(Direction.WEST)), SwingConstants.CENTER);
+    try {
+      Font customFontForLabel = Font.createFont(
+                      Font.TRUETYPE_FONT,
+                      new File(
+                              "formatting/SourGummy-VariableFont_wdth,wght.ttf"))
+              .deriveFont(15f);
+      Font customFont = Font.createFont(
+                      Font.TRUETYPE_FONT,
+                      new File(
+                              "formatting/SourGummy-VariableFont_wdth,wght.ttf"))
+              .deriveFont(17f);
+      nameLabel.setFont(customFontForLabel);
+      northLabel.setFont(customFont);
+      eastLabel.setFont(customFont);
+      southLabel.setFont(customFont);
+      westLabel.setFont(customFont);
+    } catch (FontFormatException | IOException e) {
+      e.printStackTrace();
+    }
+    setLayout(new BorderLayout());
+    add(northLabel, BorderLayout.NORTH);
+    add(eastLabel, BorderLayout.EAST);
+    add(southLabel, BorderLayout.SOUTH);
+    add(westLabel, BorderLayout.WEST);
+    add(nameLabel, BorderLayout.CENTER);
+    northLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
+    eastLabel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
+    southLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
+    westLabel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
   }
 }
 

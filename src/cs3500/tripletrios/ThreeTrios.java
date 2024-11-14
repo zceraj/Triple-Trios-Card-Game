@@ -8,6 +8,7 @@ import cs3500.tripletrios.model.GameModelImpl;
 import cs3500.tripletrios.model.HumanPlayer;
 import cs3500.tripletrios.model.IPlayer;
 import cs3500.tripletrios.model.PlayerColor;
+import cs3500.tripletrios.view.GridPanel;
 import cs3500.tripletrios.view.TripleTrioGuiView;
 
 /**
@@ -74,7 +75,30 @@ public final class ThreeTrios {
 
     GameModelImpl model = new GameModelImpl(grid, player1, player2);
     model.startGame(cards);
+
     TripleTrioGuiView view = new TripleTrioGuiView(model);
     view.setVisible(true);
+
+    model.placeCard(model.getCurPlayer().getHand().get(0), 0, 0);
+    model.nextTurn();
+    view.refreshHands();
+    view.refreshGrid();
+    model.placeCard(model.getCurPlayer().getHand().get(1), 1, 0);
+    model.nextTurn();
+    view.refreshHands();
+    view.refreshGrid();
+    view.setVisible(true);
+    model.placeCard(model.getCurPlayer().getHand().get(2), 1, 2);
+    model.nextTurn();
+    view.refreshHands();
+    view.refreshGrid();
+    view.setVisible(true);
+    model.placeCard(model.getCurPlayer().getHand().get(3), 2, 3);
+    model.nextTurn();
+    view.refreshHands();
+    view.refreshGrid();
+    view.setVisible(true);
+
+    System.out.println(model.getGameGrid().toString());
   }
 }
