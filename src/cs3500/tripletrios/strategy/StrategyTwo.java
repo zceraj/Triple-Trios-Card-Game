@@ -86,7 +86,4 @@ public class StrategyTwo extends AbstractStrategy implements StrategyInterface {
     return defenseValue;
   }
 
-
-
-
 }

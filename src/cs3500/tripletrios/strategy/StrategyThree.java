@@ -69,7 +69,8 @@ public class StrategyThree extends AbstractStrategy implements StrategyInterface
         CardInterface opponentCard = adjacentCell.getCard();
 
         if (opponentCard != null && !opponentCard.equals(card)) {
-          int opponentAttackValue = intAttackValue(opponentCard.getAttackValue(direction.getOpposite()));
+          int opponentAttackValue = intAttackValue(
+                  opponentCard.getAttackValue(direction.getOpposite()));
           int currentCardAttackValue = intAttackValue(card.getAttackValue(direction));
 
           if (opponentAttackValue > currentCardAttackValue) {

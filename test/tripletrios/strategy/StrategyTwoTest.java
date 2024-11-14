@@ -15,6 +15,7 @@ import cs3500.tripletrios.strategy.StrategyTwo;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class StrategyTwoTest {
 
@@ -82,7 +83,7 @@ public class StrategyTwoTest {
         break;
       }
     }
-    assertEquals("Expected method getGameGrid to be called at least once.", true, foundGameGrid);
+    assertTrue("Expected method getGameGrid to be called at least once.", foundGameGrid);
 
   }
 

@@ -6,14 +6,14 @@ import cs3500.tripletrios.model.Grid;
 import cs3500.tripletrios.model.IPlayer;
 
 /**
- * An abstract class of the common methods between the strategies
+ * An abstract class of the common methods between the strategies.
  */
 public abstract class AbstractStrategy implements StrategyInterface {
 
   protected final Grid grid;
 
   /**
-   * Constructor for the abstract strategy
+   * Constructor for the abstract strategy.
    * @param grid the grid to analyze
    */
   public AbstractStrategy(Grid grid) {
@@ -55,9 +55,8 @@ public abstract class AbstractStrategy implements StrategyInterface {
     return bestMove;
   }
 
-
-
-  // Fallback mechanism: if no best move was found, choose the upper-left most open cell and the first card
+  // Fallback mechanism: if no best move was found, choose the upper-left most open cell
+  // and the first card
   protected static Moves finalMove(IPlayer computerPlayer, Moves bestMove, Grid grid) {
     if (bestMove == null) {
       for (int row = 0; row < grid.getRows(); row++) {
@@ -71,5 +70,4 @@ public abstract class AbstractStrategy implements StrategyInterface {
 
     return bestMove;
   }
-
 }

@@ -24,7 +24,7 @@ import cs3500.tripletrios.model.Direction;
 class CardPanel extends JPanel implements CardPanelView {
   private final CardInterface card;
   private final int index;
-  private boolean isSelected = false;
+  private final boolean isSelected = false;
   private TripleTrioGuiView view;
 
   /**
@@ -147,6 +147,7 @@ class CardPanel extends JPanel implements CardPanelView {
             0, 200 / view.getHeight(), 0, 200 / view.getHeight()));
 
   }
+
   /**
    * to be able to use the values.
    * @return the card in the box.
