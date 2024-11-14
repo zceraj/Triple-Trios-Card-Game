@@ -7,10 +7,8 @@ import cs3500.tripletrios.model.IPlayer;
 
 /**
  * An abstract class of the common methods between the strategies.
-<<<<<<< HEAD
  * Implements the StrategyInterface.
-=======
->>>>>>> b4c1fae1b969592c6a89b6619d5941a5a7c96b5a
+ *
  */
 public abstract class AbstractStrategy implements StrategyInterface {
 
@@ -18,10 +16,7 @@ public abstract class AbstractStrategy implements StrategyInterface {
 
   /**
    * Constructor for the abstract strategy.
-<<<<<<< HEAD
    *
-=======
->>>>>>> b4c1fae1b969592c6a89b6619d5941a5a7c96b5a
    * @param grid the grid to analyze
    */
   public AbstractStrategy(Grid grid) {
@@ -64,13 +59,11 @@ public abstract class AbstractStrategy implements StrategyInterface {
     return bestMove;
   }
 
-<<<<<<< HEAD
 
-  //If no best move was found, choose the upper-left most open cell and the first card
-=======
-  // Fallback mechanism: if no best move was found, choose the upper-left most open cell
-  // and the first card
->>>>>>> b4c1fae1b969592c6a89b6619d5941a5a7c96b5a
+
+
+  //if no best move was found, choose the upper-left most open cell
+  //
   protected static Moves finalMove(IPlayer computerPlayer, Moves bestMove, Grid grid) {
     if (bestMove == null) {
       for (int row = 0; row < grid.getRows(); row++) {
