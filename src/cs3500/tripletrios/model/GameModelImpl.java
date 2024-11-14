@@ -14,9 +14,7 @@ import java.util.Map;
  * facilitates the placement of cards, manages player turns, and checks
  * for game over conditions. It implements the GameModel interface.
  */
-public class GameModelImpl implements GameModel, ReadOnlyGameModel {
-
-
+public class GameModelImpl implements GameModel {
   private final Grid grid;
   private final IPlayer player1;
   private final IPlayer player2;
@@ -82,7 +80,7 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
    * deal out cards to each player. Modifying the deck given to this method
    * will not modify the game state.
    *
-   * @param cardsIn is a list of cards passed in.
+   * @param cards is a list of cards passed in.
    * @throws IllegalStateException    if the game has already started or is over
    * @throws IllegalArgumentException if the grid is not odd or the deck's size
    *                                  is insufficient to set up the game
@@ -97,8 +95,6 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
     }
 
     int totalCardCells = grid.getCount();
-
-    int expectedHandSize = (totalCardCells + 1) / 2;
 
     if (cards.size() < totalCardCells) {
       throw new IllegalArgumentException("Deck must have enough cards to fill the grid.");
@@ -133,7 +129,7 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
    *                                  if the cell is not empty
    */
   @Override
-  public void placeCard(CardInterface card, int col, int row) {
+  public void placeCard(CardInterface card, int row, int col) {
     if (!gameStarted) {
       throw new IllegalStateException("Game has not  started.");
     }
@@ -144,18 +140,16 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
       throw new IllegalArgumentException("Invalid cell coordinates.");
     }
 
-    Cell originalCell = grid.getCell(col, row);
+    Cell originalCell = grid.getCell(row, col);
     if (!originalCell.isCardCell() || !originalCell.isEmpty()) {
       throw new IllegalArgumentException("Cannot place card in this cell.");
     }
-    card.addRow(row);
-    card.addCol(col);
 
-    Cell updatedCell = new Cell(originalCell);
-    updatedCell.setCard(card);
+    currPlayer.placeTheCard(card, row, col);
+    originalCell.setCard(card);
 
-    grid.updateCell(row, col, updatedCell);
-    cellsPlayer.put(updatedCell, currPlayer);
+    grid.updateCell(row, col, originalCell);
+    cellsPlayer.put(originalCell, currPlayer);
 
     battles(row, col);
 
@@ -338,7 +332,7 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
    * @return the player who has the card or null if no player was found.
    */
   public IPlayer getPlayerFromCard(CardInterface card) {
-    if (currPlayer == player2){
+    if (currPlayer == player2) {
       if (getCurPlayer().getHand().contains(card)) {
         return player2;
       } else {

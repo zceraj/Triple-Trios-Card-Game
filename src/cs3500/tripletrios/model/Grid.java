@@ -121,7 +121,10 @@ public class Grid {
    * @return The adjacent cell if it exists, or null if out of bounds
    * @throws IndexOutOfBoundsException if the direction is invalid.
    */
-  public Cell getAdjacentCells(int row, int col, Direction direction) throws IndexOutOfBoundsException {
+  public Cell getAdjacentCells(
+          int row,
+          int col,
+          Direction direction) throws IndexOutOfBoundsException {
     int newRow = row;
     int newCol = col;
 

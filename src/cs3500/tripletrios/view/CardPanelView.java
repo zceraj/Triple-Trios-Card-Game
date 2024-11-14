@@ -18,5 +18,6 @@ public interface CardPanelView {
    * @return The index of the card panel.
    */
   int getIndex();
+
 }
 

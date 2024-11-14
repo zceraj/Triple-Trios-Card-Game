@@ -2,6 +2,7 @@ package cs3500.tripletrios.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.GridLayout;
 import java.io.IOException;
 import javax.swing.JPanel;
@@ -29,9 +30,8 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
   private final JPanel gridPanel;
   private final JPanel leftColumnPanel;
   private final JPanel rightColumnPanel;
-  private CardInterface selectedCard;
+  private CardPanel selectedCard;
   private int selectedCardIndex = -1;
-
 
   /**
    * Initializes the frame
@@ -60,6 +60,8 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
 
     initializeGrid();
     initializeHands();
+
+    repaint();
   }
 
   /**
@@ -70,21 +72,17 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
   private void initializeGrid() {
     gridPanel.removeAll();
     List<List<Cell>> cells = new ArrayList<>();
-
+    // Retrieve the cells and add them to the panel
     for (int row = 0; row < model.getGameGrid().getRows(); row++) {
       List<Cell> rowCells = new ArrayList<>();
       for (int col = 0; col < model.getGameGrid().getCols(); col++) {
-        rowCells.add(model.getGameGrid().getCell(row, col));
+        Cell cell = model.getGameGrid().getCell(row, col);
+        GridPanel gridCellPanel = new GridPanel(cell, row, col, model);
+
+        gridPanel.add(gridCellPanel);
+        rowCells.add(cell);
       }
       cells.add(rowCells);
-    }
-
-    for (int row = 0; row < cells.size(); row++) {
-      for (int col = 0; col < cells.get(row).size(); col++) {
-        Cell cell = cells.get(row).get(col);
-        GridPanel gridCellPanel = new GridPanel(cell, row, col);
-        gridPanel.add(gridCellPanel);
-      }
     }
 
     gridPanel.revalidate();
@@ -115,7 +113,7 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
     }
 
     for (int i = 0; i < leftColumnCards.size(); i++) {
-      CardPanel cardPanel = new CardPanel(leftColumnCards.get(i), leftColumnCardsColor, i);
+      CardPanel cardPanel = new CardPanel(leftColumnCards.get(i), leftColumnCardsColor, i, this);
       cardPanel.addMouseListener(new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
@@ -126,7 +124,7 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
     }
 
     for (int i = 0; i < rightColumnCards.size(); i++) {
-      CardPanel cardPanel = new CardPanel(rightColumnCards.get(i), rightColumnCardsColor, i);
+      CardPanel cardPanel = new CardPanel(rightColumnCards.get(i), rightColumnCardsColor, i, this);
       cardPanel.addMouseListener(new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
@@ -152,21 +150,30 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
       selectedCardIndex = -1;
       cardPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // Reset border
       System.out.println("Deselected card.");
-    } else {
+    }
+    if (selectedCard != cardPanel.getCard() && selectedCardIndex != -1 && selectedCard != null) {
+      cardPanel.setBorder(BorderFactory.createEmptyBorder());
+      selectedCard.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+      System.out.println("Deselected card.");
+      selectedCard = null;
+      selectedCardIndex = -1;
+      cardPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+    }
+    else {
       // If a different card is clicked, highlight it
       if (selectedCard != null) {
         // Reset the border of the previously selected card
         cardPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
       }
 
-      selectedCard = cardPanel.getCard();
+      selectedCard = cardPanel;
       selectedCardIndex = cardPanel.getIndex();
       cardPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY, 5)); // Highlight border
 
       IPlayer playerOwner = model.getPlayerFromCard(cardPanel.getCard());
 
       System.out.println("Selected card: "
-                      + selectedCard.getCardName()
+                      + selectedCard.getCard().getCardName()
                       + " (Index: " + selectedCardIndex + " owned by "
                       + playerOwner.getName() + ")");
     }
@@ -190,4 +197,40 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
   public void render() throws IOException {
     setVisible(true);
   }
+
+  /**
+   * Refreshes the display of the player's hands in the game view.
+   * This method should be called whenever the player's hand is updated.
+   */
+  public void refreshHands() {
+    initializeHands();
+    leftColumnPanel.revalidate();
+    leftColumnPanel.repaint();
+    rightColumnPanel.revalidate();
+    rightColumnPanel.repaint();
+  }
+
+  /**
+   * Refreshes the game grid in the GUI.
+   * This method should be called whenever the grid layout or state changes,
+   * such as after a card is placed or the game progresses.
+   */
+  public void refreshGrid() {
+    // Iterate through all components in the gridPanel container
+    for (Component component : gridPanel.getComponents()) {
+      // Check if the component is an instance of GridPanel
+      if (component instanceof GridPanel) {
+        GridPanel gridPanelComponent = (GridPanel) component;
+        // Revalidate and update the color for each GridPanel
+        gridPanelComponent.revalidate();
+        gridPanelComponent.repaintGrid(model);
+      }
+    }
+    // Refresh the gridPanel to reflect changes
+    gridPanel.revalidate();
+    gridPanel.repaint();
+  }
+
+
+
 }
