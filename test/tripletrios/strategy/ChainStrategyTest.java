@@ -40,7 +40,7 @@ public class ChainStrategyTest {
     mockOpponent = new MockPlayer("Player 2");
 
     List<CardInterface> hand = new ArrayList<>();
-    hand.add(new Card("Card1", 3, 2, 1, 5)); // Example card with attack values
+    hand.add(new Card("Card1", 3, 2, 1, 5));
     hand.add(new Card("Card2", 6, 4, 3, 2));
     mockPlayer.setHand(hand);
   }
@@ -52,7 +52,7 @@ public class ChainStrategyTest {
     ChainStrategy chainStrategy = new ChainStrategy(grid);
 
     StrategyInterface strategyFour = new StrategyFour(localModel, new MockOpponentStrategy());
-    StrategyInterface strategyThree = new StrategyThree(localModel); // Assuming you have StrategyThree
+    StrategyInterface strategyThree = new StrategyThree(localModel);
 
     chainStrategy.addStrategy(strategyFour);
     chainStrategy.addStrategy(strategyThree);
@@ -70,14 +70,17 @@ public class ChainStrategyTest {
 
     ChainStrategy chainStrategy = new ChainStrategy(grid);
 
-    StrategyInterface strategyThree = new StrategyThree(localModel); // Assuming you have StrategyThree
+    StrategyInterface strategyThree = new StrategyThree(localModel);
     StrategyInterface strategyFour = new StrategyFour(localModel, new MockOpponentStrategy());
     chainStrategy.addStrategy(strategyThree);
     chainStrategy.addStrategy(strategyFour);
 
     Moves bestMove = chainStrategy.getBestMove(mockPlayer);
 
-    assertNotNull("Best move should not be null when using multiple strategies in different order", bestMove);
+    assertNotNull(
+            "Best move should not be null when"
+            + "using multiple strategies in different order",
+            bestMove);
     assertTrue("Selected cell should be empty",
             grid.getCell(bestMove.getRow(), bestMove.getCol()).isEmpty());
   }
@@ -94,7 +97,8 @@ public class ChainStrategyTest {
   private static class MockOpponentStrategy implements StrategyInterface {
     @Override
     public Moves getBestMove(IPlayer player) {
-      return new Moves(new Card("OpponentCard", 1, 1, 1, 1), 1, 1);
+      return new Moves(
+              new Card("OpponentCard", 1, 1, 1, 1), 1, 1);
     }
   }
 

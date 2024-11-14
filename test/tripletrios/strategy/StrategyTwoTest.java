@@ -30,9 +30,13 @@ public class StrategyTwoTest {
     testGrid = new Grid(gridFileReader.getGrid());
 
     mockPlayer = new MockPlayer("Computer");
-    mockPlayer.addCardToHand(new Card("Card1", 3, 2, 1, 5));  // Moderate attributes
-    mockPlayer.addCardToHand(new Card("Card2", 6, 4, 3, 2));  // Higher attack value
-    mockPlayer.addCardToHand(new Card("Card3", 1, 7, 2, 6));  // High defense, low attack value
+    mockPlayer.addCardToHand(
+            new Card("Card1", 3, 2, 1, 5));// Moderate attributes
+    mockPlayer.addCardToHand(
+            new Card("Card2", 6, 4, 3, 2));  // Higher attack value
+    mockPlayer.addCardToHand(
+            new Card("Card3", 1, 7, 2, 6));
+    // High defense, low attack value
 
     MockPlayer mockOpponent = new MockPlayer("Opponent");
     mockModel = new MockModelStrategyTwo(testGrid, mockPlayer, mockOpponent);
