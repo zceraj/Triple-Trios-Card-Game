@@ -1,4 +1,4 @@
-package cs3500.tripletrios.strategy;
+package tripletrios.strategy;
 
 import cs3500.tripletrios.controller.GridFileReader;
 import cs3500.tripletrios.model.Card;
@@ -7,8 +7,8 @@ import cs3500.tripletrios.model.Grid;
 import cs3500.tripletrios.model.IPlayer;
 import cs3500.tripletrios.model.ReadOnlyGameModel;
 
-import tripletrios.strategy.MockModelStrategyOne;
-import tripletrios.strategy.MockPlayer;
+import cs3500.tripletrios.strategy.Moves;
+import cs3500.tripletrios.strategy.StrategyOne;
 
 import org.junit.Before;
 import org.junit.Test;
