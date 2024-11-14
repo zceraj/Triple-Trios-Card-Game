@@ -24,7 +24,7 @@ public class StrategyTwo extends AbstractStrategy implements StrategyInterface {
   }
 
   /**
-   * Gets tje best move available based off the game state
+   * Gets the best move available based off the game state.
    * @param computerPlayer the computer generated player
    * @return a Move object that represents the best move
    */
