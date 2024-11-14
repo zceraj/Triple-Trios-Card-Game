@@ -74,7 +74,6 @@ public class StrategyTwoTest {
   }
 
 
-
   @Test
   public void testMethodCallsForGetBestMove() {
     strategyTwo.getBestMove(mockPlayer);

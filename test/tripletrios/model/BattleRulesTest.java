@@ -1,7 +1,8 @@
 package tripletrios.model;
 
+import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+
 
 import java.util.List;
 
@@ -30,7 +31,6 @@ public class BattleRulesTest {
           {false, true, false},
           {true, true, false}
   };
-  private List<CardInterface> cards;
   private Grid gridAsGrid = new Grid(grid);
 
   /**
@@ -41,7 +41,7 @@ public class BattleRulesTest {
     // Initialize players
     player1 = new HumanPlayer("Player1", PlayerColor.RED);
     player2 = new HumanPlayer("Player2", PlayerColor.BLUE);
-    cards = List.of(
+    List<CardInterface> cards = List.of(
             new Card("Tiger", 4, 2, 5, 3),
             new Card("Elephant", 5, 1, 4, 2),
             new Card("Giraffe", 2, 4, 3, 5),
@@ -64,7 +64,6 @@ public class BattleRulesTest {
 
   @Test
   public void testBattleExecution_SingleBattle() {
-    // Place initial cards on grid for battle
     CardInterface card1 = player1.getHand().get(0);
     CardInterface card2 = player2.getHand().get(0);
 
@@ -73,11 +72,8 @@ public class BattleRulesTest {
 
     game.placeCard(card2, 0, 1);
     game.updateOwner(0, 1, player2);
-
-    // Initiate battle and verify the outcome
     battleRules.startBattle(gridAsGrid, 1, 1, player1);
 
-    // Check that player1 has won the cell (1,0)
     assertEquals(player2, game.getCellsPlayer(0, 1), "Player 2 should have won the battle.");
   }
 }

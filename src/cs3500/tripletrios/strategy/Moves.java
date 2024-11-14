@@ -22,6 +22,7 @@ public class Moves {
 
   /**
    * Gets the card.
+   *
    * @return The card
    */
   public CardInterface getCard() {
@@ -30,6 +31,7 @@ public class Moves {
 
   /**
    * Gets the row of the card.
+   *
    * @return The row of the card
    */
   public int getRow() {
@@ -38,6 +40,7 @@ public class Moves {
 
   /**
    * Gets the column of the card.
+   *
    * @return The column of the card
    */
   public int getCol() {
@@ -46,6 +49,7 @@ public class Moves {
 
   /**
    * Gets the score of the card in the given direction.
+   *
    * @param direction The direction to get the score of
    * @return The score of the card in the given direction
    */

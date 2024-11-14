@@ -12,6 +12,7 @@ public interface GridCellView {
 
   /**
    * Returns the card that is placed in this grid cell.
+   *
    * @return The card in this grid cell, or null if no card is placed.
    */
   CardInterface getCard();
@@ -23,12 +24,14 @@ public interface GridCellView {
 
   /**
    * Returns the row index of this grid cell.
+   *
    * @return The row index.
    */
   int getRow();
 
   /**
    * Returns the column index of this grid cell.
+   *
    * @return The column index.
    */
   int getCol();

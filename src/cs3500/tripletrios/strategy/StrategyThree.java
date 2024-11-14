@@ -18,6 +18,7 @@ public class StrategyThree extends AbstractStrategy implements StrategyInterface
 
   /**
    * Constructor for Strategy three.
+   *
    * @param model the read-only game model used as the game state
    */
   public StrategyThree(ReadOnlyGameModel model) {
@@ -27,6 +28,7 @@ public class StrategyThree extends AbstractStrategy implements StrategyInterface
 
   /**
    * Finds the least risky card to play.
+   *
    * @param computerPlayer the player
    * @return a Move object based off the game state
    */
@@ -56,7 +58,6 @@ public class StrategyThree extends AbstractStrategy implements StrategyInterface
   }
 
 
-
   // Evaluates the risk of a card being flipped by opponents at the given position.
   private int evaluateFlipRisk(CardInterface card, int row, int col) {
     int riskScore = 0;
@@ -69,8 +70,13 @@ public class StrategyThree extends AbstractStrategy implements StrategyInterface
         CardInterface opponentCard = adjacentCell.getCard();
 
         if (opponentCard != null && !opponentCard.equals(card)) {
+<<<<<<< HEAD
+          int opponentAttackValue = intAttackValue(opponentCard.getAttackValue(
+                  direction.getOpposite()));
+=======
           int opponentAttackValue = intAttackValue(
                   opponentCard.getAttackValue(direction.getOpposite()));
+>>>>>>> b4c1fae1b969592c6a89b6619d5941a5a7c96b5a
           int currentCardAttackValue = intAttackValue(card.getAttackValue(direction));
 
           if (opponentAttackValue > currentCardAttackValue) {

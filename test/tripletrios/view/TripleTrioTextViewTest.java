@@ -6,12 +6,10 @@ import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.GameModel;
 import cs3500.tripletrios.model.GameModelImpl;
-import cs3500.tripletrios.model.Grid;
 import cs3500.tripletrios.model.HumanPlayer;
 import cs3500.tripletrios.model.PlayerColor;
 import cs3500.tripletrios.view.TripleTrioTextView;
 
-import java.io.File;
 import java.io.StringWriter;
 import java.io.IOException;
 import java.util.List;

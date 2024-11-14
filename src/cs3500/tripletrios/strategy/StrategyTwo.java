@@ -25,6 +25,7 @@ public class StrategyTwo extends AbstractStrategy implements StrategyInterface {
 
   /**
    * Gets the best move available based off the game state.
+   *
    * @param computerPlayer the computer generated player
    * @return a Move object that represents the best move
    */
@@ -52,8 +53,7 @@ public class StrategyTwo extends AbstractStrategy implements StrategyInterface {
           if (defenseValue > maxDefenseValue) {
             maxDefenseValue = defenseValue;
             bestMove = new Moves(card, row, col);
-          }
-          else if (defenseValue == maxDefenseValue && bestMove != null) {
+          } else if (defenseValue == maxDefenseValue && bestMove != null) {
             bestMove = breakTie(card, row, col, bestMove, computerPlayer);
           }
         }
@@ -61,7 +61,6 @@ public class StrategyTwo extends AbstractStrategy implements StrategyInterface {
     }
     return finalMove(computerPlayer, bestMove, grid);
   }
-
 
 
   // Calculate the defense value of placing a card in a corner.
@@ -86,4 +85,8 @@ public class StrategyTwo extends AbstractStrategy implements StrategyInterface {
     return defenseValue;
   }
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> b4c1fae1b969592c6a89b6619d5941a5a7c96b5a
 }

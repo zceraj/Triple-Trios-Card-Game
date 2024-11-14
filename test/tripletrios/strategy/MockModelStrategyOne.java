@@ -94,6 +94,7 @@ public class MockModelStrategyOne implements ReadOnlyGameModel {
 
   /**
    * Sets the mock game state to be over.
+   *
    * @param gameOver whether the game is over or not.
    */
   public void setGameOver(boolean gameOver) {
@@ -102,6 +103,7 @@ public class MockModelStrategyOne implements ReadOnlyGameModel {
 
   /**
    * Sets the mock winner of the game.
+   *
    * @param winner the winner of the game.
    */
   public void setWinner(IPlayer winner) {
@@ -110,6 +112,7 @@ public class MockModelStrategyOne implements ReadOnlyGameModel {
 
   /**
    * Records method calls for verification purposes.
+   *
    * @return A list of method calls made during the test.
    */
   public List<String> getMethodCalls() {
