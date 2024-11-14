@@ -21,6 +21,11 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Unit tests for the StrategyFour class in the Triple Trios game.
+ * These tests verify the functionality of the strategy, including selecting the best move,
+ * handling a player with no cards, and testing opponent's blocking behavior.
+ */
 public class StrategyFourTest {
   private MockModelStrategyFour model;
   private IPlayer mockPlayer;
@@ -36,8 +41,8 @@ public class StrategyFourTest {
     mockPlayer = new MockPlayer("Player 1");
 
     List<CardInterface> hand = new ArrayList<>();
-    hand.add(new Card("Card1", 5, 3, 2, 1));  // Card with specific attack values in four directions
-    hand.add(new Card("Card2", 7, 4, 6, 3));  // Another card with attack values in four directions
+    hand.add(new Card("Card1", 5, 3, 2, 1));
+    hand.add(new Card("Card2", 7, 4, 6, 3));
     mockPlayer.setHand(hand);
 
     // Initialize the model and strategy
@@ -80,7 +85,10 @@ public class StrategyFourTest {
     Moves opponentBestMoveAfterPlayer = opponentStrategy.getBestMove(mockOpponent);
 
 
-    assertFalse("Opponent's next best move should be less advantageous", opponentBestMoveAfterPlayer.getRow() == bestMove.getRow() && opponentBestMoveAfterPlayer.getCol() == bestMove.getCol());
+    assertFalse(
+            "Opponent's next best move should be less advantageous",
+            opponentBestMoveAfterPlayer.getRow() == bestMove.getRow()
+                    && opponentBestMoveAfterPlayer.getCol() == bestMove.getCol());
   }
 
 
@@ -88,7 +96,8 @@ public class StrategyFourTest {
   private static class MockOpponentStrategy implements StrategyInterface {
     @Override
     public Moves getBestMove(IPlayer opponent) {
-      return new Moves(new Card("MockCard", 1, 1, 1, 1), 0, 1);
+      return new Moves(
+              new Card("MockCard", 1, 1, 1, 1), 0, 1);
     }
   }
 }

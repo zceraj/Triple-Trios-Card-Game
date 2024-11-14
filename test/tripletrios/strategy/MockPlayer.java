@@ -39,13 +39,18 @@ public class MockPlayer implements IPlayer {
 
   @Override
   public void setHand(List<CardInterface> playerHand) {
-    this.hand = new ArrayList<>(playerHand); // Assign a copy of the list to avoid modifications from outside.
+    this.hand = new ArrayList<>(playerHand);
     System.out.println("Set hand for " + name + ": " + hand);
   }
 
   @Override
   public void placeTheCard(CardInterface card, int row, int col) {
-    System.out.println("MockPlayer " + name + " placed card " + card + " at (" + row + ", " + col + ")");
+    System.out.println(
+            "MockPlayer "
+                    + name
+                    + " placed card "
+                    + card
+                    + " at (" + row + ", " + col + ")");
   }
 
   @Override

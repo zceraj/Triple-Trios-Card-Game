@@ -11,6 +11,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The MockModelStrategyOne class simulates a game model with mock data for grid, players,
+ * and scores, and implements the ReadOnlyGameModel interface for managing game state and turns.
+ */
 public class MockModelStrategyOne implements ReadOnlyGameModel {
 
   private final List<String> methodCalls;
@@ -22,6 +26,9 @@ public class MockModelStrategyOne implements ReadOnlyGameModel {
   private IPlayer winner;
   private boolean gameOver;
 
+  /**
+   * Constructs a new MockModelStrategyOne instance with mock grid, players, and initial game state.
+   */
   public MockModelStrategyOne(Grid mockGrid, IPlayer mockPlayer1, IPlayer mockPlayer2) {
     this.methodCalls = new ArrayList<>();
     this.mockGrid = mockGrid;

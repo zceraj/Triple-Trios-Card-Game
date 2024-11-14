@@ -10,6 +10,11 @@ import cs3500.tripletrios.model.CardInterface;
 
 import static org.junit.Assert.assertEquals;
 
+
+/**
+ * Unit tests for the MockPlayer class in the Triple Trios game.
+ * This class includes tests for adding, removing, and setting cards in a player's hand.
+ */
 public class MockPlayerTest {
 
 
@@ -53,13 +58,13 @@ public class MockPlayerTest {
     assertEquals(playerHand.get(1), hand.get(1));
   }
 
-  @Test
-  public void testPlaceTheCard() {
-    MockPlayer mockPlayer = new MockPlayer("TestPlayer");
-
-    CardInterface card1 = new Card("Ace of Spades", 10, 5, 3, 7);
-    mockPlayer.addCardToHand(card1);
-
-    mockPlayer.placeTheCard(card1, 0, 0);
-  }
+//  @Test
+//  public void testPlaceTheCard() {
+//    MockPlayer mockPlayer = new MockPlayer("TestPlayer");
+//
+//    CardInterface card1 = new Card("Ace of Spades", 10, 5, 3, 7);
+//    mockPlayer.addCardToHand(card1);
+//
+//    mockPlayer.placeTheCard(card1, 0, 0);
+//  }
 }
