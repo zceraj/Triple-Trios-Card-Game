@@ -12,7 +12,7 @@ import cs3500.tripletrios.model.IPlayer;
  */
 public class MockPlayer implements IPlayer {
 
-  private String name;
+  private final String name;
   private List<CardInterface> hand;
 
   /**
@@ -65,10 +65,9 @@ public class MockPlayer implements IPlayer {
    */
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("MockPlayer{name='").append(name).append("', ");
-    sb.append("hand=").append(hand).append("}");
-    return sb.toString();
+    String sb = "MockPlayer{name='" + name + "', " +
+            "hand=" + hand + "}";
+    return sb;
   }
 
   /**

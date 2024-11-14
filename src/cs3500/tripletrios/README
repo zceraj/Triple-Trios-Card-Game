@@ -14,6 +14,8 @@ Missing functionality we added:
      of just getting the winner at the end
  - added a constructor in GameModelImpl to be used to simulate a play and get possible results
     to use for strategy four
+ - changed a few classes in the game impl as they weren't performing how we wanted them too -->
+ the place card didn't actually place a card...
 
 Strategies:
 - StrategyInterface with main method among the strategy classes (getBestMove)
@@ -26,6 +28,25 @@ Strategies:
     - StrategyTwo --> holds logic for the second strategy
     - StrategyThree --> holds logic for the third strategy
     - StrategyFour --> holds logic for the fourth strategy
+
+View:
+Classes Created:
+ - A card panel interface with an implementation of CardPanel, which makes cards in the GUI. They
+ are stored in a left and right panel in the main GUI implementation.
+    - displays information about a specific card --> name and attack values
+    - uses border layout and paintComponent to show each card
+    - highlights the card grey if selected.
+ - Grid cell interface with a matching implementation.
+    - Represents a single cell in the game grid and handles interactions with that cell
+    - The panel size is set, and a border is applied to distinguish the cell.
+      The background color is set based on the cell's type (card cell or hole).
+ - GameViewGUi and its corresponding TripleTrioGuiView
+    - controls the visibility of the window, refreshing hands, and updating the grid display.
+    - is a JFrame with JPanels inside.
+
+TO PLAY:
+type: java -jar OODHW5.jar into your command line ensuring that you are in the folder with the game
+in it. It should pop up the GUI view and allow you to click on parts of the game!
 ----------------------------------------------------------------------------------------------------
 -------------------------------------ASSIGNMENT 5 READ ME ------------------------------------------
 ----------------------------------------------------------------------------------------------------

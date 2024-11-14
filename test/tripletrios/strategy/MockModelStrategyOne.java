@@ -13,12 +13,12 @@ import java.util.Map;
 
 public class MockModelStrategyOne implements ReadOnlyGameModel {
 
-  private List<String> methodCalls;
-  private Grid mockGrid;
-  private Map<IPlayer, Integer> mockScores;
-  private IPlayer currentPlayer;
-  private IPlayer mockPlayer1;
-  private IPlayer mockPlayer2;
+  private final List<String> methodCalls;
+  private final Grid mockGrid;
+  private final Map<IPlayer, Integer> mockScores;
+  private final IPlayer currentPlayer;
+  private final IPlayer mockPlayer1;
+  private final IPlayer mockPlayer2;
   private IPlayer winner;
   private boolean gameOver;
 

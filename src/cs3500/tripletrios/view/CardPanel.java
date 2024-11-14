@@ -25,7 +25,7 @@ import cs3500.tripletrios.model.Direction;
 class CardPanel extends JPanel implements CardPanelView {
   private final CardInterface card;
   private final int index;
-  private boolean isSelected = false;
+  private final boolean isSelected = false;
   private TripleTrioGuiView view;
 
   /**
