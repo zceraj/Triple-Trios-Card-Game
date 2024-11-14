@@ -73,7 +73,7 @@ public class StrategyThree extends AbstractStrategy implements StrategyInterface
 
           int opponentAttackValue = intAttackValue(opponentCard.getAttackValue(
                   direction.getOpposite()));
-                  opponentCard.getAttackValue(direction.getOpposite()));
+                  opponentCard.getAttackValue(direction.getOpposite());
           int currentCardAttackValue = intAttackValue(card.getAttackValue(direction));
 
           if (opponentAttackValue > currentCardAttackValue) {
