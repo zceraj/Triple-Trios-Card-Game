@@ -39,8 +39,11 @@ public class ChainStrategy extends AbstractStrategy implements StrategyInterface
    */
   @Override
   public Moves getBestMove(IPlayer computerPlayer) {
-    Moves bestMove = null;
+    if (strategies.isEmpty()) {
+      return null;
+    }
 
+    Moves bestMove = null;
     for (StrategyInterface strategy : strategies) {
       bestMove = strategy.getBestMove(computerPlayer);
       if (bestMove != null) {
@@ -49,7 +52,5 @@ public class ChainStrategy extends AbstractStrategy implements StrategyInterface
     }
     return finalMove(computerPlayer, bestMove, grid);
   }
-
-
 
 }

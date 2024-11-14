@@ -29,6 +29,7 @@ public class StrategyFour extends AbstractStrategy implements StrategyInterface 
     this.oppStrategy = oppStrategy;
   }
 
+
   @Override
   public Moves getBestMove(IPlayer computerPlayer) {
     int minOpponentMaxScore = Integer.MAX_VALUE;
