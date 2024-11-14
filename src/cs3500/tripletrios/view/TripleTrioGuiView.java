@@ -5,9 +5,11 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
 import java.io.IOException;
+
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 import javax.swing.BorderFactory;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 
@@ -158,8 +160,7 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
       selectedCard = null;
       selectedCardIndex = -1;
       cardPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-    }
-    else {
+    } else {
       // If a different card is clicked, highlight it
       if (selectedCard != null) {
         // Reset the border of the previously selected card
@@ -173,9 +174,9 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
       IPlayer playerOwner = model.getPlayerFromCard(cardPanel.getCard());
 
       System.out.println("Selected card: "
-                      + selectedCard.getCard().getCardName()
-                      + " (Index: " + selectedCardIndex + " owned by "
-                      + playerOwner.getName() + ")");
+              + selectedCard.getCard().getCardName()
+              + " (Index: " + selectedCardIndex + " owned by "
+              + playerOwner.getName() + ")");
     }
   }
 
@@ -191,6 +192,7 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
 
   /**
    * renders the view.
+   *
    * @throws IOException I don't know why it would throw an exception
    */
   @Override
@@ -230,7 +232,6 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
     gridPanel.revalidate();
     gridPanel.repaint();
   }
-
 
 
 }

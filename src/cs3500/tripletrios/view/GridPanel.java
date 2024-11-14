@@ -103,6 +103,7 @@ public class GridPanel extends JPanel implements GridCellView {
 
   /**
    * gets the row of the cell.
+   *
    * @return the row as an int starting at 0.
    */
   @Override
@@ -112,6 +113,7 @@ public class GridPanel extends JPanel implements GridCellView {
 
   /**
    * gets the column of the cell.
+   *
    * @return the column as an int starting at 0.
    */
   @Override
@@ -137,18 +139,15 @@ public class GridPanel extends JPanel implements GridCellView {
         Color cellColor;
         if (model.getCurPlayer().getColor().equals("BLUE")) {
           cellColor = new Color(50, 100, 200);
-        }
-        else {
+        } else {
           cellColor = new Color(200, 50, 100);
         }
         setBackground(cellColor);
         setLabel();
-      }
-      else {
+      } else {
         setBackground(new Color(200, 150, 255));
       }
-    }
-    else {
+    } else {
       setBackground(Color.LIGHT_GRAY);
     }
   }

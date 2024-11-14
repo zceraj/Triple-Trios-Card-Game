@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import java.awt.Font;
 import java.io.File;
 import java.io.IOException;
+
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -29,8 +30,9 @@ class CardPanel extends JPanel implements CardPanelView {
 
   /**
    * setting up my cards in the gui!.
-   * @param card the card being portrayed --> obvi a need because how else will it access
-   *             all of the card's values.
+   *
+   * @param card  the card being portrayed --> obvi a need because how else will it access
+   *              all of the card's values.
    * @param color the color of the card --> to know which players side is which.
    * @param index for future calling of the card.
    */
@@ -59,14 +61,14 @@ class CardPanel extends JPanel implements CardPanelView {
 
     try {
       Font customFontForLabel = Font.createFont(
-              Font.TRUETYPE_FONT,
-              new File(
-                      "formatting/SourGummy-VariableFont_wdth,wght.ttf"))
+                      Font.TRUETYPE_FONT,
+                      new File(
+                              "formatting/SourGummy-VariableFont_wdth,wght.ttf"))
               .deriveFont(8000f / view.getHeight());
       Font customFont = Font.createFont(
-              Font.TRUETYPE_FONT,
-              new File(
-                      "formatting/SourGummy-VariableFont_wdth,wght.ttf"))
+                      Font.TRUETYPE_FONT,
+                      new File(
+                              "formatting/SourGummy-VariableFont_wdth,wght.ttf"))
               .deriveFont(10000f / view.getHeight());
       nameLabel.setFont(customFontForLabel);
       northLabel.setFont(customFont);
@@ -147,8 +149,10 @@ class CardPanel extends JPanel implements CardPanelView {
             0, 200 / view.getHeight(), 0, 200 / view.getHeight()));
 
   }
+
   /**
    * to be able to use the values.
+   *
    * @return the card in the box.
    */
   @Override
@@ -158,6 +162,7 @@ class CardPanel extends JPanel implements CardPanelView {
 
   /**
    * to play the card.
+   *
    * @return the index of the box
    */
   @Override

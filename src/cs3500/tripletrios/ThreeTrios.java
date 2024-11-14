@@ -8,7 +8,6 @@ import cs3500.tripletrios.model.GameModelImpl;
 import cs3500.tripletrios.model.HumanPlayer;
 import cs3500.tripletrios.model.IPlayer;
 import cs3500.tripletrios.model.PlayerColor;
-import cs3500.tripletrios.view.GridPanel;
 import cs3500.tripletrios.view.TripleTrioGuiView;
 
 /**

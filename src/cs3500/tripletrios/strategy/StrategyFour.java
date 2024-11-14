@@ -66,12 +66,10 @@ public class StrategyFour extends AbstractStrategy implements StrategyInterface 
   }
 
 
-
-
   /**
    * Creates a simulated model with a modified grid and specified current player.
    *
-   * @param grid The grid after the computer's simulated move.
+   * @param grid          The grid after the computer's simulated move.
    * @param currentPlayer The opponent who will be making the next move.
    * @return A read-only game model representing the simulated game state.
    */
@@ -82,7 +80,7 @@ public class StrategyFour extends AbstractStrategy implements StrategyInterface 
   /**
    * Evaluates the potential score of a move for the opponent.
    *
-   * @param move The opponent's best move.
+   * @param move           The opponent's best move.
    * @param simulatedModel The game model after the computer's move.
    * @return The score representing how advantageous the move is for the opponent.
    */

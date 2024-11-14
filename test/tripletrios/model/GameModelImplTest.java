@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,8 +30,6 @@ public class GameModelImplTest {
   private GameModelImpl game;
   private IPlayer player1;
   private IPlayer player2;
-  private List<CardInterface> cards;
-  private Grid grid;
 
   /**
    * sets up the game model to test.
@@ -41,7 +38,7 @@ public class GameModelImplTest {
   void setUp() throws Exception {
     player1 = new HumanPlayer("Player1", PlayerColor.BLUE);
     player2 = new HumanPlayer("Player2", PlayerColor.RED);
-    cards = List.of(
+    List<CardInterface> cards = List.of(
             new Card("Tiger", 4, 2, 5, 3),
             new Card("Elephant", 5, 1, 4, 2),
             new Card("Giraffe", 2, 4, 3, 5),
@@ -55,7 +52,7 @@ public class GameModelImplTest {
     boolean[][] gridToSet = {{true, true, false},
             {false, true, true},
             {false, true, false}};
-    this.grid = new Grid(gridToSet);
+    Grid grid = new Grid(gridToSet);
 
     game = new GameModelImpl(
             gridToSet,
@@ -125,9 +122,9 @@ public class GameModelImplTest {
 
   @Test
   public void testGetGameGrid() {
-    assertEquals("[X] [ ] [ ]\n" +
-            "[X] [ ] [X]\n" +
-            "[ ] [ ] [X]", game.getGameGrid().toString());
+    assertEquals("[X] [ ] [ ]\n"
+            + "[X] [ ] [X]\n"
+            + "[ ] [ ] [X]", game.getGameGrid().toString());
   }
 
   @Test
@@ -153,7 +150,6 @@ public class GameModelImplTest {
 
     assertEquals(player1, winner);
   }
-
 
 
   @Test

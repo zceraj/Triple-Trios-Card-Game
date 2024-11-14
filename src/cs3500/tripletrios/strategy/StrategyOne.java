@@ -30,7 +30,8 @@ public class StrategyOne extends AbstractStrategy implements StrategyInterface {
 
   /**
    * Gets the best move available based of the state of the grid.
-   * @param computerPlayer  the computer generated player
+   *
+   * @param computerPlayer the computer generated player
    * @return a Move object
    */
   @Override
@@ -58,7 +59,6 @@ public class StrategyOne extends AbstractStrategy implements StrategyInterface {
     }
     return finalMove(computerPlayer, bestMove, grid);
   }
-
 
 
   //counts the possible flips that would happen if a card was played

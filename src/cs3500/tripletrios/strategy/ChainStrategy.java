@@ -26,6 +26,7 @@ public class ChainStrategy extends AbstractStrategy implements StrategyInterface
 
   /**
    * Adds a strategy to the list of strategies.
+   *
    * @param strategy the strategy to add
    */
   public void addStrategy(StrategyInterface strategy) {
@@ -34,6 +35,7 @@ public class ChainStrategy extends AbstractStrategy implements StrategyInterface
 
   /**
    * Applies the strategies sequentially and returns the best move.
+   *
    * @param computerPlayer The computer player using the strategy.
    * @return The best move found, or a fallback move if none found.
    */

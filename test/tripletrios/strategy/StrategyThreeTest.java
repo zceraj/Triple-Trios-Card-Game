@@ -85,9 +85,9 @@ public class StrategyThreeTest {
     // Set up a scenario where two cards have the same evaluation score
     Moves bestMove = strategyThree.getBestMove(mockPlayer);
 
-    // Since Card1 and Card2 have the same score, the tie-breaking should select Card1 as it appears first
-    CardInterface expectedCard = mockPlayer.getHand().get(0); // Card1
-    int expectedRow = 0; // Assume uppermost-leftmost is selected
+    // Since Card1 and Card2 have the same score, the tie-breaking should select Card1
+    CardInterface expectedCard = mockPlayer.getHand().get(0);
+    int expectedRow = 0;
     int expectedCol = 0;
 
     assertNotNull("Best move should not be null.", bestMove);

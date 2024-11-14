@@ -7,6 +7,7 @@ import cs3500.tripletrios.model.Direction;
 import cs3500.tripletrios.model.Grid;
 import cs3500.tripletrios.model.IPlayer;
 import cs3500.tripletrios.model.ReadOnlyGameModel;
+
 import java.io.IOException;
 
 public class MockModelStrategyFour implements ReadOnlyGameModel {
@@ -43,12 +44,11 @@ public class MockModelStrategyFour implements ReadOnlyGameModel {
   @Override
   public IPlayer getCellsPlayer(int row, int col) {
     Cell cell = grid.getCell(row, col);
-    return cell.isEmpty() ? null : currentPlayer; // Assume current player owns all placed cards for simplicity
+    return cell.isEmpty() ? null : currentPlayer;
   }
 
   @Override
   public int getScore(IPlayer player) {
-    // Return a mock score based on some simple logic
     return player == currentPlayer ? 10 : 5;
   }
 

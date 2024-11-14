@@ -65,7 +65,6 @@ public class StrategyFourTest {
   }
 
 
-
   @Test
   public void testOpponentBlockingMove() {
     Moves bestMove = strategy.getBestMove(mockPlayer);
@@ -83,7 +82,6 @@ public class StrategyFourTest {
 
     assertFalse("Opponent's next best move should be less advantageous", opponentBestMoveAfterPlayer.getRow() == bestMove.getRow() && opponentBestMoveAfterPlayer.getCol() == bestMove.getCol());
   }
-
 
 
   // A mock opponent strategy to simulate opponent's behavior

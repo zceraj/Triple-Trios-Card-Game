@@ -22,8 +22,8 @@ public class MockModelStrategyThree implements ReadOnlyGameModel {
   /**
    * Constructs a MockModelStrategyThree.
    *
-   * @param grid          the grid used in the game
-   * @param currentPlayer the current player
+   * @param grid           the grid used in the game
+   * @param currentPlayer  the current player
    * @param opponentPlayer the opponent player
    */
   public MockModelStrategyThree(Grid grid, IPlayer currentPlayer, IPlayer opponentPlayer) {
