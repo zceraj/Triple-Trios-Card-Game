@@ -64,13 +64,9 @@ public abstract class AbstractStrategy implements StrategyInterface {
     return bestMove;
   }
 
-<<<<<<< HEAD
-
   //If no best move was found, choose the upper-left most open cell and the first card
-=======
   // Fallback mechanism: if no best move was found, choose the upper-left most open cell
   // and the first card
->>>>>>> b4c1fae1b969592c6a89b6619d5941a5a7c96b5a
   protected static Moves finalMove(IPlayer computerPlayer, Moves bestMove, Grid grid) {
     if (bestMove == null) {
       for (int row = 0; row < grid.getRows(); row++) {

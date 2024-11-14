@@ -17,6 +17,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Unit tests for the StrategyOne class in the Triple Trios game.
+ * These tests verify the functionality of the strategy, including selecting the best move
+ * based on maximizing flips and tie-breaking based on card values.
+ */
 public class StrategyOneTest {
 
   private MockPlayer mockPlayer;
@@ -48,7 +53,8 @@ public class StrategyOneTest {
     int expectedCol = 0;
 
     assertNotNull("Best move should not be null.", bestMove);
-    assertEquals("Expected card with the highest number of flips to be chosen.", expectedCard, bestMove.getCard());
+    assertEquals("Expected card with the highest number of flips to be chosen.",
+            expectedCard, bestMove.getCard());
     assertEquals("Expected row to be 0.", expectedRow, bestMove.getRow());
     assertEquals("Expected col to be 0.", expectedCol, bestMove.getCol());
   }
@@ -60,14 +66,21 @@ public class StrategyOneTest {
 
     Moves bestMove = strategyOne.getBestMove(mockPlayer);
 
-    CardInterface expectedCard = mockPlayer.getHand().get(0);  // Card1 should be chosen if there is a tie
+    CardInterface expectedCard = mockPlayer.getHand().get(0);
     int expectedRow = 0;
     int expectedCol = 0;
 
-    assertEquals("Tie should be resolved using the card with the lowest index.", expectedCard, bestMove.getCard());
-    assertEquals("Tie should be resolved using the uppermost row.", expectedRow, bestMove.getRow());
-    assertEquals("Tie should be resolved using the leftmost col.", expectedCol, bestMove.getCol());
+    assertEquals(
+            "Tie should be resolved using the card with the lowest index.",
+            expectedCard, bestMove.getCard());
+    assertEquals(
+            "Tie should be resolved using the uppermost row.",
+            expectedRow, bestMove.getRow());
+    assertEquals(
+            "Tie should be resolved using the leftmost col.",
+            expectedCol, bestMove.getCol());
   }
+
   @Test
   public void testMethodCallsForGetBestMove() {
     strategyOne.getBestMove(mockPlayer);
@@ -88,7 +101,9 @@ public class StrategyOneTest {
     }
 
     assertTrue("Expected method getGameGrid to be called at least once.", foundGameGrid);
-    assertTrue("Expected method getCurPlayer to be called after at least one getGameGrid.", foundCurPlayerAfterGameGrid);
+    assertTrue(
+            "Expected method getCurPlayer to be called after at least one getGameGrid.",
+            foundCurPlayerAfterGameGrid);
   }
 
 }
