@@ -1,80 +1,87 @@
 package cs3500.tripletrios.model;
 
+import cs3500.tripletrios.strategy.Moves;
+import cs3500.tripletrios.strategy.StrategyInterface;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Represents an AI player in the game.
  * Implements the IPlayer interface.
- * This class can be expanded to include AI logic for playing the game.
+ * This class uses a given strategy to determine its moves.
  */
 public class AiPlayer implements IPlayer {
+  private final String name;
+  private final PlayerColor color;
+  private final List<CardInterface> hand;
+  private final StrategyInterface strategy;
 
   /**
-   * Gets the name of the player.
-   * @return the name of the player
+   * Constructs an AI player with the specified name, color, and strategy.
+   *
+   * @param name     the name of the AI player
+   * @param color    the color representing the AI player's identity
+   * @param strategy the strategy that the AI player will use to make moves
    */
+  public AiPlayer(String name, PlayerColor color, StrategyInterface strategy) {
+    this.name = name;
+    this.color = color;
+    this.strategy = strategy;
+    this.hand = new ArrayList<>();
+  }
+
   @Override
   public String getName() {
-    return "";
+    return name;
   }
 
-  /**
-   * Gets the color of the player.
-   * @return the color of the player
-   */
   @Override
   public String getColor() {
-    return "";
+    return color.toString();
   }
 
-  /**
-   * Gets the list of cards currently held by the player.
-   * @return a list of Card objects representing the player's hand
-   */
   @Override
   public List<CardInterface> getHand() {
-    return List.of();
+    return new ArrayList<>(hand); // Return a copy to prevent outside modification.
   }
 
-  /**
-   * Adds a card to the player's hand.
-   * @param card to be added to the player's hand.
-   */
   @Override
   public void addCardToHand(CardInterface card) {
-
-    // adds a card to the hand
+    hand.add(card);
   }
 
-  /**
-   * Removes a card from the player's hand.
-   * @param card to be removed from the player's hand.
-   */
   @Override
   public void removeCardFromHand(CardInterface card) {
-
-    //removes a card from the hand
+    hand.remove(card);
   }
 
-  /**
-   * Sets the hand of the player with a specified list of cards.
-   * @param playerHand a List of Cards to be set as the player's hand.
-   */
   @Override
   public void setHand(List<CardInterface> playerHand) {
+    if (playerHand == null) {
+      throw new IllegalArgumentException("Hand cannot be null.");
+    }
+    this.hand.clear();
+    this.hand.addAll(playerHand);
+  }
 
-    // sets the hand of the player
+  @Override
+  public void placeTheCard(CardInterface card, int row, int col) {
+    if (card == null) {
+      throw new IllegalArgumentException("Card cannot be null.");
+    }
+    card.addRow(row);
+    card.addCol(col);
+    hand.remove(card);
   }
 
   /**
-   * Places the card at the specified row and column.
-   * @param card to be placed
-   * @param row to place the card
-   * @param col to place the card
+   * Determines the best move using the assigned strategy.
+   *
+   * @param grid the current game grid
+   * @return the best move determined by the strategy
    */
-  @Override
-  public void placeTheCard(CardInterface card, int row, int col) {
-
-    // places the card at the specified row and column
+  public Moves determineNextMove(Grid grid) {
+    return strategy.getBestMove(this);
   }
 }

@@ -3,6 +3,8 @@ package cs3500.tripletrios.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import cs3500.tripletrios.strategy.Moves;
+
 /**
  * Represents a human player in the card game, holding a hand of cards
  * and providing methods to manage the player's hand.
@@ -88,18 +90,7 @@ public class HumanPlayer implements IPlayer {
    * @return the list of cards in the player's hand
    */
   public List<CardInterface> getHand() {
-    return hand;
-  }
-
-  /**
-   * Plays a card from the player's hand at the specified index.
-   *
-   * @param index the index of the card to be played
-   * @return the card that was played
-   * @throws IndexOutOfBoundsException if the index is out of range
-   */
-  public CardInterface playCard(int index) {
-    return hand.remove(index);
+    return new ArrayList<>(hand);
   }
 
   /**
@@ -115,6 +106,15 @@ public class HumanPlayer implements IPlayer {
     card.addRow(row);
     card.addCol(col);
     hand.remove(card);
+  }
+
+  /**
+   * Determines the next move for the player.
+   * Used specifically for AI players.
+   * @return the move to be made
+   */
+  public Moves determineNextMove(Grid grid) {
+    throw new UnsupportedOperationException("Human players do not have a strategy.");
   }
 
 
