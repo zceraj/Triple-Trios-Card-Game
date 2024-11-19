@@ -2,6 +2,8 @@ package cs3500.tripletrios.model;
 
 import java.util.List;
 
+import cs3500.tripletrios.strategy.Moves;
+
 /**
  * Interface representing a player in the Triple Trios game.
  * This interface defines the essential actions and properties of a player.
@@ -50,5 +52,17 @@ public interface IPlayer {
    */
   void setHand(List<CardInterface> playerHand);
 
+  /**
+   * Places a card on the grid at the specified row and column.
+   * @param card the card to be placed
+   * @param row the row to place the card
+   */
   void placeTheCard(CardInterface card, int row, int col);
+
+  /**
+   * determines the next move for the player.
+   * Used Specifically for AI players.
+   * @return the move to be made
+   */
+  Moves determineNextMove(Grid grid);
 }
