@@ -1,5 +1,9 @@
 package cs3500.tripletrios.view;
 
+import java.util.function.BiConsumer;
+
+import cs3500.tripletrios.model.CardInterface;
+
 /**
  * an interface for a game view that pops up a new window to play the game.
  */
@@ -23,4 +27,9 @@ public interface GameViewGUI extends GameView {
    * such as after a card is placed or the game progresses.
    */
   void refreshGrid();
+
+  CardInterface getSelectedCard();
+
+  void addCardClickListener(BiConsumer<CardInterface, Integer> listener);
+  void addGridClickListener(BiConsumer<Integer, Integer> listener);
 }

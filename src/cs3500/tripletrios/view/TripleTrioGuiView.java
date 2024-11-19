@@ -15,6 +15,7 @@ import java.awt.event.MouseAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiConsumer;
 
 import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.Cell;
@@ -34,6 +35,9 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
   private final JPanel rightColumnPanel;
   private CardPanel selectedCard;
   private int selectedCardIndex = -1;
+  private BiConsumer<CardInterface, Integer> cardClickListener;
+  private BiConsumer<Integer, Integer> gridClickListener;
+
 
   /**
    * Initializes the frame
@@ -233,5 +237,29 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
     gridPanel.repaint();
   }
 
+  @Override
+  public CardInterface getSelectedCard() {
+    if (selectedCard == null) {
+      return null;
+    }
+    return selectedCard.getCard();
+  }
 
+  /**
+   * Sets up the card click listener.
+   *
+   * @param listener a BiConsumer that takes a CardInterface and its index.
+   */
+  public void addCardClickListener(BiConsumer<CardInterface, Integer> listener) {
+    this.cardClickListener = listener;
+  }
+
+  /**
+   * Sets up the grid click listener.
+   *
+   * @param listener a BiConsumer that takes row and column indices.
+   */
+  public void addGridClickListener(BiConsumer<Integer, Integer> listener) {
+    this.gridClickListener = listener;
+  }
 }

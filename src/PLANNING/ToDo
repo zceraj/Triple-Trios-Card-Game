@@ -2,11 +2,14 @@
 ----------------------------------------------------------------------------------------------------
 Communcations:
 Z:
-- make it such that you can pass in an odd number of cards and it wont crash!!
-- how do i make it so that the curr player cant play the other players cards?
 - throw exception if both of the players are the same color --> 2 blue players.
   O Player information (current score, cards in hand).
              O Control buttons (e.g., "Restart Game," "Exit Game").
+
+- do we need to be able to have the controller take in the card files?
+- should my model be started in the controller?
+- simplify dupe code in controller
+-
 
 M:
 

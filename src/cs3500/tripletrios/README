@@ -1,4 +1,34 @@
 ----------------------------------------------------------------------------------------------------
+-------------------------------------ASSIGNMENT 7 READ ME ------------------------------------------
+----------------------------------------------------------------------------------------------------
+CHANGES FOR PART 3:
+
+Added a method in the view called getSelectedCard which returns the card
+  @Override
+  public CardInterface getSelectedCard() {
+    return selectedCard.getCard();
+  }
+
+Added:
+  /**
+   * Sets up the card click listener.
+   *
+   * @param listener a BiConsumer that takes a CardInterface and its index.
+   */
+  public void addCardClickListener(BiConsumer<CardInterface, Integer> listener) {
+    this.cardClickListener = listener;
+  }
+
+  /**
+   * Sets up the grid click listener.
+   *
+   * @param listener a BiConsumer that takes row and column indices.
+   */
+  public void addGridClickListener(BiConsumer<Integer, Integer> listener) {
+    this.gridClickListener = listener;
+  }
+
+----------------------------------------------------------------------------------------------------
 -------------------------------------ASSIGNMENT 6 READ ME ------------------------------------------
 ----------------------------------------------------------------------------------------------------
 CHANGES FOR PART 2:
