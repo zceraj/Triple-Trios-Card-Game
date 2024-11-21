@@ -4,6 +4,7 @@ import java.io.File;
 
 import cs3500.tripletrios.controller.SetUp;
 import cs3500.tripletrios.controller.ThreeTriosController;
+import cs3500.tripletrios.model.AiPlayer;
 import cs3500.tripletrios.model.GameModelImpl;
 import cs3500.tripletrios.model.HumanPlayer;
 import cs3500.tripletrios.model.IPlayer;
@@ -41,11 +42,14 @@ public final class ThreeTrios {
     // implement the strategy pattern here
     IPlayer player1 = new HumanPlayer();
     IPlayer player2 = new HumanPlayer();
+    IPlayer player3 = new AiPlayer();
+    IPlayer player4 = new AiPlayer();
+
     GameModelImpl model = new GameModelImpl(setup.setGrid(), player1, player2);
     GameViewGUI viewPlayer1 = new TripleTrioGuiView(model);
     GameViewGUI viewPlayer2 = new TripleTrioGuiView(model);
-    ThreeTriosController controller1 = new ThreeTriosController(model, player1, viewPlayer1);
-    ThreeTriosController controller2 = new ThreeTriosController(model, player2, viewPlayer2);
+    ThreeTriosController controller1 = new ThreeTriosController(model, model.getCurPlayer(), viewPlayer1);
+    ThreeTriosController controller2 = new ThreeTriosController(model, model.getOtherPlayer(), viewPlayer2);
     model.startGame(setup.setCards());
   }
 }
