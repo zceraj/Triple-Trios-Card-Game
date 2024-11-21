@@ -16,18 +16,22 @@ import cs3500.tripletrios.strategy.StrategyTwo;
 import cs3500.tripletrios.view.GameViewGUI;
 import cs3500.tripletrios.view.TripleTrioGuiView;
 
+
 /**
  * the entry point for running the Triple Trios game.
  * It initializes the game model, players, grid configuration, and cards,
  * then launches the GUI view.
  */
+
 public final class ThreeTrios {
-  /**
+
+/**
    * The main method that sets up the Triple Trios game. It creates two players,
    * a grid layout, a list of cards, initializes the game model, and launches the GUI.
    *
    * @param args command-line arguments (not used) --> it won't let me run it without it??
    */
+
   public static void main(String[] args) {
     // setting up the grid and cards using the card and grid file readers
     String cardFilePath =  "."
@@ -45,20 +49,18 @@ public final class ThreeTrios {
 
 
     // implement the strategy pattern here
-<<<<<<< Updated upstream
     IPlayer player1 = new HumanPlayer();
     IPlayer player2 = new HumanPlayer();
     IPlayer player3 = new AiPlayer();
     IPlayer player4 = new AiPlayer();
 
-=======
     IPlayer player1 = new HumanPlayer( "Player 1", PlayerColor.RED);
     IPlayer player2 = new HumanPlayer( "Player 2", PlayerColor.BLUE);
->>>>>>> Stashed changes
     GameModelImpl model = new GameModelImpl(setup.setGrid(), player1, player2);
 
     // this is kind of what i have written
- /*   IPlayer aiPlayer = new AiPlayer("AI Player", PlayerColor.BLUE);
+
+/*   IPlayer aiPlayer = new AiPlayer("AI Player", PlayerColor.BLUE);
 
     GameModelImpl aiModel = new GameModelImpl(setup.setGrid(), player1, aiPlayer);
 
@@ -68,6 +70,7 @@ public final class ThreeTrios {
     StrategyInterface strategyTwo = new StrategyTwo(aiModel);
     aiPlayer.setStrategy(strategyTwo);
     */
+
 
     GameViewGUI viewPlayer1 = new TripleTrioGuiView(model);
     GameViewGUI viewPlayer2 = new TripleTrioGuiView(model);

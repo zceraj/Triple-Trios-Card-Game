@@ -92,11 +92,38 @@ public class MockModelAIPlayer implements ReadOnlyGameModel {
   }
 
   /**
+   * Place a card on the grid for testing purposes.
+   *
+   * @param card   The card to place.
+   * @param row    The row to place the card.
+   * @param col    The column to place the card.
+   * @param player The player placing the card.
+   */
+  public void placeCardForTesting(CardInterface card, int row, int col, IPlayer player) {
+    if (grid.isValidCell(row, col) && grid.getCell(row, col).isEmpty()) {
+      grid.getCell(row, col).setCard(card);
+      cardOwnership.put(card, player);
+    } else {
+      throw new IllegalArgumentException("Invalid cell coordinates or cell already occupied.");
+    }
+  }
+
+  /**
    * Updates the player's score in the mock.
    */
   public void setPlayerScore(IPlayer player, int score) {
     if (player != null) {
       playerScores.put(player.getName(), score);
+    }
+  }
+
+  /**
+   * Resets the player score to the initial value.
+   * This is useful when testing different game scenarios.
+   */
+  public void resetPlayerScore(IPlayer player) {
+    if (player != null) {
+      playerScores.put(player.getName(), 0);
     }
   }
 
@@ -111,4 +138,6 @@ public class MockModelAIPlayer implements ReadOnlyGameModel {
     }
     return emptyCells;
   }
+
+
 }
