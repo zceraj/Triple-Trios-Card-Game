@@ -11,8 +11,6 @@ import cs3500.tripletrios.controller.GridFileReader;
 import cs3500.tripletrios.model.AiPlayer;
 import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.CardInterface;
-import cs3500.tripletrios.model.GameModel;
-import cs3500.tripletrios.model.GameModelImpl;
 import cs3500.tripletrios.model.Grid;
 import cs3500.tripletrios.model.HumanPlayer;
 import cs3500.tripletrios.model.IPlayer;

@@ -107,7 +107,7 @@ public class ThreeTriosController implements ControllerInterface, ActionListener
         System.err.println("Failed to place card: " + e.getMessage());
       }
     }
-    System.out.println("hey girl, it is not your turn. please wait!");
+    System.out.println("Hey girl, it is not your turn:( please wait!");
   }
 
   @Override
