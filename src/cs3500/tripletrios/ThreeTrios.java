@@ -8,6 +8,11 @@ import cs3500.tripletrios.model.AiPlayer;
 import cs3500.tripletrios.model.GameModelImpl;
 import cs3500.tripletrios.model.HumanPlayer;
 import cs3500.tripletrios.model.IPlayer;
+import cs3500.tripletrios.model.PlayerColor;
+import cs3500.tripletrios.strategy.ChainStrategy;
+import cs3500.tripletrios.strategy.StrategyInterface;
+import cs3500.tripletrios.strategy.StrategyOne;
+import cs3500.tripletrios.strategy.StrategyTwo;
 import cs3500.tripletrios.view.GameViewGUI;
 import cs3500.tripletrios.view.TripleTrioGuiView;
 
@@ -40,12 +45,30 @@ public final class ThreeTrios {
 
 
     // implement the strategy pattern here
+<<<<<<< Updated upstream
     IPlayer player1 = new HumanPlayer();
     IPlayer player2 = new HumanPlayer();
     IPlayer player3 = new AiPlayer();
     IPlayer player4 = new AiPlayer();
 
+=======
+    IPlayer player1 = new HumanPlayer( "Player 1", PlayerColor.RED);
+    IPlayer player2 = new HumanPlayer( "Player 2", PlayerColor.BLUE);
+>>>>>>> Stashed changes
     GameModelImpl model = new GameModelImpl(setup.setGrid(), player1, player2);
+
+    // this is kind of what i have written
+ /*   IPlayer aiPlayer = new AiPlayer("AI Player", PlayerColor.BLUE);
+
+    GameModelImpl aiModel = new GameModelImpl(setup.setGrid(), player1, aiPlayer);
+
+    StrategyInterface strategyOne = new StrategyOne(aiModel);
+    aiPlayer.setStrategy(strategyOne);
+
+    StrategyInterface strategyTwo = new StrategyTwo(aiModel);
+    aiPlayer.setStrategy(strategyTwo);
+    */
+
     GameViewGUI viewPlayer1 = new TripleTrioGuiView(model);
     GameViewGUI viewPlayer2 = new TripleTrioGuiView(model);
     ThreeTriosController controller1 = new ThreeTriosController(model, model.getCurPlayer(), viewPlayer1);

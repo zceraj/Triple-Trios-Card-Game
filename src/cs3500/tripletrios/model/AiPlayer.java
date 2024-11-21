@@ -15,20 +15,19 @@ public class AiPlayer implements IPlayer {
   private final String name;
   private final PlayerColor color;
   private final List<CardInterface> hand;
-  private final StrategyInterface strategy;
+  private StrategyInterface strategy;
 
   /**
    * Constructs an AI player with the specified name, color, and strategy.
    *
    * @param name     the name of the AI player
    * @param color    the color representing the AI player's identity
-   * @param strategy the strategy that the AI player will use to make moves
    */
-  public AiPlayer(String name, PlayerColor color, StrategyInterface strategy) {
+  public AiPlayer(String name, PlayerColor color) {
     this.name = name;
     this.color = color;
-    this.strategy = strategy;
     this.hand = new ArrayList<>();
+    this.strategy = null;
   }
 
   /**
@@ -95,11 +94,27 @@ public class AiPlayer implements IPlayer {
    * @return the best move determined by the strategy
    */
   public Moves determineNextMove() {
+    if (strategy == null) {
+      throw new IllegalStateException("No strategy assigned to AI player.");
+    }
+
     Moves bestMove = strategy.getBestMove(this);
     if (bestMove == null || bestMove.getRow() < 0 || bestMove.getCol() < 0) {
       throw new IllegalStateException("No valid move available for AI player.");
     }
     return bestMove;
+  }
+
+  /**
+   * Sets a strategy for the AI player to use that is refered to in the determineNextMove.
+   * @param strategy
+   * @return
+   */
+  public void setStrategy(StrategyInterface strategy) {
+    if (strategy == null) {
+      throw new IllegalArgumentException("Strategy cannot be null.");
+    }
+    this.strategy = strategy;
   }
 
 

@@ -28,6 +28,7 @@ public class AIPlayerTest {
 
   private AiPlayer aiPlayer;
   private CardInterface card1;
+  private MockModelAIPlayer mockModel;
 
   @Before
   public void setUp() throws IOException {
@@ -35,10 +36,8 @@ public class AIPlayerTest {
     GridFileReader gridFileReader = new GridFileReader("TESTINGFILES/grid3x3.txt");
     Grid grid = new Grid(gridFileReader.getGrid());
 
-    // Initialize opponent
     IPlayer opponent = new HumanPlayer("Opponent", PlayerColor.RED);
 
-    // Initialize cards
     card1 = new Card("Card1", 4, 6, 2, 3);
     CardInterface card2 = new Card("Card2", 3, 7, 1, 5);
     CardInterface card3 = new Card("Card3", 5, 4, 3, 6);
@@ -47,14 +46,13 @@ public class AIPlayerTest {
     hand.add(card2);
     hand.add(card3);
 
-    // Initialize mock model
-    MockModelAIPlayer mockModel = new MockModelAIPlayer(grid, opponent, null);
+    mockModel = new MockModelAIPlayer(grid, opponent, null);
 
-    // Initialize strategy and AI player
+    aiPlayer = new AiPlayer("AI", PlayerColor.BLUE);
+
     StrategyInterface strategy = new StrategyOne(mockModel);
-    aiPlayer = new AiPlayer("AI", PlayerColor.BLUE, strategy);
+    aiPlayer.setStrategy(strategy);
 
-    // Set AI player's hand
     aiPlayer.setHand(hand);
   }
 
@@ -96,19 +94,25 @@ public class AIPlayerTest {
   }
 
   @Test
+  public void testSetStrategy() {
+    StrategyInterface newStrategy = new StrategyOne(mockModel);
+    aiPlayer.setStrategy(newStrategy);
+    Moves move = aiPlayer.determineNextMove();
+    assertNotNull("Strategy should be set, and determineNextMove should work.", move);
+  }
+
+  @Test
   public void testDetermineNextMove() {
     Moves move = aiPlayer.determineNextMove();
     assertNotNull("AI should determine a valid move.", move);
     assertTrue("Move must be from AI's hand.", aiPlayer.getHand().contains(move.getCard()));
   }
 
-
   @Test
   public void testPlaceTheCard() {
     card1 = new Card("Card1", 3, 4, 5, 2);
     aiPlayer.addCardToHand(card1);
     int initialHandSize = aiPlayer.getHand().size();
-
 
     Moves bestMove = aiPlayer.determineNextMove();
     aiPlayer.placeTheCard(card1, bestMove.getRow(), bestMove.getCol());
@@ -119,6 +123,4 @@ public class AIPlayerTest {
     assertEquals(initialHandSize - 1, aiPlayer.getHand().size());
     assertFalse(aiPlayer.getHand().contains(card1));
   }
-
-
 }
