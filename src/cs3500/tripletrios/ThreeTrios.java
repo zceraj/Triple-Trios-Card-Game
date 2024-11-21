@@ -1,5 +1,8 @@
 package cs3500.tripletrios;
 
+import java.io.File;
+
+import cs3500.tripletrios.controller.SetUp;
 import cs3500.tripletrios.controller.ThreeTriosController;
 import cs3500.tripletrios.model.GameModelImpl;
 import cs3500.tripletrios.model.HumanPlayer;
@@ -20,13 +23,29 @@ public final class ThreeTrios {
    * @param args command-line arguments (not used) --> it won't let me run it without it??
    */
   public static void main(String[] args) {
-    GameModelImpl model = new GameModelImpl();
-    GameViewGUI viewPlayer1 = new TripleTrioGuiView(model);
-    GameViewGUI viewPlayer2 = new TripleTrioGuiView(model);
+    // setting up the grid and cards using the card and grid file readers
+    String cardFilePath =  "."
+            + File.separator
+            + "TESTINGFILES"
+            + File.separator
+            + "test_cards.txt";
+    String gridFilePath = "."
+            + File.separator
+            + "TESTINGFILES"
+            + File.separator
+            + "valid_grid.text";
+
+    SetUp setup = new SetUp(cardFilePath, gridFilePath);
+
+
+    // implement the strategy pattern here
     IPlayer player1 = new HumanPlayer();
     IPlayer player2 = new HumanPlayer();
+    GameModelImpl model = new GameModelImpl(setup.setGrid(), player1, player2);
+    GameViewGUI viewPlayer1 = new TripleTrioGuiView(model);
+    GameViewGUI viewPlayer2 = new TripleTrioGuiView(model);
     ThreeTriosController controller1 = new ThreeTriosController(model, player1, viewPlayer1);
     ThreeTriosController controller2 = new ThreeTriosController(model, player2, viewPlayer2);
-    model.startGame();
+    model.startGame(setup.setCards());
   }
 }
