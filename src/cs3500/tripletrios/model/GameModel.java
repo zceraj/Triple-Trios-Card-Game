@@ -22,9 +22,10 @@ public interface GameModel extends ReadOnlyGameModel {
 
   /**
    * Places the given card at the specified row and column in the game grid.
+   *
    * @param card The card to place
-   * @param row The row to place the card
-   * @param col The column to place the card
+   * @param row  The row to place the card
+   * @param col  The column to place the card
    */
   void placeCard(CardInterface card, int row, int col);
 
@@ -35,6 +36,7 @@ public interface GameModel extends ReadOnlyGameModel {
 
   /**
    * Resolves battles at the given row and column.
+   *
    * @param row The row of the battle
    * @param col The column of the battle
    */

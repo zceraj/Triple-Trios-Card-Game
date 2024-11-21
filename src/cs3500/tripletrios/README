@@ -28,6 +28,14 @@ Added:
     this.gridClickListener = listener;
   }
 
+ For the Player classes/Interface:
+ - filled out the implementation for the AiPlayer class
+ - Added the method determineNextMove which helper determine the best move for the ai player
+    using the strategy classes defined before, then uses this method for the
+    placeTheCard method in the AiPlayer class
+
+
+
 ----------------------------------------------------------------------------------------------------
 -------------------------------------ASSIGNMENT 6 READ ME ------------------------------------------
 ----------------------------------------------------------------------------------------------------

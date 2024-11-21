@@ -31,6 +31,11 @@ public class AiPlayer implements IPlayer {
     this.hand = new ArrayList<>();
   }
 
+  /**
+   * Retrieves the name of the player.
+   *
+   * @return the name of the player as a {@code String}.
+   */
   @Override
   public String getName() {
     return name;
@@ -65,23 +70,37 @@ public class AiPlayer implements IPlayer {
     this.hand.addAll(playerHand);
   }
 
+
   @Override
   public void placeTheCard(CardInterface card, int row, int col) {
     if (card == null) {
       throw new IllegalArgumentException("Card cannot be null.");
     }
+    if (row < 0 || col < 0) {
+      throw new IllegalArgumentException("Row and column must be non-negative.");
+    }
+
+    Moves bestMove = determineNextMove();
+    row = bestMove.getRow();
+    col = bestMove.getCol();
     card.addRow(row);
     card.addCol(col);
     hand.remove(card);
   }
 
+
   /**
    * Determines the best move using the assigned strategy.
    *
-   * @param grid the current game grid
    * @return the best move determined by the strategy
    */
-  public Moves determineNextMove(Grid grid) {
-    return strategy.getBestMove(this);
+  public Moves determineNextMove() {
+    Moves bestMove = strategy.getBestMove(this);
+    if (bestMove == null || bestMove.getRow() < 0 || bestMove.getCol() < 0) {
+      throw new IllegalStateException("No valid move available for AI player.");
+    }
+    return bestMove;
   }
+
+
 }

@@ -31,12 +31,13 @@ public class StrategyFourTest {
   private IPlayer mockPlayer;
   private StrategyFour strategy;
   IPlayer mockOpponent = new MockPlayer("Player 2");
+  private Grid grid;
 
 
   @Before
   public void setUp() throws IOException {
     GridFileReader gridFileReader = new GridFileReader("TESTINGFILES/grid3x3.txt");
-    Grid grid = new Grid(gridFileReader.getGrid());
+    grid = new Grid(gridFileReader.getGrid());
 
     mockPlayer = new MockPlayer("Player 1");
 

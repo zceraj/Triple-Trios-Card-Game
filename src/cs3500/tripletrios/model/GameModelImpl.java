@@ -29,7 +29,7 @@ public class GameModelImpl implements GameModel {
   /**
    * Constructs a GameModelImpl instance with the specified grid and players.
    *
-   * @param grid a grid that isn't yet of class grid.
+   * @param grid    a grid that isn't yet of class grid.
    * @param player1 the first player.
    * @param player2 the second player.
    * @throws RuntimeException if the grid file cannot be read
@@ -41,8 +41,7 @@ public class GameModelImpl implements GameModel {
     Grid trialGrid = new Grid(grid);
     if (!isGridOdd(trialGrid)) {
       throw new IllegalArgumentException("Grid must have an odd number of card cells.");
-    }
-    else {
+    } else {
       this.grid = trialGrid;
     }
     this.player1 = player1;
@@ -131,25 +130,30 @@ public class GameModelImpl implements GameModel {
   @Override
   public void placeCard(CardInterface card, int row, int col) {
     if (!gameStarted) {
-      throw new IllegalStateException("Game has not  started.");
+      throw new IllegalStateException("Game has not started.");
     }
     if (isGameOver()) {
       throw new IllegalStateException("Game is over.");
     }
-    if (!grid.isValidCell(row, col)) {
-      throw new IllegalArgumentException("Invalid cell coordinates.");
+    // Check if the cell coordinates are valid
+    if (!grid.isValidCell(row, col) || row < 0 || col < 0 || row >= grid.getRows() || col >= grid.getCols()) {
+      throw new IllegalArgumentException("Invalid cell coordinates: (" + row + ", " + col + ")");
     }
 
-    Cell originalCell = grid.getCell(row, col);
-    if (!originalCell.isCardCell() || !originalCell.isEmpty()) {
+    Cell targetCell = grid.getCell(row, col);
+    if (!targetCell.isCardCell() || !targetCell.isEmpty()) {
       throw new IllegalArgumentException("Cannot place card in this cell.");
     }
 
-    currPlayer.placeTheCard(card, row, col);
-    originalCell.setCard(card);
+    card.addRow(row);
+    card.addCol(col);
+    System.out.println("Adding card position: (" + row + ", " + col + ")");
 
-    grid.updateCell(row, col, originalCell);
-    cellsPlayer.put(originalCell, currPlayer);
+    currPlayer.placeTheCard(card, row, col);
+    targetCell.setCard(card);
+
+    grid.updateCell(row, col, targetCell);
+    cellsPlayer.put(targetCell, currPlayer);
 
     battles(row, col);
 
@@ -159,6 +163,7 @@ public class GameModelImpl implements GameModel {
       nextTurn();
     }
   }
+
 
   /**
    * Checks if the game is over.
@@ -226,7 +231,7 @@ public class GameModelImpl implements GameModel {
     boolean[][] cellTypes = new boolean[grid.getRows()][grid.getCols()];
     for (int row = 0; row < grid.getRows(); row++) {
       for (int col = 0; col < grid.getCols(); col++) {
-        cellTypes[row][col] = grid.getCell(row, col).isCardCell(); 
+        cellTypes[row][col] = grid.getCell(row, col).isCardCell();
       }
     }
     return new Grid(this.grid);
@@ -284,6 +289,7 @@ public class GameModelImpl implements GameModel {
 
   /**
    * Gets the score for a player in the game.
+   *
    * @param player The player to get the score of
    * @return The score of the player
    */
@@ -332,20 +338,12 @@ public class GameModelImpl implements GameModel {
    * @return the player who has the card or null if no player was found.
    */
   public IPlayer getPlayerFromCard(CardInterface card) {
-    if (currPlayer == player2) {
-      if (getCurPlayer().getHand().contains(card)) {
-        return player2;
-      } else {
-        return player1;
-      }
-    }
-    if (currPlayer == player1) {
-      if (getCurPlayer().getHand().contains(card)) {
-        return player1;
-      } else {
-        return player2;
-      }
+    if (player1.getHand().contains(card)) {
+      return player1;
+    } else if (player2.getHand().contains(card)) {
+      return player2;
     }
     return null;
   }
+
 }
