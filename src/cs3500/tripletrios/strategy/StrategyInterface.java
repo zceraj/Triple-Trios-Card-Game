@@ -1,6 +1,5 @@
 package cs3500.tripletrios.strategy;
 
-import cs3500.tripletrios.model.Grid;
 import cs3500.tripletrios.model.IPlayer;
 
 /**

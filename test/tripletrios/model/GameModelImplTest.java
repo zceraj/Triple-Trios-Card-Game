@@ -49,9 +49,13 @@ public class GameModelImplTest {
     //CCX
     //XCC
     //CXC
-    boolean[][] gridToSet = {{true, true, false},
+
+    boolean[][] gridToSet = {
+            {true, true, false},
             {false, true, true},
-            {false, true, false}};
+            {false, true, false}
+    };
+
     Grid grid = new Grid(gridToSet);
 
     game = new GameModelImpl(

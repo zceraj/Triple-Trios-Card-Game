@@ -31,8 +31,8 @@ Day 4 - Testing & Debugging:
 5. Test different combinations of human and machine players.
 
 Day 5 - Finalizing and Submitting:
-1. Update README file with new classes and explanations.
+1. Update README file with new classes and explanations. -(M- added changes i made)
 2. Take four screenshots showing game view in action.
-3. Prepare strategy transcript from the mocked model.
+3. Prepare strategy transcript from the mocked model. - done(M)
 4. Create a JAR file that can run the program.
 5. Submit all source files, test files, README, screenshots, strategy transcript, and JAR file.

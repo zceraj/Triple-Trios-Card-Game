@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.controller.CardFileReader;
 import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.Direction;

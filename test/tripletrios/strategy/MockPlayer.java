@@ -6,6 +6,7 @@ import java.util.List;
 import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.IPlayer;
 import cs3500.tripletrios.strategy.Moves;
+import cs3500.tripletrios.strategy.StrategyInterface;
 
 /**
  * MockPlayer class to be used for testing purposes.
@@ -60,6 +61,11 @@ public class MockPlayer implements IPlayer {
   }
 
   @Override
+  public void setStrategy(StrategyInterface strategy) {
+    System.out.println("Set strategy for " + name + ": " + strategy);
+  }
+
+  @Override
   public String getName() {
     return name;
   }
@@ -76,8 +82,8 @@ public class MockPlayer implements IPlayer {
    */
   @Override
   public String toString() {
-    String sb = "MockPlayer{name='" + name + "', " +
-            "hand=" + hand + "}";
+    String sb = "MockPlayer{name='" + name + "', "
+            + "hand=" + hand + "}";
     return sb;
   }
 

@@ -58,13 +58,4 @@ public class MockPlayerTest {
     assertEquals(playerHand.get(1), hand.get(1));
   }
 
-//  @Test
-//  public void testPlaceTheCard() {
-//    MockPlayer mockPlayer = new MockPlayer("TestPlayer");
-//
-//    CardInterface card1 = new Card("Ace of Spades", 10, 5, 3, 7);
-//    mockPlayer.addCardToHand(card1);
-//
-//    mockPlayer.placeTheCard(card1, 0, 0);
-//  }
 }

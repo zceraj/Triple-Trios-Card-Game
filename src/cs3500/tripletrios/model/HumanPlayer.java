@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cs3500.tripletrios.strategy.Moves;
+import cs3500.tripletrios.strategy.StrategyInterface;
 
 /**
  * Represents a human player in the card game, holding a hand of cards
@@ -115,6 +116,14 @@ public class HumanPlayer implements IPlayer {
    * @return the move to be made
    */
   public Moves determineNextMove() {
+    throw new UnsupportedOperationException("Human players do not have a strategy.");
+  }
+
+  /**
+   * Sets a strategy for an AiPlayer.
+   * @param strategy the strategy to be set
+   */
+  public void setStrategy(StrategyInterface strategy) {
     throw new UnsupportedOperationException("Human players do not have a strategy.");
   }
 

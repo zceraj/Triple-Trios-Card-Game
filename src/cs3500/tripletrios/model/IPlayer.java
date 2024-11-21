@@ -3,6 +3,7 @@ package cs3500.tripletrios.model;
 import java.util.List;
 
 import cs3500.tripletrios.strategy.Moves;
+import cs3500.tripletrios.strategy.StrategyInterface;
 
 /**
  * Interface representing a player in the Triple Trios game.
@@ -67,6 +68,12 @@ public interface IPlayer {
    * @return the move to be made
    */
   Moves determineNextMove();
+
+  /**
+   * Sets a strategy for an AiPlayer.
+   * @param strategy the strategy to be set
+   */
+  void setStrategy(StrategyInterface strategy);
 
 
 }

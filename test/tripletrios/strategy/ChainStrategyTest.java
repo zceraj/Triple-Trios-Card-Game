@@ -59,7 +59,7 @@ public class ChainStrategyTest {
 
     Moves bestMove = chainStrategy.getBestMove(mockPlayer);
 
-    assertNotNull("Best move should not be null when using multiple strategies in the chain", bestMove);
+    assertNotNull("Best move should not be null", bestMove);
     assertTrue("Selected cell should be empty",
             grid.getCell(bestMove.getRow(), bestMove.getCol()).isEmpty());
   }

@@ -136,7 +136,8 @@ public class GameModelImpl implements GameModel {
       throw new IllegalStateException("Game is over.");
     }
     // Check if the cell coordinates are valid
-    if (!grid.isValidCell(row, col) || row < 0 || col < 0 || row >= grid.getRows() || col >= grid.getCols()) {
+    if (!grid.isValidCell(row, col) || row < 0 || col < 0
+            || row >= grid.getRows() || col >= grid.getCols()) {
       throw new IllegalArgumentException("Invalid cell coordinates: (" + row + ", " + col + ")");
     }
 
