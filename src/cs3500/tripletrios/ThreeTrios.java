@@ -39,7 +39,7 @@ public final class ThreeTrios {
     SetUp setup = new SetUp(cardFilePath, gridFilePath);
 
 
-    // implement the strategy pattern here
+    // implement the strategy pattern here --> use factory to create the players
     IPlayer player1 = new HumanPlayer();
     IPlayer player2 = new HumanPlayer();
     IPlayer player3 = new AiPlayer();
