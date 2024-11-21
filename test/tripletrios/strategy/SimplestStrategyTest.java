@@ -23,7 +23,6 @@ import static org.junit.Assert.assertNotNull;
  * Test class for the simplest strategy, StrategyOne, using a mock model to create a transcript.
  */
 public class SimplestStrategyTest {
-  private MockModelStrategyOne model;
   private IPlayer player;
   private StrategyOne strategy;
 
@@ -43,7 +42,7 @@ public class SimplestStrategyTest {
     player.setHand(hand);
 
     // Initialize the model and strategy
-    model = new MockModelStrategyOne(grid, player, new MockPlayer("Player Blue"));
+    MockModelStrategyOne model = new MockModelStrategyOne(grid, player, new MockPlayer("Player Blue"));
     strategy = new StrategyOne((ReadOnlyGameModel) model);
   }
 
@@ -54,7 +53,8 @@ public class SimplestStrategyTest {
 
     // Validate that the best move is not null
     assertNotNull("Best move should not be null", bestMove);
-    System.out.println("Best move found by StrategyOne: Row - " + bestMove.getRow() + ", Column - " + bestMove.getCol());
+    System.out.println("Best move by StrategyOne: Row - "
+            + bestMove.getRow() + ", Column - " + bestMove.getCol());
   }
 }
 

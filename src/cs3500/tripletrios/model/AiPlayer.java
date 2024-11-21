@@ -107,8 +107,8 @@ public class AiPlayer implements IPlayer {
 
   /**
    * Sets a strategy for the AI player to use that is refered to in the determineNextMove.
-   * @param strategy
-   * @return
+   * @param strategy the strategy to set
+   * @throws IllegalArgumentException if the strategy is null
    */
   public void setStrategy(StrategyInterface strategy) {
     if (strategy == null) {

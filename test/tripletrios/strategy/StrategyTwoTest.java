@@ -19,19 +19,18 @@ import static org.junit.Assert.assertTrue;
 
 /**
  * Unit tests for the StrategyTwo class in the Triple Trios game.
- * These tests validate the correct implementation of the second strategy, ensuring it selects optimal moves
- * based on game rules and logic.
+ * These tests validate the correct implementation of the second strategy,
+ * ensuring it selects optimal moves based on game rules and logic.
  */
 public class StrategyTwoTest {
   private MockPlayer mockPlayer;
   private MockModelStrategyTwo mockModel;
   private StrategyTwo strategyTwo;
-  private Grid testGrid;
 
   @Before
   public void setup() throws IOException {
     GridFileReader gridFileReader = new GridFileReader("TESTINGFILES/grid5x5.txt");
-    testGrid = new Grid(gridFileReader.getGrid());
+    Grid testGrid = new Grid(gridFileReader.getGrid());
 
     mockPlayer = new MockPlayer("Computer");
     mockPlayer.addCardToHand(

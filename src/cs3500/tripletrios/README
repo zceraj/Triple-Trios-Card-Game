@@ -33,6 +33,27 @@ Added:
  - Added the method determineNextMove which helper determine the best move for the ai player
     using the strategy classes defined before, then uses this method for the
     placeTheCard method in the AiPlayer class
+ - Changed the ai player constructor to no longer take in a strategy, but instead
+    have the strategy be set using the method setStrategy that returns void since
+    it will take in a strategy and updates the classes strategy field used throughout the class
+      - made this for the main so when we need to set up the game and such with different players
+        we can easily set the strategy for the ai player and alter it less troubles
+
+ /**
+    * Sets a strategy for the AI player to use that is refered to in the determineNextMove.
+    * @param strategy
+    * @return
+    */
+   public void setStrategy(StrategyInterface strategy) {
+     if (strategy == null) {
+       throw new IllegalArgumentException("Strategy cannot be null.");
+     }
+     this.strategy = strategy;
+   }
+
+
+
+
 
 
 

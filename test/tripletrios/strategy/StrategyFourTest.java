@@ -31,13 +31,12 @@ public class StrategyFourTest {
   private IPlayer mockPlayer;
   private StrategyFour strategy;
   IPlayer mockOpponent = new MockPlayer("Player 2");
-  private Grid grid;
 
 
   @Before
   public void setUp() throws IOException {
     GridFileReader gridFileReader = new GridFileReader("TESTINGFILES/grid3x3.txt");
-    grid = new Grid(gridFileReader.getGrid());
+    Grid grid = new Grid(gridFileReader.getGrid());
 
     mockPlayer = new MockPlayer("Player 1");
 
@@ -56,7 +55,8 @@ public class StrategyFourTest {
     Moves bestMove = strategy.getBestMove(mockPlayer);
 
     assertNotNull("Best move should not be null", bestMove);
-    System.out.println("Best move found: Row - " + bestMove.getRow() + ", Column - " + bestMove.getCol());
+    System.out.println("Best move found: Row - "
+            + bestMove.getRow() + ", Column - " + bestMove.getCol());
     assertTrue("Selected cell should be empty",
             model.getGameGrid().getCell(bestMove.getRow(), bestMove.getCol()).isEmpty());
   }

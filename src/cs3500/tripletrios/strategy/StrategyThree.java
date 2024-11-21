@@ -75,10 +75,10 @@ public class StrategyThree extends AbstractStrategy {
         CardInterface opponentCard = adjacentCell.getCard();
 
         if (opponentCard != null && !opponentCard.equals(card)) {
-          int opponentAttackValue = intAttackValue(opponentCard.getAttackValue(direction.getOpposite()));
+          int opponentAttackValue = intAttackValue(
+                  opponentCard.getAttackValue(direction.getOpposite()));
           int currentCardAttackValue = intAttackValue(card.getAttackValue(direction));
 
-          // If the opponent's attack value is greater than the card's attack value, there's a risk of being flipped
           if (opponentAttackValue > currentCardAttackValue) {
             riskScore++;
           }

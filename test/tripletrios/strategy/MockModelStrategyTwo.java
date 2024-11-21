@@ -19,6 +19,14 @@ public class MockModelStrategyTwo implements ReadOnlyGameModel {
   private final IPlayer opponentPlayer;
   private final List<String> methodCalls;
 
+  /**
+   * Constructs a mock model strategy two object with the specified grid, current player, and
+   * opponent player.
+   *
+   * @param grid            the grid representing the game
+   * @param currentPlayer    the current player
+   * @param opponentPlayer   the opponent player
+   */
   public MockModelStrategyTwo(Grid grid, IPlayer currentPlayer, IPlayer opponentPlayer) {
     this.mockGrid = grid;
     this.currentPlayer = currentPlayer;
