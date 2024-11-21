@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cs3500.tripletrios.model.Card;
+import cs3500.tripletrios.model.CardInterface;
 
 /**
  * A class responsible for reading card data from a specified file.
@@ -16,7 +17,7 @@ import cs3500.tripletrios.model.Card;
  * for loading a list of cards.
  */
 public class CardFileReader implements CardReader {
-  private final List<Card> cards;
+  private final List<CardInterface> cards;
 
   /**
    * Constructs a {@code CardFileReader} instance and parses the card data from the given file.
@@ -70,7 +71,7 @@ public class CardFileReader implements CardReader {
    *
    * @return a list of cards.
    */
-  public List<Card> getCardDatabase() {
+  public List<CardInterface> getCardDatabase() {
     return cards;
   }
 }
