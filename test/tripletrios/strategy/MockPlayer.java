@@ -5,6 +5,7 @@ import java.util.List;
 
 import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.IPlayer;
+import cs3500.tripletrios.strategy.Moves;
 
 /**
  * MockPlayer class to be used for testing purposes.
@@ -51,6 +52,11 @@ public class MockPlayer implements IPlayer {
                     + " placed card "
                     + card
                     + " at (" + row + ", " + col + ")");
+  }
+
+  @Override
+  public Moves determineNextMove() {
+    return new Moves(null, 0, 0);
   }
 
   @Override

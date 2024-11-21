@@ -115,8 +115,8 @@ public class Grid {
   /**
    * Gets the adjacent cell from the given position in the specified direction.
    *
-   * @param row The current row position
-   * @param col The current column position
+   * @param row       The current row position
+   * @param col       The current column position
    * @param direction The direction to move
    * @return The adjacent cell if it exists, or null if out of bounds
    * @throws IndexOutOfBoundsException if the direction is invalid.
@@ -196,6 +196,7 @@ public class Grid {
 
   /**
    * Gets the number of cells in the grid.
+   *
    * @return The number of cells in the grid.
    */
   public int getCount() {
@@ -213,8 +214,8 @@ public class Grid {
   /**
    * Updates the cell at the specified row and column with the provided {@code newCell} value.
    *
-   * @param row the row index of the cell to update
-   * @param col the column index of the cell to update
+   * @param row     the row index of the cell to update
+   * @param col     the column index of the cell to update
    * @param newCell the new cell to place at the specified location
    * @throws IndexOutOfBoundsException if the specified row or column is outside the grid bounds
    */

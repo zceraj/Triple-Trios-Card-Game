@@ -1,6 +1,5 @@
 package cs3500.tripletrios.strategy;
 
-
 import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.Direction;
@@ -12,10 +11,7 @@ import cs3500.tripletrios.model.ReadOnlyGameModel;
  * Represents a class for the first strategy that places a card that will maximize the number of
  * opponent's cards that can be flipped.
  */
-public class StrategyOne extends AbstractStrategy implements StrategyInterface {
-
-  private final ReadOnlyGameModel model;
-
+public class StrategyOne extends AbstractStrategy {
 
   /**
    * Constructor for the first strategy.
@@ -24,29 +20,28 @@ public class StrategyOne extends AbstractStrategy implements StrategyInterface {
    */
   public StrategyOne(ReadOnlyGameModel model) {
     super(model.getGameGrid());
-    this.model = model;
   }
 
-
   /**
-   * Gets the best move available based of the state of the grid.
+   * Gets the best move available based on the state of the grid.
    *
    * @param computerPlayer the computer generated player
-   * @return a Move object
+   * @return a Move object representing the best move
    */
   @Override
   public Moves getBestMove(IPlayer computerPlayer) {
-    Grid grid = model.getGameGrid();
-    IPlayer currentPlayer = model.getCurPlayer();
-
     int maxFlips = -1;
     Moves bestMove = null;
 
+    // Iterate through all cells in the grid
     for (int row = 0; row < grid.getRows(); row++) {
       for (int col = 0; col < grid.getCols(); col++) {
-        if (grid.getCell(row, col).isEmpty()) {
+        // Check if the cell is empty
+        if (grid.getCell(row, col).isEmpty() && grid.getCell(row, col).isCardCell()) {
+          // Iterate through all cards in the computer player's hand
           for (CardInterface card : computerPlayer.getHand()) {
-            int potentialFlips = countPotentialFlips(card, row, col);
+            // Count potential flips for placing the card in this position
+            int potentialFlips = countPotentialFlips(card, row, col, grid);
             if (potentialFlips > maxFlips) {
               maxFlips = potentialFlips;
               bestMove = new Moves(card, row, col);
@@ -60,14 +55,20 @@ public class StrategyOne extends AbstractStrategy implements StrategyInterface {
     return finalMove(computerPlayer, bestMove, grid);
   }
 
-
-  //counts the possible flips that would happen if a card was played
-  private int countPotentialFlips(CardInterface card, int row, int col) {
+  /**
+   * Counts the possible flips that would happen if a card was played at the given position.
+   *
+   * @param card the card being considered for placement
+   * @param row  the row to place the card
+   * @param col  the column to place the card
+   * @param grid the current game grid
+   * @return the number of opponent cards that could be flipped
+   */
+  private int countPotentialFlips(CardInterface card, int row, int col, Grid grid) {
     int flipCount = 0;
-    Grid gridCopy = new Grid(model.getGameGrid());
 
     for (Direction direction : Direction.values()) {
-      Cell adjacentCell = gridCopy.getAdjacentCells(row, col, direction);
+      Cell adjacentCell = grid.getAdjacentCells(row, col, direction);
       if (adjacentCell != null && !adjacentCell.isEmpty()) {
         CardInterface opponentCard = adjacentCell.getCard();
         if (opponentCard != null && !opponentCard.equals(card)) {
@@ -82,11 +83,4 @@ public class StrategyOne extends AbstractStrategy implements StrategyInterface {
     }
     return flipCount;
   }
-
 }
-
-
-
-
-
-

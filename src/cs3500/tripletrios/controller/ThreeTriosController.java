@@ -17,9 +17,9 @@ public class ThreeTriosController implements ControllerInterface, ActionListener
   /**
    * Constructs a controller for managing the game for a specific player.
    *
-   * @param model the game model shared across all players.
+   * @param model  the game model shared across all players.
    * @param player the player managed by this controller.
-   * @param view the view associated with this player.
+   * @param view   the view associated with this player.
    */
   public ThreeTriosController(GameModel model, IPlayer player, GameViewGUI view) {
     this.model = model;
@@ -59,12 +59,12 @@ public class ThreeTriosController implements ControllerInterface, ActionListener
   /**
    * Handles the event when a card is clicked by the player in their hand.
    *
-   * @param card the card clicked by the player.
+   * @param card      the card clicked by the player.
    * @param cardIndex the index of the card in the player's hand.
    */
   @Override
   public void handleCardClick(CardInterface card, int cardIndex) {
-    while(canMove()) {
+    while (canMove()) {
       if (!player.getHand().contains(card)) {
         System.out.println("Invalid card selection: Card not in player's hand.");
         return;
@@ -118,8 +118,7 @@ public class ThreeTriosController implements ControllerInterface, ActionListener
   private boolean canMove() {
     if (model.getCurPlayer() == player) {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }

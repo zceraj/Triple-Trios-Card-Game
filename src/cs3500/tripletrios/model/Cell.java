@@ -13,8 +13,9 @@ public class Cell {
 
   /**
    * Creates a cell at the given row and column, specifying if it's a hole or not.
-   * @param row Row position of the cell.
-   * @param col Column position of the cell.
+   *
+   * @param row        Row position of the cell.
+   * @param col        Column position of the cell.
    * @param isCardCell Whether this cell is a card cell.
    */
   public Cell(int row, int col, boolean isCardCell) {
@@ -26,6 +27,7 @@ public class Cell {
 
   /**
    * Copy constructor for a new cell.
+   *
    * @param original The cell to copy.
    */
   public Cell(Cell original) {
@@ -38,6 +40,7 @@ public class Cell {
 
   /**
    * Checks if the cell is a card cell.
+   *
    * @return True if the cell is a card cell, false if it's a hole.
    */
   public boolean isCardCell() {
@@ -47,6 +50,7 @@ public class Cell {
 
   /**
    * Checks if the cell is empty.
+   *
    * @return True if the cell is empty, false if it contains a card
    */
   public boolean isEmpty() {
@@ -56,9 +60,13 @@ public class Cell {
 
   /**
    * Places a card in this cell if it's a card cell and currently empty.
+   *
    * @param card The card to place in this cell.
    */
   public void setCard(CardInterface card) {
+    if (card == null) {
+      throw new IllegalArgumentException("Cannot place a null card in a cell.");
+    }
     if (!isCardCell) {
       throw new IllegalArgumentException("Cannot place a card in a hole.");
     }
@@ -71,6 +79,7 @@ public class Cell {
 
   /**
    * Gets the card in this cell.
+   *
    * @return The card in this cell, or null if the cell is empty.
    */
   public CardInterface getCard() {
@@ -79,6 +88,7 @@ public class Cell {
 
   /**
    * Gets the row of a Cell.
+   *
    * @return row in which the cell is in
    */
   public int getRow() {
@@ -87,19 +97,11 @@ public class Cell {
 
   /**
    * Gets the column of a Cell.
+   *
    * @return column in which the cell is in
    */
   public int getCol() {
     return col;
   }
-
-  private int intAttackValue(String value) {
-    if (value.equals("A")) {
-      return 10;
-    } else {
-      return Integer.parseInt(value);
-    }
-  }
-
 
 }

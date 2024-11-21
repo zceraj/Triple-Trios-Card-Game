@@ -83,7 +83,6 @@ public class HumanPlayer implements IPlayer {
   }
 
 
-
   /**
    * Gets the list of cards currently in the player's hand.
    *
@@ -95,8 +94,9 @@ public class HumanPlayer implements IPlayer {
 
   /**
    * Places a card on the game board at the specified row and column.
+   *
    * @param card the card to place
-   * @param row the row to place the card
+   * @param row  the row to place the card
    * @param col  the column to place the card
    */
   public void placeTheCard(CardInterface card, int row, int col) {
@@ -111,9 +111,10 @@ public class HumanPlayer implements IPlayer {
   /**
    * Determines the next move for the player.
    * Used specifically for AI players.
+   *
    * @return the move to be made
    */
-  public Moves determineNextMove(Grid grid) {
+  public Moves determineNextMove() {
     throw new UnsupportedOperationException("Human players do not have a strategy.");
   }
 

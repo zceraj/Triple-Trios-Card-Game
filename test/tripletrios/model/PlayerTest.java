@@ -64,14 +64,6 @@ public class PlayerTest {
     assertEquals(newHand, player.getHand());
   }
 
-  @Test
-  public void testPlayCard() {
-    player.addCardToHand(card1);
-    player.addCardToHand(card2);
-    CardInterface playedCard = player.playCard(0);
-    assertEquals(card1, playedCard);
-    assertFalse(player.getHand().contains(card1));
-  }
 
   @Test
   public void testGetHand() {

@@ -24,6 +24,7 @@ public class ChainStrategy extends AbstractStrategy implements StrategyInterface
     this.strategies = new ArrayList<>();
   }
 
+
   /**
    * Adds a strategy to the list of strategies.
    *

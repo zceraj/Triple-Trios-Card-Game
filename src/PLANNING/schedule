@@ -4,7 +4,7 @@ X - completed
 * - in progress if needed
 
 Day 1 - Preparation & Initial Design:
-1. Review design feedback and incorporate necessary changes from previous assignments.
+1. Review design feedback and incorporate necessary changes from previous assignments. 
 2. Clean up prior code from previous assignments, ensuring no leftover issues.
 3. Design player-action and model-status interfaces.
 4. Implement view with the ability to add player-action listeners.

@@ -26,10 +26,10 @@ public class StrategyTwoTest {
   private MockPlayer mockPlayer;
   private MockModelStrategyTwo mockModel;
   private StrategyTwo strategyTwo;
+  private Grid testGrid;
 
   @Before
   public void setup() throws IOException {
-    Grid testGrid;
     GridFileReader gridFileReader = new GridFileReader("TESTINGFILES/grid5x5.txt");
     testGrid = new Grid(gridFileReader.getGrid());
 

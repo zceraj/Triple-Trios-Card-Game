@@ -55,8 +55,7 @@ public class CardFileReader implements CardReader {
 
           Card card = new Card(cardName, north, south, east, west);
           cards.add(card);
-        }
-        else if (parts.length < 5) {
+        } else if (parts.length < 5) {
           throw new IllegalArgumentException("invalid card format");
         }
       }

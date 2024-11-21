@@ -7,24 +7,28 @@ public interface ReadOnlyGameModel {
 
   /**
    * Checks if the game is over.
+   *
    * @return True if the game is over, false otherwise
    */
   boolean isGameOver();
 
   /**
    * Gets the winner of the game.
+   *
    * @return The winner of the game
    */
   IPlayer getWinner();
 
   /**
    * Gets the game grid.
+   *
    * @return a copy of the game grid
    */
   Grid getGameGrid();
 
   /**
    * Gets the current player.
+   *
    * @return a copy of the current player
    */
   IPlayer getCurPlayer();
@@ -40,6 +44,7 @@ public interface ReadOnlyGameModel {
 
   /**
    * Gets the score of the given player.
+   *
    * @param player The player to get the score of
    * @return The score of the player
    */

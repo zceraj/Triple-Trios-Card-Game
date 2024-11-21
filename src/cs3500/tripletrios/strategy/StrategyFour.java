@@ -29,24 +29,30 @@ public class StrategyFour extends AbstractStrategy implements StrategyInterface 
     this.oppStrategy = oppStrategy;
   }
 
-
+  /**
+   * Gets the best move available based on the current game state.
+   *
+   * @param computerPlayer an AI player
+   * @return the best move avialable
+   */
   @Override
   public Moves getBestMove(IPlayer computerPlayer) {
     int minOpponentMaxScore = Integer.MAX_VALUE;
     Moves bestMove = null;
-    Grid grid = model.getGameGrid();
 
     // Iterate through the grid to find available cells
     for (int row = 0; row < grid.getRows(); row++) {
       for (int col = 0; col < grid.getCols(); col++) {
         if (grid.getCell(row, col).isEmpty() && grid.getCell(row, col).isCardCell()) {
           for (CardInterface card : computerPlayer.getHand()) {
-            Grid simulatedGrid = new Grid(model.getGameGrid());
+            // Create a simulated version of the grid
+            Grid simulatedGrid = new Grid(grid);
             Cell simulatedCell = simulatedGrid.getCell(row, col);
             simulatedCell.setCard(card);
             simulatedGrid.updateCell(row, col, simulatedCell);
 
             IPlayer opponent = model.getOtherPlayer();
+
             ReadOnlyGameModel simulatedModel = createNewModel(simulatedGrid, opponent);
             Moves opponentBestMove = oppStrategy.getBestMove(opponent);
 
@@ -64,7 +70,6 @@ public class StrategyFour extends AbstractStrategy implements StrategyInterface 
     }
     return bestMove;
   }
-
 
   /**
    * Creates a simulated model with a modified grid and specified current player.

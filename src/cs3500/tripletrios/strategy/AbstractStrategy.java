@@ -8,7 +8,6 @@ import cs3500.tripletrios.model.IPlayer;
 /**
  * An abstract class of the common methods between the strategies.
  * Implements the StrategyInterface.
- *
  */
 public abstract class AbstractStrategy implements StrategyInterface {
 
