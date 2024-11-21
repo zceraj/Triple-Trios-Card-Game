@@ -16,7 +16,6 @@ public interface ControllerInterface {
    */
   void startGame();
 
-
   void setupViewListeners();
 
   void handleCardClick(CardInterface card, int cardIndex);

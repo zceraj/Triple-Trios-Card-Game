@@ -6,10 +6,13 @@ Z:
   O Player information (current score, cards in hand).
              O Control buttons (e.g., "Restart Game," "Exit Game").
 
-- do we need to be able to have the controller take in the card files?
-- should my model be started in the controller?
-- simplify dupe code in controller
--
+    Questions
+    - do we need to be able to have the controller take in the card files?
+    - should my model be started in the controller?
+    - simplify dupe code in controller
+    -the strategy is just a parameter in the constructor, is that okay??
+        - no red flags
+
 
 M:
 
@@ -26,3 +29,8 @@ Why does our thing require 2x the amount of cards actually needed?
 O - not complete
 X - completed
 * - in progress if needed
+
+O test controller
+O test AI player
+O play the game and make sure it runs for a while
+O

@@ -1,14 +1,9 @@
 package cs3500.tripletrios;
 
-import java.util.List;
-
 import cs3500.tripletrios.controller.ThreeTriosController;
-import cs3500.tripletrios.model.Card;
-import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.GameModelImpl;
 import cs3500.tripletrios.model.HumanPlayer;
 import cs3500.tripletrios.model.IPlayer;
-import cs3500.tripletrios.model.PlayerColor;
 import cs3500.tripletrios.view.GameViewGUI;
 import cs3500.tripletrios.view.TripleTrioGuiView;
 
@@ -25,7 +20,7 @@ public final class ThreeTrios {
    * @param args command-line arguments (not used) --> it won't let me run it without it??
    */
   public static void main(String[] args) {
-    GameModelImpl model = new GameModelImpl()
+    GameModelImpl model = new GameModelImpl();
     GameViewGUI viewPlayer1 = new TripleTrioGuiView(model);
     GameViewGUI viewPlayer2 = new TripleTrioGuiView(model);
     IPlayer player1 = new HumanPlayer();

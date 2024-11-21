@@ -4,18 +4,18 @@ X - completed
 * - in progress if needed
 
 Day 1 - Preparation & Initial Design:
-1. Review design feedback and incorporate necessary changes from previous assignments.
-2. Clean up prior code from previous assignments, ensuring no leftover issues.
-3. Design player-action and model-status interfaces.
-4. Implement view with the ability to add player-action listeners.
-5. Design the player and model event systems.
+X 1. Review design feedback and incorporate necessary changes from previous assignments.
+X 2. Clean up prior code from previous assignments, ensuring no leftover issues.
+X 3. Design player-action and model-status interfaces.
+X 4. Implement view with the ability to add player-action listeners.
+X 5. Design the player and model event systems.
 
 Day 2 - Controller Design and View Implementation:
-1. Design the controller, incorporating both human and machine player handling.
-2. Design controller to subscribe to both model and view events.
-3. Implement controller to ensure player turn-based action.
-4. Ensure that the view updates based on machine player actions.
-5. Handle exceptions and errors in the controller for invalid moves.
+X 1. Design the controller, incorporating both human and machine player handling.
+X 2. Design controller to subscribe to both model and view events.
+x 3. Implement controller to ensure player turn-based action.
+x 4. Ensure that the view updates based on machine player actions.
+x 5. Handle exceptions and errors in the controller for invalid moves.
 
 Day 3 - Implementing Game Logic & Game Execution:
 1. Implement game start mechanism with `startGame` method.
