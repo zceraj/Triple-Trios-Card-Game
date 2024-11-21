@@ -40,26 +40,47 @@ public class AiPlayer implements IPlayer {
     return name;
   }
 
+  /**
+   * Retrieves the color of the player.
+   * @return the color of the player
+   */
   @Override
   public String getColor() {
     return color.toString();
   }
 
+  /**
+   * Retrieves the hand of the player.
+   * @return the hand of the player
+   */
   @Override
   public List<CardInterface> getHand() {
     return new ArrayList<>(hand); // Return a copy to prevent outside modification.
   }
 
+  /**
+   * Adds a card to the player's hand.
+   * @param card to be added to the player's hand.
+   */
   @Override
   public void addCardToHand(CardInterface card) {
     hand.add(card);
   }
 
+  /**
+   * Removes a card from the player's hand.
+   * @param card to be removed from the player's hand.
+   */
   @Override
   public void removeCardFromHand(CardInterface card) {
     hand.remove(card);
   }
 
+  /**
+   * Sets the hand of the player.
+   * @param playerHand the hand to set
+   * @throws IllegalArgumentException if the hand is null
+   */
   @Override
   public void setHand(List<CardInterface> playerHand) {
     if (playerHand == null) {
@@ -69,7 +90,12 @@ public class AiPlayer implements IPlayer {
     this.hand.addAll(playerHand);
   }
 
-
+  /**
+   * Places the specified card at the given row and column in the game grid.
+   * @param card the card to be placed
+   * @param row  the row to place the card
+   * @param col the column to place the card
+   */
   @Override
   public void placeTheCard(CardInterface card, int row, int col) {
     if (card == null) {
