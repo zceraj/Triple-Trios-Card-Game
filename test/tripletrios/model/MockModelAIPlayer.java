@@ -19,6 +19,12 @@ public class MockModelAIPlayer implements ReadOnlyGameModel {
   private final Map<CardInterface, IPlayer> cardOwnership;
   private final Map<String, Integer> playerScores;
 
+  /**
+   * Constructs a mock model with the specified grid, current player, and other player.
+   * @param grid The grid to use in the mock model
+   * @param currentPlayer The current player
+   * @param otherPlayer The other player
+   */
   public MockModelAIPlayer(Grid grid, IPlayer currentPlayer, IPlayer otherPlayer) {
     this.grid = grid;
     this.currentPlayer = currentPlayer;

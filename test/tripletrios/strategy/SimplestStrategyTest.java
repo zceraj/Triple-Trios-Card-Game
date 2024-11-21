@@ -42,7 +42,8 @@ public class SimplestStrategyTest {
     player.setHand(hand);
 
     // Initialize the model and strategy
-    MockModelStrategyOne model = new MockModelStrategyOne(grid, player, new MockPlayer("Player Blue"));
+    MockModelStrategyOne model = new MockModelStrategyOne(
+            grid, player, new MockPlayer("Player Blue"));
     strategy = new StrategyOne((ReadOnlyGameModel) model);
   }
 

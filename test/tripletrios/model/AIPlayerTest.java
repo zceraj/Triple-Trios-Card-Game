@@ -24,6 +24,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Test class for the AI player.
+ */
 public class AIPlayerTest {
 
   private AiPlayer aiPlayer;

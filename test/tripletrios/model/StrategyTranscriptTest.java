@@ -21,17 +21,18 @@ import cs3500.tripletrios.strategy.StrategyOne;
 
 import static org.junit.Assert.assertNotNull;
 
+/**
+ * Test class for the simplest strategy, StrategyOne, using a mock model.
+ */
 public class StrategyTranscriptTest {
 
   private AiPlayer aiPlayer;
-  private MockModelAIPlayer mockModel;
-  private Grid grid;
 
   @Before
   public void setUp() throws IOException {
     // Initialize the grid from the file representing a 3x3 grid with no holes.
     GridFileReader gridFileReader = new GridFileReader("TESTINGFILES/grid3x3.txt");
-    grid = new Grid(gridFileReader.getGrid());
+    Grid grid = new Grid(gridFileReader.getGrid());
 
     // Initialize opponent and AI player
     IPlayer opponent = new HumanPlayer("Opponent", PlayerColor.RED);
@@ -46,7 +47,7 @@ public class StrategyTranscriptTest {
     hand.add(card3);
 
     // Initialize the mock model for testing purposes
-    mockModel = new MockModelAIPlayer(grid, opponent, null);
+    MockModelAIPlayer mockModel = new MockModelAIPlayer(grid, opponent, null);
 
     // Initialize the strategy and AI player
     StrategyInterface strategy = new StrategyOne(mockModel);
