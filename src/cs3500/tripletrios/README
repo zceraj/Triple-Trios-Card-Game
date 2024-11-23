@@ -3,6 +3,16 @@
 ----------------------------------------------------------------------------------------------------
 CHANGES FOR PART 3:
 
+  public void setControllerObserver (ControllerInterface controllerObserver) {
+    this.controllerObserver = controllerObserver;
+  }
+
+  public void updateObservers(){
+    controllerObserver.update();
+  }
+
+  -- OBSERVER PATTERN
+
 Added a method in the view called getSelectedCard which returns the card
   @Override
   public CardInterface getSelectedCard() {

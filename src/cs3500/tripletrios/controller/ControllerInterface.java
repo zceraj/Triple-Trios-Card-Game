@@ -21,4 +21,6 @@ public interface ControllerInterface {
   void handleCardClick(CardInterface card, int cardIndex);
 
   void handleGridClick(int row, int col);
+
+  void update();
 }

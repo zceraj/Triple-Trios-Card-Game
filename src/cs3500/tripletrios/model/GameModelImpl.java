@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cs3500.tripletrios.controller.ControllerInterface;
+
 
 /**
  * Represents the model for the Triple Trios card game, encapsulating the
@@ -22,6 +24,7 @@ public class GameModelImpl implements GameModel {
   private boolean gameOver;
   private boolean gameStarted = false;
   private final Map<Cell, IPlayer> cellsPlayer;
+  private ControllerInterface controllerObserver;
 
 
   //CLASS INVARIANT: the game grid must have an odd number of card cells
@@ -347,4 +350,11 @@ public class GameModelImpl implements GameModel {
     return null;
   }
 
+  public void setControllerObserver (ControllerInterface controllerObserver) {
+    this.controllerObserver = controllerObserver;
+  }
+
+  public void updateObservers(){
+    controllerObserver.update();
+  }
 }

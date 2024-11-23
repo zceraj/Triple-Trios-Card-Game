@@ -25,6 +25,36 @@ import cs3500.tripletrios.view.TripleTrioGuiView;
 
 public final class ThreeTrios {
 
+
+  private static IPlayer dispatch(String arg){
+    IPlayer player;
+    String playerStrat;
+
+    switch (arg) {
+      case "AI":
+      case "AIPlayer":
+        player = new AiPlayer("player1", PlayerColor.RED);
+      case "Strategy One":
+        playerStrat = "Strategy One";
+        break;
+      case "Strategy Two":
+        playerStrat = "Strategy Two";
+        break;
+      case "Strategy Three":
+        playerStrat = "Strategy Three";
+        break;
+      case "Strategy Four":
+        playerStrat = "Strategy Four";
+        break;
+      case "Human":
+      case "HumanPlayer":
+        player = new HumanPlayer("player1", PlayerColor.RED);
+        break;
+      default:
+        throw new IllegalArgumentException("Unknown player or strategy: " + arg);
+    }
+
+  }
 /**
    * The main method that sets up the Triple Trios game. It creates two players,
    * a grid layout, a list of cards, initializes the game model, and launches the GUI.
@@ -33,6 +63,11 @@ public final class ThreeTrios {
    */
 
   public static void main(String[] args) {
+    IPlayer player1;
+    IPlayer player2;
+    String player1Strat;
+    String player2Strat;
+
     // setting up the grid and cards using the card and grid file readers
     String cardFilePath =  "."
             + File.separator
@@ -47,29 +82,16 @@ public final class ThreeTrios {
 
     SetUp setup = new SetUp(cardFilePath, gridFilePath);
 
+    if (args.length == 0) {
+      System.out.println("No arguments provided. Game will be started with 2 human players");
+      player1 = new HumanPlayer("player1", PlayerColor.RED);
+      player2 = new HumanPlayer("player2", PlayerColor.BLUE);
+      player1Strat = null;
+      player2Strat = null;
+      return;
 
-    // implement the strategy pattern here --> use factory to create the players
-    IPlayer player1 = new HumanPlayer();
-    IPlayer player2 = new HumanPlayer();
-    IPlayer player3 = new AiPlayer();
-    IPlayer player4 = new AiPlayer();
 
-    IPlayer player1 = new HumanPlayer( "Player 1", PlayerColor.RED);
-    IPlayer player2 = new HumanPlayer( "Player 2", PlayerColor.BLUE);
     GameModelImpl model = new GameModelImpl(setup.setGrid(), player1, player2);
-
-    // this is kind of what i have written
-
-/*   IPlayer aiPlayer = new AiPlayer("AI Player", PlayerColor.BLUE);
-
-    GameModelImpl aiModel = new GameModelImpl(setup.setGrid(), player1, aiPlayer);
-
-    StrategyInterface strategyOne = new StrategyOne(aiModel);
-    aiPlayer.setStrategy(strategyOne);
-
-    StrategyInterface strategyTwo = new StrategyTwo(aiModel);
-    aiPlayer.setStrategy(strategyTwo);
-    */
 
 
     GameViewGUI viewPlayer1 = new TripleTrioGuiView(model);
