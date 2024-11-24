@@ -8,6 +8,7 @@ import java.util.Scanner;
 import cs3500.tripletrios.controller.SetUp;
 import cs3500.tripletrios.controller.ThreeTriosController;
 import cs3500.tripletrios.model.AiPlayer;
+import cs3500.tripletrios.model.GameModel;
 import cs3500.tripletrios.model.GameModelImpl;
 import cs3500.tripletrios.model.HumanPlayer;
 import cs3500.tripletrios.model.IPlayer;
@@ -83,7 +84,7 @@ public final class ThreeTrios {
 
     if (args.length >= 3) {
       System.out.println("Too many arguments inputted, this game only supports 2 players. The game "
-        + "will be started with the first two inputs. Press q to quit.");
+          + "will be started with the first two inputs. Press q to quit.");
     }
 
     if (args.length >= 2) {
@@ -98,7 +99,7 @@ public final class ThreeTrios {
   }
 
 
-  private static void setStrats(GameModelImpl model, IPlayer playerUno,
+  private static void setStrats(GameModel model, IPlayer playerUno,
                                 IPlayer playerDos, String[] args) {
     IPlayer player1 = playerUno;
     IPlayer player2 = playerDos;
@@ -120,7 +121,7 @@ public final class ThreeTrios {
     }
   }
 
-  private static StrategyInterface setStrat(GameModelImpl model, IPlayer player, String arg) {
+  private static StrategyInterface setStrat(GameModel model, IPlayer player, String arg) {
     StrategyInterface strategy = null;
 
     if (player instanceof HumanPlayer) {
@@ -172,12 +173,12 @@ public final class ThreeTrios {
     return strategy;
   }
 
-   /**
-   * The main method that sets up the Triple Trios game. It creates two players,
-   * a grid layout, a list of cards, initializes the game model, and launches the GUI.
-   *
-   * @param args command-line arguments (not used) --> it won't let me run it without it??
-   */
+  /**
+  * The main method that sets up the Triple Trios game. It creates two players,
+  * a grid layout, a list of cards, initializes the game model, and launches the GUI.
+  *
+  * @param args command-line arguments (not used) --> it won't let me run it without it??
+  */
 
   public static void main(String[] args) {
     // setting up the grid and cards using the card and grid file readers
@@ -199,7 +200,7 @@ public final class ThreeTrios {
     IPlayer player1 = playersList.get(0);
     IPlayer player2 = playersList.get(1);
 
-    GameModelImpl model = new GameModelImpl(setup.setGrid(), player1, player2);
+    GameModel model = new GameModelImpl(setup.setGrid(), player1, player2);
 
     setStrats(model, player1, player2, args);
 

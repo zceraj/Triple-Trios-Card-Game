@@ -1,6 +1,5 @@
 package cs3500.tripletrios.controller;
 
-import cs3500.tripletrios.observing.ObservableInterface;
 import cs3500.tripletrios.observing.Observer;
 
 /**

@@ -84,6 +84,7 @@ public class ThreeTriosController implements ControllerInterface {
 
       if (isValidMove(card, cell)) {
         model.placeCard(card, cell.getRow(), cell.getCol());
+        model.nextTurn();
         view.clearSelectedCard();
         view.refreshHands();
         view.refreshGrid();
