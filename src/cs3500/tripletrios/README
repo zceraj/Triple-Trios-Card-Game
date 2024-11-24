@@ -2,6 +2,36 @@
 -------------------------------------ASSIGNMENT 7 READ ME ------------------------------------------
 ----------------------------------------------------------------------------------------------------
 CHANGES FOR PART 3:
+ hi so this is about to be so messy so im so sorry
+
+
+ things we changed
+ - for the view i added a player so i could see whos view was whos so now its in the title
+ - we added a super cool fun pop up method that pops up things on the screen
+ - we made it an observable so the controller can see it
+ - clear selected card so the state can be reset when a card is placed
+
+ - for the controller i made it an oberver that looks at the model and view
+ - most of the functionality is in the update method which calls all the helper methods and
+ makes changes in teh game
+
+ - model is also now an observable (how cool!)
+ - i also addded an is game started method
+
+those were the big changes for now
+
+
+ OH YEAH sorry i forgot
+ we excluded files so we have less than 125 haha
+ - pretty much i just excluded the old screenshots because theyre irrelevant now that we have 2
+ views
+ - i took out all the irrelevant files that were used in my read file tests
+ - i removed the text view test because lets be real you want to see the super cool gui instead
+ - i removed the meta -inf (what does it do??)
+ - i took out our planning (sorry no more free looks into the chaos of my mind)
+
+ I KNOW THIS WASNT A GOOD READ ME BUT IM TRYING IM SORRY
+
 
   public void setControllerObserver (ControllerInterface controllerObserver) {
     this.controllerObserver = controllerObserver;

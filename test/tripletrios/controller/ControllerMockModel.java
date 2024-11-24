@@ -13,6 +13,9 @@ import cs3500.tripletrios.model.Grid;
 import cs3500.tripletrios.model.IPlayer;
 import cs3500.tripletrios.observing.Observable;
 
+/**
+ * mock for my model.
+ */
 public class ControllerMockModel extends Observable implements GameModel {
   private final Grid grid;
   private final IPlayer player1;
