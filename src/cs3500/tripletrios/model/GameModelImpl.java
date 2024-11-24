@@ -16,7 +16,7 @@ import cs3500.tripletrios.observing.Observable;
  * facilitates the placement of cards, manages player turns, and checks
  * for game over conditions. It implements the GameModel interface.
  */
-public class GameModelImpl extends Observable implements GameModel{
+public class GameModelImpl extends Observable implements GameModel {
   private final Grid grid;
   private final IPlayer player1;
   private final IPlayer player2;
@@ -358,7 +358,7 @@ public class GameModelImpl extends Observable implements GameModel{
   }
 
   @Override
-  public boolean isGameStarted(){
+  public boolean isGameStarted() {
     return gameStarted;
   }
 }

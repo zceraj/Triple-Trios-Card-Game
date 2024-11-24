@@ -1,7 +1,5 @@
 package cs3500.tripletrios.view;
 
-import java.util.function.BiConsumer;
-
 import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.observing.ObservableInterface;

@@ -2,7 +2,6 @@ package cs3500.tripletrios.model;
 
 import java.util.List;
 
-import cs3500.tripletrios.observing.Observable;
 import cs3500.tripletrios.observing.ObservableInterface;
 
 /**

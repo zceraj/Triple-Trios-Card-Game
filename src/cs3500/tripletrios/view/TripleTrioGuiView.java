@@ -252,7 +252,7 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
     }
     return selectedCard.getCard();
   }
-  
+
   @Override
   public void addObserver(Observer observer) {
     observers.add(observer);
@@ -265,7 +265,7 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
 
   @Override
   public void notifyObservers() {
-    for (Observer observer : observers){
+    for (Observer observer : observers) {
       observer.update();
     }
   }
@@ -283,7 +283,7 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
   }
 
   /**
-   * resets the selected card
+   * resets the selected card.
    */
   @Override
   public void clearSelectedCard() {
@@ -307,12 +307,12 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
   }
 
   @Override
-  public void setSelectedPanel(Cell cell){
+  public void setSelectedPanel(Cell cell) {
     this.selectedCell = cell;
   }
 
   @Override
-  public Cell getSelectedPanel(){
+  public Cell getSelectedPanel() {
     return this.selectedCell;
   }
 }

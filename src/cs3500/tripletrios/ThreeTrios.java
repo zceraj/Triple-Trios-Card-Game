@@ -29,11 +29,12 @@ import cs3500.tripletrios.view.TripleTrioGuiView;
 
 public final class ThreeTrios {
 
-  private static IPlayer createPlayer(PlayerColor color, String arg) throws IllegalArgumentException{
+  private static IPlayer createPlayer(PlayerColor color, String arg)
+          throws IllegalArgumentException {
     IPlayer player = null;
     String playerName;
 
-    if (color == PlayerColor.BLUE){
+    if (color == PlayerColor.BLUE) {
       playerName = "player2";
     }
     else {
@@ -65,7 +66,7 @@ public final class ThreeTrios {
     IPlayer player2 = null;
 
     if (args == null || args.length == 0) {
-      System.out.println("No arguments provided. Game will be started with 2 human players. Press q "
+      System.out.println("No arguments provided. Game will be started with 2 human players. Press q"
               +
               "to quit.");
       player1 = new HumanPlayer("player1", PlayerColor.RED);
@@ -82,7 +83,7 @@ public final class ThreeTrios {
 
     if (args.length >= 3) {
       System.out.println("Too many arguments inputted, this game only supports 2 players. The game "
-      + "will be started with the first two inputs. Press q to quit.");
+        + "will be started with the first two inputs. Press q to quit.");
     }
 
     if (args.length >= 2) {
@@ -90,14 +91,15 @@ public final class ThreeTrios {
       player2 = createPlayer(PlayerColor.BLUE, args[1]);
     }
 
-    List <IPlayer> playersToReturn = new ArrayList<>();
+    List<IPlayer> playersToReturn = new ArrayList<>();
     playersToReturn.add(player1);
     playersToReturn.add(player2);
     return playersToReturn;
   }
 
 
-  private static void setStrats(GameModelImpl model, IPlayer playerUno, IPlayer playerDos, String[] args) {
+  private static void setStrats(GameModelImpl model, IPlayer playerUno,
+                                IPlayer playerDos, String[] args) {
     IPlayer player1 = playerUno;
     IPlayer player2 = playerDos;
     boolean canBeStrat4 = false;
@@ -109,16 +111,16 @@ public final class ThreeTrios {
       canBeStrat4 = true;
     }
     if (player1 instanceof AiPlayer) {
-      player1Strat = setStrat(model, player1, args[0], canBeStrat4);
+      player1Strat = setStrat(model, player1, args[0]);
       player1.setStrategy(player1Strat);
     }
     if (player2 instanceof AiPlayer) {
-      player2Strat = setStrat(model, player2, args[1], canBeStrat4);
+      player2Strat = setStrat(model, player2, args[1]);
       player2.setStrategy(player2Strat);
     }
   }
 
-  public static StrategyInterface setStrat(GameModelImpl model, IPlayer player, String arg, boolean canBeStrat4) {
+  private static StrategyInterface setStrat(GameModelImpl model, IPlayer player, String arg) {
     StrategyInterface strategy = null;
 
     if (player instanceof HumanPlayer) {
@@ -130,12 +132,16 @@ public final class ThreeTrios {
       switch (input[0]) {
         case "Strategy1":
           strategy = new StrategyOne(model);
+          break;
         case "Strategy2":
           strategy = new StrategyTwo(model);
+          break;
         case "Strategy3":
           strategy = new StrategyThree(model);
+          break;
         case "Strategy4":
           strategy = new StrategyFour(model, new StrategyOne(model));
+          break;
         default:
           strategy = new StrategyOne(model);
       }
@@ -147,13 +153,18 @@ public final class ThreeTrios {
         switch (input[i]) {
           case "Strategy1":
             stratsList.addStrategy(new StrategyOne(model));
+            break;
           case "Strategy2":
             stratsList.addStrategy(new StrategyTwo(model));
+            break;
           case "Strategy3":
             stratsList.addStrategy(new StrategyThree(model));
+            break;
           case "Strategy4":
             stratsList.addStrategy(new StrategyFour(model, new StrategyOne(model)));
-
+            break;
+          default:
+            stratsList.addStrategy(null);
         }
       }
     }
@@ -161,7 +172,7 @@ public final class ThreeTrios {
     return strategy;
   }
 
-/**
+   /**
    * The main method that sets up the Triple Trios game. It creates two players,
    * a grid layout, a list of cards, initializes the game model, and launches the GUI.
    *
@@ -194,8 +205,8 @@ public final class ThreeTrios {
 
     GameViewGUI viewPlayer1 = new TripleTrioGuiView(model, model.getCurPlayer());
     GameViewGUI viewPlayer2 = new TripleTrioGuiView(model, model.getOtherPlayer());
-    ThreeTriosController controller1 = new ThreeTriosController(model, model.getCurPlayer(), viewPlayer1);
-    ThreeTriosController controller2 = new ThreeTriosController(model, model.getOtherPlayer(), viewPlayer2);
+    ThreeTriosController controller1 = new ThreeTriosController(model, viewPlayer1);
+    ThreeTriosController controller2 = new ThreeTriosController(model, viewPlayer2);
     model.startGame(setup.setCards());
   }
 }

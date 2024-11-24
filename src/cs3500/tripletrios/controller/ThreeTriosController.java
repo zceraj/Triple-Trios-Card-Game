@@ -3,31 +3,29 @@ package cs3500.tripletrios.controller;
 import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.GameModel;
-import cs3500.tripletrios.model.IPlayer;
-import cs3500.tripletrios.observing.Observer;
 import cs3500.tripletrios.view.GameViewGUI;
 
-public class ThreeTriosController implements ControllerInterface, Observer {
+/**
+ * Controls the flow of the Three Trios game.
+ */
+public class ThreeTriosController implements ControllerInterface {
   private final GameModel model;
-  private final IPlayer player;
   private final GameViewGUI view;
 
   /**
    * Constructs a controller for managing the game for a specific player.
    *
    * @param model  the game model shared across all players.
-   * @param player the player managed by this controller.
    * @param view   the view associated with this player.
    */
-  public ThreeTriosController(GameModel model, IPlayer player, GameViewGUI view) {
-    if (model == null || player == null || view == null) {
-      view.popup("model, null, or view cannot be null");
-      throw new IllegalArgumentException("model, player, or view cannot be null");
+  public ThreeTriosController(GameModel model, GameViewGUI view) {
+    if (model == null || view == null) {
+      view.popup("model or view cannot be null");
+      throw new IllegalArgumentException("model or view cannot be null");
     }
     else {
       this.model = model;
       model.addObserver(this);
-      this.player = player;
       this.view = view;
       this.view.addObserver(this);
       view.setVisible(true);
@@ -80,23 +78,6 @@ public class ThreeTriosController implements ControllerInterface, Observer {
     view.refreshHands();
     view.refreshGrid();
 
-//    // Check whose turn it is and update the view accordingly
-//    if (model.getCurPlayer() == player) {
-//      view.popup("It's your turn, " + player.getName() + ". Select a card to play!");
-//    } else {
-//      view.popup("Waiting for " + model.getCurPlayer().getName() + "'s move...");
-//    }
-//
-//    if (view.getSelectedCard() != null) {
-//      System.out.println("Selected card: " + view.getSelectedCard() + "select cell");
-//      if (view.getSelectedPanel() != null) {
-//        handleGridClick(view.getSelectedPanel().getRow(), view.getSelectedPanel().getCol());
-//
-//        // Update the view to reflect the latest game state
-//        view.refreshHands();
-//        view.refreshGrid();
-//        view.clearSelectedCard();
-//      }
     if (view.getSelectedCard() != null && view.getSelectedPanel() != null) {
       CardInterface card = view.getSelectedCard();
       Cell cell = view.getSelectedPanel();
@@ -123,9 +104,6 @@ public class ThreeTriosController implements ControllerInterface, Observer {
   }
 
   private boolean isValidMove(CardInterface card, Cell cell) {
-    if (cell.isCardCell() && cell.isEmpty()) {
-      return true;
-    }
-    return false;
+    return (cell.isCardCell() && cell.isEmpty());
   }
 }
