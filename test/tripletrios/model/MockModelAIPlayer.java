@@ -85,6 +85,11 @@ public class MockModelAIPlayer implements ReadOnlyGameModel {
   }
 
   @Override
+  public boolean isGameStarted() {
+    return false;
+  }
+
+  @Override
   public int getScore(IPlayer player) {
     if (player == null) {
       return 0;

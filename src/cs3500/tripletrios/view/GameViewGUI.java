@@ -3,11 +3,14 @@ package cs3500.tripletrios.view;
 import java.util.function.BiConsumer;
 
 import cs3500.tripletrios.model.CardInterface;
+import cs3500.tripletrios.model.Cell;
+import cs3500.tripletrios.observing.ObservableInterface;
+import cs3500.tripletrios.observing.Observer;
 
 /**
  * an interface for a game view that pops up a new window to play the game.
  */
-public interface GameViewGUI extends GameView {
+public interface GameViewGUI extends GameView, ObservableInterface {
   /**
    * Sets the visibility of the game view GUI.
    *
@@ -30,6 +33,37 @@ public interface GameViewGUI extends GameView {
 
   CardInterface getSelectedCard();
 
-  void addCardClickListener(BiConsumer<CardInterface, Integer> listener);
-  void addGridClickListener(BiConsumer<Integer, Integer> listener);
+  // we weren't able to extend the Observable abstract class due to java rules, so we did this
+
+  /**
+   * adds an observer.
+   * @param observer someone who observes
+   */
+  void addObserver(Observer observer);
+
+  /**
+   * removes an observer.
+   * @param observer someone who observes
+   */
+  void removeObserver(Observer observer);
+
+  /**
+   * notifies the observers of any changes.
+   */
+  void notifyObservers();
+
+  /**
+   * creates a pop up message.
+   * @param message what you want shown
+   */
+  void popup(String message);
+
+  /**
+   * resets the selected card.
+   */
+  void clearSelectedCard();
+
+  void setSelectedPanel(Cell cell);
+
+  Cell getSelectedPanel();
 }

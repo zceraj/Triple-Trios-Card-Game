@@ -83,6 +83,11 @@ public class MockModelStrategyTwo implements ReadOnlyGameModel {
     return opponentPlayer;
   }
 
+  @Override
+  public boolean isGameStarted() {
+    return false;
+  }
+
   public List<String> getMethodCalls() {
     return methodCalls;
   }

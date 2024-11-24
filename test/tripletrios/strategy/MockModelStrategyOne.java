@@ -81,6 +81,11 @@ public class MockModelStrategyOne implements ReadOnlyGameModel {
   }
 
   @Override
+  public boolean isGameStarted() {
+    return false;
+  }
+
+  @Override
   public boolean isGameOver() {
     methodCalls.add("isGameOver");
     return gameOver;

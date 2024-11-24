@@ -4,9 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.swing.JPanel;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.BorderFactory;
 
@@ -15,12 +18,12 @@ import java.awt.event.MouseAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BiConsumer;
 
 import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.IPlayer;
 import cs3500.tripletrios.model.ReadOnlyGameModel;
+import cs3500.tripletrios.observing.Observer;
 
 /**
  * Represents the graphical user interface (GUI) view for the "Triple Trio" gam.
@@ -35,8 +38,9 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
   private final JPanel rightColumnPanel;
   private CardPanel selectedCard;
   private int selectedCardIndex = -1;
-  private BiConsumer<CardInterface, Integer> cardClickListener;
-  private BiConsumer<Integer, Integer> gridClickListener;
+  private final List<Observer> observers = new ArrayList<>();
+  private final IPlayer player;
+  private Cell selectedCell;
 
 
   /**
@@ -46,15 +50,16 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
    *
    * @param model the read-only model representing the current game state.
    */
-  public TripleTrioGuiView(ReadOnlyGameModel model) {
+  public TripleTrioGuiView(ReadOnlyGameModel model, IPlayer player) {
     this.model = model;
+    this.player = player;
     this.gridPanel = new JPanel(
             new GridLayout(model.getGameGrid().getRows(), model.getGameGrid().getCols()));
     this.leftColumnPanel = new JPanel(new GridLayout(model.getGameGrid().getRows(), 1));
     this.rightColumnPanel = new JPanel(new GridLayout(model.getGameGrid().getRows(), 1));
     this.selectedCard = null;
 
-    setTitle("Three Trios Game");
+    setTitle("Three Trios Game         " + "This player: " + player.getName());
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setLayout(new BorderLayout());
     setSize(800, 600);
@@ -66,6 +71,7 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
 
     initializeGrid();
     initializeHands();
+    initializeQuitButton();
 
     repaint();
   }
@@ -83,7 +89,7 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
       List<Cell> rowCells = new ArrayList<>();
       for (int col = 0; col < model.getGameGrid().getCols(); col++) {
         Cell cell = model.getGameGrid().getCell(row, col);
-        GridPanel gridCellPanel = new GridPanel(cell, row, col, model);
+        GridPanel gridCellPanel = new GridPanel(cell, row, col, model, player, this);
 
         gridPanel.add(gridCellPanel);
         rowCells.add(cell);
@@ -150,37 +156,39 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
    * @param cardPanel the card panel that was clicked
    */
   private void handleCardClick(CardPanel cardPanel) {
-    // If the same card is clicked again, deselect it
-    if (selectedCard == cardPanel.getCard()) {
-      selectedCard = null;
-      selectedCardIndex = -1;
-      cardPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // Reset border
-      System.out.println("Deselected card.");
-    }
-    if (selectedCard != cardPanel.getCard() && selectedCardIndex != -1 && selectedCard != null) {
-      cardPanel.setBorder(BorderFactory.createEmptyBorder());
-      selectedCard.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
-      System.out.println("Deselected card.");
-      selectedCard = null;
-      selectedCardIndex = -1;
-      cardPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-    } else {
-      // If a different card is clicked, highlight it
-      if (selectedCard != null) {
-        // Reset the border of the previously selected card
-        cardPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+    if (model.getCurPlayer() == player && model.getPlayerFromCard(cardPanel.getCard()) == player) {
+      // If the same card is clicked again, deselect it
+      if (selectedCard == cardPanel.getCard()) {
+        selectedCard = null;
+        selectedCardIndex = -1;
+        cardPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // Reset border
+        System.out.println("Deselected card.");
       }
+      if (selectedCard != cardPanel.getCard() && selectedCardIndex != -1 && selectedCard != null) {
+        cardPanel.setBorder(BorderFactory.createEmptyBorder());
+        selectedCard.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        System.out.println("Deselected card.");
+        selectedCard = null;
+        selectedCardIndex = -1;
+        cardPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+      } else {
+        // If a different card is clicked, highlight it
+        if (selectedCard != null) {
+          // Reset the border of the previously selected card
+          cardPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        }
 
-      selectedCard = cardPanel;
-      selectedCardIndex = cardPanel.getIndex();
-      cardPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY, 5)); // Highlight border
+        selectedCard = cardPanel;
+        selectedCardIndex = cardPanel.getIndex();
+        cardPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY, 5)); // Highlight border
 
-      IPlayer playerOwner = model.getPlayerFromCard(cardPanel.getCard());
+        IPlayer playerOwner = model.getPlayerFromCard(cardPanel.getCard());
 
-      System.out.println("Selected card: "
-              + selectedCard.getCard().getCardName()
-              + " (Index: " + selectedCardIndex + " owned by "
-              + playerOwner.getName() + ")");
+        System.out.println("Selected card: "
+                + selectedCard.getCard().getCardName()
+                + " (Index: " + selectedCardIndex + " owned by "
+                + playerOwner.getName() + ")");
+      }
     }
   }
 
@@ -244,22 +252,67 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
     }
     return selectedCard.getCard();
   }
+  
+  @Override
+  public void addObserver(Observer observer) {
+    observers.add(observer);
+  }
 
-  /**
-   * Sets up the card click listener.
-   *
-   * @param listener a BiConsumer that takes a CardInterface and its index.
-   */
-  public void addCardClickListener(BiConsumer<CardInterface, Integer> listener) {
-    this.cardClickListener = listener;
+  @Override
+  public void removeObserver(Observer observer) {
+    observers.remove(observer);
+  }
+
+  @Override
+  public void notifyObservers() {
+    for (Observer observer : observers){
+      observer.update();
+    }
+  }
+
+  @Override
+  public void popup(String message) {
+    javax.swing.SwingUtilities.invokeLater(() -> {
+      javax.swing.JOptionPane.showMessageDialog(
+              null,
+              message,
+              "Here ye! Here ye!",
+              javax.swing.JOptionPane.INFORMATION_MESSAGE
+      );
+    });
   }
 
   /**
-   * Sets up the grid click listener.
-   *
-   * @param listener a BiConsumer that takes row and column indices.
+   * resets the selected card
    */
-  public void addGridClickListener(BiConsumer<Integer, Integer> listener) {
-    this.gridClickListener = listener;
+  @Override
+  public void clearSelectedCard() {
+    selectedCard = null;
+    selectedCardIndex = -1;
+    notifyObservers();
+  }
+
+  // Method to initialize the Quit button
+  private void initializeQuitButton() {
+    JButton quitButton = new JButton("Quit");
+    quitButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        System.exit(0);  // This will terminate the program when the button is clicked
+      }
+    });
+
+    // Add the button to the bottom of the window (BorderLayout.SOUTH)
+    add(quitButton, BorderLayout.SOUTH);
+  }
+
+  @Override
+  public void setSelectedPanel(Cell cell){
+    this.selectedCell = cell;
+  }
+
+  @Override
+  public Cell getSelectedPanel(){
+    return this.selectedCell;
   }
 }

@@ -1,15 +1,13 @@
 package cs3500.tripletrios.controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.IOException;
-
 import cs3500.tripletrios.model.CardInterface;
+import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.GameModel;
 import cs3500.tripletrios.model.IPlayer;
+import cs3500.tripletrios.observing.Observer;
 import cs3500.tripletrios.view.GameViewGUI;
 
-public class ThreeTriosController implements ControllerInterface, ActionListener {
+public class ThreeTriosController implements ControllerInterface, Observer {
   private final GameModel model;
   private final IPlayer player;
   private final GameViewGUI view;
@@ -22,58 +20,20 @@ public class ThreeTriosController implements ControllerInterface, ActionListener
    * @param view   the view associated with this player.
    */
   public ThreeTriosController(GameModel model, IPlayer player, GameViewGUI view) {
-    this.model = model;
-    this.player = player;
-    this.view = view;
-  }
-
-  /**
-   * Starts the game for this controller, ensuring the view is set up
-   * and listening to player actions.
-   */
-  @Override
-  public void startGame() {
-    try {
-      view.render();
-    } catch (IOException e) {
-      System.err.println("Failed to render the view: " + e.getMessage());
+    if (model == null || player == null || view == null) {
+      view.popup("model, null, or view cannot be null");
+      throw new IllegalArgumentException("model, player, or view cannot be null");
     }
-
-    // Refresh the view to reflect the model's current state
-    view.refreshHands();
-    view.refreshGrid();
-
-    // Add event listeners to the view (if applicable)
-    setupViewListeners();
-  }
-
-  /**
-   * Sets up event listeners for the view to handle user interactions.
-   */
-  @Override
-  public void setupViewListeners() {
-    view.addCardClickListener((card, cardIndex) -> handleCardClick(card, cardIndex));
-    view.addGridClickListener((row, col) -> handleGridClick(row, col));
-  }
-
-  /**
-   * Handles the event when a card is clicked by the player in their hand.
-   *
-   * @param card      the card clicked by the player.
-   * @param cardIndex the index of the card in the player's hand.
-   */
-  @Override
-  public void handleCardClick(CardInterface card, int cardIndex) {
-    while (canMove()) {
-      if (!player.getHand().contains(card)) {
-        System.out.println("Invalid card selection: Card not in player's hand.");
-        return;
-      }
-
-      System.out.println("Player " + player.getName() + " selected card: " + card.getCardName());
+    else {
+      this.model = model;
+      model.addObserver(this);
+      this.player = player;
+      this.view = view;
+      this.view.addObserver(this);
+      view.setVisible(true);
       view.refreshHands();
+      view.refreshGrid();
     }
-    System.out.println("hey girl, it is not your turn. please wait!");
   }
 
   /**
@@ -87,15 +47,13 @@ public class ThreeTriosController implements ControllerInterface, ActionListener
     while (canMove()) {
       CardInterface selectedCard = view.getSelectedCard();
       if (selectedCard == null) {
-        System.out.println("No card selected. Please select a card first.");
+        view.popup("No card selected. Please select a card first.");
         return;
       }
 
       try {
         model.placeCard(selectedCard, row, col);
         model.battles(row, col);
-
-        System.out.println("Player " + player.getName() + " placed card at (" + row + ", " + col + ").");
 
         // Refresh the grid and hands after the card placement
         view.refreshGrid();
@@ -110,17 +68,64 @@ public class ThreeTriosController implements ControllerInterface, ActionListener
     System.out.println("Hey girl, it is not your turn:( please wait!");
   }
 
+
   @Override
-  public void actionPerformed(ActionEvent e) {
-
-  }
-
-  private boolean canMove() {
-    if (model.getCurPlayer() == player) {
-      return true;
-    } else {
-      return false;
+  public void update() {
+    // Check if the game is over
+    if (model.isGameOver()) {
+      view.popup("Game Over! " + model.getWinner() + " wins!");
+      return;
     }
+
+    view.refreshHands();
+    view.refreshGrid();
+
+//    // Check whose turn it is and update the view accordingly
+//    if (model.getCurPlayer() == player) {
+//      view.popup("It's your turn, " + player.getName() + ". Select a card to play!");
+//    } else {
+//      view.popup("Waiting for " + model.getCurPlayer().getName() + "'s move...");
+//    }
+//
+//    if (view.getSelectedCard() != null) {
+//      System.out.println("Selected card: " + view.getSelectedCard() + "select cell");
+//      if (view.getSelectedPanel() != null) {
+//        handleGridClick(view.getSelectedPanel().getRow(), view.getSelectedPanel().getCol());
+//
+//        // Update the view to reflect the latest game state
+//        view.refreshHands();
+//        view.refreshGrid();
+//        view.clearSelectedCard();
+//      }
+    if (view.getSelectedCard() != null && view.getSelectedPanel() != null) {
+      CardInterface card = view.getSelectedCard();
+      Cell cell = view.getSelectedPanel();
+
+      if (isValidMove(card, cell)) {
+        model.placeCard(card, cell.getRow(), cell.getCol());
+        view.clearSelectedCard();
+        view.refreshHands();
+        view.refreshGrid();
+      } else {
+        view.popup("Invalid move!");
+      }
+    }
+
   }
 
+  /**
+   * Checks if the current player is allowed to move.
+   *
+   * @return true if the current player is allowed to move; false otherwise
+   */
+  private boolean canMove() {
+    return model.getCurPlayer().equals(model.getCurPlayer());
+  }
+
+  private boolean isValidMove(CardInterface card, Cell cell) {
+    if (cell.isCardCell() && cell.isEmpty()) {
+      return true;
+    }
+    return false;
+  }
 }

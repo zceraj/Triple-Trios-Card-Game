@@ -2,10 +2,13 @@ package cs3500.tripletrios.model;
 
 import java.util.List;
 
+import cs3500.tripletrios.observing.Observable;
+import cs3500.tripletrios.observing.ObservableInterface;
+
 /**
  * Represents the interface fo the model for the Triple Trios card game.
  */
-public interface GameModel extends ReadOnlyGameModel {
+public interface GameModel extends ReadOnlyGameModel, ObservableInterface {
 
   /**
    * Starts the game with the given options. The deck given is used

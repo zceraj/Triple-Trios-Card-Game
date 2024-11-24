@@ -21,6 +21,7 @@ import java.io.IOException;
 import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.Direction;
+import cs3500.tripletrios.model.IPlayer;
 import cs3500.tripletrios.model.ReadOnlyGameModel;
 
 /**
@@ -33,6 +34,9 @@ public class GridPanel extends JPanel implements GridCellView {
   private final Cell cell;
   private final int row;
   private final int col;
+  private final ReadOnlyGameModel model;
+  private final IPlayer player;
+  private final GameViewGUI gameView;
 
   /**
    * Constructs a GridPanel instance representing a specific cell in the grid.
@@ -42,10 +46,16 @@ public class GridPanel extends JPanel implements GridCellView {
    * @param row  the row index of the cell in the grid
    * @param col  the column index of the cell in the grid
    */
-  public GridPanel(Cell cell, int row, int col, ReadOnlyGameModel model) {
+  public GridPanel(Cell cell, int row, int col, ReadOnlyGameModel model,
+                   IPlayer player, GameViewGUI gameView) {
     this.cell = cell;
     this.row = row;
     this.col = col;
+
+    this.model = model;
+    this.player = player;
+    this.gameView = gameView;
+
     setPreferredSize(new Dimension(80, 120));
     setColor(model);
     setBorder(BorderFactory.createLineBorder(new Color(100, 0, 150)));
@@ -68,18 +78,21 @@ public class GridPanel extends JPanel implements GridCellView {
    * Prints the cell's coordinates and card name (if present) and updates the cell's border.
    */
   public void handleGridCellClick() {
-    // Print the coordinates of the clicked cell starting at 0 with the rows going down
-    // so for a grid "xox" o would be (0,1) bc its the first row and the second column
-    System.out.println("Grid cell clicked: (" + row + ", " + col + ")");
+    if (model.getCurPlayer() == player) {
+      // Print the coordinates of the clicked cell starting at 0 with the rows going down
+      // so for a grid "xox" o would be (0,1) bc its the first row and the second column
+      System.out.println("Grid cell clicked: (" + row + ", " + col + ")");
 
-    if (cell.isCardCell()) {
-      if (cell.getCard() != null) {
-        System.out.println("Card in this cell: " + cell.getCard().getCardName());
+      if (cell.isCardCell()) {
+        if (cell.getCard() != null) {
+          gameView.setSelectedPanel(this.cell);
+        }
+
+        setBorder(BorderFactory.createLineBorder(new Color(100, 0, 150), 5));
+        repaint();
       }
-
-      setBorder(BorderFactory.createLineBorder(new Color(100, 0, 150), 5));
-      repaint();
     }
+    gameView.notifyObservers();
   }
 
   @Override
@@ -126,14 +139,6 @@ public class GridPanel extends JPanel implements GridCellView {
    */
   private void setColor(ReadOnlyGameModel model) {
     Cell cell = model.getGameGrid().getCell(row, col);
-    if (cell.isCardCell()) {
-      System.out.println("Cell at (" + row + "," + col + ") is a card cell.");
-      if (cell.getCard() != null) {
-        System.out.println("Cell contains card: " + cell.getCard().getCardName());
-      } else {
-        System.out.println("Cell is empty.");
-      }
-    }
     if (cell.isCardCell()) {
       if (cell.getCard() != null) {
         Color cellColor;

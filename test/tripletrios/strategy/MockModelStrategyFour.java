@@ -73,4 +73,9 @@ public class MockModelStrategyFour implements ReadOnlyGameModel {
     return opponentPlayer;
   }
 
+  @Override
+  public boolean isGameStarted() {
+    return false;
+  }
+
 }

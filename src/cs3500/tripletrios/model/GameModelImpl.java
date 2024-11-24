@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import cs3500.tripletrios.controller.ControllerInterface;
+import cs3500.tripletrios.observing.Observable;
 
 
 /**
@@ -16,7 +16,7 @@ import cs3500.tripletrios.controller.ControllerInterface;
  * facilitates the placement of cards, manages player turns, and checks
  * for game over conditions. It implements the GameModel interface.
  */
-public class GameModelImpl implements GameModel {
+public class GameModelImpl extends Observable implements GameModel{
   private final Grid grid;
   private final IPlayer player1;
   private final IPlayer player2;
@@ -24,7 +24,7 @@ public class GameModelImpl implements GameModel {
   private boolean gameOver;
   private boolean gameStarted = false;
   private final Map<Cell, IPlayer> cellsPlayer;
-  private ControllerInterface controllerObserver;
+
 
 
   //CLASS INVARIANT: the game grid must have an odd number of card cells
@@ -119,6 +119,7 @@ public class GameModelImpl implements GameModel {
     this.currPlayer = player1;
     this.gameOver = false;
     this.gameStarted = true;
+    this.notifyObservers();
   }
 
   /**
@@ -165,6 +166,7 @@ public class GameModelImpl implements GameModel {
       gameOver = true;
     } else {
       nextTurn();
+      notifyObservers();
     }
   }
 
@@ -177,6 +179,7 @@ public class GameModelImpl implements GameModel {
   @Override
   public boolean isGameOver() {
     if (gameOver) {
+      notifyObservers();
       return true;
     }
     for (int row = 0; row < grid.getRows(); row++) {
@@ -187,6 +190,7 @@ public class GameModelImpl implements GameModel {
         }
       }
     }
+    notifyObservers();
     gameOver = true;
     return true;
   }
@@ -258,6 +262,7 @@ public class GameModelImpl implements GameModel {
    * @param col      The column of the cell
    * @param newOwner The new player owning the cell
    */
+  @Override
   public void updateOwner(int row, int col, IPlayer newOwner) {
     Cell orignalCell = grid.getCell(row, col);
     Cell updatedCell = new Cell(orignalCell);
@@ -328,6 +333,7 @@ public class GameModelImpl implements GameModel {
    *
    * @return the other player in the game, opposite to the current player
    */
+  @Override
   public IPlayer getOtherPlayer() {
     if (currPlayer == player2) {
       return player1;
@@ -341,6 +347,7 @@ public class GameModelImpl implements GameModel {
    * @param card the card to locate
    * @return the player who has the card or null if no player was found.
    */
+  @Override
   public IPlayer getPlayerFromCard(CardInterface card) {
     if (player1.getHand().contains(card)) {
       return player1;
@@ -350,11 +357,8 @@ public class GameModelImpl implements GameModel {
     return null;
   }
 
-  public void setControllerObserver (ControllerInterface controllerObserver) {
-    this.controllerObserver = controllerObserver;
-  }
-
-  public void updateObservers(){
-    controllerObserver.update();
+  @Override
+  public boolean isGameStarted(){
+    return gameStarted;
   }
 }

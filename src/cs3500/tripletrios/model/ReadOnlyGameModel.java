@@ -53,4 +53,6 @@ public interface ReadOnlyGameModel {
   IPlayer getPlayerFromCard(CardInterface card);
 
   IPlayer getOtherPlayer();
+
+  boolean isGameStarted();
 }
