@@ -8,11 +8,5 @@ import cs3500.tripletrios.observing.Observer;
  * handling user inputs and updating the game state accordingly.
  */
 public interface ControllerInterface extends Observer {
-  /**
-   * handles when a cell is clicked and update is called.
-   *
-   * @param row  of the cell
-   * @param col of the cell
-   */
-  void handleGridClick(int row, int col);
+  // the only method called in the controller is from observer and it is the update method
 }

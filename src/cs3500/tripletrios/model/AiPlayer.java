@@ -15,6 +15,7 @@ public class AiPlayer implements IPlayer {
   private final String name;
   private final PlayerColor color;
   private final List<CardInterface> hand;
+  private final List<CardInterface> allCards;
   private StrategyInterface strategy;
 
   /**
@@ -27,6 +28,7 @@ public class AiPlayer implements IPlayer {
     this.name = name;
     this.color = color;
     this.hand = new ArrayList<>();
+    this.allCards = new ArrayList<>();
     this.strategy = null;
   }
 
@@ -54,7 +56,7 @@ public class AiPlayer implements IPlayer {
    * @return the hand of the player
    */
   @Override
-  public List<CardInterface> getHand() {
+  public List<CardInterface> getCurrentHand() {
     return new ArrayList<>(hand); // Return a copy to prevent outside modification.
   }
 
@@ -64,7 +66,10 @@ public class AiPlayer implements IPlayer {
    */
   @Override
   public void addCardToHand(CardInterface card) {
+
     hand.add(card);
+    allCards.add(card);
+
   }
 
   /**
@@ -82,7 +87,7 @@ public class AiPlayer implements IPlayer {
    * @throws IllegalArgumentException if the hand is null
    */
   @Override
-  public void setHand(List<CardInterface> playerHand) {
+  public void setCurrentHand(List<CardInterface> playerHand) {
     if (playerHand == null) {
       throw new IllegalArgumentException("Hand cannot be null.");
     }
@@ -143,5 +148,8 @@ public class AiPlayer implements IPlayer {
     this.strategy = strategy;
   }
 
-
+  @Override
+  public List<CardInterface> getAllCards() {
+    return new ArrayList<>(allCards);
+  }
 }

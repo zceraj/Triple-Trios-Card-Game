@@ -45,4 +45,9 @@ public interface GameModel extends ReadOnlyGameModel, ObservableInterface {
   void battles(int row, int col);
 
   void updateOwner(int row, int col, IPlayer player);
+
+  boolean justStarted();
+
+  // I want my controller to be able to access it but not the general public
+  void setJustStarted(boolean justStarted);
 }

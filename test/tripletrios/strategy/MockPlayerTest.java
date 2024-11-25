@@ -25,7 +25,7 @@ public class MockPlayerTest {
     CardInterface card1 = new Card("Ace of Spades", 10, 5, 3, 7);
     mockPlayer.addCardToHand(card1);
 
-    List<CardInterface> hand = mockPlayer.getHand();
+    List<CardInterface> hand = mockPlayer.getCurrentHand();
     assertEquals(1, hand.size());
     assertEquals(card1, hand.get(0));
   }
@@ -38,7 +38,7 @@ public class MockPlayerTest {
     mockPlayer.addCardToHand(card1);
     mockPlayer.removeCardFromHand(card1);
 
-    List<CardInterface> hand = mockPlayer.getHand();
+    List<CardInterface> hand = mockPlayer.getCurrentHand();
     assertEquals(0, hand.size());
   }
 
@@ -50,8 +50,8 @@ public class MockPlayerTest {
     playerHand.add(new Card("Ace of Spades", 10, 5, 3, 7));
     playerHand.add(new Card("King of Hearts", 9, 8, 6, 4));
 
-    mockPlayer.setHand(playerHand);
-    List<CardInterface> hand = mockPlayer.getHand();
+    mockPlayer.setCurrentHand(playerHand);
+    List<CardInterface> hand = mockPlayer.getCurrentHand();
 
     assertEquals(2, hand.size());
     assertEquals(playerHand.get(0), hand.get(0));

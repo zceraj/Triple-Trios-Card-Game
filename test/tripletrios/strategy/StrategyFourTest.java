@@ -43,7 +43,7 @@ public class StrategyFourTest {
     List<CardInterface> hand = new ArrayList<>();
     hand.add(new Card("Card1", 5, 3, 2, 1));
     hand.add(new Card("Card2", 7, 4, 6, 3));
-    mockPlayer.setHand(hand);
+    mockPlayer.setCurrentHand(hand);
 
     // Initialize the model and strategy
     model = new MockModelStrategyFour(grid, mockPlayer, mockOpponent);
@@ -63,7 +63,7 @@ public class StrategyFourTest {
 
   @Test
   public void testNoCardsInHand() {
-    mockPlayer.setHand(new ArrayList<>());
+    mockPlayer.setCurrentHand(new ArrayList<>());
 
     Moves bestMove = strategy.getBestMove(mockPlayer);
 

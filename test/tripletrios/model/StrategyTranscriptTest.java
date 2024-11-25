@@ -52,7 +52,7 @@ public class StrategyTranscriptTest {
     // Initialize the strategy and AI player
     StrategyInterface strategy = new StrategyOne(mockModel);
     aiPlayer = new AiPlayer("AI Player", PlayerColor.RED);
-    aiPlayer.setHand(hand);
+    aiPlayer.setCurrentHand(hand);
     aiPlayer.setStrategy(strategy);
   }
 

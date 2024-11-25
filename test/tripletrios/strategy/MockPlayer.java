@@ -40,7 +40,7 @@ public class MockPlayer implements IPlayer {
   }
 
   @Override
-  public void setHand(List<CardInterface> playerHand) {
+  public void setCurrentHand(List<CardInterface> playerHand) {
     this.hand = new ArrayList<>(playerHand);
     System.out.println("Set hand for " + name + ": " + hand);
   }
@@ -63,6 +63,11 @@ public class MockPlayer implements IPlayer {
   @Override
   public void setStrategy(StrategyInterface strategy) {
     System.out.println("Set strategy for " + name + ": " + strategy);
+  }
+
+  @Override
+  public List<CardInterface> getAllCards() {
+    return List.of();
   }
 
   @Override
@@ -92,7 +97,7 @@ public class MockPlayer implements IPlayer {
    *
    * @return The hand of the player.
    */
-  public List<CardInterface> getHand() {
+  public List<CardInterface> getCurrentHand() {
     return new ArrayList<>(hand);
   }
 

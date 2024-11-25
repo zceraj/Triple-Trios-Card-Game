@@ -3,9 +3,7 @@ package cs3500.tripletrios.view;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Color;
-import java.awt.FontMetrics;
 import java.awt.FontFormatException;
-import java.awt.Graphics;
 import java.awt.Font;
 
 import javax.swing.JPanel;
@@ -22,7 +20,11 @@ import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.Direction;
 import cs3500.tripletrios.model.IPlayer;
+import cs3500.tripletrios.model.PlayerColor;
 import cs3500.tripletrios.model.ReadOnlyGameModel;
+
+import static cs3500.tripletrios.model.PlayerColor.BLUE;
+import static cs3500.tripletrios.model.PlayerColor.RED;
 
 /**
  * Represents a graphical component in a grid-based view for the Triple Trios game.
@@ -31,7 +33,7 @@ import cs3500.tripletrios.model.ReadOnlyGameModel;
  * events on the cell.
  */
 public class GridPanel extends JPanel implements GridCellView {
-  private final Cell cell;
+  private Cell cell;
   private final int row;
   private final int col;
   private final ReadOnlyGameModel model;
@@ -57,7 +59,7 @@ public class GridPanel extends JPanel implements GridCellView {
     this.gameView = gameView;
 
     setPreferredSize(new Dimension(80, 120));
-    setColor(model);
+    setColor();
     setBorder(BorderFactory.createLineBorder(new Color(100, 0, 150)));
 
     // Add mouse listener to handle clicks on the grid cell
@@ -78,40 +80,22 @@ public class GridPanel extends JPanel implements GridCellView {
    * Prints the cell's coordinates and card name (if present) and updates the cell's border.
    */
   public void handleGridCellClick() {
-    if (model.getCurPlayer() == player) {
+    if (model.getCurPlayer() == player && gameView.getSelectedPanel() == null) {
       // Print the coordinates of the clicked cell starting at 0 with the rows going down
-      // so for a grid "xox" o would be (0,1) bc its the first row and the second column
+      // so for a grid "xox" o would be (0,1) bc it's the first row and the second column
       System.out.println("Grid cell clicked: (" + row + ", " + col + ")");
 
       if (cell.isCardCell()) {
-        if (cell.getCard() != null) {
-          gameView.setSelectedPanel(this.cell);
+        if (gameView.getSelectedPanel() != null) {
+          gameView.getSelectedPanel()
+                  .setBorder(BorderFactory.createLineBorder(new Color(100, 0, 150)));
         }
-
+        gameView.setSelectedPanel(this);
         setBorder(BorderFactory.createLineBorder(new Color(100, 0, 150), 5));
         repaint();
       }
     }
     gameView.notifyObservers();
-  }
-
-  @Override
-  protected void paintComponent(Graphics g) {
-    super.paintComponent(g);
-
-    // If the cell contains a card, display the card name in the center
-    if (cell.isCardCell() && cell.getCard() != null) {
-      CardInterface card = cell.getCard();
-      g.setColor(Color.BLACK); // Set text color
-      g.setFont(new Font("Arial", Font.PLAIN, 12)); // Set font for card name
-      String cardName = card.getCardName();
-
-      // Draw the card name in the center of the cell
-      FontMetrics fm = g.getFontMetrics();
-      int x = (getWidth() - fm.stringWidth(cardName)) / 2;
-      int y = (getHeight() + fm.getAscent()) / 2;
-      g.drawString(cardName, x, y);
-    }
   }
 
   /**
@@ -137,19 +121,21 @@ public class GridPanel extends JPanel implements GridCellView {
   /**
    * sets the colr of the cell depending on if it is a card cell and if theres a card inside.
    */
-  private void setColor(ReadOnlyGameModel model) {
-    Cell cell = model.getGameGrid().getCell(row, col);
+  private void setColor() {
+    this.removeAll();
     if (cell.isCardCell()) {
       if (cell.getCard() != null) {
         Color cellColor;
-        if (model.getCurPlayer().getColor().equals("BLUE")) {
+        if (model.getPlayerFromCard(cell.getCard()).getColor().equalsIgnoreCase(BLUE.name())) {
           cellColor = new Color(50, 100, 200);
-        } else {
+        } else if (model.getPlayerFromCard(cell.getCard()).getColor().equalsIgnoreCase(RED.name())){
           cellColor = new Color(200, 50, 100);
         }
+        else cellColor = new Color(0, 255, 0);
         setBackground(cellColor);
         setLabel();
-      } else {
+      }
+      else {
         setBackground(new Color(200, 150, 255));
       }
     } else {
@@ -161,7 +147,8 @@ public class GridPanel extends JPanel implements GridCellView {
    * repaints the grid and changes the color of the cell.
    */
   public void repaintGrid(ReadOnlyGameModel model) {
-    setColor(model);
+    this.cell = model.getGameGrid().getCellOops(this.row, this.col);
+    setColor();
     repaint();
   }
 

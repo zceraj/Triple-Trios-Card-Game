@@ -44,7 +44,7 @@ public class StrategyFour extends AbstractStrategy implements StrategyInterface 
     for (int row = 0; row < grid.getRows(); row++) {
       for (int col = 0; col < grid.getCols(); col++) {
         if (grid.getCell(row, col).isEmpty() && grid.getCell(row, col).isCardCell()) {
-          for (CardInterface card : computerPlayer.getHand()) {
+          for (CardInterface card : computerPlayer.getCurrentHand()) {
             // Create a simulated version of the grid
             Grid simulatedGrid = new Grid(grid);
             Cell simulatedCell = simulatedGrid.getCell(row, col);

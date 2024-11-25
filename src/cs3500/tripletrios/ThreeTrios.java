@@ -67,9 +67,7 @@ public final class ThreeTrios {
     IPlayer player2 = null;
 
     if (args == null || args.length == 0) {
-      System.out.println("No arguments provided. Game will be started with 2 human players. Press q"
-              +
-              "to quit.");
+      System.out.println("No arguments provided. Game will be started with 2 human players.");
       player1 = new HumanPlayer("player1", PlayerColor.RED);
       player2 = new HumanPlayer("player2", PlayerColor.BLUE);
     }
@@ -206,8 +204,9 @@ public final class ThreeTrios {
 
     GameViewGUI viewPlayer1 = new TripleTrioGuiView(model, model.getCurPlayer());
     GameViewGUI viewPlayer2 = new TripleTrioGuiView(model, model.getOtherPlayer());
-    ThreeTriosController controller1 = new ThreeTriosController(model, viewPlayer1);
-    ThreeTriosController controller2 = new ThreeTriosController(model, viewPlayer2);
+    ((TripleTrioGuiView)viewPlayer2).setLocation(300,300);
+    ThreeTriosController controller1 = new ThreeTriosController(model, viewPlayer1, player1);
+    ThreeTriosController controller2 = new ThreeTriosController(model, viewPlayer2, player2);
     model.startGame(setup.setCards());
   }
 }

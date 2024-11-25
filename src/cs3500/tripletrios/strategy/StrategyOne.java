@@ -39,7 +39,7 @@ public class StrategyOne extends AbstractStrategy {
         // Check if the cell is empty
         if (grid.getCell(row, col).isEmpty() && grid.getCell(row, col).isCardCell()) {
           // Iterate through all cards in the computer player's hand
-          for (CardInterface card : computerPlayer.getHand()) {
+          for (CardInterface card : computerPlayer.getCurrentHand()) {
             // Count potential flips for placing the card in this position
             int potentialFlips = countPotentialFlips(card, row, col, grid);
             if (potentialFlips > maxFlips) {

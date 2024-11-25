@@ -9,6 +9,8 @@ import cs3500.tripletrios.observing.Observer;
  * an interface for a game view that pops up a new window to play the game.
  */
 public interface GameViewGUI extends GameView, ObservableInterface {
+  void initializeHands();
+
   /**
    * Sets the visibility of the game view GUI.
    *
@@ -61,7 +63,11 @@ public interface GameViewGUI extends GameView, ObservableInterface {
    */
   void clearSelectedCard();
 
-  void setSelectedPanel(Cell cell);
+  void setSelectedPanel(GridPanel panel);
 
-  Cell getSelectedPanel();
+  GridPanel getSelectedPanel();
+
+  void clearSelectedPanel();
+
+  boolean isHandsInitialized();
 }

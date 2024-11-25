@@ -46,7 +46,7 @@ public class StrategyTwo extends AbstractStrategy {
 
       // Check if the corner cell is a valid, empty cell for placement
       if (grid.isValidCell(row, col) && grid.getCell(row, col).isEmpty()) {
-        for (CardInterface card : computerPlayer.getHand()) {
+        for (CardInterface card : computerPlayer.getCurrentHand()) {
           // Calculate the defense value for placing the card in the current corner
           int defenseValue = calculateDefenseValue(card, row, col, grid);
 

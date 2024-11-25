@@ -37,7 +37,7 @@ public class TripleTrioTextView implements GameView {
 
     // Cards (C): Show loaded card details
     stringToRender.append("\nCards:\n");
-    for (CardInterface card : model.getCurPlayer().getHand()) {
+    for (CardInterface card : model.getCurPlayer().getCurrentHand()) {
       stringToRender.append(card.toString()).append("\n");
     }
   }

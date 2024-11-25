@@ -38,7 +38,7 @@ public class StrategyThree extends AbstractStrategy {
       for (int col = 0; col < grid.getCols(); col++) {
         // If the cell is empty, consider placing a card there
         if (grid.getCell(row, col).isEmpty() && grid.getCell(row, col).isCardCell()) {
-          for (CardInterface card : computerPlayer.getHand()) {
+          for (CardInterface card : computerPlayer.getCurrentHand()) {
             // Evaluate the flip risk for placing the card in the current cell
             int flipRisk = evaluateFlipRisk(card, row, col, grid);
 

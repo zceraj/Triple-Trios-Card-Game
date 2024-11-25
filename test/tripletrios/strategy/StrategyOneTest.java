@@ -48,7 +48,7 @@ public class StrategyOneTest {
   public void testGetBestMoveMaxFlips() {
     Moves bestMove = strategyOne.getBestMove(mockPlayer);
 
-    CardInterface expectedCard = mockPlayer.getHand().get(0);
+    CardInterface expectedCard = mockPlayer.getCurrentHand().get(0);
     int expectedRow = 0;
     int expectedCol = 0;
 
@@ -66,7 +66,7 @@ public class StrategyOneTest {
 
     Moves bestMove = strategyOne.getBestMove(mockPlayer);
 
-    CardInterface expectedCard = mockPlayer.getHand().get(0);
+    CardInterface expectedCard = mockPlayer.getCurrentHand().get(0);
     int expectedRow = 0;
     int expectedCol = 0;
 

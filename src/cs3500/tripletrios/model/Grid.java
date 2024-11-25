@@ -113,6 +113,18 @@ public class Grid {
   }
 
   /**
+   * Retrieves a specific cell at the given row and column.
+   *
+   * @param row Row of the cell.
+   * @param col Column of the cell.
+   * @return The cell at (row, col).
+   * @throws IndexOutOfBoundsException if the coordinates are out of bounds.
+   */
+  public Cell getCellOops(int row, int col) {
+    return grid[row][col];
+  }
+
+  /**
    * Gets the adjacent cell from the given position in the specified direction.
    *
    * @param row       The current row position

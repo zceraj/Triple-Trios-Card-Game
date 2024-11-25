@@ -18,7 +18,8 @@ import cs3500.tripletrios.strategy.StrategyInterface;
 public class HumanPlayer implements IPlayer {
   private final String name;
   private final PlayerColor color;
-  private final List<CardInterface> hand;
+  private final List<CardInterface> currentHand;
+  private final List<CardInterface> allCards;
 
   /**
    * Constructs a new HumanPlayer with the specified name and color.
@@ -27,7 +28,8 @@ public class HumanPlayer implements IPlayer {
    * @param color the color representing the player's identity
    */
   public HumanPlayer(String name, PlayerColor color) {
-    this.hand = new ArrayList<>();
+    this.currentHand = new ArrayList<>();
+    this.allCards = new ArrayList<>();
     this.name = name;
     this.color = color;
   }
@@ -56,7 +58,7 @@ public class HumanPlayer implements IPlayer {
    * @param card the card to be added to the hand
    */
   public void addCardToHand(CardInterface card) {
-    hand.add(card);
+    currentHand.add(card);
   }
 
   /**
@@ -65,7 +67,7 @@ public class HumanPlayer implements IPlayer {
    * @param card the card to be removed from the hand
    */
   public void removeCardFromHand(CardInterface card) {
-    hand.remove(card);
+    currentHand.remove(card);
   }
 
   /**
@@ -75,12 +77,14 @@ public class HumanPlayer implements IPlayer {
    * @throws IllegalArgumentException if playerHand is null
    */
   @Override
-  public void setHand(List<CardInterface> playerHand) {
+  public void setCurrentHand(List<CardInterface> playerHand) {
     if (playerHand == null) {
       throw new IllegalArgumentException("Hand cannot be null.");
     }
-    this.hand.clear();
-    this.hand.addAll(playerHand);
+    this.currentHand.clear();
+    this.currentHand.addAll(playerHand);
+    this.allCards.clear();
+    this.allCards.addAll(playerHand);
   }
 
 
@@ -89,8 +93,17 @@ public class HumanPlayer implements IPlayer {
    *
    * @return the list of cards in the player's hand
    */
-  public List<CardInterface> getHand() {
-    return new ArrayList<>(hand);
+  public List<CardInterface> getCurrentHand() {
+    return new ArrayList<>(currentHand);
+  }
+
+  /**
+   * Gets the list of cards the player has placed down or had in their hand.
+   *
+   * @return the list of cards in the player's hand
+   */
+  public List<CardInterface> getAllCards() {
+    return new ArrayList<>(allCards);
   }
 
   /**
@@ -104,9 +117,7 @@ public class HumanPlayer implements IPlayer {
     if (card == null) {
       throw new IllegalArgumentException("Card cannot be null.");
     }
-    card.addRow(row);
-    card.addCol(col);
-    hand.remove(card);
+    currentHand.remove(card);
   }
 
   /**
@@ -136,6 +147,6 @@ public class HumanPlayer implements IPlayer {
    */
   @Override
   public String toString() {
-    return name + " (" + color + ") - Hand: " + hand;
+    return name + " (" + color + ") - Hand: " + currentHand;
   }
 }

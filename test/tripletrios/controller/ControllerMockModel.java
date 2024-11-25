@@ -86,8 +86,8 @@ public class ControllerMockModel extends Observable implements GameModel {
       }
     }
 
-    player1.setHand(player1Hand);
-    player2.setHand(player2Hand);
+    player1.setCurrentHand(player1Hand);
+    player2.setCurrentHand(player2Hand);
 
     this.currPlayer = player1;
     this.gameStarted = true;
@@ -241,6 +241,16 @@ public class ControllerMockModel extends Observable implements GameModel {
     cellsPlayer.put(updatedCell, newOwner);
   }
 
+  @Override
+  public boolean justStarted() {
+    return false;
+  }
+
+  @Override
+  public void setJustStarted(boolean justStarted) {
+
+  }
+
   /**
    * Advances to the next player's turn.
    */
@@ -321,9 +331,9 @@ public class ControllerMockModel extends Observable implements GameModel {
    */
   @Override
   public IPlayer getPlayerFromCard(CardInterface card) {
-    if (player1.getHand().contains(card)) {
+    if (player1.getCurrentHand().contains(card)) {
       return player1;
-    } else if (player2.getHand().contains(card)) {
+    } else if (player2.getCurrentHand().contains(card)) {
       return player2;
     }
     return null;
@@ -333,5 +343,6 @@ public class ControllerMockModel extends Observable implements GameModel {
   public boolean isGameStarted() {
     return gameStarted;
   }
+
 
 }

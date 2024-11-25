@@ -30,7 +30,7 @@ public interface IPlayer {
    *
    * @return a list of {@code Card} objects representing the player's hand.
    */
-  List<CardInterface> getHand();
+  List<CardInterface> getCurrentHand();
 
   /**
    * Adds a card to the player's hand.
@@ -51,7 +51,7 @@ public interface IPlayer {
    *
    * @param playerHand a List of Cards to be set as the player's hand.
    */
-  void setHand(List<CardInterface> playerHand);
+  void setCurrentHand(List<CardInterface> playerHand);
 
   /**
    * Places a card on the grid at the specified row and column.
@@ -76,4 +76,10 @@ public interface IPlayer {
   void setStrategy(StrategyInterface strategy);
 
 
+  /**
+   * Gets the list of cards the player has placed down or had in their hand.
+   *
+   * @return the list of cards in the player's hand
+   */
+  List<CardInterface> getAllCards();
 }

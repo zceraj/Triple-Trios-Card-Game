@@ -49,8 +49,8 @@ public abstract class AbstractStrategy implements StrategyInterface {
       return new Moves(card, row, col);
     }
     if (row == bestMove.getRow() && col == bestMove.getCol()) {
-      int cardIndex = player.getHand().indexOf(card);
-      int bestMoveCardIndex = player.getHand().indexOf(bestMove.getCard());
+      int cardIndex = player.getCurrentHand().indexOf(card);
+      int bestMoveCardIndex = player.getCurrentHand().indexOf(bestMove.getCard());
       if (cardIndex < bestMoveCardIndex) {
         return new Moves(card, row, col);
       }
@@ -68,7 +68,7 @@ public abstract class AbstractStrategy implements StrategyInterface {
       for (int row = 0; row < grid.getRows(); row++) {
         for (int col = 0; col < grid.getCols(); col++) {
           if (grid.getCell(row, col).isEmpty()) {
-            return new Moves(computerPlayer.getHand().get(0), row, col);
+            return new Moves(computerPlayer.getCurrentHand().get(0), row, col);
           }
         }
       }

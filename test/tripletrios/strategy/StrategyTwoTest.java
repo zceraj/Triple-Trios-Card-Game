@@ -52,7 +52,7 @@ public class StrategyTwoTest {
   public void testGetBestMove() {
     Moves bestMove = strategyTwo.getBestMove(mockPlayer);
 
-    CardInterface expectedCard = mockPlayer.getHand().get(2);
+    CardInterface expectedCard = mockPlayer.getCurrentHand().get(2);
     //should be for top right corner
     int expectedRow = 0;
     int expectedCol = 4;
@@ -72,7 +72,7 @@ public class StrategyTwoTest {
 
     Moves bestMove = strategyTwo.getBestMove(mockPlayer);
 
-    CardInterface expectedCard = mockPlayer.getHand().get(0);
+    CardInterface expectedCard = mockPlayer.getCurrentHand().get(0);
     assertNotNull("Best move should not be null.", bestMove);
     assertEquals("Expected card with the lowest index to be chosen in case of a tie.",
             expectedCard, bestMove.getCard());
@@ -99,7 +99,7 @@ public class StrategyTwoTest {
   public void testGetBestMoveMaxDefense() {
     Moves bestMove = strategyTwo.getBestMove(mockPlayer);
 
-    CardInterface expectedCard = mockPlayer.getHand().get(2);
+    CardInterface expectedCard = mockPlayer.getCurrentHand().get(2);
     assertNotNull("Best move should not be null.", bestMove);
     assertEquals("Expected card with the highest defense value to be chosen.",
             expectedCard, bestMove.getCard());

@@ -23,6 +23,7 @@ public class GameModelImpl extends Observable implements GameModel {
   private IPlayer currPlayer;
   private boolean gameOver;
   private boolean gameStarted = false;
+  private boolean gameJustStarted = false;
   private final Map<Cell, IPlayer> cellsPlayer;
 
 
@@ -65,6 +66,7 @@ public class GameModelImpl extends Observable implements GameModel {
     this.player2 = otherPlayer;
     this.gameOver = false;
     this.cellsPlayer = new HashMap<>();
+    this.gameJustStarted = false;
 
     //add the cellsPlayer map based on the current grid state.
     for (int row = 0; row < grid.getRows(); row++) {
@@ -113,12 +115,13 @@ public class GameModelImpl extends Observable implements GameModel {
       }
     }
 
-    player1.setHand(player1Hand);
-    player2.setHand(player2Hand);
+    player1.setCurrentHand(player1Hand);
+    player2.setCurrentHand(player2Hand);
 
     this.currPlayer = player1;
     this.gameOver = false;
     this.gameStarted = true;
+    this.gameJustStarted = true;
     this.notifyObservers();
   }
 
@@ -133,6 +136,7 @@ public class GameModelImpl extends Observable implements GameModel {
    */
   @Override
   public void placeCard(CardInterface card, int row, int col) {
+    this.gameJustStarted = false;
     if (!gameStarted) {
       throw new IllegalStateException("Game has not started.");
     }
@@ -146,6 +150,7 @@ public class GameModelImpl extends Observable implements GameModel {
     }
 
     Cell targetCell = grid.getCell(row, col);
+
     if (!targetCell.isCardCell() || !targetCell.isEmpty()) {
       throw new IllegalArgumentException("Cannot place card in this cell.");
     }
@@ -156,6 +161,7 @@ public class GameModelImpl extends Observable implements GameModel {
 
     currPlayer.placeTheCard(card, row, col);
     targetCell.setCard(card);
+    System.out.println(targetCell.getCard().getCardName());
 
     grid.updateCell(row, col, targetCell);
     cellsPlayer.put(targetCell, currPlayer);
@@ -164,9 +170,6 @@ public class GameModelImpl extends Observable implements GameModel {
 
     if (isGameOver()) {
       gameOver = true;
-    } else {
-      nextTurn();
-      notifyObservers();
     }
   }
 
@@ -178,22 +181,18 @@ public class GameModelImpl extends Observable implements GameModel {
    */
   @Override
   public boolean isGameOver() {
-    if (gameOver) {
-      notifyObservers();
-      return true;
-    }
     for (int row = 0; row < grid.getRows(); row++) {
       for (int col = 0; col < grid.getCols(); col++) {
-        if (grid.getCell(row, col).isCardCell() && grid.getCell(row, col).isEmpty()) {
-          gameOver = false;
+        Cell cell = grid.getCellOops(row, col);
+        if (cell.isCardCell() && cell.isEmpty()) {
           return false;
         }
       }
     }
-    notifyObservers();
     gameOver = true;
     return true;
   }
+
 
   /**
    * Gets the player that is the winner of the game, if the game is over.
@@ -274,6 +273,7 @@ public class GameModelImpl extends Observable implements GameModel {
    */
   @Override
   public void nextTurn() {
+    this.gameJustStarted = false;
     if (currPlayer == player1) {
       currPlayer = player2;
     } else {
@@ -292,8 +292,6 @@ public class GameModelImpl extends Observable implements GameModel {
   public void battles(int row, int col) {
     BattleRules battleRules = new BattleRules(this);
     battleRules.startBattle(grid, row, col, currPlayer);
-
-    nextTurn();
   }
 
   /**
@@ -349,9 +347,9 @@ public class GameModelImpl extends Observable implements GameModel {
    */
   @Override
   public IPlayer getPlayerFromCard(CardInterface card) {
-    if (player1.getHand().contains(card)) {
+    if (player1.getAllCards().contains(card)) {
       return player1;
-    } else if (player2.getHand().contains(card)) {
+    } else if (player2.getAllCards().contains(card)) {
       return player2;
     }
     return null;
@@ -360,5 +358,16 @@ public class GameModelImpl extends Observable implements GameModel {
   @Override
   public boolean isGameStarted() {
     return gameStarted;
+  }
+
+  @Override
+  public boolean justStarted() {
+    return gameJustStarted;
+  }
+
+  // I want my controller to be able to access it but not the general public
+  @Override
+  public void setJustStarted(boolean justStarted) {
+    this.gameJustStarted = justStarted;
   }
 }

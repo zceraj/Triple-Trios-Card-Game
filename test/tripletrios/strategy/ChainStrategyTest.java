@@ -42,7 +42,7 @@ public class ChainStrategyTest {
     List<CardInterface> hand = new ArrayList<>();
     hand.add(new Card("Card1", 3, 2, 1, 5));
     hand.add(new Card("Card2", 6, 4, 3, 2));
-    mockPlayer.setHand(hand);
+    mockPlayer.setCurrentHand(hand);
   }
 
   @Test

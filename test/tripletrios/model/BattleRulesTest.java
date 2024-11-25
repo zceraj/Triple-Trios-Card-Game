@@ -64,8 +64,8 @@ public class BattleRulesTest {
 
   @Test
   public void testBattleExecution_SingleBattle() {
-    CardInterface card1 = player1.getHand().get(0);
-    CardInterface card2 = player2.getHand().get(0);
+    CardInterface card1 = player1.getCurrentHand().get(0);
+    CardInterface card2 = player2.getCurrentHand().get(0);
 
     game.placeCard(card1, 1, 1);
     game.updateOwner(1, 1, player1);

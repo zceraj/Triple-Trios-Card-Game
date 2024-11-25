@@ -65,7 +65,7 @@ public class StrategyThreeTest {
 
     assertEquals(
             "Expected Card1 to be selected as the best move.",
-            mockPlayer.getHand().get(0), card);
+            mockPlayer.getCurrentHand().get(0), card);
 
   }
 
@@ -93,7 +93,7 @@ public class StrategyThreeTest {
     Moves bestMove = strategyThree.getBestMove(mockPlayer);
 
     // Since Card1 and Card2 have the same score, the tie-breaking should select Card1
-    CardInterface expectedCard = mockPlayer.getHand().get(0);
+    CardInterface expectedCard = mockPlayer.getCurrentHand().get(0);
     int expectedRow = 0;
     int expectedCol = 0;
 

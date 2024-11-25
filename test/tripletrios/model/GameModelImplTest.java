@@ -86,8 +86,8 @@ public class GameModelImplTest {
 
   @Test
   public void testBattles() {
-    CardInterface playersCard = player1.getHand().get(0);
-    CardInterface opponentsCard = player2.getHand().get(0);
+    CardInterface playersCard = player1.getCurrentHand().get(0);
+    CardInterface opponentsCard = player2.getCurrentHand().get(0);
 
     game.placeCard(playersCard, 0, 0);
     game.placeCard(opponentsCard, 1, 2);
@@ -109,7 +109,7 @@ public class GameModelImplTest {
 
   @Test
   public void testUpdateOwner() {
-    CardInterface playersCard = player1.getHand().get(0);
+    CardInterface playersCard = player1.getCurrentHand().get(0);
     game.placeCard(playersCard, 0, 0);
 
     game.updateOwner(0, 0, player2);
@@ -133,7 +133,7 @@ public class GameModelImplTest {
 
   @Test
   public void testGetCellsPlayer() {
-    CardInterface playersCard = player1.getHand().get(0);
+    CardInterface playersCard = player1.getCurrentHand().get(0);
     game.placeCard(playersCard, 0, 0);
 
     assertEquals(player1, game.getCellsPlayer(0, 0));
@@ -141,9 +141,9 @@ public class GameModelImplTest {
 
   @Test
   public void testGetWinner() {
-    CardInterface playersCard1 = player1.getHand().get(0);
-    CardInterface playersCard2 = player1.getHand().get(1);
-    CardInterface opponentsCard = player2.getHand().get(0);
+    CardInterface playersCard1 = player1.getCurrentHand().get(0);
+    CardInterface playersCard2 = player1.getCurrentHand().get(1);
+    CardInterface opponentsCard = player2.getCurrentHand().get(0);
 
     game.placeCard(playersCard1, 0, 0);
     game.placeCard(playersCard2, 1, 0);
@@ -164,7 +164,7 @@ public class GameModelImplTest {
       for (int col = 0; col < game.getGameGrid().getCols(); col++) {
         if (game.getGameGrid().getCell(row, col).isCardCell()
                 && game.getGameGrid().getCell(row, col).isEmpty()) {
-          CardInterface card = player1.getHand().get(0);
+          CardInterface card = player1.getCurrentHand().get(0);
           game.placeCard(card, row, col);
         }
       }
@@ -175,14 +175,14 @@ public class GameModelImplTest {
 
   @Test
   public void testPlaceCard() {
-    CardInterface card = player1.getHand().get(0);
+    CardInterface card = player1.getCurrentHand().get(0);
     game.placeCard(card, 0, 0);
     assertEquals(card, game.getGameGrid().getCardAt(0, 0));
   }
 
   @Test
   public void testPlayerCantPlayWrongTurn() {
-    CardInterface card = player2.getHand().get(0);
+    CardInterface card = player2.getCurrentHand().get(0);
     assertThrows(IllegalArgumentException.class, () -> game.placeCard(card, 1, 1));
   }
 
@@ -196,15 +196,15 @@ public class GameModelImplTest {
   @Test
   void testStartGameDistributesCards() {
     int expectedHandSize = (game.getGameGrid().getCount() + 1) / 2;
-    assertEquals(expectedHandSize, player1.getHand().size(),
+    assertEquals(expectedHandSize, player1.getCurrentHand().size(),
             "Player 1 should have correct hand size.");
-    assertEquals(expectedHandSize, player2.getHand().size(),
+    assertEquals(expectedHandSize, player2.getCurrentHand().size(),
             "Player 2 should have correct hand size.");
   }
 
   @Test
   public void testPlayerInvalidLocation() {
-    CardInterface card = player1.getHand().get(0);
+    CardInterface card = player1.getCurrentHand().get(0);
     assertThrows(IllegalArgumentException.class, () -> game.placeCard(card, 4, 5));
   }
 
@@ -233,8 +233,8 @@ public class GameModelImplTest {
     }
 
     int expectedHandSize = (game.getGameGrid().getCount() + 1) / 2;
-    assertEquals(expectedHandSize, player1.getHand().size());
-    assertEquals(expectedHandSize, player2.getHand().size());
+    assertEquals(expectedHandSize, player1.getCurrentHand().size());
+    assertEquals(expectedHandSize, player2.getCurrentHand().size());
     assertEquals(player1, game.getCurPlayer());
     assertFalse(game.isGameOver());
   }
@@ -243,11 +243,11 @@ public class GameModelImplTest {
   @Test
   public void testStartGame_PlayerHandsCorrectAfterStart() {
     List<String> showHand1 = new ArrayList<>();
-    for (CardInterface card : player1.getHand()) {
+    for (CardInterface card : player1.getCurrentHand()) {
       showHand1.add(card.toString());
     }
     List<String> showHand2 = new ArrayList<>();
-    for (CardInterface card : player2.getHand()) {
+    for (CardInterface card : player2.getCurrentHand()) {
       showHand2.add(card.toString());
     }
 
@@ -257,7 +257,7 @@ public class GameModelImplTest {
 
   @Test
   public void testFlipPersonalCard() {
-    CardInterface card = player1.getHand().get(0);
+    CardInterface card = player1.getCurrentHand().get(0);
     game.placeCard(card, 0, 0);
 
     game.battles(0, 0);
@@ -268,8 +268,8 @@ public class GameModelImplTest {
 
   @Test
   public void testFlipOpponentCard() {
-    CardInterface playersCard = player1.getHand().get(0);
-    CardInterface opponentsCard = player2.getHand().get(0);
+    CardInterface playersCard = player1.getCurrentHand().get(0);
+    CardInterface opponentsCard = player2.getCurrentHand().get(0);
 
     game.placeCard(playersCard, 0, 0);
     game.placeCard(opponentsCard, 1, 0);
@@ -282,9 +282,9 @@ public class GameModelImplTest {
 
   @Test
   public void testFlippingTiles() {
-    CardInterface player1Card1 = player1.getHand().get(0);
-    CardInterface player2Card1 = player2.getHand().get(0);
-    CardInterface player2Card2 = player2.getHand().get(1);
+    CardInterface player1Card1 = player1.getCurrentHand().get(0);
+    CardInterface player2Card1 = player2.getCurrentHand().get(0);
+    CardInterface player2Card2 = player2.getCurrentHand().get(1);
 
     game.placeCard(player1Card1, 0, 0);
     game.placeCard(player2Card1, 2, 2);
@@ -298,7 +298,7 @@ public class GameModelImplTest {
   @Test
   //test the get score method in between plays
   public void testGetScore() {
-    CardInterface playersCard = player1.getHand().get(0);
+    CardInterface playersCard = player1.getCurrentHand().get(0);
     game.placeCard(playersCard, 0, 0);
     assertEquals(1, game.getScore(player1));
   }
