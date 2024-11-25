@@ -248,7 +248,7 @@ public class ControllerMockModel extends Observable implements GameModel {
 
   @Override
   public void setJustStarted(boolean justStarted) {
-    // not done idk 
+    // not done idk
   }
 
   /**

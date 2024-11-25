@@ -127,10 +127,11 @@ public class GridPanel extends JPanel implements GridCellView {
         Color cellColor;
         if (model.getPlayerFromCard(cell.getCard()).getColor().equalsIgnoreCase(BLUE.name())) {
           cellColor = new Color(50, 100, 200);
-        } else if (model.getPlayerFromCard(cell.getCard()).getColor().equalsIgnoreCase(RED.name())){
+        }
+        else if (model.getPlayerFromCard(cell.getCard()).getColor().equalsIgnoreCase(RED.name())) {
           cellColor = new Color(200, 50, 100);
         }
-        else cellColor = new Color(0, 255, 0);
+        else { cellColor = new Color(0, 255, 0); }
         setBackground(cellColor);
         setLabel();
       }
