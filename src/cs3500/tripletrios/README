@@ -5,18 +5,25 @@ CHANGES FOR PART 3:
  hi so this is about to be so messy so im so sorry
 
 
- things we changed
+                                  things we changed
+ view
  - for the view i added a player so i could see whos view was whos so now its in the title
  - we added a super cool fun pop up method that pops up things on the screen
  - we made it an observable so the controller can see it
  - clear selected card so the state can be reset when a card is placed
+ - added a fun quit button so you can stop whenever you want
+ - added a clear and set selected card and panel that allow everyone to know what they are
 
+controller
  - for the controller i made it an oberver that looks at the model and view
  - most of the functionality is in the update method which calls all the helper methods and
  makes changes in teh game
 
+model
  - model is also now an observable (how cool!)
- - i also addded an is game started method
+ - i also added an is game started method
+ - added an all cards field and correponding methods that determine cards that aren't only in the
+ player's hand
 
 those were the big changes for now
 
@@ -39,33 +46,12 @@ those were the big changes for now
 
   public void updateObservers(){
     controllerObserver.update();
-  }
-
-  -- OBSERVER PATTERN
+  }  -- OBSERVER PATTERN
 
 Added a method in the view called getSelectedCard which returns the card
   @Override
   public CardInterface getSelectedCard() {
     return selectedCard.getCard();
-  }
-
-Added:
-  /**
-   * Sets up the card click listener.
-   *
-   * @param listener a BiConsumer that takes a CardInterface and its index.
-   */
-  public void addCardClickListener(BiConsumer<CardInterface, Integer> listener) {
-    this.cardClickListener = listener;
-  }
-
-  /**
-   * Sets up the grid click listener.
-   *
-   * @param listener a BiConsumer that takes row and column indices.
-   */
-  public void addGridClickListener(BiConsumer<Integer, Integer> listener) {
-    this.gridClickListener = listener;
   }
 
  For the Player classes/Interface:
@@ -90,11 +76,6 @@ Added:
      }
      this.strategy = strategy;
    }
-
-
-
-
-
 
 
 ----------------------------------------------------------------------------------------------------

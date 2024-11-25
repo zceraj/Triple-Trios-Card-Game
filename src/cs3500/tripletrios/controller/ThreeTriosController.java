@@ -56,7 +56,7 @@ public class ThreeTriosController implements ControllerInterface {
               view.getSelectedCard(),
               model.getGameGrid().getCell(
                       view.getSelectedPanel().getRow(),
-                      view.getSelectedPanel().getCol()))){
+                      view.getSelectedPanel().getCol()))) {
         view.popup("invalid move");
       }
       else {
@@ -77,13 +77,15 @@ public class ThreeTriosController implements ControllerInterface {
     }
   }
 
-  public void gameOver(){
+  // checks if game is over
+  private void gameOver() {
     // Recheck game over after updating the model
     if (model.isGameOver()) {
       view.popup("Game Over! " + model.getWinner() + " wins!");
     }
   }
 
+  // checks if you can move the card there
   private boolean isValidMove(CardInterface card, Cell cell) {
     return (cell.isCardCell() && cell.isEmpty());
   }

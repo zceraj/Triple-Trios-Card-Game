@@ -133,7 +133,8 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
         }
 
         for (int i = 0; i < leftColumnCards.size(); i++) {
-          CardPanel cardPanel = new CardPanel(leftColumnCards.get(i), leftColumnCardsColor, i, this);
+          CardPanel cardPanel = new CardPanel(
+                  leftColumnCards.get(i), leftColumnCardsColor, i, this);
           cardPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -143,7 +144,8 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
           leftColumnPanel.add(cardPanel);
         }
         for (int i = 0; i < rightColumnCards.size(); i++) {
-          CardPanel cardPanel = new CardPanel(rightColumnCards.get(i), rightColumnCardsColor, i, this);
+          CardPanel cardPanel = new CardPanel(
+                  rightColumnCards.get(i), rightColumnCardsColor, i, this);
           cardPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -219,8 +221,10 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
     if (player == model.getCurPlayer()) {
       if (player == startingPlayer) {
         leftColumnPanel.remove(selectedCard);
+        leftColumnPanel.repaint();
       } else {
         rightColumnPanel.remove(selectedCard);
+        leftColumnPanel.repaint();
       }
     }
   }
@@ -317,7 +321,7 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
   }
 
   @Override
-  public boolean isHandsInitialized(){
+  public boolean isHandsInitialized() {
     return this.handsInitialized;
   }
 }

@@ -1,7 +1,6 @@
 package cs3500.tripletrios.view;
 
 import cs3500.tripletrios.model.CardInterface;
-import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.observing.ObservableInterface;
 import cs3500.tripletrios.observing.Observer;
 

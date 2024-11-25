@@ -20,7 +20,6 @@ import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.Direction;
 import cs3500.tripletrios.model.IPlayer;
-import cs3500.tripletrios.model.PlayerColor;
 import cs3500.tripletrios.model.ReadOnlyGameModel;
 
 import static cs3500.tripletrios.model.PlayerColor.BLUE;
