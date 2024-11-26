@@ -1,0 +1,91 @@
+# Assignment 8
+----------------------------------------------------------------------------------------------------
+Communcations:
+Z:
+
+M:
+
+To Discuss:
+
+----------------------------------------------------------------------------------------------------
+                              ---------------
+                              --To Do List:--
+                              ---------------
+    KEY
+O - not complete
+X - completed
+* - in progress if needed
+
+
+Day 1: Request, Review, and Understand Provider Code
+Request Provider Code
+
+Email providers immediately to request their code.
+Ensure they send all required files: interfaces, interactive view implementations, README, and a screenshot.
+Initial Code Review
+
+Set up the provider code in a new package (cs3500.threetrios.provider).
+Review their interfaces for structure and flexibility:
+Model interfaces: Examine logical separation and adherence to principles.
+View interfaces: Check feature completeness and usability.
+Controller interfaces (if applicable): Validate consistency.
+Note initial observations about usability and potential integration challenges.
+Read the README
+
+Understand how to set up and use the provider's code.
+Identify any missing details or areas of confusion for follow-up.
+Communicate Clarifications
+
+Email providers with any questions or requests for clarifications or fixes.
+
+
+Day 2: Integrate Provider Code
+Refactor Provider Code
+
+Move all provider code into the cs3500.threetrios.provider package.
+Divide their files into sub-packages: model, view, controller, and strategy.
+Implement Integration
+
+Update your controller to support the provider's views for Player 2.
+Add logic to handle compatibility issues:
+Write adapters if required to bridge mismatched interfaces.
+Ensure backward compatibility with your own views for Player 1.
+Document new command-line options for specifying provider views/strategies.
+Initial Testing
+
+Test Player 1 using your views and Player 2 using the provider’s views.
+Log features that are working and features that fail due to incompatibility.
+Day 3: Finalize Integration and Begin Reviews
+Finalize Integration
+
+Address any unresolved issues from testing.
+Leave commented-out adapter attempts if features cannot be implemented and document why in your README.
+Write the Peer Review
+
+Analyze provider code and write a critique:
+Design critique: Evaluate interfaces, flexibility, and coupling.
+Implementation critique: Check code quality, naming conventions, and efficiency.
+Documentation critique: Assess the clarity of their README and comments.
+Limitations and suggestions: Provide constructive feedback on improvements.
+Write the Self Review
+
+Reflect on your design/implementation decisions and their impact on integration.
+Document any lessons learned from the provider’s code and customer interactions.
+Day 4: Final Submission and Peer Support
+Prepare Submission
+
+Package all files, including:
+Your final integrated code (including provider code refactored into your package).
+A JAR file supporting additional command-line options.
+README documenting:
+Features integrated successfully.
+Features that were not integrated and reasons.
+Any tests removed due to size constraints.
+PeerReview.txt.
+SelfReview.txt.
+Customer Support
+
+Be available to address questions or fix issues for your customer group.
+Submit Code
+
+Submit to the provided hand-in link before the deadline.
