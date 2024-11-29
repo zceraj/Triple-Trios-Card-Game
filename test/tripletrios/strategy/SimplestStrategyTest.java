@@ -44,7 +44,7 @@ public class SimplestStrategyTest {
     // Initialize the model and strategy
     MockModelStrategyOne model = new MockModelStrategyOne(
             grid, player, new MockPlayer("Player Blue"));
-    strategy = new StrategyOne((ReadOnlyGameModel) model);
+    strategy = new StrategyOne(model);
   }
 
   @Test

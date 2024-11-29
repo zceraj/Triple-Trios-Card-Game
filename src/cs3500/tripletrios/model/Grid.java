@@ -10,7 +10,7 @@ import java.util.Map;
  * The grid is a 2D array of cells, where each cell can be a CardCell or a Hole.
  * The grid is tracked as a coordinate system with (0, 0) as the top-left corner.
  */
-public class Grid {
+public class Grid implements GridInterface{
   private final int rows;
   private final int cols;
   private final Cell[][] grid;
@@ -103,6 +103,7 @@ public class Grid {
    * @return The cell at (row, col).
    * @throws IndexOutOfBoundsException if the coordinates are out of bounds.
    */
+  @Override
   public Cell getCell(int row, int col) {
     if (isValidCell(row, col)) {
       Cell originalCell = grid[row][col];
@@ -133,6 +134,7 @@ public class Grid {
    * @return The adjacent cell if it exists, or null if out of bounds
    * @throws IndexOutOfBoundsException if the direction is invalid.
    */
+  @Override
   public Cell getAdjacentCells(
           int row,
           int col,
@@ -171,6 +173,7 @@ public class Grid {
    * @param col The column of the cell.
    * @return True if the cell is within the grid bounds, false otherwise.
    */
+  @Override
   public boolean isValidCell(int row, int col) {
     return row >= 0 && row < rows && col >= 0 && col < cols;
   }
@@ -182,6 +185,7 @@ public class Grid {
    * @param col The column of the cell.
    * @return The card in the cell at (row, col), or null if empty or a Hole.
    */
+  @Override
   public CardInterface getCardAt(int row, int col) {
     Cell cell = getCell(row, col);
     return cell.isCardCell() && !cell.isEmpty() ? cell.getCard() : null;
@@ -192,6 +196,7 @@ public class Grid {
    *
    * @return The number of rows in the grid.
    */
+  @Override
   public int getRows() {
     return rows;
   }
@@ -201,6 +206,7 @@ public class Grid {
    *
    * @return The number of columns in the grid.
    */
+  @Override
   public int getCols() {
     return cols;
   }
@@ -211,6 +217,7 @@ public class Grid {
    *
    * @return The number of cells in the grid.
    */
+  @Override
   public int getCount() {
     int count = 0;
     for (int row = 0; row < this.getRows(); row++) {
@@ -231,6 +238,7 @@ public class Grid {
    * @param newCell the new cell to place at the specified location
    * @throws IndexOutOfBoundsException if the specified row or column is outside the grid bounds
    */
+  @Override
   public void updateCell(int row, int col, Cell newCell) {
     if (isValidCell(row, col)) {
       grid[row][col] = new Cell(newCell);
@@ -248,6 +256,7 @@ public class Grid {
    *
    * @return String rendering of the grid.
    */
+  @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     for (int columns = 0; columns < grid.length; columns++) {

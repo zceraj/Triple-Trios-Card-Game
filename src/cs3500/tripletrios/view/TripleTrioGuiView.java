@@ -43,7 +43,7 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
   private GridPanel selectedPanel;
   private final IPlayer startingPlayer;
   private final IPlayer notStartingPlayer;
-  private boolean handsInitialized;
+  private final boolean handsInitialized;
 
 
   /**
@@ -317,7 +317,7 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
   @Override
   public void clearSelectedPanel() {
     this.selectedPanel.repaintGrid(model);
-    setSelectedPanel((GridPanel) null);
+    setSelectedPanel(null);
   }
 
   @Override
