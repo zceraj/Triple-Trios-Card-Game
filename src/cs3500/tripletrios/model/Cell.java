@@ -5,7 +5,7 @@ package cs3500.tripletrios.model;
  * Represents each cell in the grid of the game. Cells can either be card cells (where cards can
  * be placed) or holes (where no cards can be placed).
  */
-public class Cell {
+public class Cell implements CellInterface{
   private final boolean isCardCell;
   private CardInterface card;
   private final int row;
@@ -43,6 +43,7 @@ public class Cell {
    *
    * @return True if the cell is a card cell, false if it's a hole.
    */
+  @Override
   public boolean isCardCell() {
     return isCardCell;
   }
@@ -53,6 +54,7 @@ public class Cell {
    *
    * @return True if the cell is empty, false if it contains a card
    */
+  @Override
   public boolean isEmpty() {
     return card == null;
   }
@@ -63,6 +65,7 @@ public class Cell {
    *
    * @param card The card to place in this cell.
    */
+  @Override
   public void setCard(CardInterface card) {
     if (card == null) {
       throw new IllegalArgumentException("Cannot place a null card in a cell.");
@@ -82,6 +85,7 @@ public class Cell {
    *
    * @return The card in this cell, or null if the cell is empty.
    */
+  @Override
   public CardInterface getCard() {
     return card;
   }
@@ -91,6 +95,7 @@ public class Cell {
    *
    * @return row in which the cell is in
    */
+  @Override
   public int getRow() {
     return row;
   }
@@ -100,6 +105,7 @@ public class Cell {
    *
    * @return column in which the cell is in
    */
+  @Override
   public int getCol() {
     return col;
   }
