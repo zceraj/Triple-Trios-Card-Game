@@ -6,7 +6,7 @@ import cs3500.tripletrios.model.Direction;
 /**
  * Represents a move in the game.
  */
-public class Moves {
+public class Moves implements MovesInterface{
   private final CardInterface card;
   private final int row;
   private final int col;
@@ -25,6 +25,7 @@ public class Moves {
    *
    * @return The card
    */
+  @Override
   public CardInterface getCard() {
     return card;
   }
@@ -34,6 +35,7 @@ public class Moves {
    *
    * @return The row of the card
    */
+  @Override
   public int getRow() {
     return row;
   }
@@ -43,6 +45,7 @@ public class Moves {
    *
    * @return The column of the card
    */
+  @Override
   public int getCol() {
     return col;
   }
@@ -53,6 +56,7 @@ public class Moves {
    * @param direction The direction to get the score of
    * @return The score of the card in the given direction
    */
+  @Override
   public int getScore(Direction direction) {
     return Integer.parseInt(card.getAttackValue(direction));
   }
