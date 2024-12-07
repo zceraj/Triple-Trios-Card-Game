@@ -44,10 +44,13 @@ public interface GameModel extends ReadOnlyGameModel, ObservableInterface {
    */
   void battles(int row, int col);
 
+  /**
+   * Updates the owner of the cell at the given row and column.
+   * @param row The row of the cell
+   * @param col The column of the cell
+   * @param player The player to set as the owner
+   */
   void updateOwner(int row, int col, IPlayer player);
 
-  boolean justStarted();
 
-  // I want my controller to be able to access it but not the general public
-  void setJustStarted(boolean justStarted);
 }
