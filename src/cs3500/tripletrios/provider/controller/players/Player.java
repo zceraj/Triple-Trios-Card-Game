@@ -1,8 +1,8 @@
 package cs3500.tripletrios.provider.controller.players;
 
-import cs3500.threetrios.model.PlayerColor;
-import cs3500.threetrios.model.ThreeTriosModelInterface;
-import cs3500.threetrios.controller.Actions;
+import cs3500.tripletrios.provider.model.PlayerColor;
+import cs3500.tripletrios.provider.model.ThreeTriosModelInterface;
+import cs3500.tripletrios.provider.controller.Actions;
 
 /**
  * Represents a game player.

@@ -77,6 +77,7 @@ public class ThreeTriosController implements ControllerInterface {
     }
   }
 
+
   // checks if game is over
   private void gameOver() {
     // Recheck game over after updating the model
@@ -89,4 +90,41 @@ public class ThreeTriosController implements ControllerInterface {
   private boolean isValidMove(CardInterface card, Cell cell) {
     return (cell.isCardCell() && cell.isEmpty());
   }
+
+  /**
+   * Plays the card at the given index in the player's hand to the given coordinates.
+   * Added it for the adaptor for the providers code.
+   * @param row the row of the position to play
+   * @param col the column of the position to play
+   * @param handIndex the index in hand of the card to be played
+   */
+  public void playMove(int row, int col, int handIndex) {
+    try {
+      // Get the selected card from the player's hand
+      CardInterface card = player.getCurrentHand().get(handIndex);
+
+      // Check if the move is valid
+      if (isValidMove(card, model.getGameGrid().getCell(row, col))) {
+        // Place the card in the grid
+        model.placeCard(card, row, col);
+
+        // Notify the model to advance to the next turn
+        model.nextTurn();
+
+        // Refresh the view
+        view.refreshGrid();
+        view.refreshHands();
+
+        // Check if the game is over
+        gameOver();
+      } else {
+        view.popup("Invalid move. Try again.");
+      }
+    } catch (IndexOutOfBoundsException e) {
+      view.popup("Invalid card selection.");
+    }
+  }
+
+
+
 }

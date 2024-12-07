@@ -1,6 +1,7 @@
 package cs3500.tripletrios.provider.controller;
 
-import cs3500.threetrios.model.PlayerColor;
+import cs3500.tripletrios.controller.ThreeTriosController;
+import cs3500.tripletrios.provider.model.PlayerColor;
 
 /**
  * Meant to allow swapping between the two managers when turns are exchanged.
