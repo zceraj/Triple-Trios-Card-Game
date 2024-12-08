@@ -28,8 +28,8 @@ public class StrategyTwo extends AbstractStrategy {
    * @return a Move object that represents the best move
    */
   @Override
-  public Moves getBestMove(IPlayer computerPlayer) {
-    Moves bestMove = null;
+  public MovesInterface getBestMove(IPlayer computerPlayer) {
+    MovesInterface bestMove = null;
     int maxDefenseValue = -1;
 
     int[][] cornerPositions = {

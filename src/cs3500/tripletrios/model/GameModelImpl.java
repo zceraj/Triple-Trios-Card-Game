@@ -24,7 +24,7 @@ public class GameModelImpl extends Observable implements GameModel {
   private boolean gameOver;
   private boolean gameStarted = false;
   private boolean gameJustStarted = false;
-  private final Map<Cell, IPlayer> cellsPlayer;
+  private final Map<CellInterface, IPlayer> cellsPlayer;
 
 
 
@@ -71,7 +71,7 @@ public class GameModelImpl extends Observable implements GameModel {
     //add the cellsPlayer map based on the current grid state.
     for (int row = 0; row < grid.getRows(); row++) {
       for (int col = 0; col < grid.getCols(); col++) {
-        Cell cell = grid.getCell(row, col);
+        CellInterface cell = grid.getCell(row, col);
         if (!cell.isEmpty()) {
           cellsPlayer.put(cell, getCellsPlayer(row, col));
         }
@@ -149,7 +149,7 @@ public class GameModelImpl extends Observable implements GameModel {
       throw new IllegalArgumentException("Invalid cell coordinates: (" + row + ", " + col + ")");
     }
 
-    Cell targetCell = grid.getCell(row, col);
+    CellInterface targetCell = grid.getCell(row, col);
 
     if (!targetCell.isCardCell() || !targetCell.isEmpty()) {
       throw new IllegalArgumentException("Cannot place card in this cell.");
@@ -183,7 +183,7 @@ public class GameModelImpl extends Observable implements GameModel {
   public boolean isGameOver() {
     for (int row = 0; row < grid.getRows(); row++) {
       for (int col = 0; col < grid.getCols(); col++) {
-        Cell cell = grid.getCellOops(row, col);
+        CellInterface cell = grid.getCell(row, col);
         if (cell.isCardCell() && cell.isEmpty()) {
           return false;
         }
@@ -224,7 +224,7 @@ public class GameModelImpl extends Observable implements GameModel {
    * @return The player that owns the card in the cell
    */
   public IPlayer getCellsPlayer(int row, int col) {
-    Cell cell = grid.getCell(row, col);
+    CellInterface cell = grid.getCell(row, col);
     return cellsPlayer.get(cell);
   }
 
@@ -263,8 +263,8 @@ public class GameModelImpl extends Observable implements GameModel {
    */
   @Override
   public void updateOwner(int row, int col, IPlayer newOwner) {
-    Cell orignalCell = grid.getCell(row, col);
-    Cell updatedCell = new Cell(orignalCell);
+    CellInterface orignalCell = grid.getCell(row, col);
+    CellInterface updatedCell = new Cell(orignalCell);
     cellsPlayer.put(updatedCell, newOwner);
   }
 

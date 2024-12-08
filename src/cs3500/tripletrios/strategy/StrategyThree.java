@@ -1,6 +1,7 @@
 package cs3500.tripletrios.strategy;
 
 import cs3500.tripletrios.model.CardInterface;
+import cs3500.tripletrios.model.CellInterface;
 import cs3500.tripletrios.model.Grid;
 import cs3500.tripletrios.model.IPlayer;
 import cs3500.tripletrios.model.ReadOnlyGameModel;
@@ -29,9 +30,9 @@ public class StrategyThree extends AbstractStrategy {
    * @return a Move object based on the game state
    */
   @Override
-  public Moves getBestMove(IPlayer computerPlayer) {
+  public MovesInterface getBestMove(IPlayer computerPlayer) {
     int minFlipsRisk = Integer.MAX_VALUE;
-    Moves bestMove = null;
+    MovesInterface bestMove = null;
 
     // Iterate through all cells in the grid to determine the best move
     for (int row = 0; row < grid.getRows(); row++) {
@@ -69,7 +70,7 @@ public class StrategyThree extends AbstractStrategy {
 
     // Iterate through all directions to determine the potential risk of being flipped
     for (Direction direction : Direction.values()) {
-      Cell adjacentCell = grid.getAdjacentCells(row, col, direction);
+      CellInterface adjacentCell = grid.getAdjacentCells(row, col, direction);
 
       if (adjacentCell != null && !adjacentCell.isEmpty()) {
         CardInterface opponentCard = adjacentCell.getCard();

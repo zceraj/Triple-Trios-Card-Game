@@ -1,6 +1,6 @@
 package cs3500.tripletrios.model;
 
-import cs3500.tripletrios.strategy.Moves;
+import cs3500.tripletrios.strategy.MovesInterface;
 import cs3500.tripletrios.strategy.StrategyInterface;
 
 import java.util.ArrayList;
@@ -110,7 +110,7 @@ public class AiPlayer implements IPlayer {
       throw new IllegalArgumentException("Row and column must be non-negative.");
     }
 
-    Moves bestMove = determineNextMove();
+    MovesInterface bestMove = determineNextMove();
     row = bestMove.getRow();
     col = bestMove.getCol();
     card.addRow(row);
@@ -124,12 +124,12 @@ public class AiPlayer implements IPlayer {
    *
    * @return the best move determined by the strategy
    */
-  public Moves determineNextMove() {
+  public MovesInterface determineNextMove() {
     if (strategy == null) {
       throw new IllegalStateException("No strategy assigned to AI player.");
     }
 
-    Moves bestMove = strategy.getBestMove(this);
+    MovesInterface bestMove = strategy.getBestMove(this);
     if (bestMove == null || bestMove.getRow() < 0 || bestMove.getCol() < 0) {
       throw new IllegalStateException("No valid move available for AI player.");
     }

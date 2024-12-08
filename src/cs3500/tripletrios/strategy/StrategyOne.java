@@ -2,6 +2,7 @@ package cs3500.tripletrios.strategy;
 
 import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.Cell;
+import cs3500.tripletrios.model.CellInterface;
 import cs3500.tripletrios.model.Direction;
 import cs3500.tripletrios.model.Grid;
 import cs3500.tripletrios.model.IPlayer;
@@ -29,9 +30,9 @@ public class StrategyOne extends AbstractStrategy {
    * @return a Move object representing the best move
    */
   @Override
-  public Moves getBestMove(IPlayer computerPlayer) {
+  public MovesInterface getBestMove(IPlayer computerPlayer) {
     int maxFlips = -1;
-    Moves bestMove = null;
+    MovesInterface bestMove = null;
 
     // Iterate through all cells in the grid
     for (int row = 0; row < grid.getRows(); row++) {
@@ -68,7 +69,7 @@ public class StrategyOne extends AbstractStrategy {
     int flipCount = 0;
 
     for (Direction direction : Direction.values()) {
-      Cell adjacentCell = grid.getAdjacentCells(row, col, direction);
+      CellInterface adjacentCell = grid.getAdjacentCells(row, col, direction);
       if (adjacentCell != null && !adjacentCell.isEmpty()) {
         CardInterface opponentCard = adjacentCell.getCard();
         if (opponentCard != null && !opponentCard.equals(card)) {

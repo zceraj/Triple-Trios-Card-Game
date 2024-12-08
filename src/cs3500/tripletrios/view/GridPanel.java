@@ -18,6 +18,7 @@ import java.io.IOException;
 
 import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.Cell;
+import cs3500.tripletrios.model.CellInterface;
 import cs3500.tripletrios.model.Direction;
 import cs3500.tripletrios.model.IPlayer;
 import cs3500.tripletrios.model.ReadOnlyGameModel;
@@ -32,7 +33,7 @@ import static cs3500.tripletrios.model.PlayerColor.RED;
  * events on the cell.
  */
 public class GridPanel extends JPanel implements GridCellView {
-  private Cell cell;
+  private CellInterface cell;
   private final int row;
   private final int col;
   private final ReadOnlyGameModel model;
@@ -47,7 +48,7 @@ public class GridPanel extends JPanel implements GridCellView {
    * @param row  the row index of the cell in the grid
    * @param col  the column index of the cell in the grid
    */
-  public GridPanel(Cell cell, int row, int col, ReadOnlyGameModel model,
+  public GridPanel(CellInterface cell, int row, int col, ReadOnlyGameModel model,
                    IPlayer player, GameViewGUI gameView) {
     this.cell = cell;
     this.row = row;
@@ -147,7 +148,7 @@ public class GridPanel extends JPanel implements GridCellView {
    * repaints the grid and changes the color of the cell.
    */
   public void repaintGrid(ReadOnlyGameModel model) {
-    this.cell = model.getGameGrid().getCellOops(this.row, this.col);
+    this.cell = model.getGameGrid().getCell(this.row, this.col);
     setColor();
     repaint();
   }

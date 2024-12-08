@@ -16,6 +16,7 @@ import cs3500.tripletrios.model.HumanPlayer;
 import cs3500.tripletrios.model.IPlayer;
 import cs3500.tripletrios.model.PlayerColor;
 import cs3500.tripletrios.strategy.Moves;
+import cs3500.tripletrios.strategy.MovesInterface;
 import cs3500.tripletrios.strategy.StrategyInterface;
 import cs3500.tripletrios.strategy.StrategyOne;
 
@@ -59,7 +60,7 @@ public class StrategyTranscriptTest {
   @Test
   public void testGenerateTranscriptForSimpleStrategy() {
     // Determine the best move using the assigned strategy
-    Moves move = aiPlayer.determineNextMove();
+    MovesInterface move = aiPlayer.determineNextMove();
 
     // Validate that the move is not null
     assertNotNull("AI should determine a valid move.", move);

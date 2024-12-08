@@ -3,7 +3,7 @@ package cs3500.tripletrios.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import cs3500.tripletrios.strategy.Moves;
+import cs3500.tripletrios.strategy.MovesInterface;
 import cs3500.tripletrios.strategy.StrategyInterface;
 
 /**
@@ -126,7 +126,7 @@ public class HumanPlayer implements IPlayer {
    *
    * @return the move to be made
    */
-  public Moves determineNextMove() {
+  public MovesInterface determineNextMove() {
     throw new UnsupportedOperationException("Human players do not have a strategy.");
   }
 

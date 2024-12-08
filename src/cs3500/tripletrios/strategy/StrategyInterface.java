@@ -14,5 +14,5 @@ public interface StrategyInterface {
    * @param computerPlayer an AI player
    * @return a move that is superior.
    */
-  Moves getBestMove(IPlayer computerPlayer);
+  MovesInterface getBestMove(IPlayer computerPlayer);
 }

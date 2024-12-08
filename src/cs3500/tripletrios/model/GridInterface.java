@@ -10,7 +10,7 @@ public interface GridInterface {
    * @return The cell at (row, col).
    * @throws IndexOutOfBoundsException if the coordinates are out of bounds.
    */
-  Cell getCell(int row, int col) throws IndexOutOfBoundsException;
+  CellInterface getCell(int row, int col) throws IndexOutOfBoundsException;
 
   /**
    * Gets the adjacent cell from the given position in the specified direction.
@@ -21,7 +21,7 @@ public interface GridInterface {
    * @return The adjacent cell if it exists, or null if out of bounds
    * @throws IndexOutOfBoundsException if the direction is invalid.
    */
-  Cell getAdjacentCells(
+  CellInterface getAdjacentCells(
           int row,
           int col,
           Direction direction) throws IndexOutOfBoundsException;
@@ -74,7 +74,7 @@ public interface GridInterface {
    * @param newCell the new cell to place at the specified location
    * @throws IndexOutOfBoundsException if the specified row or column is outside the grid bounds
    */
-  void updateCell(int row, int col, Cell newCell);
+  void updateCell(int row, int col, CellInterface newCell);
 
   /**
    * Transforms the grid's state into a string that the viewer can use.

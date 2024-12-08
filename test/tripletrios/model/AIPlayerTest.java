@@ -16,6 +16,7 @@ import cs3500.tripletrios.model.HumanPlayer;
 import cs3500.tripletrios.model.IPlayer;
 import cs3500.tripletrios.model.PlayerColor;
 import cs3500.tripletrios.strategy.Moves;
+import cs3500.tripletrios.strategy.MovesInterface;
 import cs3500.tripletrios.strategy.StrategyInterface;
 import cs3500.tripletrios.strategy.StrategyOne;
 
@@ -100,13 +101,13 @@ public class AIPlayerTest {
   public void testSetStrategy() {
     StrategyInterface newStrategy = new StrategyOne(mockModel);
     aiPlayer.setStrategy(newStrategy);
-    Moves move = aiPlayer.determineNextMove();
+    MovesInterface move = aiPlayer.determineNextMove();
     assertNotNull("Strategy should be set, and determineNextMove should work.", move);
   }
 
   @Test
   public void testDetermineNextMove() {
-    Moves move = aiPlayer.determineNextMove();
+    MovesInterface move = aiPlayer.determineNextMove();
     assertNotNull("AI should determine a valid move.", move);
     assertTrue("Move must be from AI's hand.", aiPlayer.getCurrentHand().contains(move.getCard()));
   }
@@ -117,7 +118,7 @@ public class AIPlayerTest {
     aiPlayer.addCardToHand(card1);
     int initialHandSize = aiPlayer.getCurrentHand().size();
 
-    Moves bestMove = aiPlayer.determineNextMove();
+    MovesInterface bestMove = aiPlayer.determineNextMove();
     aiPlayer.placeTheCard(card1, bestMove.getRow(), bestMove.getCol());
 
     assertEquals(bestMove.getRow(), card1.getRow());

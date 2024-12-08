@@ -14,7 +14,7 @@ public class Grid implements GridInterface{
   private final int rows;
   private final int cols;
   private final Cell[][] grid;
-  private final Map<Cell, Map<Direction, Cell>> adjacentCellMap;
+  private final Map<CellInterface, Map<Direction, CellInterface>> adjacentCellMap;
 
   /**
    * Creates a new grid with specified cell types (CardCells or Holes).
@@ -70,8 +70,8 @@ public class Grid implements GridInterface{
   private void trackCellsNextTo() {
     for (int row = 0; row < rows; row++) {
       for (int col = 0; col < cols; col++) {
-        Cell cell = grid[row][col];
-        Map<Direction, Cell> neighbors = new EnumMap<>(Direction.class);
+        CellInterface cell = grid[row][col];
+        Map<Direction, CellInterface> neighbors = new EnumMap<>(Direction.class);
 
         if (isValidCell(row - 1, col)) {
           neighbors.put(Direction.NORTH, grid[row - 1][col]);
@@ -104,25 +104,13 @@ public class Grid implements GridInterface{
    * @throws IndexOutOfBoundsException if the coordinates are out of bounds.
    */
   @Override
-  public Cell getCell(int row, int col) {
+  public CellInterface getCell(int row, int col) {
     if (isValidCell(row, col)) {
-      Cell originalCell = grid[row][col];
-      return new Cell(row, col, originalCell.isCardCell());
+      CellInterface originalCell = grid[row][col];
+      return new Cell(originalCell);
     } else {
       throw new IndexOutOfBoundsException("Invalid cell coordinates.");
     }
-  }
-
-  /**
-   * Retrieves a specific cell at the given row and column.
-   *
-   * @param row Row of the cell.
-   * @param col Column of the cell.
-   * @return The cell at (row, col).
-   * @throws IndexOutOfBoundsException if the coordinates are out of bounds.
-   */
-  public Cell getCellOops(int row, int col) {
-    return grid[row][col];
   }
 
   /**
@@ -135,7 +123,7 @@ public class Grid implements GridInterface{
    * @throws IndexOutOfBoundsException if the direction is invalid.
    */
   @Override
-  public Cell getAdjacentCells(
+  public CellInterface getAdjacentCells(
           int row,
           int col,
           Direction direction) throws IndexOutOfBoundsException {
@@ -187,7 +175,7 @@ public class Grid implements GridInterface{
    */
   @Override
   public CardInterface getCardAt(int row, int col) {
-    Cell cell = getCell(row, col);
+    CellInterface cell = getCell(row, col);
     return cell.isCardCell() && !cell.isEmpty() ? cell.getCard() : null;
   }
 
@@ -239,7 +227,7 @@ public class Grid implements GridInterface{
    * @throws IndexOutOfBoundsException if the specified row or column is outside the grid bounds
    */
   @Override
-  public void updateCell(int row, int col, Cell newCell) {
+  public void updateCell(int row, int col, CellInterface newCell) {
     if (isValidCell(row, col)) {
       grid[row][col] = new Cell(newCell);
     } else {

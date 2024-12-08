@@ -2,7 +2,7 @@ package cs3500.tripletrios.model;
 
 import java.util.List;
 
-import cs3500.tripletrios.strategy.Moves;
+import cs3500.tripletrios.strategy.MovesInterface;
 import cs3500.tripletrios.strategy.StrategyInterface;
 
 /**
@@ -67,7 +67,7 @@ public interface IPlayer {
    *
    * @return the move to be made
    */
-  Moves determineNextMove();
+  MovesInterface determineNextMove();
 
   /**
    * Sets a strategy for an AiPlayer.

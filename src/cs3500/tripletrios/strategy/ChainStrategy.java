@@ -41,12 +41,12 @@ public class ChainStrategy extends AbstractStrategy implements StrategyInterface
    * @return The best move found, or a fallback move if none found.
    */
   @Override
-  public Moves getBestMove(IPlayer computerPlayer) {
+  public MovesInterface getBestMove(IPlayer computerPlayer) {
     if (strategies.isEmpty()) {
       return null;
     }
 
-    Moves bestMove = null;
+    MovesInterface bestMove = null;
     for (StrategyInterface strategy : strategies) {
       bestMove = strategy.getBestMove(computerPlayer);
       if (bestMove != null) {

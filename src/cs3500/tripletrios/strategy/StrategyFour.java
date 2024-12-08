@@ -2,6 +2,7 @@ package cs3500.tripletrios.strategy;
 
 import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.Cell;
+import cs3500.tripletrios.model.CellInterface;
 import cs3500.tripletrios.model.GameModelImpl;
 import cs3500.tripletrios.model.Grid;
 import cs3500.tripletrios.model.IPlayer;
@@ -36,9 +37,9 @@ public class StrategyFour extends AbstractStrategy implements StrategyInterface 
    * @return the best move avialable
    */
   @Override
-  public Moves getBestMove(IPlayer computerPlayer) {
+  public MovesInterface getBestMove(IPlayer computerPlayer) {
     int minOpponentMaxScore = Integer.MAX_VALUE;
-    Moves bestMove = null;
+    MovesInterface bestMove = null;
 
     // Iterate through the grid to find available cells
     for (int row = 0; row < grid.getRows(); row++) {
@@ -47,14 +48,14 @@ public class StrategyFour extends AbstractStrategy implements StrategyInterface 
           for (CardInterface card : computerPlayer.getCurrentHand()) {
             // Create a simulated version of the grid
             Grid simulatedGrid = new Grid(grid);
-            Cell simulatedCell = simulatedGrid.getCell(row, col);
+            CellInterface simulatedCell = simulatedGrid.getCell(row, col);
             simulatedCell.setCard(card);
             simulatedGrid.updateCell(row, col, simulatedCell);
 
             IPlayer opponent = model.getOtherPlayer();
 
             ReadOnlyGameModel simulatedModel = createNewModel(simulatedGrid, opponent);
-            Moves opponentBestMove = oppStrategy.getBestMove(opponent);
+            MovesInterface opponentBestMove = oppStrategy.getBestMove(opponent);
 
             int opponentMaxScore = evaluateMove(opponentBestMove, simulatedModel);
 
@@ -89,7 +90,7 @@ public class StrategyFour extends AbstractStrategy implements StrategyInterface 
    * @param simulatedModel The game model after the computer's move.
    * @return The score representing how advantageous the move is for the opponent.
    */
-  private int evaluateMove(Moves move, ReadOnlyGameModel simulatedModel) {
+  private int evaluateMove(MovesInterface move, ReadOnlyGameModel simulatedModel) {
     if (move == null) {
       return 0;
     }

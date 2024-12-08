@@ -6,6 +6,7 @@ import java.util.List;
 import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.IPlayer;
 import cs3500.tripletrios.strategy.Moves;
+import cs3500.tripletrios.strategy.MovesInterface;
 import cs3500.tripletrios.strategy.StrategyInterface;
 
 /**
@@ -56,7 +57,7 @@ public class MockPlayer implements IPlayer {
   }
 
   @Override
-  public Moves determineNextMove() {
+  public MovesInterface determineNextMove() {
     return new Moves(null, 0, 0);
   }
 

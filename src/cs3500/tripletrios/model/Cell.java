@@ -30,11 +30,11 @@ public class Cell implements CellInterface{
    *
    * @param original The cell to copy.
    */
-  public Cell(Cell original) {
-    this.row = original.row;
-    this.col = original.col;
-    this.isCardCell = original.isCardCell;
-    this.card = original.card;
+  public Cell(CellInterface original) {
+    this.row = original.getRow();
+    this.col = original.getCol();
+    this.isCardCell = original.isCardCell();
+    this.card = original.getCard();
   }
 
 

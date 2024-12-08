@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cs3500.tripletrios.model.CardInterface;
-import cs3500.tripletrios.model.Cell;
+import cs3500.tripletrios.model.CellInterface;
 import cs3500.tripletrios.model.IPlayer;
 import cs3500.tripletrios.model.PlayerColor;
 import cs3500.tripletrios.model.ReadOnlyGameModel;
@@ -88,12 +88,12 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
    */
   private void initializeGrid() {
     gridPanel.removeAll();
-    List<List<Cell>> cells = new ArrayList<>();
+    List<List<CellInterface>> cells = new ArrayList<>();
     // Retrieve the cells and add them to the panel
     for (int row = 0; row < model.getGameGrid().getRows(); row++) {
-      List<Cell> rowCells = new ArrayList<>();
+      List<CellInterface> rowCells = new ArrayList<>();
       for (int col = 0; col < model.getGameGrid().getCols(); col++) {
-        Cell cell = model.getGameGrid().getCell(row, col);
+        CellInterface cell = model.getGameGrid().getCell(row, col);
         GridPanel gridCellPanel = new GridPanel(cell, row, col, model, player, this);
 
         gridPanel.add(gridCellPanel);
