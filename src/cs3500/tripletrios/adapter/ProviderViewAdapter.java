@@ -1,17 +1,24 @@
-package cs3500.tripletrios.provider.adapter;
+package cs3500.tripletrios.adapter;
+
+import java.io.IOException;
 
 import cs3500.tripletrios.controller.ControllerInterface;
+import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.GameModel;
 import cs3500.tripletrios.model.IPlayer;
+import cs3500.tripletrios.observing.Observer;
 import cs3500.tripletrios.provider.controller.GameListeners;
 import cs3500.tripletrios.provider.view.BoardPanelInterface;
 import cs3500.tripletrios.provider.view.HandPanelInterface;
 import cs3500.tripletrios.provider.view.ThreeTriosGUIViewInterface;
+import cs3500.tripletrios.view.GameViewGUI;
+import cs3500.tripletrios.view.GridPanel;
+import cs3500.tripletrios.view.TripleTrioGuiView;
 
 /**
  * Adapter to integrate the provider's view interfaces into our system.
  */
-public class ProviderViewAdapter implements GameListeners {
+public class ProviderViewAdapter implements GameViewGUI {
   private final GameModel model;
   private final ControllerInterface controller;
   private final IPlayer player;
@@ -26,23 +33,16 @@ public class ProviderViewAdapter implements GameListeners {
    * @param controller  Our controller to manage game logic.
    * @param player      The player associated with the provider's view.
    * @param providerView The provider's main GUI view.
-   * @param boardPanel   The provider's board panel.
-   * @param handPanel    The provider's hand panel.
    */
   public ProviderViewAdapter(GameModel model, ControllerInterface controller, IPlayer player,
-                             ThreeTriosGUIViewInterface providerView,
-                             BoardPanelInterface boardPanel,
-                             HandPanelInterface handPanel) {
+                             ThreeTriosGUIViewInterface providerView) {
     this.model = model;
     this.controller = controller;
     this.player = player;
     this.providerView = providerView;
-    this.boardPanel = boardPanel;
-    this.handPanel = handPanel;
 
     // Set up the provider's controller
-    this.providerView.setController(this);
-    this.boardPanel.setController(this);
+    this.providerView.setController(new ControllerAdapter(controller));
   }
 
   @Override
@@ -93,5 +93,80 @@ public class ProviderViewAdapter implements GameListeners {
     } else {
       providerView.displayMessage("It's not your turn!");
     }
+  }
+
+  @Override
+  public void initializeHands() {
+
+  }
+
+  @Override
+  public void setVisible(boolean visible) {
+
+  }
+
+  @Override
+  public void refreshHands() {
+
+  }
+
+  @Override
+  public void refreshGrid() {
+
+  }
+
+  @Override
+  public CardInterface getSelectedCard() {
+    return null;
+  }
+
+  @Override
+  public void addObserver(Observer observer) {
+
+  }
+
+  @Override
+  public void removeObserver(Observer observer) {
+
+  }
+
+  @Override
+  public void notifyObservers() {
+
+  }
+
+  @Override
+  public void popup(String message) {
+
+  }
+
+  @Override
+  public void clearSelectedCard() {
+
+  }
+
+  @Override
+  public void setSelectedPanel(GridPanel panel) {
+
+  }
+
+  @Override
+  public GridPanel getSelectedPanel() {
+    return null;
+  }
+
+  @Override
+  public void clearSelectedPanel() {
+
+  }
+
+  @Override
+  public boolean isHandsInitialized() {
+    return false;
+  }
+
+  @Override
+  public void render() throws IOException {
+
   }
 }

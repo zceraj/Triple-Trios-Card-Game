@@ -1,9 +1,9 @@
 package cs3500.tripletrios.provider.view;
 
-import cs3500.threetrios.controller.GameListeners;
-import cs3500.threetrios.model.GameState;
-import cs3500.threetrios.model.PlayerColor;
-import cs3500.threetrios.model.ReadOnlyThreeTriosModelInterface;
+import cs3500.tripletrios.provider.controller.GameListeners;
+import cs3500.tripletrios.provider.model.GameState;
+import cs3500.tripletrios.provider.model.PlayerColor;
+import cs3500.tripletrios.provider.model.ReadOnlyThreeTriosModelInterface;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;

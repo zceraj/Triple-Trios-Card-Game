@@ -1,7 +1,7 @@
 package cs3500.tripletrios.controller;
 
 import cs3500.tripletrios.model.CardInterface;
-import cs3500.tripletrios.model.Cell;
+import cs3500.tripletrios.model.CellInterface;
 import cs3500.tripletrios.model.GameModel;
 import cs3500.tripletrios.model.IPlayer;
 import cs3500.tripletrios.view.GameViewGUI;
@@ -87,7 +87,7 @@ public class ThreeTriosController implements ControllerInterface {
   }
 
   // checks if you can move the card there
-  private boolean isValidMove(CardInterface card, Cell cell) {
+  private boolean isValidMove(CardInterface card, CellInterface cell) {
     return (cell.isCardCell() && cell.isEmpty());
   }
 

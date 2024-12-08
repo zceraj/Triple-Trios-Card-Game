@@ -9,7 +9,7 @@ import cs3500.tripletrios.model.GameModelImpl;
 import cs3500.tripletrios.model.HumanPlayer;
 import cs3500.tripletrios.model.IPlayer;
 import cs3500.tripletrios.model.PlayerColor;
-import cs3500.tripletrios.provider.adapter.ProviderViewAdapter;
+import cs3500.tripletrios.adapter.ProviderViewAdapter;
 import cs3500.tripletrios.provider.view.BoardPanelInterface;
 import cs3500.tripletrios.provider.view.HandPanelInterface;
 import cs3500.tripletrios.provider.view.ThreeTriosGUIViewInterface;
