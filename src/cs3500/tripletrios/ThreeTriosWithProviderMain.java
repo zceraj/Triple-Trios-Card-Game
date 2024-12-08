@@ -1,7 +1,6 @@
-package cs3500.tripletrios.provider;
+package cs3500.tripletrios;
 
 import java.io.File;
-import java.util.List;
 
 import cs3500.tripletrios.controller.SetUp;
 import cs3500.tripletrios.controller.ThreeTriosController;
@@ -14,7 +13,6 @@ import cs3500.tripletrios.provider.adapter.ProviderViewAdapter;
 import cs3500.tripletrios.provider.view.BoardPanelInterface;
 import cs3500.tripletrios.provider.view.HandPanelInterface;
 import cs3500.tripletrios.provider.view.ThreeTriosGUIViewInterface;
-import cs3500.tripletrios.provider.view.ThreeTriosView;
 import cs3500.tripletrios.view.GameViewGUI;
 import cs3500.tripletrios.view.TripleTrioGuiView;
 

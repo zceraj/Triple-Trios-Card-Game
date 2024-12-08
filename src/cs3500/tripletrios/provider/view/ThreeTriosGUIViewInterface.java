@@ -1,6 +1,6 @@
 package cs3500.tripletrios.provider.view;
 
-import cs3500.tripletrios.provider.controller.GameListeners;
+import cs3500.threetrios.controller.GameListeners;
 
 /**
  * A view interface specific to a GUI view of Three Trios. For anything that
