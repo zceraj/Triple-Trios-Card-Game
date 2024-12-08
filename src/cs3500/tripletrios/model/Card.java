@@ -14,11 +14,12 @@ public class Card implements CardInterface {
 
   /**
    * Creates a new card with the given name and attack values.
+   *
    * @param cardName The name of the card
-   * @param north The attack value of the card in the north direction
-   * @param south The attack value of the card in the south direction
-   * @param east The attack value of the card in the east direction
-   * @param west The attack value of the card in the west direction
+   * @param north    The attack value of the card in the north direction
+   * @param south    The attack value of the card in the south direction
+   * @param east     The attack value of the card in the east direction
+   * @param west     The attack value of the card in the west direction
    */
   public Card(String cardName, int north, int south, int east, int west) {
     this.cardName = cardName;
@@ -42,9 +43,9 @@ public class Card implements CardInterface {
   }
 
 
-
   /**
    * Converts an integer attack value to a string, where 10 is represented by "A".
+   *
    * @param value The integer attack value to convert
    * @return The string representation of the attack value ("1"-"9" or "A")
    */
@@ -54,6 +55,7 @@ public class Card implements CardInterface {
 
   /**
    * Sets the row for the card after placement.
+   *
    * @param row The row to set
    */
   @Override
@@ -63,6 +65,7 @@ public class Card implements CardInterface {
 
   /**
    * Sets the column for the card after placement.
+   *
    * @param col The column to set
    */
   @Override
@@ -72,6 +75,7 @@ public class Card implements CardInterface {
 
   /**
    * Gets the attack value of the card in the given direction as a string.
+   *
    * @param direction The direction to get the attack value
    * @return The attack value of the card in the given direction ("1"-"9" or "A").
    */
@@ -82,7 +86,19 @@ public class Card implements CardInterface {
   }
 
   /**
+   * Gets the attack value of the card in the given direction as an integer.
+   *
+   * @param direction The direction to get the attack value
+   * @return The attack value of the card in the given direction (1-10).
+   */
+  public int getAttackValueAsInt(Direction direction) {
+    return attackValues.get(direction);
+  }
+
+
+  /**
    * Gets the row of the card.
+   *
    * @return The row of the card
    */
   @Override
@@ -92,6 +108,7 @@ public class Card implements CardInterface {
 
   /**
    * Gets the column of the card.
+   *
    * @return The column of the card
    */
   @Override
@@ -101,6 +118,7 @@ public class Card implements CardInterface {
 
   /**
    * Gets the column of the card.
+   *
    * @return The name of the card.
    */
   public String getCardName() {
@@ -109,14 +127,16 @@ public class Card implements CardInterface {
 
   /**
    * formats the card as the name of the card and all of its attack values.
+   *
    * @return the card as a string.
    */
+  @Override
   public String toString() {
-    StringBuilder attackValuesString = new StringBuilder();
-    for (Integer value : attackValues.values()) {
-      attackValuesString.append(value.toString());
-      attackValuesString.append(" ");
-    }
-    return cardName + " " + attackValuesString;
+    return cardName + " " +
+            formatAttack(attackValues.get(Direction.NORTH)) + " " +
+            formatAttack(attackValues.get(Direction.SOUTH)) + " " +
+            formatAttack(attackValues.get(Direction.EAST)) + " " +
+            formatAttack(attackValues.get(Direction.WEST));
   }
+
 }

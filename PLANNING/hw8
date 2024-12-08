@@ -1,0 +1,53 @@
+# Assignment 8
+----------------------------------------------------------------------------------------------------
+Communcations:
+Z:
+
+M:
+
+To Discuss:
+
+----------------------------------------------------------------------------------------------------
+                              ---------------
+                              --To Do List:--
+                              ---------------
+    KEY
+O - not complete
+X - completed
+* - in progress if needed
+
+time to work:
+Z:
+wed morning
+thurs morning
+part of sat and sun
+
+M:
+
+
+
+Day 1: Code Exchange and Setup (Z)
+X Request provider code via email and confirm receipt.
+X Review the received code and refactor it into the cs3500.threetrios.provider package.
+O Perform an initial review of the provider’s interfaces and functionality.
+O Verify that all necessary files from the provider are included.
+
+Day 2: Integration and Debugging
+O Integrate the provider’s views with your model and controller.
+O Test integration of provider views to ensure they display Player 2 correctly.
+O Retain functionality of your own views and ensure Player 1 continues to work.
+O Debug issues arising from integration (e.g., mismatched interfaces, missing features).
+O Document command-line options for the grader in your README.
+
+Day 3: Documentation and Critiques
+O Write a comprehensive critique of the provider’s code (PeerReview.txt).
+O Include sections for design critique, implementation critique, and documentation critique.
+O Write a self-review reflecting on your experience (SelfReview.txt).
+O Update the README file with details about features that work, features that don’t, and why.
+O Justify any adapters or code changes attempted but not completed.
+
+Day 4: Final Checks and Submission
+O Perform final testing with both your views and the provider’s views.
+O Test all command-line options to verify they work as expected.
+O Package all files for submission, including the JAR file, README, PeerReview.txt, and SelfReview.txt.
+O Submit the assignment to the required platform by the deadline.

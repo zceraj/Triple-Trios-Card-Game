@@ -1,62 +1,91 @@
 package cs3500.tripletrios.view;
 
-import java.util.List;
+import cs3500.tripletrios.model.CardInterface;
+import cs3500.tripletrios.observing.ObservableInterface;
+import cs3500.tripletrios.observing.Observer;
 
-import cs3500.tripletrios.model.Card;
-import cs3500.tripletrios.model.Cell;
-import cs3500.tripletrios.model.ReadOnlyGameModel;
-
-public interface GameViewGUI extends GameView {
-  /**
-   * Initializes the grid panel based on the game's state.
-   * This method is responsible for rendering the game board grid.
-   */
-  void initializeGrid();
-
-  /**
-   * Initializes the player hands and updates the UI to reflect the cards in the players' hands.
-   */
+/**
+ * an interface for a game view that pops up a new window to play the game.
+ */
+public interface GameViewGUI extends GameView, ObservableInterface {
   void initializeHands();
 
   /**
-   * Highlights the selected card in the player’s hand.
-   * @param card The card to be highlighted.
-   */
-  void highlightSelectedCard(Card card);
-
-  /**
-   * Updates the UI to reflect changes in the game, such as moving a card to the grid.
-   */
-  void updateGame();
-
-  /**
-   * Handles the logic for when a card is clicked.
-   * @param card The card that was clicked.
-   */
-  void handleCardClick(Card card);
-
-  /**
-   * Handles the logic for when a grid cell is clicked.
-   * @param row The row index of the clicked grid cell.
-   * @param col The column index of the clicked grid cell.
-   */
-  void handleGridClick(int row, int col);
-
-  /**
-   * Makes the view visible or invisible.
-   * @param visible True to make the view visible, false to hide it.
+   * Sets the visibility of the game view GUI.
+   *
+   * @param visible --> true to make the GUI visible, false to hide it
    */
   void setVisible(boolean visible);
 
   /**
-   * Displays an error message in the view.
-   * @param message The message to be displayed.
+   * Refreshes the display of the player's hands in the game view.
+   * This method should be called whenever the player's hand is updated.
    */
-  void displayErrorMessage(String message);
+  void refreshHands();
 
   /**
-   * Updates the player's hand on the UI after a card is played.
-   * @param cards The updated list of cards in the player's hand.
+   * Refreshes the game grid in the GUI.
+   * This method should be called whenever the grid layout or state changes,
+   * such as after a card is placed or the game progresses.
    */
-  void updatePlayerHand(List<Card> cards);
+  void refreshGrid();
+
+  /**
+   * Gets the card that is selected.
+   * @return the selected card
+   */
+  CardInterface getSelectedCard();
+
+  // we weren't able to extend the Observable abstract class due to java rules, so we did this
+
+  /**
+   * adds an observer.
+   * @param observer someone who observes
+   */
+  void addObserver(Observer observer);
+
+  /**
+   * removes an observer.
+   * @param observer someone who observes
+   */
+  void removeObserver(Observer observer);
+
+  /**
+   * notifies the observers of any changes.
+   */
+  void notifyObservers();
+
+  /**
+   * creates a pop up message.
+   * @param message what you want shown
+   */
+  void popup(String message);
+
+  /**
+   * resets the selected card.
+   */
+  void clearSelectedCard();
+
+  /**
+    * sets the selected panel.
+   * @param panel the panel to be selected
+   */
+  void setSelectedPanel(GridPanel panel);
+
+  /**
+   * gets the selected panel.
+   * @return the selected panel
+   */
+  GridPanel getSelectedPanel();
+
+  /**
+   * resets/clears the selected panel.
+   */
+  void clearSelectedPanel();
+
+  /**
+   * Determines if the hand has been initialized or not.
+   * @return true if the hands have been initialized, false otherwise
+   */
+  boolean isHandsInitialized();
 }

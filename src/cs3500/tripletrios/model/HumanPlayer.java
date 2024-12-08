@@ -3,6 +3,9 @@ package cs3500.tripletrios.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import cs3500.tripletrios.strategy.MovesInterface;
+import cs3500.tripletrios.strategy.StrategyInterface;
+
 /**
  * Represents a human player in the card game, holding a hand of cards
  * and providing methods to manage the player's hand.
@@ -15,7 +18,8 @@ import java.util.List;
 public class HumanPlayer implements IPlayer {
   private final String name;
   private final PlayerColor color;
-  private final List<CardInterface> hand;
+  private final List<CardInterface> currentHand;
+  private final List<CardInterface> allCards;
 
   /**
    * Constructs a new HumanPlayer with the specified name and color.
@@ -24,7 +28,8 @@ public class HumanPlayer implements IPlayer {
    * @param color the color representing the player's identity
    */
   public HumanPlayer(String name, PlayerColor color) {
-    this.hand = new ArrayList<>();
+    this.currentHand = new ArrayList<>();
+    this.allCards = new ArrayList<>();
     this.name = name;
     this.color = color;
   }
@@ -53,7 +58,7 @@ public class HumanPlayer implements IPlayer {
    * @param card the card to be added to the hand
    */
   public void addCardToHand(CardInterface card) {
-    hand.add(card);
+    currentHand.add(card);
   }
 
   /**
@@ -62,7 +67,7 @@ public class HumanPlayer implements IPlayer {
    * @param card the card to be removed from the hand
    */
   public void removeCardFromHand(CardInterface card) {
-    hand.remove(card);
+    currentHand.remove(card);
   }
 
   /**
@@ -72,14 +77,15 @@ public class HumanPlayer implements IPlayer {
    * @throws IllegalArgumentException if playerHand is null
    */
   @Override
-  public void setHand(List<CardInterface> playerHand) {
+  public void setCurrentHand(List<CardInterface> playerHand) {
     if (playerHand == null) {
       throw new IllegalArgumentException("Hand cannot be null.");
     }
-    this.hand.clear();
-    this.hand.addAll(playerHand);
+    this.currentHand.clear();
+    this.currentHand.addAll(playerHand);
+    this.allCards.clear();
+    this.allCards.addAll(playerHand);
   }
-
 
 
   /**
@@ -87,34 +93,49 @@ public class HumanPlayer implements IPlayer {
    *
    * @return the list of cards in the player's hand
    */
-  public List<CardInterface> getHand() {
-    return hand;
+  public List<CardInterface> getCurrentHand() {
+    return new ArrayList<>(currentHand);
   }
 
   /**
-   * Plays a card from the player's hand at the specified index.
+   * Gets the list of cards the player has placed down or had in their hand.
    *
-   * @param index the index of the card to be played
-   * @return the card that was played
-   * @throws IndexOutOfBoundsException if the index is out of range
+   * @return the list of cards in the player's hand
    */
-  public CardInterface playCard(int index) {
-
-    return hand.remove(index);
+  public List<CardInterface> getAllCards() {
+    return new ArrayList<>(allCards);
   }
 
   /**
    * Places a card on the game board at the specified row and column.
+   *
    * @param card the card to place
-   * @param row the row to place the card
+   * @param row  the row to place the card
    * @param col  the column to place the card
    */
   public void placeTheCard(CardInterface card, int row, int col) {
     if (card == null) {
       throw new IllegalArgumentException("Card cannot be null.");
     }
-    card.addRow(row);
-    card.addCol(col);
+    currentHand.remove(card);
+  }
+
+  /**
+   * Determines the next move for the player.
+   * Used specifically for AI players.
+   *
+   * @return the move to be made
+   */
+  public MovesInterface determineNextMove() {
+    throw new UnsupportedOperationException("Human players do not have a strategy.");
+  }
+
+  /**
+   * Sets a strategy for an AiPlayer.
+   * @param strategy the strategy to be set
+   */
+  public void setStrategy(StrategyInterface strategy) {
+    throw new UnsupportedOperationException("Human players do not have a strategy.");
   }
 
 
@@ -126,6 +147,6 @@ public class HumanPlayer implements IPlayer {
    */
   @Override
   public String toString() {
-    return name + " (" + color + ") - Hand: " + hand;
+    return name + " (" + color + ") - Hand: " + currentHand;
   }
 }

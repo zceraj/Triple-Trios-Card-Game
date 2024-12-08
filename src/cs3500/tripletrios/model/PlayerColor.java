@@ -6,10 +6,14 @@ package cs3500.tripletrios.model;
  */
 public enum PlayerColor {
 
-  /** Represents the color red. */
+  /**
+   * Represents the color red.
+   */
   RED,
 
-  /** Represents the color blue. */
+  /**
+   * Represents the color blue.
+   */
   BLUE;
 
   /**

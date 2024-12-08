@@ -45,14 +45,14 @@ public class PlayerTest {
   @Test
   public void testAddCardToHand() {
     player.addCardToHand(card1);
-    assertTrue(player.getHand().contains(card1));
+    assertTrue(player.getCurrentHand().contains(card1));
   }
 
   @Test
   public void testRemoveCardFromHand() {
     player.addCardToHand(card1);
     player.removeCardFromHand(card1);
-    assertFalse(player.getHand().contains(card1));
+    assertFalse(player.getCurrentHand().contains(card1));
   }
 
   @Test
@@ -60,26 +60,18 @@ public class PlayerTest {
     List<CardInterface> newHand = new ArrayList<>();
     newHand.add(card1);
     newHand.add(card2);
-    player.setHand(newHand);
-    assertEquals(newHand, player.getHand());
+    player.setCurrentHand(newHand);
+    assertEquals(newHand, player.getCurrentHand());
   }
 
-  @Test
-  public void testPlayCard() {
-    player.addCardToHand(card1);
-    player.addCardToHand(card2);
-    CardInterface playedCard = player.playCard(0);
-    assertEquals(card1, playedCard);
-    assertFalse(player.getHand().contains(card1));
-  }
 
   @Test
   public void testGetHand() {
     List<CardInterface> hand = new ArrayList<>();
     hand.add(card1);
     hand.add(card2);
-    player.setHand(hand);
-    assertEquals(hand, player.getHand());
+    player.setCurrentHand(hand);
+    assertEquals(hand, player.getCurrentHand());
   }
 
   @Test

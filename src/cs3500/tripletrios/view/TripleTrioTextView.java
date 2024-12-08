@@ -3,7 +3,6 @@ package cs3500.tripletrios.view;
 import java.io.IOException;
 import java.util.Objects;
 
-import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.GameModel;
 
@@ -16,9 +15,9 @@ public class TripleTrioTextView implements GameView {
 
 
   /**
-   * constructs a text view using a mdel and an appendable.
+   * constructs a text view using a model and an appendable.
    *
-   * @param model model that the player is playing on.
+   * @param model      model that the player is playing on.
    * @param appendable an appendable that is passed back to the controller.
    */
   public TripleTrioTextView(GameModel model, Appendable appendable) {
@@ -38,7 +37,7 @@ public class TripleTrioTextView implements GameView {
 
     // Cards (C): Show loaded card details
     stringToRender.append("\nCards:\n");
-    for (CardInterface card : model.getCurPlayer().getHand()) {
+    for (CardInterface card : model.getCurPlayer().getCurrentHand()) {
       stringToRender.append(card.toString()).append("\n");
     }
   }

@@ -1,7 +1,0 @@
-Lion 3 5 2 1
-Tiger 4 2 5 3
-Elephant 5 1 4 2
-Giraffe 2 4 3 5
-Zebra 1 3 5 4
-Panda 4 4 4 4
-Wolf 3 2 1 5

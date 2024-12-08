@@ -108,9 +108,9 @@ public class GridTest {
 
     // Define the expected string representation of the grid
     String expectedOutput =
-            "[CardA] [ ] [ ]\n" +
-                    "[ ] [CardB] [X]\n" +
-                    "[X] [X] [ ]";
+            "[CardA] [ ] [ ]\n"
+                    + "[ ] [CardB] [X]\n"
+                    + "[X] [X] [ ]";
 
     // Test if the actual output matches the expected output
     assertEquals(expectedOutput, smallGrid.toString());

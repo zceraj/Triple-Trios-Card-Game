@@ -1,0 +1,12 @@
+"C:\Program Files\Java\jdk-11\bin\java.exe" -ea -Didea.test.cyclic.buffer.size=1048576 "-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA 2024.2.1\lib\idea_rt.jar=61850:C:\Program Files\JetBrains\IntelliJ IDEA 2024.2.1\bin" -Dfile.encoding=UTF-8 -classpath "C:\Program Files\JetBrains\IntelliJ IDEA 2024.2.1\lib\idea_rt.jar;C:\Program Files\JetBrains\IntelliJ IDEA 2024.2.1\plugins\junit\lib\junit5-rt.jar;C:\Program Files\JetBrains\IntelliJ IDEA 2024.2.1\plugins\junit\lib\junit-rt.jar;C:\Users\meros\OneDrive\Documents\GitHub\OODHW5\out\test\OODHW5;C:\Users\meros\OneDrive\Documents\GitHub\OODHW5\out\production\OODHW5;C:\Users\meros\.m2\repository\junit\junit\4.13.1\junit-4.13.1.jar;C:\Users\meros\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\meros\.m2\repository\org\junit\jupiter\junit-jupiter\5.8.1\junit-jupiter-5.8.1.jar;C:\Users\meros\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.8.1\junit-jupiter-api-5.8.1.jar;C:\Users\meros\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\meros\.m2\repository\org\junit\platform\junit-platform-commons\1.8.1\junit-platform-commons-1.8.1.jar;C:\Users\meros\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\meros\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.8.1\junit-jupiter-params-5.8.1.jar;C:\Users\meros\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.8.1\junit-jupiter-engine-5.8.1.jar;C:\Users\meros\.m2\repository\org\junit\platform\junit-platform-engine\1.8.1\junit-platform-engine-1.8.1.jar" com.intellij.rt.junit.JUnitStarter -ideVersion5 -junit4 tripletrios.model.StrategyTranscriptTest,testGenerateTranscriptForSimpleStrategy
+Strategy Transcript:
+Player: AI Player (Red)
+Chosen Card: Card1
+Chosen Position: Row 0, Column 0
+
+Process finished with exit code 0
+
+
+I chose strategy one has the easiest because
+a player themselves can easily choose the card without
+much thought and effort

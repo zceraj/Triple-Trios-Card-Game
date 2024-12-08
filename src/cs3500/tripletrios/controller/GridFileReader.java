@@ -22,10 +22,10 @@ public class GridFileReader implements GridReader {
    * from the specified file path, setting it to the grid above.
    *
    * @param filePath the path to the grid configuration file.
-   * @throws FileNotFoundException if the file cannot be found.
-   * @throws InvalidPathException if the path format is invalid.
+   * @throws FileNotFoundException  if the file cannot be found.
+   * @throws InvalidPathException   if the path format is invalid.
    * @throws InputMismatchException if the grid dimensions or cell values are invalid.
-   * @throws IOException if an error occurs while reading the file.
+   * @throws IOException            if an error occurs while reading the file.
    */
   public GridFileReader(String filePath) throws FileNotFoundException, InvalidPathException,
           InputMismatchException, IOException {
@@ -34,11 +34,12 @@ public class GridFileReader implements GridReader {
 
   /**
    * Reads a grid configuration file and converts it to a boolean 2D array.
+   *
    * @param filename Path to the grid configuration file.
-   * @throws FileNotFoundException if the file cannot be found.
-   * @throws InvalidPathException if the path format is invalid.
+   * @throws FileNotFoundException  if the file cannot be found.
+   * @throws InvalidPathException   if the path format is invalid.
    * @throws InputMismatchException if the grid dimensions or cell values are invalid.
-   * @throws IOException if an error occurs while reading the file.
+   * @throws IOException            if an error occurs while reading the file.
    */
   private void readGridFile(String filename) throws FileNotFoundException,
           InvalidPathException, InputMismatchException, IOException {

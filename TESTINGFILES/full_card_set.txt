@@ -13,3 +13,12 @@ Cheetah 4 3 2 5
 Kangaroo 3 4 4 3
 Rhino 4 5 2 1
 Owl 1 2 5 3
+Falcon 5 3 1 4
+Dolphin 2 5 3 2
+Leopard 3 1 5 4
+Hawk 4 5 3 2
+Penguin 3 3 4 2
+Bison 5 2 4 3
+Moose 2 3 5 4
+Koala 4 2 2 5
+Otter 3 5 1 4

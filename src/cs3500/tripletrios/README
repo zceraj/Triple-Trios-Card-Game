@@ -1,0 +1,261 @@
+----------------------------------------------------------------------------------------------------
+-------------------------------------ASSIGNMENT 7 READ ME ------------------------------------------
+----------------------------------------------------------------------------------------------------
+CHANGES FOR PART 3:
+ hi so this is about to be so messy so im so sorry
+
+
+                                  things we changed
+ view
+ - for the view i added a player so i could see whos view was whos so now its in the title
+ - we added a super cool fun pop up method that pops up things on the screen
+ - we made it an observable so the controller can see it
+ - clear selected card so the state can be reset when a card is placed
+ - added a fun quit button so you can stop whenever you want
+ - added a clear and set selected card and panel that allow everyone to know what they are
+
+controller
+ - for the controller i made it an oberver that looks at the model and view
+ - most of the functionality is in the update method which calls all the helper methods and
+ makes changes in teh game
+
+model
+ - model is also now an observable (how cool!)
+ - i also added an is game started method
+ - added an all cards field and correponding methods that determine cards that aren't only in the
+ player's hand
+
+those were the big changes for now
+
+
+ OH YEAH sorry i forgot
+ we excluded files so we have less than 125 haha
+ - pretty much i just excluded the old screenshots because theyre irrelevant now that we have 2
+ views
+ - i took out all the irrelevant files that were used in my read file tests
+ - i removed the text view test because lets be real you want to see the super cool gui instead
+ - i removed the meta -inf (what does it do??)
+ - i took out our planning (sorry no more free looks into the chaos of my mind)
+
+ I KNOW THIS WASNT A GOOD READ ME BUT IM TRYING IM SORRY
+
+
+  public void setControllerObserver (ControllerInterface controllerObserver) {
+    this.controllerObserver = controllerObserver;
+  }
+
+  public void updateObservers(){
+    controllerObserver.update();
+  }  -- OBSERVER PATTERN
+
+Added a method in the view called getSelectedCard which returns the card
+  @Override
+  public CardInterface getSelectedCard() {
+    return selectedCard.getCard();
+  }
+
+ For the Player classes/Interface:
+ - filled out the implementation for the AiPlayer class
+ - Added the method determineNextMove which helper determine the best move for the ai player
+    using the strategy classes defined before, then uses this method for the
+    placeTheCard method in the AiPlayer class
+ - Changed the ai player constructor to no longer take in a strategy, but instead
+    have the strategy be set using the method setStrategy that returns void since
+    it will take in a strategy and updates the classes strategy field used throughout the class
+      - made this for the main so when we need to set up the game and such with different players
+        we can easily set the strategy for the ai player and alter it less troubles
+
+ /**
+    * Sets a strategy for the AI player to use that is refered to in the determineNextMove.
+    * @param strategy
+    * @return
+    */
+   public void setStrategy(StrategyInterface strategy) {
+     if (strategy == null) {
+       throw new IllegalArgumentException("Strategy cannot be null.");
+     }
+     this.strategy = strategy;
+   }
+
+
+----------------------------------------------------------------------------------------------------
+-------------------------------------ASSIGNMENT 6 READ ME ------------------------------------------
+----------------------------------------------------------------------------------------------------
+CHANGES FOR PART 2:
+- Clearly stated in the grid class the coordinate system, we originally forgot to write this in the model
+   adding it has made the game clearer to understand.
+- removed the int col, int row in the comboBattle method in BattleRules class, it wasn't used and felt unnecessary
+- changed the input for methods related to cards to not take in the class of a Card, but instead take in/output the
+   Card interface as instructed by the feedback of HW5 implementation
+
+Missing functionality we added:
+ - players score in the game. We originally just had a getWinner, but we figured
+     it would be useful to know who is currently winning through out the game instead
+     of just getting the winner at the end
+ - added a constructor in GameModelImpl to be used to simulate a play and get possible results
+    to use for strategy four
+ - changed a few classes in the game impl as they weren't performing how we wanted them too -->
+ the place card didn't actually place a card...
+
+Strategies:
+- StrategyInterface with main method among the strategy classes (getBestMove)
+- AbstractStrategy class extended to strategy classes with the common methods
+    - breakTie
+    - intAttackValue
+    - finalMove
+- Individual classes fro each strategy and its logic
+    - StrategyOne --> holds logic for the first strategy
+    - StrategyTwo --> holds logic for the second strategy
+    - StrategyThree --> holds logic for the third strategy
+    - StrategyFour --> holds logic for the fourth strategy
+
+View:
+Classes Created:
+ - A card panel interface with an implementation of CardPanel, which makes cards in the GUI. They
+ are stored in a left and right panel in the main GUI implementation.
+    - displays information about a specific card --> name and attack values
+    - uses border layout and paintComponent to show each card
+    - highlights the card grey if selected.
+ - Grid cell interface with a matching implementation.
+    - Represents a single cell in the game grid and handles interactions with that cell
+    - The panel size is set, and a border is applied to distinguish the cell.
+      The background color is set based on the cell's type (card cell or hole).
+ - GameViewGUi and its corresponding TripleTrioGuiView
+    - controls the visibility of the window, refreshing hands, and updating the grid display.
+    - is a JFrame with JPanels inside.
+
+TO PLAY:
+type: java -jar OODHW5.jar into your command line ensuring that you are in the folder with the game
+in it. It should pop up the GUI view and allow you to click on parts of the game!
+----------------------------------------------------------------------------------------------------
+-------------------------------------ASSIGNMENT 5 READ ME ------------------------------------------
+----------------------------------------------------------------------------------------------------
+OVERVIEW:
+
+This is a two player game of Three Trios that is played ona grid consisting of cells.
+Each cell can either be a card cell that players can take turns placing cards in, or holes
+that a card can not be placed on. Once players place their cards on the grid, the cards may battle
+with the adjacent cards in the grid. The player who owns the most cards once the grid is full wins.
+
+----------------------------------------------------------------------------------------------------
+QUICK START:
+
+// 5x5 grid true for card cell, false for hole
+boolean[][] cellTypes = {
+    {true, false, true, false, true},
+    {false, true, false, true, false},
+    {true, false, true, false, true},
+    {false, true, false, true, false},
+    {true, false, true, false, true}
+};
+Grid grid = new Grid(cellTypes);
+IPlayer player1 = new HumanPlayer("Player 1", Color.RED);
+IPlayer player2 = new HumanPlayer("Player 2", Color.BLUE);
+player1.addCard(new Card("King", 1, 2, 3, 4));
+player2.addCard(new Card("Joker", 1, 2, 3, 4));
+
+//initializes the game model
+GameModelImpl gameModel = new GameModelImpl(grid, player1, player2);
+gameModel.startGame();
+
+//placing the card of index 0 on (0,0) of the grid
+gameModel.placeCard(player1.getHand.get(0), 0, 0);
+----------------------------------------------------------------------------------------------------
+
+KEY COMPONENTS:
+GameModel:
+- Interface that defines the methods needed to run the game such as:
+  - starGame
+  - placeCard
+  - battles
+
+GameModelImpl:
+- Implements the GameModel interface and the logic of the game itself such as:
+  - if the setup is valid
+  - actual logic of starting the game and placing a card
+  - initiates the battle when appropriate
+  - maintains the game state
+  - brings together logic of the player, grd, card, and rules
+
+Grid:
+- Manages the grid/board of the game for both holes and card cells
+    - validates if a cell can be placed
+    - gets the cells next to each other to keep up with the battle logic
+
+Cell:
+- Represents a cell within a grid
+  - checks if its is a hole or a card cell
+  - a cell can hold a card or be empty
+
+Card:
+- Represents a card int he game
+  - has the attack values of each direction of the card
+  - had the card name
+
+BattleRules:
+- Represents the logic behind battles in the game
+  - determines winner for each battle
+  -
+
+Direction:
+- Enum representing directions of a card
+  - NORTH, SOUTH, EAST, WEST
+  - maps the opposite direction for cards used in battle logic
+
+IPlayer:
+- Interfaces defining a basic player
+ - color
+ - name
+ - hand
+ - adding and removing cards from hand
+
+HumanPlayer:
+- Implements IPlayer
+  - represents a human player
+  - has a hand of cards
+  - can add and remove cards from hand
+
+AIPlayer:
+- Implements IPlayer
+  - represents an AI player
+-------------------------------------------------------------------------------------------------
+
+KEY SUBCOMPONENTS:
+
+- Grid Initialized with a boolean 2d Array that is configured based off
+   each cell as either a card cell or a hole
+
+- Battle results are determined using the BattleRules class where the attack values
+  determine the winner of an attack
+
+- Player clas can manage the hand with removing and adding cards
+-------------------------------------------------------------------------------------------------
+
+SOURCE ORGANIZATION:
+-The model contains the following interfaces/classes :
+ -- GameModel
+ -- GameModelImpl
+ -- Grid
+ -- Cell
+ -- Card
+ -- BattleRules
+ -- Direction
+ -- IPlayer
+ -- HumanPlayer
+ -- AIPlayer
+
+Game logic in:
+    -- GameModelImpl
+    -- BattleRules
+    -- Grid
+    -- Cell
+    -- Card
+    -- Direction
+
+Player logic in:
+    -- IPlayer
+    -- HumanPlayer
+    -- AIPlayer
+
+
+

@@ -1,0 +1,54 @@
+# Assignment 9
+----------------------------------------------------------------------------------------------------
+Communcations:
+Z:
+
+M:
+
+To Discuss:
+
+----------------------------------------------------------------------------------------------------
+                              ---------------
+                              --To Do List:--
+                              ---------------
+    KEY
+O - not complete
+X - completed
+* - in progress if needed
+
+1. Level 0: Showing scoring hints
+O Understanding and planning the feature: 1-2 hours
+O Implementation: 3-4 hours
+O Testing and debugging: 2-3 hours
+
+Total for Level 0: ~6-9 hours
+
+2. Level 1: Variant Rule Set 1
+O Understanding and planning the rules: 2-3 hours
+O Refactoring the model to support variants: 3-4 hours
+O Implementation: 4-5 hours
+O Testing and debugging: 3-4 hours
+
+Total for Level 1: ~12-16 hours
+
+3. Level 2: Variant Rule Set 2
+O Understanding and planning the rules: 2-3 hours
+O Implementation: 4-6 hours
+O Testing and debugging: 3-4 hours
+
+Total for Level 2: ~9-13 hours
+
+4. Level 3: Combining Both Sets of Variant Rules
+O Integrating the designs: 3-4 hours
+O Implementation: 4-5 hours
+O Testing and debugging: 3-4 hours
+
+Total for Level 3: ~10-13 hours
+
+5. Demo preparation and submission
+O Final testing and polishing: 3-4 hours
+O Preparing the demo and README file: 2-3 hours
+O Scheduling and attending the demo: 1 hour
+
+Total for demo preparation: ~6-8 hours
+

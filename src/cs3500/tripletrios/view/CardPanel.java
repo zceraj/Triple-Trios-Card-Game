@@ -1,40 +1,47 @@
-
 package cs3500.tripletrios.view;
 
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.FontFormatException;
+import java.awt.Graphics;
+import java.awt.Font;
 import java.io.File;
 import java.io.IOException;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import javax.swing.BorderFactory;
 
 
-import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.Direction;
 
 /**
  * a card that appears on the side of the board before its played.
  */
-class CardPanel extends JPanel {
+class CardPanel extends JPanel implements CardPanelView {
   private final CardInterface card;
   private final int index;
-  private boolean isSelected = false;
+  private final boolean isSelected = false;
+  private TripleTrioGuiView view;
 
   /**
-   * setting up my cards in the gui!!
-   * @param card the card being portrayed --> obvi a need because how else will it access
-   *             all of the card's values.
+   * setting up my cards in the gui!.
+   *
+   * @param card  the card being portrayed --> obvi a need because how else will it access
+   *              all of the card's values.
    * @param color the color of the card --> to know which players side is which.
    * @param index for future calling of the card.
    */
-  public CardPanel(CardInterface card, Color color, int index) {
+  public CardPanel(CardInterface card, Color color, int index, TripleTrioGuiView view) {
     this.card = card;
     this.index = index;
 
     // size of each card yay
-    setPreferredSize(new Dimension(100, 140));
+    setPreferredSize(new Dimension(view.getWidth() / 15, view.getHeight() / 8));
     // to be able to have the color just set by the players side
     setBackground(color);
 
@@ -54,89 +61,123 @@ class CardPanel extends JPanel {
 
     try {
       Font customFontForLabel = Font.createFont(
-              Font.TRUETYPE_FONT,
-              new File(
-                      "formatting/SourGummy-VariableFont_wdth,wght.ttf"))
-              .deriveFont(14f);
+                      Font.TRUETYPE_FONT,
+                      new File(
+                              "formatting/SourGummy-VariableFont_wdth,wght.ttf"))
+              .deriveFont(8000f / view.getHeight());
       Font customFont = Font.createFont(
-              Font.TRUETYPE_FONT,
-              new File(
-                      "formatting/SourGummy-VariableFont_wdth,wght.ttf"))
-              .deriveFont(23f);
+                      Font.TRUETYPE_FONT,
+                      new File(
+                              "formatting/SourGummy-VariableFont_wdth,wght.ttf"))
+              .deriveFont(10000f / view.getHeight());
       nameLabel.setFont(customFontForLabel);
       northLabel.setFont(customFont);
       eastLabel.setFont(customFont);
       southLabel.setFont(customFont);
       westLabel.setFont(customFont);
     } catch (FontFormatException | IOException e) {
-      e.printStackTrace();  // Print the exception to understand what went wrong
+      e.printStackTrace();
     }
 
-
-
-    // putting all my things in the right spot
     add(northLabel, BorderLayout.NORTH);
     add(eastLabel, BorderLayout.EAST);
     add(southLabel, BorderLayout.SOUTH);
     add(westLabel, BorderLayout.WEST);
     add(nameLabel, BorderLayout.CENTER);
 
-    // i didnt like how smushed they looked, so i added some padding on each border
-    northLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
-    eastLabel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
-    southLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
-    westLabel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
+    northLabel.setBorder(BorderFactory.createEmptyBorder(
+            100 / view.getHeight(), 0, 0, 0));
+    eastLabel.setBorder(BorderFactory.createEmptyBorder(
+            0, 200 / view.getHeight(), 0, 200 / view.getHeight()));
+    southLabel.setBorder(BorderFactory.createEmptyBorder(
+            0, 0, 200 / view.getHeight(), 0));
+    westLabel.setBorder(BorderFactory.createEmptyBorder(
+            0, 200 / view.getHeight(), 0, 200 / view.getHeight()));
 
-    // black borders to distinguish from the board
     setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
-    // Mouse listener for card selection
-    addMouseListener(new MouseAdapter() {
-      @Override
-      public void mouseClicked(MouseEvent e) {
-        handleCardClick();
-      }
-    });
   }
 
 
+  private void setText() {
+    setLayout(new BorderLayout());
+
+    // labels with attack values or the card name as the text shown
+    JLabel nameLabel = new JLabel(card.getCardName(), SwingConstants.CENTER);
+    JLabel northLabel = new JLabel(
+            String.valueOf(card.getAttackValue(Direction.NORTH)), SwingConstants.CENTER);
+    JLabel eastLabel = new JLabel(
+            String.valueOf(card.getAttackValue(Direction.EAST)), SwingConstants.CENTER);
+    JLabel southLabel = new JLabel(
+            String.valueOf(card.getAttackValue(Direction.SOUTH)), SwingConstants.CENTER);
+    JLabel westLabel = new JLabel(
+            String.valueOf(card.getAttackValue(Direction.WEST)), SwingConstants.CENTER);
+
+
+    try {
+      Font customFontForLabel = Font.createFont(
+                      Font.TRUETYPE_FONT,
+                      new File(
+                              "formatting/SourGummy-VariableFont_wdth,wght.ttf"))
+              .deriveFont(8000f / view.getHeight());
+      Font customFont = Font.createFont(
+                      Font.TRUETYPE_FONT,
+                      new File(
+                              "formatting/SourGummy-VariableFont_wdth,wght.ttf"))
+              .deriveFont(10000f / view.getHeight());
+      nameLabel.setFont(customFontForLabel);
+      northLabel.setFont(customFont);
+      eastLabel.setFont(customFont);
+      southLabel.setFont(customFont);
+      westLabel.setFont(customFont);
+    } catch (FontFormatException | IOException e) {
+      e.printStackTrace();
+    }
+
+    add(northLabel, BorderLayout.NORTH);
+    add(eastLabel, BorderLayout.EAST);
+    add(southLabel, BorderLayout.SOUTH);
+    add(westLabel, BorderLayout.WEST);
+    add(nameLabel, BorderLayout.CENTER);
+
+    northLabel.setBorder(BorderFactory.createEmptyBorder(
+            100 / view.getHeight(), 0, 0, 0));
+    eastLabel.setBorder(BorderFactory.createEmptyBorder(
+            0, 200 / view.getHeight(), 0, 200 / view.getHeight()));
+    southLabel.setBorder(BorderFactory.createEmptyBorder(
+            0, 0, 200 / view.getHeight(), 0));
+    westLabel.setBorder(BorderFactory.createEmptyBorder(
+            0, 200 / view.getHeight(), 0, 200 / view.getHeight()));
+
+  }
 
   /**
    * to be able to use the values.
+   *
    * @return the card in the box.
    */
+  @Override
   public CardInterface getCard() {
     return card;
   }
 
   /**
    * to play the card.
+   *
    * @return the index of the box
    */
+  @Override
   public int getIndex() {
     return index;
-  }
-
-  // Handle card selection/deselection
-  private void handleCardClick() {
-    if (isSelected) {
-      // Deselect the card
-      isSelected = false;
-      setBorder(BorderFactory.createLineBorder(Color.BLACK)); // Reset border to default
-      System.out.println("Deselected card: " + card.getCardName() + " (Index: " + index + ")");
-    } else {
-      // Select the card
-      this.isSelected = true;
-      setBorder(BorderFactory.createLineBorder(Color.GRAY, 5)); // Highlight
-      System.out.println("Selected card: " + card.getCardName() + " (Index: " + index + ")");
-    }
   }
 
   @Override
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
+    Graphics2D g2d = (Graphics2D) g;
+    int width = getWidth();
+    int height = getHeight();
     if (isSelected) {
-      g.setColor(Color.GRAY); // Change??
+      g.setColor(Color.GRAY);
       g.fillRect(0, 0, getWidth(), getHeight());
     }
   }

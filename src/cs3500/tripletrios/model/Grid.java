@@ -10,11 +10,11 @@ import java.util.Map;
  * The grid is a 2D array of cells, where each cell can be a CardCell or a Hole.
  * The grid is tracked as a coordinate system with (0, 0) as the top-left corner.
  */
-public class Grid {
+public class Grid implements GridInterface{
   private final int rows;
   private final int cols;
   private final Cell[][] grid;
-  private final Map<Cell, Map<Direction, Cell>> adjacentCellMap;
+  private final Map<CellInterface, Map<Direction, CellInterface>> adjacentCellMap;
 
   /**
    * Creates a new grid with specified cell types (CardCells or Holes).
@@ -70,8 +70,8 @@ public class Grid {
   private void trackCellsNextTo() {
     for (int row = 0; row < rows; row++) {
       for (int col = 0; col < cols; col++) {
-        Cell cell = grid[row][col];
-        Map<Direction, Cell> neighbors = new EnumMap<>(Direction.class);
+        CellInterface cell = grid[row][col];
+        Map<Direction, CellInterface> neighbors = new EnumMap<>(Direction.class);
 
         if (isValidCell(row - 1, col)) {
           neighbors.put(Direction.NORTH, grid[row - 1][col]);
@@ -103,10 +103,11 @@ public class Grid {
    * @return The cell at (row, col).
    * @throws IndexOutOfBoundsException if the coordinates are out of bounds.
    */
-  public Cell getCell(int row, int col) {
+  @Override
+  public CellInterface getCell(int row, int col) {
     if (isValidCell(row, col)) {
-      Cell originalCell = grid[row][col];
-      return new Cell(row, col, originalCell.isCardCell());
+      CellInterface originalCell = grid[row][col];
+      return new Cell(originalCell);
     } else {
       throw new IndexOutOfBoundsException("Invalid cell coordinates.");
     }
@@ -115,12 +116,17 @@ public class Grid {
   /**
    * Gets the adjacent cell from the given position in the specified direction.
    *
-   * @param row The current row position
-   * @param col The current column position
+   * @param row       The current row position
+   * @param col       The current column position
    * @param direction The direction to move
    * @return The adjacent cell if it exists, or null if out of bounds
+   * @throws IndexOutOfBoundsException if the direction is invalid.
    */
-  public Cell getAdjacentCells(int row, int col, Direction direction) {
+  @Override
+  public CellInterface getAdjacentCells(
+          int row,
+          int col,
+          Direction direction) throws IndexOutOfBoundsException {
     int newRow = row;
     int newCol = col;
 
@@ -137,6 +143,8 @@ public class Grid {
       case WEST:
         newCol -= 1;
         break;
+      default:
+        throw new IndexOutOfBoundsException("Invalid direction.");
     }
 
     if (isValidCell(newRow, newCol)) {
@@ -153,6 +161,7 @@ public class Grid {
    * @param col The column of the cell.
    * @return True if the cell is within the grid bounds, false otherwise.
    */
+  @Override
   public boolean isValidCell(int row, int col) {
     return row >= 0 && row < rows && col >= 0 && col < cols;
   }
@@ -164,8 +173,9 @@ public class Grid {
    * @param col The column of the cell.
    * @return The card in the cell at (row, col), or null if empty or a Hole.
    */
+  @Override
   public CardInterface getCardAt(int row, int col) {
-    Cell cell = getCell(row, col);
+    CellInterface cell = getCell(row, col);
     return cell.isCardCell() && !cell.isEmpty() ? cell.getCard() : null;
   }
 
@@ -174,6 +184,7 @@ public class Grid {
    *
    * @return The number of rows in the grid.
    */
+  @Override
   public int getRows() {
     return rows;
   }
@@ -183,6 +194,7 @@ public class Grid {
    *
    * @return The number of columns in the grid.
    */
+  @Override
   public int getCols() {
     return cols;
   }
@@ -190,8 +202,10 @@ public class Grid {
 
   /**
    * Gets the number of cells in the grid.
+   *
    * @return The number of cells in the grid.
    */
+  @Override
   public int getCount() {
     int count = 0;
     for (int row = 0; row < this.getRows(); row++) {
@@ -201,19 +215,25 @@ public class Grid {
         }
       }
     }
-      return count;
+    return count;
   }
 
-  public void updateCell(int row, int col, Cell newCell) {
+  /**
+   * Updates the cell at the specified row and column with the provided {@code newCell} value.
+   *
+   * @param row     the row index of the cell to update
+   * @param col     the column index of the cell to update
+   * @param newCell the new cell to place at the specified location
+   * @throws IndexOutOfBoundsException if the specified row or column is outside the grid bounds
+   */
+  @Override
+  public void updateCell(int row, int col, CellInterface newCell) {
     if (isValidCell(row, col)) {
       grid[row][col] = new Cell(newCell);
     } else {
       throw new IndexOutOfBoundsException("Invalid cell coordinates.");
     }
   }
-
-
-
 
   /**
    * Transforms the grid's state into a string that the viewer can use.
@@ -224,6 +244,7 @@ public class Grid {
    *
    * @return String rendering of the grid.
    */
+  @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     for (int columns = 0; columns < grid.length; columns++) {

@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cs3500.tripletrios.observing.Observable;
+
 
 /**
  * Represents the model for the Triple Trios card game, encapsulating the
@@ -14,15 +16,16 @@ import java.util.Map;
  * facilitates the placement of cards, manages player turns, and checks
  * for game over conditions. It implements the GameModel interface.
  */
-public class GameModelImpl implements GameModel, ReadOnlyGameModel {
-
+public class GameModelImpl extends Observable implements GameModel {
   private final Grid grid;
   private final IPlayer player1;
   private final IPlayer player2;
   private IPlayer currPlayer;
   private boolean gameOver;
   private boolean gameStarted = false;
-  private final Map<Cell, IPlayer> cellsPlayer;
+  private boolean gameJustStarted = false;
+  private final Map<CellInterface, IPlayer> cellsPlayer;
+
 
 
   //CLASS INVARIANT: the game grid must have an odd number of card cells
@@ -30,7 +33,7 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
   /**
    * Constructs a GameModelImpl instance with the specified grid and players.
    *
-   * @param grid a grid that isn't yet of class grid.
+   * @param grid    a grid that isn't yet of class grid.
    * @param player1 the first player.
    * @param player2 the second player.
    * @throws RuntimeException if the grid file cannot be read
@@ -42,8 +45,7 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
     Grid trialGrid = new Grid(grid);
     if (!isGridOdd(trialGrid)) {
       throw new IllegalArgumentException("Grid must have an odd number of card cells.");
-    }
-    else {
+    } else {
       this.grid = trialGrid;
     }
     this.player1 = player1;
@@ -53,20 +55,42 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
     this.cellsPlayer = new HashMap<>();
   }
 
+  /**
+   * Constructor for an instance of a model with its current grid and players
+   * to be used for strategies.
+   */
+  public GameModelImpl(Grid grid, IPlayer currPlayer, IPlayer otherPlayer) {
+    this.grid = new Grid(grid);
+    this.currPlayer = currPlayer;
+    this.player1 = currPlayer;
+    this.player2 = otherPlayer;
+    this.gameOver = false;
+    this.cellsPlayer = new HashMap<>();
+    this.gameJustStarted = false;
 
+    //add the cellsPlayer map based on the current grid state.
+    for (int row = 0; row < grid.getRows(); row++) {
+      for (int col = 0; col < grid.getCols(); col++) {
+        CellInterface cell = grid.getCell(row, col);
+        if (!cell.isEmpty()) {
+          cellsPlayer.put(cell, getCellsPlayer(row, col));
+        }
+      }
+    }
+  }
 
   /**
    * Starts the game with the given options. The provided deck is used to
    * deal out cards to each player. Modifying the deck given to this method
    * will not modify the game state.
    *
-   * @param cardsIn is a list of cards passed in.
+   * @param cards is a list of cards passed in.
    * @throws IllegalStateException    if the game has already started or is over
    * @throws IllegalArgumentException if the grid is not odd or the deck's size
    *                                  is insufficient to set up the game
    */
   @Override
-  public void startGame(List<CardInterface> cardsIn) {
+  public void startGame(List<CardInterface> cards) {
     if (this.gameStarted) {
       throw new IllegalStateException("Game has already started.");
     }
@@ -76,24 +100,29 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
 
     int totalCardCells = grid.getCount();
 
-    int expectedHandSize = (totalCardCells + 1) / 2;
-
-    if (cardsIn.size() < totalCardCells) {
+    if (cards.size() < totalCardCells) {
       throw new IllegalArgumentException("Deck must have enough cards to fill the grid.");
     }
 
-    // Limit the cards list to the minimum necessary size
-    List<CardInterface> cards = new ArrayList<>(cardsIn.subList(0, 2 * expectedHandSize));
+    List<CardInterface> player1Hand = new ArrayList<>();
+    List<CardInterface> player2Hand = new ArrayList<>();
 
-    List<CardInterface> player1Hand = new ArrayList<>(cards.subList(0, expectedHandSize));
-    List<CardInterface> player2Hand = new ArrayList<>(cards.subList(expectedHandSize, 2 * expectedHandSize));
+    for (int i = 0; i < cards.size(); i++) {
+      if (i % 2 == 0) {
+        player1Hand.add(cards.get(i));
+      } else {
+        player2Hand.add(cards.get(i));
+      }
+    }
 
-    player1.setHand(player1Hand);
-    player2.setHand(player2Hand);
+    player1.setCurrentHand(player1Hand);
+    player2.setCurrentHand(player2Hand);
 
     this.currPlayer = player1;
     this.gameOver = false;
     this.gameStarted = true;
+    this.gameJustStarted = true;
+    this.notifyObservers();
   }
 
   /**
@@ -106,38 +135,44 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
    *                                  if the cell is not empty
    */
   @Override
-  public void placeCard(CardInterface card, int col, int row) {
+  public void placeCard(CardInterface card, int row, int col) {
+    this.gameJustStarted = false;
     if (!gameStarted) {
-      throw new IllegalStateException("Game has not  started.");
+      throw new IllegalStateException("Game has not started.");
     }
     if (isGameOver()) {
       throw new IllegalStateException("Game is over.");
     }
-    if (!grid.isValidCell(row, col)) {
-      throw new IllegalArgumentException("Invalid cell coordinates.");
+    // Check if the cell coordinates are valid
+    if (!grid.isValidCell(row, col) || row < 0 || col < 0
+            || row >= grid.getRows() || col >= grid.getCols()) {
+      throw new IllegalArgumentException("Invalid cell coordinates: (" + row + ", " + col + ")");
     }
 
-    Cell originalCell = grid.getCell(col, row);
-    if (!originalCell.isCardCell() || !originalCell.isEmpty()) {
+    CellInterface targetCell = grid.getCell(row, col);
+
+    if (!targetCell.isCardCell() || !targetCell.isEmpty()) {
       throw new IllegalArgumentException("Cannot place card in this cell.");
     }
+
     card.addRow(row);
     card.addCol(col);
+    System.out.println("Adding card position: (" + row + ", " + col + ")");
 
-    Cell updatedCell = new Cell(originalCell);
-    updatedCell.setCard(card);
+    currPlayer.placeTheCard(card, row, col);
+    targetCell.setCard(card);
+    System.out.println(targetCell.getCard().getCardName());
 
-    grid.updateCell(row, col, updatedCell);
-    cellsPlayer.put(updatedCell, currPlayer);
+    grid.updateCell(row, col, targetCell);
+    cellsPlayer.put(targetCell, currPlayer);
 
     battles(row, col);
 
     if (isGameOver()) {
       gameOver = true;
-    } else {
-      nextTurn();
     }
   }
+
 
   /**
    * Checks if the game is over.
@@ -146,13 +181,10 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
    */
   @Override
   public boolean isGameOver() {
-    if (gameOver) {
-      return true;
-    }
     for (int row = 0; row < grid.getRows(); row++) {
       for (int col = 0; col < grid.getCols(); col++) {
-        if (grid.getCell(row, col).isCardCell() && grid.getCell(row, col).isEmpty()) {
-          gameOver = false;
+        CellInterface cell = grid.getCell(row, col);
+        if (cell.isCardCell() && cell.isEmpty()) {
           return false;
         }
       }
@@ -160,6 +192,7 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
     gameOver = true;
     return true;
   }
+
 
   /**
    * Gets the player that is the winner of the game, if the game is over.
@@ -191,7 +224,7 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
    * @return The player that owns the card in the cell
    */
   public IPlayer getCellsPlayer(int row, int col) {
-    Cell cell = grid.getCell(row, col);
+    CellInterface cell = grid.getCell(row, col);
     return cellsPlayer.get(cell);
   }
 
@@ -205,7 +238,7 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
     boolean[][] cellTypes = new boolean[grid.getRows()][grid.getCols()];
     for (int row = 0; row < grid.getRows(); row++) {
       for (int col = 0; col < grid.getCols(); col++) {
-        cellTypes[row][col] = grid.getCell(row, col).isCardCell(); 
+        cellTypes[row][col] = grid.getCell(row, col).isCardCell();
       }
     }
     return new Grid(this.grid);
@@ -228,9 +261,10 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
    * @param col      The column of the cell
    * @param newOwner The new player owning the cell
    */
+  @Override
   public void updateOwner(int row, int col, IPlayer newOwner) {
-    Cell orignalCell = grid.getCell(row, col);
-    Cell updatedCell = new Cell(orignalCell);
+    CellInterface orignalCell = grid.getCell(row, col);
+    CellInterface updatedCell = new Cell(orignalCell);
     cellsPlayer.put(updatedCell, newOwner);
   }
 
@@ -239,6 +273,7 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
    */
   @Override
   public void nextTurn() {
+    this.gameJustStarted = false;
     if (currPlayer == player1) {
       currPlayer = player2;
     } else {
@@ -257,12 +292,11 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
   public void battles(int row, int col) {
     BattleRules battleRules = new BattleRules(this);
     battleRules.startBattle(grid, row, col, currPlayer);
-
-    nextTurn();
   }
 
   /**
-   * Gets the score for a player in the game
+   * Gets the score for a player in the game.
+   *
    * @param player The player to get the score of
    * @return The score of the player
    */
@@ -289,13 +323,41 @@ public class GameModelImpl implements GameModel, ReadOnlyGameModel {
   // checks if the gird has an odd number of cells
   private boolean isGridOdd(Grid grid) {
     int cardCellCount = grid.getCount();
-    return cardCellCount % 2 != 0;
+    return cardCellCount % 2 == 1;
   }
 
-  public IPlayer getOtherPlayer(){
+  /**
+   * Returns the player who is not the current player.
+   *
+   * @return the other player in the game, opposite to the current player
+   */
+  @Override
+  public IPlayer getOtherPlayer() {
     if (currPlayer == player2) {
       return player1;
     }
     return player2;
   }
+
+  /**
+   * Determines the owner of the specified room.
+   *
+   * @param card the card to locate
+   * @return the player who has the card or null if no player was found.
+   */
+  @Override
+  public IPlayer getPlayerFromCard(CardInterface card) {
+    if (player1.getAllCards().contains(card)) {
+      return player1;
+    } else if (player2.getAllCards().contains(card)) {
+      return player2;
+    }
+    return null;
+  }
+
+  @Override
+  public boolean isGameStarted() {
+    return gameStarted;
+  }
+
 }

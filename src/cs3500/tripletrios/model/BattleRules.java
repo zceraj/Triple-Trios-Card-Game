@@ -15,6 +15,7 @@ public class BattleRules {
 
   /**
    * Constructs a new BattleRules object with the given game model.
+   *
    * @param gameModel The game model to use for the battle phase.
    */
   public BattleRules(GameModel gameModel) {
@@ -23,9 +24,10 @@ public class BattleRules {
 
   /**
    * Starts the battle phase after a card is placed on the grid.
-   * @param grid The grid where the card is placed.
-   * @param row The row where the card is placed.
-   * @param col The column where the card is placed.
+   *
+   * @param grid       The grid where the card is placed.
+   * @param row        The row where the card is placed.
+   * @param col        The column where the card is placed.
    * @param currPlayer The player who placed the card.
    */
   public void startBattle(Grid grid, int row, int col, IPlayer currPlayer) {
@@ -46,11 +48,15 @@ public class BattleRules {
 
   /**
    * Executes the comparison between two cards and flips owners based on the result.
-   * @param placedCard The card placed by the current player.
+   *
+   * @param placedCard   The card placed by the current player.
    * @param adjacentCard The opposing player's adjacent card.
-   * @param direction The direction in which the placed card faces the adjacent card.
+   * @param direction    The direction in which the placed card faces the adjacent card.
    */
-  private void executeBattle(CardInterface placedCard, CardInterface adjacentCard, Direction direction) {
+  private void executeBattle(
+          CardInterface placedCard,
+          CardInterface adjacentCard,
+          Direction direction) {
     Direction oppositeDirection = direction.getOpposite();
 
     int placedAttack = parseAttackValue(placedCard.getAttackValue(direction));
@@ -65,7 +71,8 @@ public class BattleRules {
 
   /**
    * Executes combo battles where newly flipped cards can flip cards in chain reactions.
-   * @param grid The game grid.
+   *
+   * @param grid       The game grid.
    * @param currPlayer The player who placed the card.
    */
   private void comboBattle(Grid grid, IPlayer currPlayer) {
@@ -78,7 +85,10 @@ public class BattleRules {
       }
       processedCards.add(flippedCard);
 
-      List<CardInterface> adjacentCards = getAdjacentCards(grid, flippedCard.getRow(), flippedCard.getCol());
+      List<CardInterface> adjacentCards = getAdjacentCards(
+              grid,
+              flippedCard.getRow(),
+              flippedCard.getCol());
 
       for (CardInterface adjacentCard : adjacentCards) {
         IPlayer adjacentOwner = gameModel.getCellsPlayer(
@@ -94,9 +104,10 @@ public class BattleRules {
 
   /**
    * Retrieves all valid adjacent cards for a given cell on the grid.
+   *
    * @param grid The game grid.
-   * @param row The row of the current cell.
-   * @param col The column of the current cell.
+   * @param row  The row of the current cell.
+   * @param col  The column of the current cell.
    * @return A list of adjacent cards.
    */
   private List<CardInterface> getAdjacentCards(Grid grid, int row, int col) {
@@ -119,8 +130,9 @@ public class BattleRules {
 
   /**
    * Determines the direction from the original cell to an adjacent cell.
-   * @param row The row of the original cell.
-   * @param col The column of the original cell.
+   *
+   * @param row          The row of the original cell.
+   * @param col          The column of the original cell.
    * @param adjacentCard The adjacent card being examined.
    * @return The direction from the original cell to the adjacent cell.
    */
@@ -137,7 +149,8 @@ public class BattleRules {
 
   /**
    * Finds all cards on the grid that are currently owned by the current player.
-   * @param grid The game grid.
+   *
+   * @param grid       The game grid.
    * @param currPlayer The current player.
    * @return A list of cards owned by the current player.
    */

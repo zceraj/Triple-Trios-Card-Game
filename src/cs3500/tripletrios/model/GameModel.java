@@ -2,10 +2,12 @@ package cs3500.tripletrios.model;
 
 import java.util.List;
 
+import cs3500.tripletrios.observing.ObservableInterface;
+
 /**
  * Represents the interface fo the model for the Triple Trios card game.
  */
-public interface GameModel extends ReadOnlyGameModel {
+public interface GameModel extends ReadOnlyGameModel, ObservableInterface {
 
   /**
    * Starts the game with the given options. The deck given is used
@@ -22,9 +24,10 @@ public interface GameModel extends ReadOnlyGameModel {
 
   /**
    * Places the given card at the specified row and column in the game grid.
+   *
    * @param card The card to place
-   * @param row The row to place the card
-   * @param col The column to place the card
+   * @param row  The row to place the card
+   * @param col  The column to place the card
    */
   void placeCard(CardInterface card, int row, int col);
 
@@ -35,12 +38,19 @@ public interface GameModel extends ReadOnlyGameModel {
 
   /**
    * Resolves battles at the given row and column.
+   *
    * @param row The row of the battle
    * @param col The column of the battle
    */
   void battles(int row, int col);
 
+  /**
+   * Updates the owner of the cell at the given row and column.
+   * @param row The row of the cell
+   * @param col The column of the cell
+   * @param player The player to set as the owner
+   */
   void updateOwner(int row, int col, IPlayer player);
 
-  IPlayer getOtherPlayer();
+
 }
