@@ -28,7 +28,7 @@ M:
 
 Day 1: Code Exchange and Setup (Z)
 X Request provider code via email and confirm receipt.
-O Review the received code and refactor it into the cs3500.threetrios.provider package.
+X Review the received code and refactor it into the cs3500.threetrios.provider package.
 O Perform an initial review of the provider’s interfaces and functionality.
 O Verify that all necessary files from the provider are included.
 

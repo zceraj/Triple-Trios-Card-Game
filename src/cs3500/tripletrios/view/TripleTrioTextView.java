@@ -15,7 +15,7 @@ public class TripleTrioTextView implements GameView {
 
 
   /**
-   * constructs a text view using a mdel and an appendable.
+   * constructs a text view using a model and an appendable.
    *
    * @param model      model that the player is playing on.
    * @param appendable an appendable that is passed back to the controller.

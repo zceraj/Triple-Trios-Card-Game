@@ -360,14 +360,4 @@ public class GameModelImpl extends Observable implements GameModel {
     return gameStarted;
   }
 
-  @Override
-  public boolean justStarted() {
-    return gameJustStarted;
-  }
-
-  // I want my controller to be able to access it but not the general public
-  @Override
-  public void setJustStarted(boolean justStarted) {
-    this.gameJustStarted = justStarted;
-  }
 }

@@ -241,15 +241,6 @@ public class ControllerMockModel extends Observable implements GameModel {
     cellsPlayer.put(updatedCell, newOwner);
   }
 
-  @Override
-  public boolean justStarted() {
-    return false;
-  }
-
-  @Override
-  public void setJustStarted(boolean justStarted) {
-    // not done idk
-  }
 
   /**
    * Advances to the next player's turn.

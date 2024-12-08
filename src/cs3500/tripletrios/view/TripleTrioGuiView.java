@@ -244,6 +244,10 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
     }
   }
 
+  /**
+   * Gets the card that is selected.
+   * @return the selected card
+   */
   @Override
   public CardInterface getSelectedCard() {
     if (selectedCard == null) {
