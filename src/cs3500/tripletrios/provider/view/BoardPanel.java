@@ -1,9 +1,9 @@
 package cs3500.tripletrios.provider.view;
 
-import cs3500.threetrios.controller.GameListeners;
-import cs3500.threetrios.model.ReadOnlyThreeTriosModelInterface;
-import cs3500.threetrios.model.cell.Cell;
-import cs3500.threetrios.model.grid.Grid;
+import cs3500.tripletrios.provider.controller.GameListeners;
+import cs3500.tripletrios.provider.model.ReadOnlyThreeTriosModelInterface;
+import cs3500.tripletrios.provider.model.cell.Cell;
+import cs3500.tripletrios.provider.model.grid.Grid;
 
 import java.awt.Color;
 import java.awt.GridLayout;

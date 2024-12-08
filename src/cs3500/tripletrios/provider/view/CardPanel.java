@@ -1,8 +1,8 @@
 package cs3500.tripletrios.provider.view;
 
-import cs3500.threetrios.model.card.CardColor;
-import cs3500.threetrios.model.card.CustomCard;
-import cs3500.threetrios.model.card.Direction;
+import cs3500.tripletrios.provider.model.card.CardColor;
+import cs3500.tripletrios.provider.model.card.CustomCard;
+import cs3500.tripletrios.provider.model.card.Direction;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
