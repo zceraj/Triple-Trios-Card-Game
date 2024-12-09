@@ -1,4 +1,4 @@
-package cs3500.tripletrios.adapter;
+package cs3500.tripletrios.controller;
 
 import cs3500.tripletrios.controller.ThreeTriosController;
 import cs3500.tripletrios.model.PlayerColor;
