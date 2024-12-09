@@ -1,5 +1,7 @@
 package cs3500.tripletrios.controller;
 
+import java.io.IOException;
+
 import cs3500.tripletrios.model.PlayerColor;
 import cs3500.tripletrios.provider.controller.ControllerManagerInterface;
 import cs3500.tripletrios.provider.controller.GameListeners;
@@ -27,7 +29,7 @@ public final class ControllerAdapter implements GameListeners, ControllerManager
   }
 
   @Override
-  public void refreshScreen() {
+  public void refreshScreen() throws IOException {
     ThreeTriosController currentController = getCurrentController();
     currentController.view.refreshGrid();
     currentController.view.refreshHands();

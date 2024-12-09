@@ -39,6 +39,6 @@ public final class ThreeTriosWithProviderMain {
 
     // **Player 2 Setup**: Provider's view with your model
 
-//////need to fill out the rest 
+//////need to fill out the rest
   }
 }
