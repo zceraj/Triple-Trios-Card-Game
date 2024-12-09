@@ -13,10 +13,8 @@ import cs3500.tripletrios.model.ModelProviderAdapter;
 import cs3500.tripletrios.model.PlayerAdapter;
 import cs3500.tripletrios.model.PlayerColor;
 import cs3500.tripletrios.provider.view.ThreeTriosGUIView;
-import cs3500.tripletrios.provider.view.ThreeTriosTextualView;
 import cs3500.tripletrios.view.GameViewGUI;
 import cs3500.tripletrios.view.TripleTrioGuiView;
-import cs3500.tripletrios.view.ViewAdapted;
 import cs3500.tripletrios.view.ViewAdapter;
 
 /**
