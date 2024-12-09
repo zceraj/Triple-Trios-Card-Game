@@ -2,9 +2,18 @@
 -------------------------------------ASSIGNMENT 8 READ ME ------------------------------------------
 ----------------------------------------------------------------------------------------------------
 
-Submit a README file summarizing which features you were able to get working
-successfully and which features do not work in your final submission.
+Command Line:
 
+Features that work:
+
+Features that don't work:
+
+Our method:
+We tried to minimally adapt our code by adding in 3 primary adapters
+- one for their view
+and then two for the inputs for the view:
+- one for our player
+- one for our model
 
 ----------------------------------------------------------------------------------------------------
 -------------------------------------ASSIGNMENT 7 READ ME ------------------------------------------

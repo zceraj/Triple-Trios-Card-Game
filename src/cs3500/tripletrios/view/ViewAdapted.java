@@ -29,7 +29,7 @@ public class ViewAdapted implements GameViewGUI {
    * @param player the player associated with this view
    */
   public ViewAdapted(ReadOnlyThreeTriosModelInterface model, Player player) {
-    this.providerView = new ThreeTriosGUIView(model, player);
+    this.providerView = new ThreeTriosGUIView(model, player.getColor());
     this.observers = new ArrayList<>();
     this.handsInitialized = false;
   }

@@ -1,25 +1,16 @@
 package cs3500.tripletrios;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import cs3500.tripletrios.controller.SetUp;
 import cs3500.tripletrios.controller.ThreeTriosController;
-import cs3500.tripletrios.model.AiPlayer;
 import cs3500.tripletrios.model.GameModel;
 import cs3500.tripletrios.model.GameModelImpl;
 import cs3500.tripletrios.model.HumanPlayer;
 import cs3500.tripletrios.model.IPlayer;
 import cs3500.tripletrios.model.ModelProviderAdapter;
 import cs3500.tripletrios.model.PlayerColor;
-import cs3500.tripletrios.strategy.StrategyInterface;
-import cs3500.tripletrios.strategy.StrategyOne;
-import cs3500.tripletrios.strategy.StrategyThree;
-import cs3500.tripletrios.strategy.StrategyTwo;
-import cs3500.tripletrios.strategy.StrategyFour;
-import cs3500.tripletrios.strategy.ChainStrategy;
 import cs3500.tripletrios.view.GameViewGUI;
 import cs3500.tripletrios.view.TripleTrioGuiView;
 import cs3500.tripletrios.view.ViewAdapted;
