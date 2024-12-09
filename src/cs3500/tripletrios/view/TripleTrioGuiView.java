@@ -134,7 +134,7 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
 
         for (int i = 0; i < leftColumnCards.size(); i++) {
           CardPanel cardPanel = new CardPanel(
-                  leftColumnCards.get(i), leftColumnCardsColor, i, this);
+                  leftColumnCards.get(i), leftColumnCardsColor,this, this);
           cardPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -145,7 +145,7 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
         }
         for (int i = 0; i < rightColumnCards.size(); i++) {
           CardPanel cardPanel = new CardPanel(
-                  rightColumnCards.get(i), rightColumnCardsColor, i, this);
+                  rightColumnCards.get(i), rightColumnCardsColor, this, this);
           cardPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

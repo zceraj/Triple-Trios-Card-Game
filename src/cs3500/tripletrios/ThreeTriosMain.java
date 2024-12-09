@@ -10,10 +10,14 @@ import cs3500.tripletrios.model.GameModelImpl;
 import cs3500.tripletrios.model.HumanPlayer;
 import cs3500.tripletrios.model.IPlayer;
 import cs3500.tripletrios.model.ModelProviderAdapter;
+import cs3500.tripletrios.model.PlayerAdapter;
 import cs3500.tripletrios.model.PlayerColor;
+import cs3500.tripletrios.provider.view.ThreeTriosGUIView;
+import cs3500.tripletrios.provider.view.ThreeTriosTextualView;
 import cs3500.tripletrios.view.GameViewGUI;
 import cs3500.tripletrios.view.TripleTrioGuiView;
 import cs3500.tripletrios.view.ViewAdapted;
+import cs3500.tripletrios.view.ViewAdapter;
 
 /**
  * the entry point for running the Triple Trios game.
@@ -63,10 +67,9 @@ public final class ThreeTriosMain {
     GameModel model = new GameModelImpl(setup.setGrid(), player1, player2);
 
     GameViewGUI viewPlayer1 = new TripleTrioGuiView(model, model.getCurPlayer());
-    GameViewGUI viewPlayer2 = new ViewAdapted(new ModelProviderAdapter(model), new PlayerAdapted(model.getOtherPlayer()));
-    ((TripleTrioGuiView)viewPlayer2).setLocation(300,300);
+    ThreeTriosGUIView viewPlayer2 = new ThreeTriosGUIView(new ModelProviderAdapter(model), new PlayerAdapter(model.getOtherPlayer()).getColor());
     ThreeTriosController controller1 = new ThreeTriosController(model, viewPlayer1, player1);
-    ThreeTriosController controller2 = new ThreeTriosController(model, viewPlayer2, player2);
+    ThreeTriosController controller2 = new ThreeTriosController(model, new ViewAdapter(viewPlayer2), player2);
     model.startGame(setup.setCards());
   }
 }

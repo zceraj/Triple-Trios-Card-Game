@@ -10,10 +10,7 @@ import java.awt.Font;
 import java.io.File;
 import java.io.IOException;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.BorderFactory;
+import javax.swing.*;
 
 
 import cs3500.tripletrios.model.CardInterface;
@@ -24,7 +21,6 @@ import cs3500.tripletrios.model.Direction;
  */
 class CardPanel extends JPanel implements CardPanelView {
   private final CardInterface card;
-  private final int index;
   private final boolean isSelected = false;
   private TripleTrioGuiView view;
 
@@ -34,14 +30,12 @@ class CardPanel extends JPanel implements CardPanelView {
    * @param card  the card being portrayed --> obvi a need because how else will it access
    *              all of the card's values.
    * @param color the color of the card --> to know which players side is which.
-   * @param index for future calling of the card.
    */
-  public CardPanel(CardInterface card, Color color, int index, TripleTrioGuiView view) {
+  public CardPanel(CardInterface card, Color color, GameViewGUI view, JFrame parent) {
     this.card = card;
-    this.index = index;
 
     // size of each card yay
-    setPreferredSize(new Dimension(view.getWidth() / 15, view.getHeight() / 8));
+    setPreferredSize(new Dimension(parent.getWidth() / 15, parent.getHeight() / 8));
     // to be able to have the color just set by the players side
     setBackground(color);
 
@@ -64,12 +58,12 @@ class CardPanel extends JPanel implements CardPanelView {
                       Font.TRUETYPE_FONT,
                       new File(
                               "formatting/SourGummy-VariableFont_wdth,wght.ttf"))
-              .deriveFont(8000f / view.getHeight());
+              .deriveFont(8000f / parent.getHeight());
       Font customFont = Font.createFont(
                       Font.TRUETYPE_FONT,
                       new File(
                               "formatting/SourGummy-VariableFont_wdth,wght.ttf"))
-              .deriveFont(10000f / view.getHeight());
+              .deriveFont(10000f / parent.getHeight());
       nameLabel.setFont(customFontForLabel);
       northLabel.setFont(customFont);
       eastLabel.setFont(customFont);
@@ -86,13 +80,13 @@ class CardPanel extends JPanel implements CardPanelView {
     add(nameLabel, BorderLayout.CENTER);
 
     northLabel.setBorder(BorderFactory.createEmptyBorder(
-            100 / view.getHeight(), 0, 0, 0));
+            100 / parent.getHeight(), 0, 0, 0));
     eastLabel.setBorder(BorderFactory.createEmptyBorder(
-            0, 200 / view.getHeight(), 0, 200 / view.getHeight()));
+            0, 200 / parent.getHeight(), 0, 200 / parent.getHeight()));
     southLabel.setBorder(BorderFactory.createEmptyBorder(
-            0, 0, 200 / view.getHeight(), 0));
+            0, 0, 200 / parent.getHeight(), 0));
     westLabel.setBorder(BorderFactory.createEmptyBorder(
-            0, 200 / view.getHeight(), 0, 200 / view.getHeight()));
+            0, 200 / parent.getHeight(), 0, 200 / parent.getHeight()));
 
     setBorder(BorderFactory.createLineBorder(Color.BLACK));
   }
@@ -160,15 +154,6 @@ class CardPanel extends JPanel implements CardPanelView {
     return card;
   }
 
-  /**
-   * to play the card.
-   *
-   * @return the index of the box
-   */
-  @Override
-  public int getIndex() {
-    return index;
-  }
 
   @Override
   protected void paintComponent(Graphics g) {

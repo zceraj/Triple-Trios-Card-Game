@@ -14,12 +14,5 @@ public interface CardPanelView {
    */
   CardInterface getCard();
 
-  /**
-   * Returns the index of this card panel for referencing or playing the card.
-   *
-   * @return The index of the card panel.
-   */
-  int getIndex();
-
 }
 
