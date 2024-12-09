@@ -23,6 +23,7 @@ public class ViewAdapter extends JFrame implements GameViewGUI {
   private final JPanel leftColumnPanel;
   private final JPanel rightColumnPanel;
   private final List<Observer> observers;
+  private final ThreeTriosGUIView view;
 
   private CardPanel selectedCard;
   private GridPanel selectedPanel;
@@ -30,12 +31,16 @@ public class ViewAdapter extends JFrame implements GameViewGUI {
 
   /**
    * Constructs a new adapter for the Three Trios GUI view.
+   *
+   * @param model  the read-only model of the game.
+   * @param player the player for whom the view is rendered.
    */
-  public ViewAdapter(ThreeTriosGUIView view) {
+  public ViewAdapter(ReadOnlyThreeTriosModelInterface model, PlayerColor player, ThreeTriosGUIView view) {
     if (model == null || player == null) {
       throw new IllegalArgumentException("Model and player cannot be null");
     }
     this.model = model;
+    this.view = view;
     this.player = player;
     this.handsInitialized = false;
     this.observers = new ArrayList<>();
