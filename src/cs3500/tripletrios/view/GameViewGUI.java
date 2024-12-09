@@ -1,5 +1,7 @@
 package cs3500.tripletrios.view;
 
+import java.io.IOException;
+
 import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.observing.ObservableInterface;
 import cs3500.tripletrios.observing.Observer;
@@ -8,7 +10,7 @@ import cs3500.tripletrios.observing.Observer;
  * an interface for a game view that pops up a new window to play the game.
  */
 public interface GameViewGUI extends GameView, ObservableInterface {
-  void initializeHands();
+  void initializeHands() throws IOException;
 
   /**
    * Sets the visibility of the game view GUI.
@@ -21,14 +23,14 @@ public interface GameViewGUI extends GameView, ObservableInterface {
    * Refreshes the display of the player's hands in the game view.
    * This method should be called whenever the player's hand is updated.
    */
-  void refreshHands();
+  void refreshHands() throws IOException;
 
   /**
    * Refreshes the game grid in the GUI.
    * This method should be called whenever the grid layout or state changes,
    * such as after a card is placed or the game progresses.
    */
-  void refreshGrid();
+  void refreshGrid() throws IOException;
 
   /**
    * Gets the card that is selected.

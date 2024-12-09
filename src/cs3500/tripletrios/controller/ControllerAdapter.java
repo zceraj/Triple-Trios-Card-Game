@@ -1,6 +1,5 @@
-package cs3500.tripletrios.adapter;
+package cs3500.tripletrios.controller;
 
-import cs3500.tripletrios.controller.ThreeTriosController;
 import cs3500.tripletrios.model.PlayerColor;
 import cs3500.tripletrios.provider.controller.ControllerManagerInterface;
 import cs3500.tripletrios.provider.controller.GameListeners;
@@ -9,7 +8,7 @@ import cs3500.tripletrios.provider.controller.GameListeners;
  * Adapter that bridges the GameListeners and ControllerManagerInterface
  * to the ThreeTriosController.
  */
-public class ControllerAdapter implements GameListeners, ControllerManagerInterface {
+public final class ControllerAdapter implements GameListeners, ControllerManagerInterface {
   private final ThreeTriosController redController;
   private final ThreeTriosController blueController;
 
@@ -29,8 +28,9 @@ public class ControllerAdapter implements GameListeners, ControllerManagerInterf
 
   @Override
   public void refreshScreen() {
-    getCurrentController().view.refreshGrid();
-    getCurrentController().view.refreshHands();
+    ThreeTriosController currentController = getCurrentController();
+    currentController.view.refreshGrid();
+    currentController.view.refreshHands();
   }
 
   @Override
@@ -45,7 +45,8 @@ public class ControllerAdapter implements GameListeners, ControllerManagerInterf
 
   @Override
   public void runGameOver() {
-    getCurrentController().view.popup("Game Over! " + getCurrentController().model.getWinner() + " wins!");
+    ThreeTriosController currentController = getCurrentController();
+    currentController.view.popup("Game Over! " + currentController.model.getWinner() + " wins!");
   }
 
   @Override
@@ -66,13 +67,26 @@ public class ControllerAdapter implements GameListeners, ControllerManagerInterf
 
   @Override
   public ThreeTriosController getController(PlayerColor playerColor) {
-    if (playerColor == PlayerColor.RED) {
-      return redController;
-    } else if (playerColor == PlayerColor.BLUE) {
-      return blueController;
-    } else {
-      throw new IllegalArgumentException("Invalid player color.");
+    switch (playerColor) {
+      case RED:
+        return redController;
+      case BLUE:
+        return blueController;
+      default:
+        throw new IllegalArgumentException("Invalid player color.");
     }
+  }
+
+
+
+  @Override
+  public void swapTurn(cs3500.tripletrios.provider.model.PlayerColor playerColor) {
+    swapTurn(convertToOurColor(playerColor));
+  }
+
+  @Override
+  public ThreeTriosController getController(cs3500.tripletrios.provider.model.PlayerColor playerColor) {
+    return getController(convertToOurColor(playerColor));
   }
 
   /**
@@ -83,18 +97,28 @@ public class ControllerAdapter implements GameListeners, ControllerManagerInterf
   private ThreeTriosController getCurrentController() {
     if (redController.model.getCurPlayer() == redController.player) {
       return redController;
-    } else {
+    } else if (blueController.model.getCurPlayer() == blueController.player) {
       return blueController;
+    } else {
+      throw new IllegalStateException("No matching controller for the current player.");
     }
   }
 
-  @Override
-  public void swapTurn(cs3500.tripletrios.provider.model.PlayerColor playerColor) {
-    
+  /**
+   * Converts the provider's PlayerColor enum to our PlayerColor enum.
+   *
+   * @param color the provider's PlayerColor
+   * @return the corresponding PlayerColor in our system
+   */
+  private PlayerColor convertToOurColor(cs3500.tripletrios.provider.model.PlayerColor color) {
+    switch (color) {
+      case RED:
+        return PlayerColor.RED;
+      case BLUE:
+        return PlayerColor.BLUE;
+      default:
+        throw new IllegalArgumentException("Invalid color: " + color);
+    }
   }
 
-  @Override
-  public ThreeTriosController getController(cs3500.tripletrios.provider.model.PlayerColor playerColor) {
-    return null;
-  }
 }
