@@ -11,10 +11,9 @@ import cs3500.tripletrios.view.GridPanel;
  * Controls the flow of the Three Trios game.
  */
 public class ThreeTriosController implements ControllerInterface {
-  private final GameModel model;
-  private final GameViewGUI view;
-  private final IPlayer player;
-  private boolean justStarted;
+  final GameModel model;
+  final GameViewGUI view;
+  final IPlayer player;
 
   /**
    * Constructs a controller for managing the game for a specific player.

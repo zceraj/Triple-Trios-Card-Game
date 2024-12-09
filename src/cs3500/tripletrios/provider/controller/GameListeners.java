@@ -1,5 +1,7 @@
 package cs3500.tripletrios.provider.controller;
 
+import java.io.IOException;
+
 /**
  * Represents model and view functionalities.
  */
@@ -8,7 +10,7 @@ public interface GameListeners {
   /**
    * Refreshes the view screen.
    */
-  void refreshScreen();
+  void refreshScreen() throws IOException;
 
   /**
    * Makes a new screen visible.
