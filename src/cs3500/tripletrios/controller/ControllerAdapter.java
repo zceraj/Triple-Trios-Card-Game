@@ -80,7 +80,6 @@ public final class ControllerAdapter implements GameListeners, ControllerManager
   }
 
 
-
   @Override
   public void swapTurn(cs3500.tripletrios.provider.model.PlayerColor playerColor) {
     swapTurn(convertToOurColor(playerColor));
