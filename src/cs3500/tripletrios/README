@@ -42,7 +42,7 @@ Since we didn't have controller tests actually written last time and they were c
 simply deleted the file since it was taking up space. We also deleted all the strategy tests since
 they were not relevant to this assignment.
 Update... Sadly, in the end we had to delete all our test files to be able to submit through handins, if needed we can
-send the test files separately. We also had to delete 
+send the test files separately. We also had to delete
 
 
 ----------------------------------------------------------------------------------------------------
