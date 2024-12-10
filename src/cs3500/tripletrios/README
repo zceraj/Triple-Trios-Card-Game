@@ -5,6 +5,7 @@
 Command Line:
 
 Features that work:
+- seperate window of providers view
 
 Features that don't work:
 
@@ -14,6 +15,12 @@ We tried to minimally adapt our code by adding in 3 primary adapters
 and then two for the inputs for the view:
 - one for our player
 - one for our model
+
+What wwe changed for our customers:
+- Made GridInterface, used it throughout our code instead of Grid concrete class
+- Made CellInterface, used it throughout our code instead of Cell concrete class
+- Made MovesInterface, specifcially fro the strategies and AIPlayer
+
 
 ----------------------------------------------------------------------------------------------------
 -------------------------------------ASSIGNMENT 7 READ ME ------------------------------------------
