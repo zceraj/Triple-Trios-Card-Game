@@ -138,8 +138,6 @@ public class ThreeTriosController implements ControllerInterface {
       }
     } catch (IndexOutOfBoundsException | IOException e) {
       view.popup("Invalid card selection.");
-    } catch (IOException e) {
-      view.popup("broken...");
     }
   }
 
