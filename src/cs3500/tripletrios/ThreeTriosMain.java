@@ -67,6 +67,7 @@ public final class ThreeTriosMain {
     IPlayer player2 = playersList.get(1);
 
     GameModel model = new GameModelImpl(setup.setGrid(), player1, player2);
+    model.startGame(setup.setCards());
 
     ReadOnlyThreeTriosModelInterface providerModel = new ModelProviderAdapter(model);
     Player providerPlayer = new PlayerAdapter(player2);
@@ -78,6 +79,5 @@ public final class ThreeTriosMain {
             model,
             new ViewAdapter(model, viewPlayer2),
             player2);
-    model.startGame(setup.setCards());
   }
 }
