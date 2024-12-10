@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import cs3500.tripletrios.model.Card;
 import cs3500.tripletrios.model.Cell;
+import cs3500.tripletrios.model.CellInterface;
 import cs3500.tripletrios.model.Grid;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -79,7 +80,7 @@ public class GridTest {
 
   @Test
   public void testGetCardAtCardCell() {
-    Cell cell = easyGrid.getCell(0, 0);
+    CellInterface cell = easyGrid.getCell(0, 0);
     Card testCard = new Card("TestCard", 5, 3, 7, 1);
     cell.setCard(testCard);
     assertEquals(testCard, easyGrid.getCardAt(0, 0),

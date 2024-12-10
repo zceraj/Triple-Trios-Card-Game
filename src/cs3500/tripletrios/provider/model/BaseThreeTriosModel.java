@@ -6,6 +6,7 @@ import cs3500.tripletrios.provider.model.cell.CellState;
 import cs3500.tripletrios.provider.model.grid.Grid;
 import cs3500.tripletrios.provider.model.rules.RuleKeeper;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,7 +56,11 @@ public abstract class BaseThreeTriosModel implements ThreeTriosModelInterface {
 
   @Override
   public void startGame(Grid gameGrid, List<CustomCard> deck) {
-    startGame(gameGrid, deck, true);
+    try {
+      startGame(gameGrid, deck, true);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   @Override

@@ -1,6 +1,7 @@
 package cs3500.tripletrios;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -202,8 +203,12 @@ public final class ThreeTrios {
     GameViewGUI viewPlayer1 = new TripleTrioGuiView(model, model.getCurPlayer());
     GameViewGUI viewPlayer2 = new TripleTrioGuiView(model, model.getOtherPlayer());
     ((TripleTrioGuiView) viewPlayer2).setLocation(300, 300);
-    ThreeTriosController controller1 = new ThreeTriosController(model, viewPlayer1, player1);
-    ThreeTriosController controller2 = new ThreeTriosController(model, viewPlayer2, player2);
-    model.startGame(setup.setCards());
+    try {
+      ThreeTriosController controller1 = new ThreeTriosController(model, viewPlayer1, player1);
+      ThreeTriosController controller2 = new ThreeTriosController(model, viewPlayer2, player2);
+      model.startGame(setup.setCards());
+    } catch (IOException e) {
+      viewPlayer1.popup("can't start game");
+    }
   }
 }

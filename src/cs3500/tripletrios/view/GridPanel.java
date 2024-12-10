@@ -95,7 +95,11 @@ public class GridPanel extends JPanel implements GridCellView {
         repaint();
       }
     }
-    gameView.notifyObservers();
+    try {
+      gameView.notifyObservers();
+    } catch (IOException e) {
+      gameView.popup("oopsies");
+    }
   }
 
   /**

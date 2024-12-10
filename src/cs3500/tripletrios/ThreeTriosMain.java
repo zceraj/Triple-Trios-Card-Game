@@ -14,6 +14,7 @@ import cs3500.tripletrios.model.ModelProviderAdapter;
 import cs3500.tripletrios.model.PlayerAdapter;
 import cs3500.tripletrios.model.PlayerColor;
 import cs3500.tripletrios.provider.controller.players.Player;
+import cs3500.tripletrios.provider.model.ReadOnlyThreeTriosModelInterface;
 import cs3500.tripletrios.provider.model.ThreeTriosModelInterface;
 import cs3500.tripletrios.provider.view.ThreeTriosGUIView;
 import cs3500.tripletrios.view.GameViewGUI;
@@ -66,8 +67,9 @@ public final class ThreeTriosMain {
     IPlayer player2 = playersList.get(1);
 
     GameModel model = new GameModelImpl(setup.setGrid(), player1, player2);
+    model.startGame(setup.setCards());
 
-    ThreeTriosModelInterface providerModel = new ModelProviderAdapter(model);
+    ReadOnlyThreeTriosModelInterface providerModel = new ModelProviderAdapter(model);
     Player providerPlayer = new PlayerAdapter(player2);
 
     GameViewGUI viewPlayer1 = new TripleTrioGuiView(model, model.getCurPlayer());
@@ -75,8 +77,7 @@ public final class ThreeTriosMain {
     ThreeTriosController controller1 = new ThreeTriosController(model, viewPlayer1, player1);
     ThreeTriosController controller2 = new ThreeTriosController(
             model,
-            new ViewAdapter(providerModel, providerPlayer.getColor(), viewPlayer2),
+            new ViewAdapter(model, viewPlayer2),
             player2);
-    model.startGame(setup.setCards());
   }
 }
