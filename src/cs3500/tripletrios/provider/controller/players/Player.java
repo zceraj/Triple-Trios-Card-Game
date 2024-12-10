@@ -34,5 +34,5 @@ public interface Player {
    *
    * @return player's color
    */
-  PlayerColor getColor();  
+  PlayerColor getColor();
 }

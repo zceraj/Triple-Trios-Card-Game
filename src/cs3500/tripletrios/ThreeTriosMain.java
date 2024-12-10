@@ -1,6 +1,7 @@
 package cs3500.tripletrios;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import cs3500.tripletrios.controller.SetUp;
@@ -44,9 +45,9 @@ public final class ThreeTriosMain {
    * @param args command-line arguments (not used) --> it won't let me run it without it??
    */
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws IOException {
     // setting up the grid and cards using the card and grid file readers
-    String cardFilePath =  "."
+    String cardFilePath = "."
             + File.separator
             + "TESTINGFILES"
             + File.separator

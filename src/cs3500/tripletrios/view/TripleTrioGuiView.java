@@ -134,11 +134,15 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
 
         for (int i = 0; i < leftColumnCards.size(); i++) {
           CardPanel cardPanel = new CardPanel(
-                  leftColumnCards.get(i), leftColumnCardsColor,this, this);
+                  leftColumnCards.get(i), leftColumnCardsColor, this, this);
           cardPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-              handleCardClick(cardPanel);
+              try {
+                handleCardClick(cardPanel);
+              } catch (IOException ex) {
+                throw new RuntimeException(ex);
+              }
             }
           });
           leftColumnPanel.add(cardPanel);
@@ -149,7 +153,11 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
           cardPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-              handleCardClick(cardPanel);
+              try {
+                handleCardClick(cardPanel);
+              } catch (IOException ex) {
+                throw new RuntimeException(ex);
+              }
             }
           });
           rightColumnPanel.add(cardPanel);
@@ -169,7 +177,7 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
    *
    * @param cardPanel the card panel that was clicked
    */
-  private void handleCardClick(CardPanel cardPanel) {
+  private void handleCardClick(CardPanel cardPanel) throws IOException {
     if (model.getCurPlayer() == player && model.getPlayerFromCard(cardPanel.getCard()) == player) {
       if (this.selectedCard == cardPanel) {
         cardPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // Reset border
@@ -246,6 +254,7 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
 
   /**
    * Gets the card that is selected.
+   *
    * @return the selected card
    */
   @Override
@@ -267,7 +276,7 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
   }
 
   @Override
-  public void notifyObservers() {
+  public void notifyObservers() throws IOException {
     for (Observer observer : observers) {
       observer.update();
     }
@@ -289,7 +298,7 @@ public class TripleTrioGuiView extends JFrame implements GameViewGUI {
    * resets the selected card.
    */
   @Override
-  public void clearSelectedCard() {
+  public void clearSelectedCard() throws IOException {
     selectedCard = null;
     notifyObservers();
   }

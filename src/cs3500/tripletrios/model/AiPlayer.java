@@ -22,8 +22,8 @@ public class AiPlayer implements IPlayer {
   /**
    * Constructs an AI player with the specified name, color, and strategy.
    *
-   * @param name     the name of the AI player
-   * @param color    the color representing the AI player's identity
+   * @param name  the name of the AI player
+   * @param color the color representing the AI player's identity
    */
   public AiPlayer(String name, PlayerColor color) {
     this.name = name;
@@ -45,6 +45,7 @@ public class AiPlayer implements IPlayer {
 
   /**
    * Retrieves the color of the player.
+   *
    * @return the color of the player
    */
   @Override
@@ -54,6 +55,7 @@ public class AiPlayer implements IPlayer {
 
   /**
    * Retrieves the hand of the player.
+   *
    * @return the hand of the player
    */
   @Override
@@ -63,6 +65,7 @@ public class AiPlayer implements IPlayer {
 
   /**
    * Adds a card to the player's hand.
+   *
    * @param card to be added to the player's hand.
    */
   @Override
@@ -75,6 +78,7 @@ public class AiPlayer implements IPlayer {
 
   /**
    * Removes a card from the player's hand.
+   *
    * @param card to be removed from the player's hand.
    */
   @Override
@@ -84,6 +88,7 @@ public class AiPlayer implements IPlayer {
 
   /**
    * Sets the hand of the player.
+   *
    * @param playerHand the hand to set
    * @throws IllegalArgumentException if the hand is null
    */
@@ -98,9 +103,10 @@ public class AiPlayer implements IPlayer {
 
   /**
    * Places the specified card at the given row and column in the game grid.
+   *
    * @param card the card to be placed
    * @param row  the row to place the card
-   * @param col the column to place the card
+   * @param col  the column to place the card
    */
   @Override
   public void placeTheCard(CardInterface card, int row, int col) {
@@ -139,6 +145,7 @@ public class AiPlayer implements IPlayer {
 
   /**
    * Sets a strategy for the AI player to use that is refered to in the determineNextMove.
+   *
    * @param strategy the strategy to set
    * @throws IllegalArgumentException if the strategy is null
    */

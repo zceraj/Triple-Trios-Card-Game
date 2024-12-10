@@ -17,7 +17,7 @@ public interface Actions {
    * Action when a card is clicked.
    *
    * @param playerName name of the player
-   * @param cardIdx index of the selected card
+   * @param cardIdx    index of the selected card
    * @return true if selection is successful
    */
   boolean selectCard(String playerName, int cardIdx);

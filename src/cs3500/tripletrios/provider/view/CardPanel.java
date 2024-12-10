@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -37,9 +38,9 @@ public abstract class CardPanel {
     cardPanel.setOpaque(false);
 
     JLabel northLabel = new JLabel(card.getAttackValue(Direction.NORTH).toString(),
-        SwingConstants.CENTER);
+            SwingConstants.CENTER);
     JLabel southLabel = new JLabel(card.getAttackValue(Direction.SOUTH).toString(),
-        SwingConstants.CENTER);
+            SwingConstants.CENTER);
     JLabel eastLabel = new JLabel(card.getAttackValue(Direction.EAST).toString());
     JLabel westLabel = new JLabel(card.getAttackValue(Direction.WEST).toString());
 

@@ -132,6 +132,7 @@ public class HumanPlayer implements IPlayer {
 
   /**
    * Sets a strategy for an AiPlayer.
+   *
    * @param strategy the strategy to be set
    */
   public void setStrategy(StrategyInterface strategy) {

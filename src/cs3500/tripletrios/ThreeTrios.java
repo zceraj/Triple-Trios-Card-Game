@@ -37,8 +37,7 @@ public final class ThreeTrios {
 
     if (color == PlayerColor.BLUE) {
       playerName = "player2";
-    }
-    else {
+    } else {
       playerName = "player1";
     }
 
@@ -82,7 +81,7 @@ public final class ThreeTrios {
 
     if (args.length >= 3) {
       System.out.println("Too many arguments inputted, this game only supports 2 players. The game "
-          + "will be started with the first two inputs. Press q to quit.");
+              + "will be started with the first two inputs. Press q to quit.");
     }
 
     if (args.length >= 2) {
@@ -144,9 +143,7 @@ public final class ThreeTrios {
         default:
           strategy = new StrategyOne(model);
       }
-    }
-
-    else {
+    } else {
       ChainStrategy stratsList = new ChainStrategy(model.getGameGrid());
       for (int i = 0; i < input.length; i++) {
         switch (input[i]) {
@@ -172,15 +169,15 @@ public final class ThreeTrios {
   }
 
   /**
-  * The main method that sets up the Triple Trios game. It creates two players,
-  * a grid layout, a list of cards, initializes the game model, and launches the GUI.
-  *
-  * @param args command-line arguments (not used) --> it won't let me run it without it??
-  */
+   * The main method that sets up the Triple Trios game. It creates two players,
+   * a grid layout, a list of cards, initializes the game model, and launches the GUI.
+   *
+   * @param args command-line arguments (not used) --> it won't let me run it without it??
+   */
 
   public static void main(String[] args) {
     // setting up the grid and cards using the card and grid file readers
-    String cardFilePath =  "."
+    String cardFilePath = "."
             + File.separator
             + "TESTINGFILES"
             + File.separator
@@ -204,7 +201,7 @@ public final class ThreeTrios {
 
     GameViewGUI viewPlayer1 = new TripleTrioGuiView(model, model.getCurPlayer());
     GameViewGUI viewPlayer2 = new TripleTrioGuiView(model, model.getOtherPlayer());
-    ((TripleTrioGuiView)viewPlayer2).setLocation(300,300);
+    ((TripleTrioGuiView) viewPlayer2).setLocation(300, 300);
     ThreeTriosController controller1 = new ThreeTriosController(model, viewPlayer1, player1);
     ThreeTriosController controller2 = new ThreeTriosController(model, viewPlayer2, player2);
     model.startGame(setup.setCards());

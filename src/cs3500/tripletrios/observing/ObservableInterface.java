@@ -1,5 +1,7 @@
 package cs3500.tripletrios.observing;
 
+import java.io.IOException;
+
 /**
  * Interface for an observable object that can be watched by observers.
  */
@@ -22,5 +24,5 @@ public interface ObservableInterface {
   /**
    * Notifies all observers of a change in this object.
    */
-  void notifyObservers();
+  void notifyObservers() throws IOException;
 }

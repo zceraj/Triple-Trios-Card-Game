@@ -23,7 +23,7 @@ public class ThreeTriosController implements ControllerInterface {
    * @param model the game model shared across all players.
    * @param view  the view associated with this player.
    */
-  public ThreeTriosController(GameModel model, GameViewGUI view, IPlayer player) {
+  public ThreeTriosController(GameModel model, GameViewGUI view, IPlayer player) throws IOException {
     if (model == null || view == null || player == null) {
       view.popup("model, player, or view cannot be null");
       throw new IllegalArgumentException("model, player, or view cannot be null");
@@ -44,9 +44,8 @@ public class ThreeTriosController implements ControllerInterface {
   }
 
 
-
   @Override
-  public void update() {
+  public void update() throws IOException {
     gameOver();
     try {
       view.initializeHands();
@@ -67,8 +66,7 @@ public class ThreeTriosController implements ControllerInterface {
                       view.getSelectedPanel().getRow(),
                       view.getSelectedPanel().getCol()))) {
         view.popup("invalid move");
-      }
-      else {
+      } else {
         CardInterface card = view.getSelectedCard();
         GridPanel panel = view.getSelectedPanel();
         model.placeCard(card, panel.getRow(), panel.getCol());
@@ -111,8 +109,9 @@ public class ThreeTriosController implements ControllerInterface {
   /**
    * Plays the card at the given index in the player's hand to the given coordinates.
    * Added it for the adaptor for the providers code.
-   * @param row the row of the position to play
-   * @param col the column of the position to play
+   *
+   * @param row       the row of the position to play
+   * @param col       the column of the position to play
    * @param handIndex the index in hand of the card to be played
    */
   public void playMove(int row, int col, int handIndex) {
@@ -137,13 +136,12 @@ public class ThreeTriosController implements ControllerInterface {
       } else {
         view.popup("Invalid move. Try again.");
       }
-    } catch (IndexOutOfBoundsException e) {
+    } catch (IndexOutOfBoundsException | IOException e) {
       view.popup("Invalid card selection.");
     } catch (IOException e) {
       view.popup("broken...");
     }
   }
-
 
 
 }

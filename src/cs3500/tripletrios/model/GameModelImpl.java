@@ -1,5 +1,6 @@
 package cs3500.tripletrios.model;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,7 +26,6 @@ public class GameModelImpl extends Observable implements GameModel {
   private boolean gameStarted = false;
   private boolean gameJustStarted = false;
   private final Map<CellInterface, IPlayer> cellsPlayer;
-
 
 
   //CLASS INVARIANT: the game grid must have an odd number of card cells
@@ -90,7 +90,7 @@ public class GameModelImpl extends Observable implements GameModel {
    *                                  is insufficient to set up the game
    */
   @Override
-  public void startGame(List<CardInterface> cards) {
+  public void startGame(List<CardInterface> cards) throws IOException {
     if (this.gameStarted) {
       throw new IllegalStateException("Game has already started.");
     }

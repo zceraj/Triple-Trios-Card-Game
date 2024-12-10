@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 
 
+import java.io.IOException;
 import java.util.List;
 
 import cs3500.tripletrios.model.BattleRules;
@@ -37,7 +38,7 @@ public class BattleRulesTest {
    * sets up everything needed to test.
    */
   @BeforeEach
-  public void setUp() {
+  public void setUp() throws IOException {
     // Initialize players
     player1 = new HumanPlayer("Player1", PlayerColor.RED);
     player2 = new HumanPlayer("Player2", PlayerColor.BLUE);

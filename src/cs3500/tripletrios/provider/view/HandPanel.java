@@ -5,8 +5,10 @@ import cs3500.tripletrios.provider.model.ReadOnlyThreeTriosModelInterface;
 import cs3500.tripletrios.provider.model.card.CustomCard;
 
 import java.awt.GridLayout;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
 import java.util.List;
 
 /**

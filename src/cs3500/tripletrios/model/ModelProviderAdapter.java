@@ -3,7 +3,6 @@ package cs3500.tripletrios.model;
 import cs3500.tripletrios.provider.model.ReadOnlyThreeTriosModelInterface;
 import cs3500.tripletrios.provider.model.PlayerColor;
 import cs3500.tripletrios.provider.model.GameState;
-import cs3500.tripletrios.provider.model.ThreeTriosModelInterface;
 import cs3500.tripletrios.provider.model.card.AttackValue;
 import cs3500.tripletrios.provider.model.card.CardColor;
 import cs3500.tripletrios.provider.model.card.CustomCard;
@@ -17,7 +16,7 @@ import java.util.List;
 /**
  * Adapts your GameModel to the provider's ReadOnlyThreeTriosModelInterface.
  */
-public class ModelProviderAdapter implements ThreeTriosModelInterface {
+public class ModelProviderAdapter implements ReadOnlyThreeTriosModelInterface {
   private final GameModel model;
 
   /**
