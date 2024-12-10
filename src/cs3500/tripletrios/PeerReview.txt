@@ -21,8 +21,8 @@ flexible.
 
 The Views they provided were difficult to work from since it wasn't very felixble
 in how it was written since the textual view they wrote orginally only accepted a controller class they couldn't give us,
-so we did ask them change it, since we had a seperate deadline from them due to recieving code later, they told us we
-can just change it to GameListers on our end since they already submitted thier view code, if necessary we have email confirmation from them
+so we did ask them change it, since we had a separate deadline from them due to receiving code later, they told us we
+can just change it to GameListeners on our end since they already submitted thier view code, if necessary we have email confirmation from them
 explaining this. After that we refrained from changing their code and aimed to problem solve around errors that came up along
 the way.
 
@@ -33,7 +33,7 @@ but instead the same card/object. Also, their Grid interface included methods th
 change the state of the grid itself instead of just getting information about the grid.
 
 DOCUMENTATION CRITIQUE:
-The code was well documented making it easier to undertsand the purpose of the methods
+The code was well documented making it easier to understand the purpose of the methods
 shared. They could have documented edge cases and exceptions a bit more, but overall really
 helpful to us.
 

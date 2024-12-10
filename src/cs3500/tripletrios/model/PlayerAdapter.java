@@ -27,7 +27,7 @@ public class PlayerAdapter implements cs3500.tripletrios.provider.controller.pla
 
   @Override
   public void getMakePlay(ThreeTriosModelInterface model) {
-    // doing nothing not needed for this assingment.
+    // doing nothing not needed for this assignment.
 
   }
 
