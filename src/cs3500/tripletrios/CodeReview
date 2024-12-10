@@ -23,7 +23,8 @@ The Views they provided were difficult to work from since it wasn't very felixbl
 in how it was written since the textual view they wrote orginally only accepted a controller class they couldn't give us,
 so we did ask them change it, since we had a seperate deadline from them due to recieving code later, they told us we
 can just change it to GameListers on our end since they already submitted thier view code, if necessary we have email confirmation from them
-explaining this.
+explaining this. After that we refrained from changing their code and aimed to problem solve around errors that came up along
+the way.
 
 IMPLEMENTATION CRITIQUE/LIMITATIONS:
 The provided code was implemented fairly well. The AttackValue and CellState enums were implemented
@@ -35,4 +36,12 @@ DOCUMENTATION CRITIQUE:
 The code was well documented making it easier to undertsand the purpose of the methods
 shared. They could have documented edge cases and exceptions a bit more, but overall really
 helpful to us.
+
+
+PEER REVIEW:
+We had some issues in the beginning with getting code from our providers. This is the second group we had to request code from
+since the first group we were assigned to never responded. Despite issues with OutLook after a days of back and forth emails
+we were able to recieve the code through iMessages on one of our Laptops. We only had to reach out once or twice regarding the code,
+they had responded fairly quickly and were detailed in their reponses to us.
+
 
