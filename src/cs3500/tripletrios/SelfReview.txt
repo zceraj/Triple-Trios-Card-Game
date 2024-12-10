@@ -3,14 +3,16 @@ What do you wish you had done differently in your design/implementation?
 Did you learn any lessons from the code given to you, or the updates you had
 to make for your customers?
 
-Added more interfaces to separate things originally, for example we had to add
-CellInterface and GridInterface and MovesInterface to separate the logic more beforehand.
-Our customers asked this of us so we did end up doing it for them.
-The code that was provided to was over all very specific and made me which we had maybe included more
-detail in some of the java docs for interfaces so that someone reading our documentation would have a full understanding.
-
-
+We had to create more interfaces for our customers, for example we had to add
+CellInterface, GridInterface, and MovesInterface, this taught us that we should've had more seperate
+classes before and not depend on concrete objects as it made it difficult for our partners to
+implement our code. So lesson 1 - separate the logic more beforehand.
+The code that was provided to was over all very specific and did not have many methods
+we could go off of. We're grateful that we wrote detailed javadocs so that that someone reading our
+documentation would have a full understanding, however we wish we did more for the interfaces.
 
 What was your experience like with your providers?
-It was difficult getting code from them since we had a seperated dealing they suggested we change their code on our end
-it was al over all, and we can definitely tell they were working to send the code as soon as they can.
+
+Our experience with our providers was quite positive. While it was difficult getting code from them
+since we had a seperated deadline they suggested we change their code on our end. We appriciate their
+effort and we know it was hard with all the confusion during Thanksgiving.
