@@ -4,6 +4,7 @@ import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.CellInterface;
 import cs3500.tripletrios.provider.model.*;
 import cs3500.tripletrios.observing.Observer;
+import cs3500.tripletrios.provider.model.cell.Cell;
 import cs3500.tripletrios.provider.view.ThreeTriosGUIView;
 
 import java.awt.*;
@@ -17,7 +18,7 @@ import javax.swing.*;
  * Adapter to integrate the ThreeTriosGUIViewInterface with the existing GUI structure.
  */
 public class ViewAdapter extends JFrame implements GameViewGUI {
-  private final ReadOnlyThreeTriosModelInterface model;
+  private final GameViewGUI model;
   private final PlayerColor player;
   private final JPanel gridPanel;
   private final JPanel leftColumnPanel;
@@ -35,8 +36,8 @@ public class ViewAdapter extends JFrame implements GameViewGUI {
    * @param model  the read-only model of the game.
    * @param player the player for whom the view is rendered.
    */
-  public ViewAdapter(ReadOnlyThreeTriosModelInterface model, PlayerColor player, ThreeTriosGUIView view) {
-    if (model == null || player == null) {
+  public ViewAdapter(GameViewGUI model, PlayerColor player, ThreeTriosGUIView view) {
+    if (model == null || player == null || view == null) {
       throw new IllegalArgumentException("Model and player cannot be null");
     }
     this.model = model;
@@ -68,7 +69,7 @@ public class ViewAdapter extends JFrame implements GameViewGUI {
     gridPanel.removeAll();
     for (int row = 0; row < model.getGrid().getRows(); row++) {
       for (int col = 0; col < model.getGrid().getCols(); col++) {
-        CellInterface cell = model.getGrid().getCell(row, col);
+        Cell cell = model.getGrid().getCell(row, col);
         GridPanel gridCellPanel = new GridPanel(cell, row, col, model, player, this);
         gridPanel.add(gridCellPanel);
       }
