@@ -27,10 +27,7 @@ public class PlayerAdapter implements cs3500.tripletrios.provider.controller.pla
 
   @Override
   public void getMakePlay(ThreeTriosModelInterface model) {
-
-    if (!isHuman() && adaptedPlayer.determineNextMove() != null) {
-
-    }
+    // doing nothing not needed for this assingment. 
 
   }
 
