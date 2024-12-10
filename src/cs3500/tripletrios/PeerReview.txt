@@ -1,21 +1,47 @@
-As customers of the providers’ code, you have the opportunity to praise, critique, comment upon, and
-suggest improvements to their code. In short, you should provide a code review of their code.
-
-In that review, consider all the self-evaluation questions you have been asked during this course,
-and extrapolate from them the kinds of issues to examine. For example:
-
 How flexible are the interfaces you were given?
 How capable are the views?
 How convenient was it to reuse their code?
 How cleanly written and well-documented was their code?
 If you needed to request changes from them, what were they and why were they needed?
-Write a short (3-4 paragraph) review of their code. Your review should have the following sections:
-Design critique, implementation critique, documentation critique,
-design/code limitations and suggestions on how to address them.
+Write a short (3-4 paragraph) review of their code. Your review should
+have the following sections: Design critique, implementation critique,
+ documentation critique, design/code limitations and suggestions
+  on how to address them.
 
-Please concentrate on writing a review that is honest, but constructive.
- The reader should be able to understand what was wrong, and how to correct it.
- Please avoid simply criticizing the code given to you with no suggestions on how to make
-  it better. Similarly avoid blanket praise: every implementation has flaws or limitations!
-   Most importantly, please be professional in your writing. In summary, write a review that
-   you would not mind receiving and acting upon.
+
+DESIGN CRITIQUE/LIMITATIONS:
+The code provided was somewhat flexible. The separate interfaces for the model, grid,
+Cells, and Cards allow for modularity. But some specific designs made it more
+difficult to extend on. For example the CustomCard interface keeps track of a a card's
+color, which isn't necessary and makes adapting cards more complicated. It was also a bit frustrating
+since or cards didn't keep track of the color, it was the cells that did. Also, the Cell In
+tightly couples cell states with the player that owns them again making it difficult to adapt.
+If these aspects relied less on assumptions about the logic of the game it would be more
+flexible.
+
+The Views they provided were difficult to work from since it wasn't very felixble
+in how it was written since the textual view they wrote orginally only accepted a controller class they couldn't give us,
+so we did ask them change it, since we had a seperate deadline from them due to recieving code later, they told us we
+can just change it to GameListers on our end since they already submitted thier view code, if necessary we have email confirmation from them
+explaining this. After that we refrained from changing their code and aimed to problem solve around errors that came up along
+the way.
+
+IMPLEMENTATION CRITIQUE/LIMITATIONS:
+The provided code was implemented fairly well. The AttackValue and CellState enums were implemented
+well, but methods like CustomerCard.copy() didn't return a new instance or necessarily a copy of a card
+but instead the same card/object. Also, their Grid interface included methods that would be used to
+change the state of the grid itself instead of just getting information about the grid.
+
+DOCUMENTATION CRITIQUE:
+The code was well documented making it easier to undertsand the purpose of the methods
+shared. They could have documented edge cases and exceptions a bit more, but overall really
+helpful to us.
+
+
+PEER REVIEW:
+We had some issues in the beginning with getting code from our providers. This is the second group we had to request code from
+since the first group we were assigned to never responded. Despite issues with OutLook after a days of back and forth emails
+we were able to recieve the code through iMessages on one of our Laptops. We only had to reach out once or twice regarding the code,
+they had responded fairly quickly and were detailed in their reponses to us.
+
+
