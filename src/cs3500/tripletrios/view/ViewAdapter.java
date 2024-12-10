@@ -2,7 +2,6 @@ package cs3500.tripletrios.view;
 
 import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.GameModel;
-import cs3500.tripletrios.provider.model.*;
 import cs3500.tripletrios.observing.Observer;
 import cs3500.tripletrios.provider.view.ThreeTriosGUIView;
 
