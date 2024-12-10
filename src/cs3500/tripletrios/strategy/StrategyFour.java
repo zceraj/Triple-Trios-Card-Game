@@ -1,7 +1,6 @@
 package cs3500.tripletrios.strategy;
 
 import cs3500.tripletrios.model.CardInterface;
-import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.CellInterface;
 import cs3500.tripletrios.model.GameModelImpl;
 import cs3500.tripletrios.model.Grid;

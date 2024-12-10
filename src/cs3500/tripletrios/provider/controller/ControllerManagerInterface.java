@@ -8,10 +8,6 @@ import cs3500.tripletrios.provider.model.PlayerColor;
  */
 public interface ControllerManagerInterface {
 
-  void swapTurn(cs3500.tripletrios.model.PlayerColor playerColor);
-
-  ThreeTriosController getController(cs3500.tripletrios.model.PlayerColor playerColor);
-
   /**
    * Switch from one controller and view to the other.
    *

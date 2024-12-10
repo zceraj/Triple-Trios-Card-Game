@@ -44,7 +44,8 @@ public abstract class AbstractStrategy implements StrategyInterface {
 
 
   // Break ties by position of uppermost-leftmost and card index
-  protected MovesInterface breakTie(CardInterface card, int row, int col, MovesInterface bestMove, IPlayer player) {
+  protected MovesInterface breakTie(CardInterface card, int row, int col,
+                                    MovesInterface bestMove, IPlayer player) {
     if (row < bestMove.getRow() || (row == bestMove.getRow() && col < bestMove.getCol())) {
       return new Moves(card, row, col);
     }
@@ -63,7 +64,8 @@ public abstract class AbstractStrategy implements StrategyInterface {
   //If no best move was found, choose the upper-left most open cell and the first card
   // Fallback mechanism: if no best move was found, choose the upper-left most open cell
   // and the first card
-  protected static MovesInterface finalMove(IPlayer computerPlayer, MovesInterface bestMove, Grid grid) {
+  protected static MovesInterface finalMove(
+          IPlayer computerPlayer, MovesInterface bestMove, Grid grid) {
     if (bestMove == null) {
       for (int row = 0; row < grid.getRows(); row++) {
         for (int col = 0; col < grid.getCols(); col++) {

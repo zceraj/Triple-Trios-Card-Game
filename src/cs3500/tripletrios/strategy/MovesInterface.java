@@ -3,6 +3,9 @@ package cs3500.tripletrios.strategy;
 import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.Direction;
 
+/**
+ * Represents a move that a player can make in the game.
+ */
 public interface MovesInterface {
   /**
    * Gets the card.

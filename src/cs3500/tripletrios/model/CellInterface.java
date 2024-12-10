@@ -1,5 +1,8 @@
 package cs3500.tripletrios.model;
 
+/**
+ * Interface representing a cell in the Triple Trios game.
+ */
 public interface CellInterface {
 
   /**

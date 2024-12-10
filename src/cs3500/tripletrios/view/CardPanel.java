@@ -10,7 +10,11 @@ import java.awt.Font;
 import java.io.File;
 import java.io.IOException;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import javax.swing.BorderFactory;
+import javax.swing.JFrame;
 
 
 import cs3500.tripletrios.model.CardInterface;

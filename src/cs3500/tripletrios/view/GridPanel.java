@@ -17,7 +17,6 @@ import java.io.File;
 import java.io.IOException;
 
 import cs3500.tripletrios.model.CardInterface;
-import cs3500.tripletrios.model.Cell;
 import cs3500.tripletrios.model.CellInterface;
 import cs3500.tripletrios.model.Direction;
 import cs3500.tripletrios.model.IPlayer;
@@ -132,7 +131,8 @@ public class GridPanel extends JPanel implements GridCellView {
         Color cellColor;
         if (model.getPlayerFromCard(cell.getCard()).getColor().equalsIgnoreCase(BLUE.name())) {
           cellColor = new Color(50, 100, 200);
-        } else if (model.getPlayerFromCard(cell.getCard()).getColor().equalsIgnoreCase(RED.name())) {
+        } else if (model.getPlayerFromCard(cell.getCard()).getColor()
+                .equalsIgnoreCase(RED.name())) {
           cellColor = new Color(200, 50, 100);
         } else {
           cellColor = new Color(0, 255, 0);

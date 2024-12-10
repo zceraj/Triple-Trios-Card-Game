@@ -2,7 +2,6 @@ package cs3500.tripletrios.model;
 
 import java.util.List;
 
-import cs3500.tripletrios.provider.controller.players.Player;
 import cs3500.tripletrios.strategy.MovesInterface;
 import cs3500.tripletrios.strategy.StrategyInterface;
 

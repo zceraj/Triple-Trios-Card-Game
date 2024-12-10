@@ -6,7 +6,6 @@ import cs3500.tripletrios.model.Grid;
 import cs3500.tripletrios.model.IPlayer;
 import cs3500.tripletrios.model.ReadOnlyGameModel;
 import cs3500.tripletrios.model.Direction;
-import cs3500.tripletrios.model.Cell;
 
 /**
  * A class representing the third strategy of choosing the card that is least

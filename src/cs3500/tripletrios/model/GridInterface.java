@@ -1,5 +1,8 @@
 package cs3500.tripletrios.model;
 
+/**
+ * Interface representing the grid of the Triple Trios game.
+ */
 public interface GridInterface {
 
   /**

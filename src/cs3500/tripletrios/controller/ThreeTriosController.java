@@ -23,7 +23,8 @@ public class ThreeTriosController implements ControllerInterface {
    * @param model the game model shared across all players.
    * @param view  the view associated with this player.
    */
-  public ThreeTriosController(GameModel model, GameViewGUI view, IPlayer player) throws IOException {
+  public ThreeTriosController(GameModel model,
+                              GameViewGUI view, IPlayer player) throws IOException {
     if (model == null || view == null || player == null) {
       view.popup("model, player, or view cannot be null");
       throw new IllegalArgumentException("model, player, or view cannot be null");
@@ -49,7 +50,7 @@ public class ThreeTriosController implements ControllerInterface {
     gameOver();
     try {
       view.initializeHands();
-    view.refreshGrid();
+      view.refreshGrid();
     } catch (IOException e) {
       view.popup("broken lol");
     }
@@ -74,7 +75,7 @@ public class ThreeTriosController implements ControllerInterface {
         try {
           view.refreshHands();
         } catch (IOException e) {
-          view.popup("broken hand view.");;
+          view.popup("broken hand view.");
         }
         try {
           view.refreshGrid();

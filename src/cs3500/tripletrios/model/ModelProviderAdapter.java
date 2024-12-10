@@ -62,7 +62,8 @@ public class ModelProviderAdapter implements ReadOnlyThreeTriosModelInterface {
 
   @Override
   public List<CustomCard> getPlayerHand(PlayerColor player) {
-    IPlayer targetPlayer = player == PlayerColor.RED ? model.getCurPlayer() : model.getOtherPlayer();
+    IPlayer targetPlayer
+            = player == PlayerColor.RED ? model.getCurPlayer() : model.getOtherPlayer();
     return convertHand(targetPlayer.getCurrentHand());
   }
 
@@ -131,14 +132,15 @@ public class ModelProviderAdapter implements ReadOnlyThreeTriosModelInterface {
 
       @Override
       public Grid copy() {
-        throw new UnsupportedOperationException("Copy operation is not supported for this adapter.");
+        throw new UnsupportedOperationException("Copy operation not supported for this adapter.");
       }
     };
   }
 
   @Override
   public int getScore(PlayerColor player) {
-    IPlayer targetPlayer = player == PlayerColor.RED ? model.getCurPlayer() : model.getOtherPlayer();
+    IPlayer targetPlayer
+            = player == PlayerColor.RED ? model.getCurPlayer() : model.getOtherPlayer();
     return model.getScore(targetPlayer);
   }
 
@@ -186,7 +188,8 @@ public class ModelProviderAdapter implements ReadOnlyThreeTriosModelInterface {
       }
 
       @Override
-      public AttackValue getAttackValue(cs3500.tripletrios.provider.model.card.Direction direction) {
+      public AttackValue getAttackValue(
+              cs3500.tripletrios.provider.model.card.Direction direction) {
         // Convert the provider's direction enum to your direction enum
         Direction ourDirection = Direction.valueOf(direction.name());
 
@@ -279,7 +282,8 @@ public class ModelProviderAdapter implements ReadOnlyThreeTriosModelInterface {
           return CellState.BLUE;
         }
         // Default case: throw exception for invalid state (optional)
-        throw new IllegalArgumentException("Invalid cell state for cell at (" + yourCell.getRow() + ", " + yourCell.getCol() + ")");
+        throw new IllegalArgumentException("Invalid cell state for cell at ("
+                + yourCell.getRow() + ", " + yourCell.getCol() + ")");
       }
 
 

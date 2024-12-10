@@ -9,13 +9,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  * Adapter to integrate the ThreeTriosGUIViewInterface with the existing GUI structure.
  */
 public class ViewAdapter extends JFrame implements GameViewGUI {
-  private final GameModel model;
   private final List<Observer> observers;
   private final ThreeTriosGUIView view;
 
@@ -32,7 +32,6 @@ public class ViewAdapter extends JFrame implements GameViewGUI {
     if (model == null || view == null) {
       throw new IllegalArgumentException("Model and player cannot be null");
     }
-    this.model = model;
     this.view = view;
     this.handsInitialized = false;
     this.observers = new ArrayList<>();

@@ -10,7 +10,6 @@ import cs3500.tripletrios.provider.model.ThreeTriosModelInterface;
 public class PlayerAdapter implements cs3500.tripletrios.provider.controller.players.Player {
 
   private final IPlayer adaptedPlayer;
-  private Actions actions;
 
   /**
    * Constructs a PlayerAdapter.
@@ -23,7 +22,7 @@ public class PlayerAdapter implements cs3500.tripletrios.provider.controller.pla
 
   @Override
   public void callbackFeatures(Actions features) {
-    this.actions = features;
+    // Do nothing not needed
   }
 
   @Override
