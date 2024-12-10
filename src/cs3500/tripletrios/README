@@ -15,6 +15,17 @@ and then two for the inputs for the view:
 - one for our player
 - one for our model
 
+What we changed for our customers:
+- Made GridInterface, used it throughout our code instead of Grid concrete class
+- Made CellInterface, used it throughout our code instead of Cell concrete class
+- Made MovesInterface, specifcially fro the strategies and AIPlayer
+
+
+Tests we removed for this assigment:
+Since we didn't have controller tests actually written last time and they were commented out, we
+simply deleted the file since it was taking up space. We also deleted all the strategy tests since
+they were not relevant to this assignment.
+
 ----------------------------------------------------------------------------------------------------
 -------------------------------------ASSIGNMENT 7 READ ME ------------------------------------------
 ----------------------------------------------------------------------------------------------------
