@@ -3,7 +3,6 @@ package cs3500.tripletrios.model;
 import cs3500.tripletrios.provider.model.ReadOnlyThreeTriosModelInterface;
 import cs3500.tripletrios.provider.model.PlayerColor;
 import cs3500.tripletrios.provider.model.GameState;
-import cs3500.tripletrios.provider.model.ThreeTriosModelInterface;
 import cs3500.tripletrios.provider.model.card.AttackValue;
 import cs3500.tripletrios.provider.model.card.CardColor;
 import cs3500.tripletrios.provider.model.card.CustomCard;
@@ -11,14 +10,13 @@ import cs3500.tripletrios.provider.model.cell.Cell;
 import cs3500.tripletrios.provider.model.cell.CellState;
 import cs3500.tripletrios.provider.model.grid.Grid;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Adapts your GameModel to the provider's ReadOnlyThreeTriosModelInterface.
  */
-public class ModelProviderAdapter implements ReadOnlyThreeTriosModelInterface, ThreeTriosModelInterface {
+public class ModelProviderAdapter implements ReadOnlyThreeTriosModelInterface {
   private final GameModel model;
 
   /**
@@ -306,95 +304,4 @@ public class ModelProviderAdapter implements ReadOnlyThreeTriosModelInterface, T
       }
     };
   }
-
-  @Override
-  public void startGame(Grid gameGrid, List<CustomCard> deck) throws IOException {
-    if (gameGrid == null || deck == null) {
-      throw new IllegalArgumentException("Game grid and deck cannot be null.");
-    }
-    List<CardInterface> adaptedDeck = new ArrayList<>();
-    for (CustomCard card : deck) {
-      adaptedDeck.add(adaptCustomCardToCardInterface(card));
-    }
-    model.startGame(adaptedDeck);
-  }
-
-  @Override
-  public void startGame(Grid gameGrid, List<CustomCard> deck, boolean shuffle) throws IOException {
-    if (gameGrid == null || deck == null) {
-      throw new IllegalArgumentException("Game grid and deck cannot be null.");
-    }
-    List<CardInterface> adaptedDeck = new ArrayList<>();
-    for (CustomCard card : deck) {
-      adaptedDeck.add(adaptCustomCardToCardInterface(card));
-    }
-    model.startGame(adaptedDeck);
-  }
-
-  @Override
-  public void playTurn(int row, int col, int handIndex) {
-    //not needed
-  }
-
-  @Override
-  public Grid endGame() {
-    if (model.isGameOver()) {
-      return getGrid();
-    }
-    throw new IllegalStateException("Game is not over yet.");
-  }
-
-  @Override
-  public ThreeTriosModelInterface copy() {
-    return new ModelProviderAdapter(model);
-  }
-
-  private CardInterface adaptCustomCardToCardInterface(CustomCard card) {
-    return new CardInterface() {
-      private int row = -1; // Default uninitialized value for row
-      private int col = -1; // Default uninitialized value for column
-
-      @Override
-      public void addRow(int row) {
-        this.row = row;
-      }
-
-      @Override
-      public void addCol(int col) {
-        this.col = col;
-      }
-
-      @Override
-      public String getAttackValue(Direction direction) {
-        cs3500.tripletrios.provider.model.card.Direction providerDirection =
-                cs3500.tripletrios.provider.model.card.Direction.valueOf(direction.name());
-
-        return card.getAttackValue(providerDirection).toString();
-      }
-
-      @Override
-      public int getRow() {
-        return row;
-      }
-
-      @Override
-      public int getCol() {
-        return col;
-      }
-
-      @Override
-      public String getCardName() {
-        return card.getName();
-      }
-
-      @Override
-      public int getAttackValueAsInt(Direction direction) {
-        cs3500.tripletrios.provider.model.card.Direction providerDirection =
-                cs3500.tripletrios.provider.model.card.Direction.valueOf(direction.name());
-
-        return card.getAttackValue(providerDirection).getStrength();
-      }
-    };
-  }
-
 }

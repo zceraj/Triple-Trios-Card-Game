@@ -34,7 +34,11 @@ public class ThreeTriosController implements ControllerInterface {
       this.player = player;
       this.view.addObserver(this);
       view.setVisible(true);
-      view.refreshGrid();
+      try {
+        view.refreshGrid();
+      } catch (IOException e) {
+        view.popup("broken grid view.");
+      }
       model.notifyObservers();
     }
   }
@@ -43,8 +47,12 @@ public class ThreeTriosController implements ControllerInterface {
   @Override
   public void update() throws IOException {
     gameOver();
-    view.initializeHands();
+    try {
+      view.initializeHands();
     view.refreshGrid();
+    } catch (IOException e) {
+      view.popup("broken lol");
+    }
     gameOver();
 
     if (this.player != model.getCurPlayer()) {
@@ -63,8 +71,16 @@ public class ThreeTriosController implements ControllerInterface {
         GridPanel panel = view.getSelectedPanel();
         model.placeCard(card, panel.getRow(), panel.getCol());
         model.nextTurn();
-        view.refreshHands();
-        view.refreshGrid();
+        try {
+          view.refreshHands();
+        } catch (IOException e) {
+          view.popup("broken hand view.");;
+        }
+        try {
+          view.refreshGrid();
+        } catch (IOException e) {
+          view.popup("broken grid view.");
+        }
         view.clearSelectedPanel();
         view.clearSelectedCard();
         gameOver();
@@ -122,6 +138,8 @@ public class ThreeTriosController implements ControllerInterface {
       }
     } catch (IndexOutOfBoundsException | IOException e) {
       view.popup("Invalid card selection.");
+    } catch (IOException e) {
+      view.popup("broken...");
     }
   }
 

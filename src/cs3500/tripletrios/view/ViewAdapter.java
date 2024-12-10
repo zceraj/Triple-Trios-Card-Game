@@ -4,6 +4,7 @@ import cs3500.tripletrios.model.CardInterface;
 import cs3500.tripletrios.model.CellInterface;
 import cs3500.tripletrios.provider.model.*;
 import cs3500.tripletrios.observing.Observer;
+import cs3500.tripletrios.provider.view.ThreeTriosGUIView;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -23,6 +24,7 @@ public class ViewAdapter extends JFrame implements GameViewGUI {
   private final JPanel leftColumnPanel;
   private final JPanel rightColumnPanel;
   private final List<Observer> observers;
+  private final ThreeTriosGUIView view;
 
   private CardPanel selectedCard;
   private GridPanel selectedPanel;
@@ -34,11 +36,12 @@ public class ViewAdapter extends JFrame implements GameViewGUI {
    * @param model  the read-only model of the game.
    * @param player the player for whom the view is rendered.
    */
-  public ViewAdapter(ReadOnlyThreeTriosModelInterface model, PlayerColor player) {
+  public ViewAdapter(ReadOnlyThreeTriosModelInterface model, PlayerColor player, ThreeTriosGUIView view) {
     if (model == null || player == null) {
       throw new IllegalArgumentException("Model and player cannot be null");
     }
     this.model = model;
+    this.view = view;
     this.player = player;
     this.handsInitialized = false;
     this.observers = new ArrayList<>();
