@@ -1,13 +1,11 @@
 package cs3500.tripletrios.view;
 
 import cs3500.tripletrios.model.CardInterface;
+import cs3500.tripletrios.model.GameModel;
 import cs3500.tripletrios.provider.model.*;
 import cs3500.tripletrios.observing.Observer;
 import cs3500.tripletrios.provider.view.ThreeTriosGUIView;
 
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,11 +16,11 @@ import javax.swing.*;
  * Adapter to integrate the ThreeTriosGUIViewInterface with the existing GUI structure.
  */
 public class ViewAdapter extends JFrame implements GameViewGUI {
-  private final GameViewGUI model;
+  private final GameModel model;
   private final List<Observer> observers;
   private final ThreeTriosGUIView view;
 
-  private CardPanel selectedCard;
+  private CardInterface selectedCard;
   private GridPanel selectedPanel;
   private boolean handsInitialized;
 
@@ -31,7 +29,7 @@ public class ViewAdapter extends JFrame implements GameViewGUI {
    *
    * @param model  the read-only model of the game.
    */
-  public ViewAdapter(GameViewGUI model, ThreeTriosGUIView view) {
+  public ViewAdapter(GameModel model, ThreeTriosGUIView view) {
     if (model == null || view == null) {
       throw new IllegalArgumentException("Model and player cannot be null");
     }
@@ -61,7 +59,7 @@ public class ViewAdapter extends JFrame implements GameViewGUI {
 
   @Override
   public CardInterface getSelectedCard() {
-    return model.getSelectedCard();
+    return selectedCard;
   }
 
   @Override
@@ -88,7 +86,7 @@ public class ViewAdapter extends JFrame implements GameViewGUI {
 
   @Override
   public void clearSelectedCard() throws IOException {
-    model.clearSelectedCard();
+    this.selectedCard = null;
   }
 
   @Override
