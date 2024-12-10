@@ -74,6 +74,7 @@ public interface Cell {
 
   /**
    * Make a copy of this cell.
+   *
    * @return a copy of this cell
    */
   Cell copy();

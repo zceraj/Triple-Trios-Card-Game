@@ -1,12 +1,12 @@
 package cs3500.tripletrios.provider.model.card;
 
 /**
- * Represents the color of a card, either RED, BLUE, 
+ * Represents the color of a card, either RED, BLUE,
  * or UNASSIGNED if the card has not been assigned to a player.
  */
 public enum CardColor {
   RED("RED"),
-  BLUE("BLUE"), 
+  BLUE("BLUE"),
   UNASSIGNED("UNASSIGNED");
 
   // the color of the card
@@ -14,7 +14,7 @@ public enum CardColor {
 
   /**
    * Constructs a CardColor with the given color.
-   * 
+   *
    * @param color the color of the card
    */
   CardColor(String color) {
@@ -23,7 +23,7 @@ public enum CardColor {
 
   /**
    * Gets the color of the card.
-   * 
+   *
    * @return the color of the card
    */
   public String getColor() {

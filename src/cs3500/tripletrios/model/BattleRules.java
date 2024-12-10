@@ -119,7 +119,7 @@ public class BattleRules {
       int newCol = col + offset[1];
 
       if (grid.isValidCell(newRow, newCol)) {
-        Cell cell = grid.getCell(newRow, newCol);
+        CellInterface cell = grid.getCell(newRow, newCol);
         if (cell.isCardCell() && !cell.isEmpty()) {
           adjacentCards.add(cell.getCard());
         }

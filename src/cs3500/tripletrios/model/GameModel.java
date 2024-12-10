@@ -1,5 +1,6 @@
 package cs3500.tripletrios.model;
 
+import java.io.IOException;
 import java.util.List;
 
 import cs3500.tripletrios.observing.ObservableInterface;
@@ -20,7 +21,7 @@ public interface GameModel extends ReadOnlyGameModel, ObservableInterface {
    * @throws IllegalArgumentException if deck's size is not large enough to set up the game
    * @throws IllegalArgumentException if deck has non-unique cards or null cards
    */
-  void startGame(List<CardInterface> cardIn);
+  void startGame(List<CardInterface> cardIn) throws IOException;
 
   /**
    * Places the given card at the specified row and column in the game grid.
@@ -46,8 +47,9 @@ public interface GameModel extends ReadOnlyGameModel, ObservableInterface {
 
   /**
    * Updates the owner of the cell at the given row and column.
-   * @param row The row of the cell
-   * @param col The column of the cell
+   *
+   * @param row    The row of the cell
+   * @param col    The column of the cell
    * @param player The player to set as the owner
    */
   void updateOwner(int row, int col, IPlayer player);

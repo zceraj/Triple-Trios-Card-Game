@@ -1,5 +1,6 @@
 package cs3500.tripletrios.observing;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +36,7 @@ public abstract class Observable implements ObservableInterface {
    * Notifies all registered observers of a change.
    */
   @Override
-  public void notifyObservers() {
+  public void notifyObservers() throws IOException {
     for (Observer observer : observers) {
       observer.update();
     }

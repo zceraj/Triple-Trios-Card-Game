@@ -6,7 +6,7 @@ import cs3500.tripletrios.model.Direction;
 /**
  * Represents a move in the game.
  */
-public class Moves implements MovesInterface{
+public class Moves implements MovesInterface {
   private final CardInterface card;
   private final int row;
   private final int col;

@@ -72,6 +72,7 @@ public interface IPlayer {
 
   /**
    * Sets a strategy for an AiPlayer.
+   *
    * @param strategy the strategy to be set
    */
   void setStrategy(StrategyInterface strategy);

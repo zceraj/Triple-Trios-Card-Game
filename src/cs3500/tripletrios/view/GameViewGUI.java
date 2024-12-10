@@ -34,6 +34,7 @@ public interface GameViewGUI extends GameView, ObservableInterface {
 
   /**
    * Gets the card that is selected.
+   *
    * @return the selected card
    */
   CardInterface getSelectedCard();
@@ -42,12 +43,14 @@ public interface GameViewGUI extends GameView, ObservableInterface {
 
   /**
    * adds an observer.
+   *
    * @param observer someone who observes
    */
   void addObserver(Observer observer);
 
   /**
    * removes an observer.
+   *
    * @param observer someone who observes
    */
   void removeObserver(Observer observer);
@@ -55,10 +58,11 @@ public interface GameViewGUI extends GameView, ObservableInterface {
   /**
    * notifies the observers of any changes.
    */
-  void notifyObservers();
+  void notifyObservers() throws IOException;
 
   /**
    * creates a pop up message.
+   *
    * @param message what you want shown
    */
   void popup(String message);
@@ -66,16 +70,18 @@ public interface GameViewGUI extends GameView, ObservableInterface {
   /**
    * resets the selected card.
    */
-  void clearSelectedCard();
+  void clearSelectedCard() throws IOException;
 
   /**
-    * sets the selected panel.
+   * sets the selected panel.
+   *
    * @param panel the panel to be selected
    */
   void setSelectedPanel(GridPanel panel);
 
   /**
    * gets the selected panel.
+   *
    * @return the selected panel
    */
   GridPanel getSelectedPanel();
@@ -87,6 +93,7 @@ public interface GameViewGUI extends GameView, ObservableInterface {
 
   /**
    * Determines if the hand has been initialized or not.
+   *
    * @return true if the hands have been initialized, false otherwise
    */
   boolean isHandsInitialized();

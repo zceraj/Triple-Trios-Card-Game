@@ -7,6 +7,7 @@ import cs3500.tripletrios.provider.model.grid.Grid;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;

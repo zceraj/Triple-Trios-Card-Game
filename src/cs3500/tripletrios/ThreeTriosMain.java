@@ -1,6 +1,7 @@
 package cs3500.tripletrios;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import cs3500.tripletrios.controller.SetUp;
@@ -13,10 +14,8 @@ import cs3500.tripletrios.model.ModelProviderAdapter;
 import cs3500.tripletrios.model.PlayerAdapter;
 import cs3500.tripletrios.model.PlayerColor;
 import cs3500.tripletrios.provider.view.ThreeTriosGUIView;
-import cs3500.tripletrios.provider.view.ThreeTriosTextualView;
 import cs3500.tripletrios.view.GameViewGUI;
 import cs3500.tripletrios.view.TripleTrioGuiView;
-import cs3500.tripletrios.view.ViewAdapted;
 import cs3500.tripletrios.view.ViewAdapter;
 
 /**
@@ -44,9 +43,9 @@ public final class ThreeTriosMain {
    * @param args command-line arguments (not used) --> it won't let me run it without it??
    */
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws IOException {
     // setting up the grid and cards using the card and grid file readers
-    String cardFilePath =  "."
+    String cardFilePath = "."
             + File.separator
             + "TESTINGFILES"
             + File.separator

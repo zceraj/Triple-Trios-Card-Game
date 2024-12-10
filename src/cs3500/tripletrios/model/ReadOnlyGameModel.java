@@ -52,6 +52,7 @@ public interface ReadOnlyGameModel {
 
   /**
    * Gets the player the card belongs to.
+   *
    * @param card The card to get the player of
    * @return The player that owns the card
    */
@@ -59,12 +60,14 @@ public interface ReadOnlyGameModel {
 
   /**
    * Gets the other player, meaning player whose turn is not the current player.
+   *
    * @return The other player
    */
   IPlayer getOtherPlayer();
 
   /**
    * Checks if the game has started.
+   *
    * @return True if the game has started, false otherwise
    */
   boolean isGameStarted();

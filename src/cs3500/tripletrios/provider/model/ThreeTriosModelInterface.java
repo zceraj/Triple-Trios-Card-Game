@@ -3,6 +3,7 @@ package cs3500.tripletrios.provider.model;
 import cs3500.tripletrios.provider.model.card.CustomCard;
 import cs3500.tripletrios.provider.model.grid.Grid;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ public interface ThreeTriosModelInterface extends ReadOnlyThreeTriosModelInterfa
    * @throws IllegalArgumentException if the deck does not have more cards than card cells
    * @throws IllegalStateException    if there is a game in play
    */
-  void startGame(Grid gameGrid, List<CustomCard> deck);
+  void startGame(Grid gameGrid, List<CustomCard> deck) throws IOException;
 
   /**
    * Starts a game with the given grid and deck, may shuffle deck.
@@ -34,7 +35,7 @@ public interface ThreeTriosModelInterface extends ReadOnlyThreeTriosModelInterfa
    * @throws IllegalArgumentException if the deck does not have more cards than card cells
    * @throws IllegalStateException    if there is a game in play
    */
-  void startGame(Grid gameGrid, List<CustomCard> deck, boolean shuffle);
+  void startGame(Grid gameGrid, List<CustomCard> deck, boolean shuffle) throws IOException;
 
   /**
    * Plays the given card to the cell at the given coordinates,

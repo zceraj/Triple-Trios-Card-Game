@@ -81,7 +81,7 @@ public abstract class BaseThreeTriosModel implements ThreeTriosModelInterface {
         throw new IllegalArgumentException("Game state must be initialized as NOT_STARTED");
       }
     } else if (gameState.ordinal() != this.gameState.ordinal() + 1
-        || this.gameState.ordinal() > 1) {
+            || this.gameState.ordinal() > 1) {
       throw new IllegalArgumentException("Illegal game state change");
     }
     this.gameState = gameState;

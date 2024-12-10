@@ -13,8 +13,9 @@ public interface ControllerInterface extends Observer {
   /**
    * Plays the card at the given index in the player's hand to the given coordinates.
    * Added it for the adaptor for the providers code.
-   * @param row the row of the position to play
-   * @param col the column of the position to play
+   *
+   * @param row       the row of the position to play
+   * @param col       the column of the position to play
    * @param handIndex the index in hand of the card to be played
    */
   public void playMove(int row, int col, int handIndex);
